@@ -1,120 +1,112 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>2025寒假训练 - 标签 - Doごみ箱🪄</title><link>http://dodolalorc.cn/tags/2025%E5%AF%92%E5%81%87%E8%AE%AD%E7%BB%83/</link><description>2025寒假训练 - 标签 - Doごみ箱🪄</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>chenflora124@gmail.com (DODOLA)</managingEditor><webMaster>chenflora124@gmail.com (DODOLA)</webMaster><copyright>dodola</copyright><lastBuildDate>Sun, 02 Mar 2025 18:46:04 +0800</lastBuildDate><atom:link href="http://dodolalorc.cn/tags/2025%E5%AF%92%E5%81%87%E8%AE%AD%E7%BB%83/" rel="self" type="application/rss+xml"/><item><title>2025牛客暑寒假多校训练营Day4</title><link>http://dodolalorc.cn/posts/nc25wd4/</link><pubDate>Sun, 02 Mar 2025 18:46:04 +0800</pubDate><author><name>DODOLA</name></author><guid>http://dodolalorc.cn/posts/nc25wd4/</guid><description><![CDATA[<div class="featured-image">
-                <img src="https://img.dodolalorc.cn/i/2025/03/02/67c461f0d8665.jpg" referrerpolicy="no-referrer">
-            </div><h2 id="a" class="headerLink">
-    <a href="#a" class="header-mark"></a>A</h2><h3 id="题意" class="headerLink">
-    <a href="#%e9%a2%98%e6%84%8f" class="header-mark"></a>题意</h3><h4 id="数据范围" class="headerLink">
-    <a href="#%e6%95%b0%e6%8d%ae%e8%8c%83%e5%9b%b4" class="header-mark"></a>数据范围</h4><h3 id="思路" class="headerLink">
-    <a href="#%e6%80%9d%e8%b7%af" class="header-mark"></a>思路</h3><h3 id="代码" class="headerLink">
-    <a href="#%e4%bb%a3%e7%a0%81" class="header-mark"></a>代码</h3><h2 id="b-tokitsukaze-and-balance-string-easy" class="headerLink">
-    <a href="#b-tokitsukaze-and-balance-string-easy" class="header-mark"></a>B Tokitsukaze and Balance String (easy)</h2><h3 id="题意-1" class="headerLink">
-    <a href="#%e9%a2%98%e6%84%8f-1" class="header-mark"></a>题意</h3><p>定义字符串是平衡的：字符串中<code>01</code>的连续子串的数量和<code>10</code>的连续子串的数量相同。</p>
-<p>定义字符串<code>s</code>的<code>val(s)</code>：</p>
-<ul>
-<li>将字符串<code>s</code>的某位置<code>i</code>的字符倒置（<code>1</code>变成<code>0</code>，<code>0</code>变成<code>1</code>）后，字符串是平衡的，这样的位置的总数</li>
-</ul>
-<p>现在有一个由<code>1</code>、<code>0</code>和<code>?</code>组成的字符串，<code>?</code>可以任意换成<code>1</code>或<code>0</code>，求所有的填写完成的字符串的<code>val(s)</code>的总和，模数是$10^9+7$。</p>]]></description></item><item><title>2025牛客暑寒假多校训练营Day3（完結）</title><link>http://dodolalorc.cn/posts/nc25wd3/</link><pubDate>Sun, 16 Feb 2025 08:53:02 +0800</pubDate><author><name>DODOLA</name></author><guid>http://dodolalorc.cn/posts/nc25wd3/</guid><description><![CDATA[<div class="featured-image">
-                <img src="https://img.dodolalorc.cn/i/2025/02/16/67b17bacd70e1.jpg" referrerpolicy="no-referrer">
-            </div><h2 id="a-智乃的博弈游戏" class="headerLink">
-    <a href="#a-%e6%99%ba%e4%b9%83%e7%9a%84%e5%8d%9a%e5%bc%88%e6%b8%b8%e6%88%8f" class="header-mark"></a>A 智乃的博弈游戏</h2><h3 id="题意" class="headerLink">
-    <a href="#%e9%a2%98%e6%84%8f" class="header-mark"></a>题意</h3><p>有一堆$n$个石子，每次可以拿走$x$个石子，要求$x$是一个不大于$n$且与$n$互质的数，当面对$1$时选手获胜，询问智乃（先手玩家）能否获胜。</p>
-<h4 id="数据范围" class="headerLink">
-    <a href="#%e6%95%b0%e6%8d%ae%e8%8c%83%e5%9b%b4" class="header-mark"></a>数据范围</h4><ul>
-<li>$1\leq n\leq 1e18$</li>
-</ul>
-<h3 id="思路" class="headerLink">
-    <a href="#%e6%80%9d%e8%b7%af" class="header-mark"></a>思路</h3><p>必胜点是剩余 1，则 2 是必败点，两个选手都不希望对手面对 1，都希望对手面对 2。</p>
-<p>如果当前剩余$n$是奇数，则选手一定可以操作将剩余数量变成偶数（只拿一个）。面对偶数的选手，能选的互质的数一定是一个奇数，偶数减去奇数会变成奇数，下一轮回到奇数的情况，如果某一方保持偶数，一定会到剩余$2$的情况，也就是必败点。</p>]]></description></item><item><title>2025牛客暑寒假多校训练营Day2</title><link>http://dodolalorc.cn/posts/nc25wd2/</link><pubDate>Thu, 06 Feb 2025 00:40:31 +0800</pubDate><author><name>DODOLA</name></author><guid>http://dodolalorc.cn/posts/nc25wd2/</guid><description><![CDATA[<div class="featured-image">
-                <img src="https://img.dodolalorc.cn/i/2025/02/06/67a3a57b557f6.jpg" referrerpolicy="no-referrer">
-            </div><h2 id="a-一起奏响历史之音" class="headerLink">
-    <a href="#a-%e4%b8%80%e8%b5%b7%e5%a5%8f%e5%93%8d%e5%8e%86%e5%8f%b2%e4%b9%8b%e9%9f%b3" class="header-mark"></a>A 一起奏响历史之音！</h2><h3 id="题意" class="headerLink">
-    <a href="#%e9%a2%98%e6%84%8f" class="header-mark"></a>题意</h3><p>中国传统五声调中包含 1、2、3、5、6，判断一个乐谱是否仅由全部或部分五声调铺成。</p>
-<h3 id="思路" class="headerLink">
-    <a href="#%e6%80%9d%e8%b7%af" class="header-mark"></a>思路</h3><p>按题意判断即可。</p>
-<h3 id="代码" class="headerLink">
-    <a href="#%e4%bb%a3%e7%a0%81" class="header-mark"></a>代码</h3><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">solve</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="n">flag</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="n">set</span><span class="o">&lt;</span><span class="n">ll</span><span class="o">&gt;</span> <span class="n">st</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">};</span>
-</span></span><span class="line"><span class="cl">  <span class="n">ll</span> <span class="n">x</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="k">while</span> <span class="p">(</span><span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">st</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="n">st</span><span class="p">.</span><span class="n">end</span><span class="p">())</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="n">flag</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">flag</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;YES</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;NO</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="b-能去你家蹭口饭吃吗" class="headerLink">
-    <a href="#b-%e8%83%bd%e5%8e%bb%e4%bd%a0%e5%ae%b6%e8%b9%ad%e5%8f%a3%e9%a5%ad%e5%90%83%e5%90%97" class="header-mark"></a>B 能去你家蹭口饭吃吗</h2><h3 id="题意-1" class="headerLink">
-    <a href="#%e9%a2%98%e6%84%8f-1" class="header-mark"></a>题意</h3><p>给出一个数组$a$，找到一个整数，要求整数尽可能大，但是至少要比数组中一半数量的数小。</p>]]></description></item><item><title>2025牛客暑寒假多校训练营Day1（完結）</title><link>http://dodolalorc.cn/posts/nc25wd1/</link><pubDate>Thu, 23 Jan 2025 12:58:36 +0800</pubDate><author><name>DODOLA</name></author><guid>http://dodolalorc.cn/posts/nc25wd1/</guid><description><![CDATA[<div class="featured-image">
-                <img src="https://img.dodolalorc.cn/i/2025/02/05/67a26952e01a0.jpg" referrerpolicy="no-referrer">
-            </div><h2 id="a-茕茕孑立之影" class="headerLink">
-    <a href="#a-%e8%8c%95%e8%8c%95%e5%ad%91%e7%ab%8b%e4%b9%8b%e5%bd%b1" class="header-mark"></a>A 茕茕孑立之影</h2><h3 id="题意" class="headerLink">
-    <a href="#%e9%a2%98%e6%84%8f" class="header-mark"></a>题意</h3><p>找一个不超过$1e18$的数$x$，使得$x$既不是任何$a_i$的倍数，也不是任何$a_i$的因数。若没有输出$-1$。</p>
-<h4 id="数据范围" class="headerLink">
-    <a href="#%e6%95%b0%e6%8d%ae%e8%8c%83%e5%9b%b4" class="header-mark"></a>数据范围</h4><ul>
-<li>$1\leq n\leq 1e5$</li>
-<li>$1\leq a_i\leq 1e9$</li>
-</ul>
-<h3 id="思路" class="headerLink">
-    <a href="#%e6%80%9d%e8%b7%af" class="header-mark"></a>思路</h3><p>观察到，如果数组中有$1$则不存在这样的数。</p>
-<p>$1\leq a_i\leq 1e9$，而$1\leq x\leq 1e18$，有解时任意数=输出一个大于$1e9$的质数即可。</p>
-<h3 id="代码" class="headerLink">
-    <a href="#%e4%bb%a3%e7%a0%81" class="header-mark"></a>代码</h3><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">solve</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="n">ll</span> <span class="n">n</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">n</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="n">ll</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="n">sort</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">n</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;-1</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;100000007</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="b-一气贯通之刃" class="headerLink">
-    <a href="#b-%e4%b8%80%e6%b0%94%e8%b4%af%e9%80%9a%e4%b9%8b%e5%88%83" class="header-mark"></a>B 一气贯通之刃</h2><h3 id="题意-1" class="headerLink">
-    <a href="#%e9%a2%98%e6%84%8f-1" class="header-mark"></a>题意</h3><p>给一棵树，寻找一条简单路径，使之遍历树上所有的顶点，输出起点和终点。如果没有这样的解则输出$-1$。</p>]]></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>2025寒假训练 on Doごみ箱🪄</title><link>http://dodolalorc.cn/tags/2025%E5%AF%92%E5%81%87%E8%AE%AD%E7%BB%83/</link><description>Recent content in 2025寒假训练 on Doごみ箱🪄</description><generator>Hugo</generator><language>zh-CN</language><managingEditor>chenflora124@gmail.com (DODOLA)</managingEditor><webMaster>chenflora124@gmail.com (DODOLA)</webMaster><copyright>dodola</copyright><lastBuildDate>Fri, 11 Apr 2025 05:57:01 +0000</lastBuildDate><atom:link href="http://dodolalorc.cn/tags/2025%E5%AF%92%E5%81%87%E8%AE%AD%E7%BB%83/index.xml" rel="self" type="application/rss+xml"/><item><title>2025牛客暑寒假多校训练营Day4</title><link>http://dodolalorc.cn/posts/nc25wd4/</link><pubDate>Sun, 02 Mar 2025 18:46:04 +0800</pubDate><author>chenflora124@gmail.com (DODOLA)</author><guid>http://dodolalorc.cn/posts/nc25wd4/</guid><description>&lt;h2 id="a" class="headerLink">
+ &lt;a href="#a" class="header-mark">&lt;/a>A&lt;/h2>&lt;h3 id="题意" class="headerLink">
+ &lt;a href="#%e9%a2%98%e6%84%8f" class="header-mark">&lt;/a>题意&lt;/h3>&lt;h4 id="数据范围" class="headerLink">
+ &lt;a href="#%e6%95%b0%e6%8d%ae%e8%8c%83%e5%9b%b4" class="header-mark">&lt;/a>数据范围&lt;/h4>&lt;h3 id="思路" class="headerLink">
+ &lt;a href="#%e6%80%9d%e8%b7%af" class="header-mark">&lt;/a>思路&lt;/h3>&lt;h3 id="代码" class="headerLink">
+ &lt;a href="#%e4%bb%a3%e7%a0%81" class="header-mark">&lt;/a>代码&lt;/h3>&lt;h2 id="b-tokitsukaze-and-balance-string-easy" class="headerLink">
+ &lt;a href="#b-tokitsukaze-and-balance-string-easy" class="header-mark">&lt;/a>B Tokitsukaze and Balance String (easy)&lt;/h2>&lt;h3 id="题意-1" class="headerLink">
+ &lt;a href="#%e9%a2%98%e6%84%8f-1" class="header-mark">&lt;/a>题意&lt;/h3>&lt;p>定义字符串是平衡的：字符串中&lt;code>01&lt;/code>的连续子串的数量和&lt;code>10&lt;/code>的连续子串的数量相同。&lt;/p>
+&lt;p>定义字符串&lt;code>s&lt;/code>的&lt;code>val(s)&lt;/code>：&lt;/p>
+&lt;ul>
+&lt;li>将字符串&lt;code>s&lt;/code>的某位置&lt;code>i&lt;/code>的字符倒置（&lt;code>1&lt;/code>变成&lt;code>0&lt;/code>，&lt;code>0&lt;/code>变成&lt;code>1&lt;/code>）后，字符串是平衡的，这样的位置的总数&lt;/li>
+&lt;/ul>
+&lt;p>现在有一个由&lt;code>1&lt;/code>、&lt;code>0&lt;/code>和&lt;code>?&lt;/code>组成的字符串，&lt;code>?&lt;/code>可以任意换成&lt;code>1&lt;/code>或&lt;code>0&lt;/code>，求所有的填写完成的字符串的&lt;code>val(s)&lt;/code>的总和，模数是$10^9+7$。&lt;/p></description></item><item><title>2025牛客暑寒假多校训练营Day3（完結）</title><link>http://dodolalorc.cn/posts/nc25wd3/</link><pubDate>Sun, 16 Feb 2025 08:53:02 +0800</pubDate><author>chenflora124@gmail.com (DODOLA)</author><guid>http://dodolalorc.cn/posts/nc25wd3/</guid><description>&lt;h2 id="a-智乃的博弈游戏" class="headerLink">
+ &lt;a href="#a-%e6%99%ba%e4%b9%83%e7%9a%84%e5%8d%9a%e5%bc%88%e6%b8%b8%e6%88%8f" class="header-mark">&lt;/a>A 智乃的博弈游戏&lt;/h2>&lt;h3 id="题意" class="headerLink">
+ &lt;a href="#%e9%a2%98%e6%84%8f" class="header-mark">&lt;/a>题意&lt;/h3>&lt;p>有一堆$n$个石子，每次可以拿走$x$个石子，要求$x$是一个不大于$n$且与$n$互质的数，当面对$1$时选手获胜，询问智乃（先手玩家）能否获胜。&lt;/p>
+&lt;h4 id="数据范围" class="headerLink">
+ &lt;a href="#%e6%95%b0%e6%8d%ae%e8%8c%83%e5%9b%b4" class="header-mark">&lt;/a>数据范围&lt;/h4>&lt;ul>
+&lt;li>$1\leq n\leq 1e18$&lt;/li>
+&lt;/ul>
+&lt;h3 id="思路" class="headerLink">
+ &lt;a href="#%e6%80%9d%e8%b7%af" class="header-mark">&lt;/a>思路&lt;/h3>&lt;p>必胜点是剩余 1，则 2 是必败点，两个选手都不希望对手面对 1，都希望对手面对 2。&lt;/p>
+&lt;p>如果当前剩余$n$是奇数，则选手一定可以操作将剩余数量变成偶数（只拿一个）。面对偶数的选手，能选的互质的数一定是一个奇数，偶数减去奇数会变成奇数，下一轮回到奇数的情况，如果某一方保持偶数，一定会到剩余$2$的情况，也就是必败点。&lt;/p></description></item><item><title>2025牛客暑寒假多校训练营Day2</title><link>http://dodolalorc.cn/posts/nc25wd2/</link><pubDate>Thu, 06 Feb 2025 00:40:31 +0800</pubDate><author>chenflora124@gmail.com (DODOLA)</author><guid>http://dodolalorc.cn/posts/nc25wd2/</guid><description>&lt;h2 id="a-一起奏响历史之音" class="headerLink">
+ &lt;a href="#a-%e4%b8%80%e8%b5%b7%e5%a5%8f%e5%93%8d%e5%8e%86%e5%8f%b2%e4%b9%8b%e9%9f%b3" class="header-mark">&lt;/a>A 一起奏响历史之音！&lt;/h2>&lt;h3 id="题意" class="headerLink">
+ &lt;a href="#%e9%a2%98%e6%84%8f" class="header-mark">&lt;/a>题意&lt;/h3>&lt;p>中国传统五声调中包含 1、2、3、5、6，判断一个乐谱是否仅由全部或部分五声调铺成。&lt;/p>
+&lt;h3 id="思路" class="headerLink">
+ &lt;a href="#%e6%80%9d%e8%b7%af" class="header-mark">&lt;/a>思路&lt;/h3>&lt;p>按题意判断即可。&lt;/p>
+&lt;h3 id="代码" class="headerLink">
+ &lt;a href="#%e4%bb%a3%e7%a0%81" class="header-mark">&lt;/a>代码&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">void&lt;/span> &lt;span class="nf">solve&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">bool&lt;/span> &lt;span class="n">flag&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">true&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">set&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">ll&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="n">st&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">5&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">6&lt;/span>&lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ll&lt;/span> &lt;span class="n">x&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">while&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">cin&lt;/span> &lt;span class="o">&amp;gt;&amp;gt;&lt;/span> &lt;span class="n">x&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">st&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">find&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">x&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="n">st&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">end&lt;/span>&lt;span class="p">())&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">flag&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">false&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">flag&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">cout&lt;/span> &lt;span class="o">&amp;lt;&amp;lt;&lt;/span> &lt;span class="s">&amp;#34;YES&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span> &lt;span class="k">else&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">cout&lt;/span> &lt;span class="o">&amp;lt;&amp;lt;&lt;/span> &lt;span class="s">&amp;#34;NO&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="b-能去你家蹭口饭吃吗" class="headerLink">
+ &lt;a href="#b-%e8%83%bd%e5%8e%bb%e4%bd%a0%e5%ae%b6%e8%b9%ad%e5%8f%a3%e9%a5%ad%e5%90%83%e5%90%97" class="header-mark">&lt;/a>B 能去你家蹭口饭吃吗&lt;/h2>&lt;h3 id="题意-1" class="headerLink">
+ &lt;a href="#%e9%a2%98%e6%84%8f-1" class="header-mark">&lt;/a>题意&lt;/h3>&lt;p>给出一个数组$a$，找到一个整数，要求整数尽可能大，但是至少要比数组中一半数量的数小。&lt;/p></description></item><item><title>2025牛客暑寒假多校训练营Day1（完結）</title><link>http://dodolalorc.cn/posts/nc25wd1/</link><pubDate>Thu, 23 Jan 2025 12:58:36 +0800</pubDate><author>chenflora124@gmail.com (DODOLA)</author><guid>http://dodolalorc.cn/posts/nc25wd1/</guid><description>&lt;h2 id="a-茕茕孑立之影" class="headerLink">
+ &lt;a href="#a-%e8%8c%95%e8%8c%95%e5%ad%91%e7%ab%8b%e4%b9%8b%e5%bd%b1" class="header-mark">&lt;/a>A 茕茕孑立之影&lt;/h2>&lt;h3 id="题意" class="headerLink">
+ &lt;a href="#%e9%a2%98%e6%84%8f" class="header-mark">&lt;/a>题意&lt;/h3>&lt;p>找一个不超过$1e18$的数$x$，使得$x$既不是任何$a_i$的倍数，也不是任何$a_i$的因数。若没有输出$-1$。&lt;/p>
+&lt;h4 id="数据范围" class="headerLink">
+ &lt;a href="#%e6%95%b0%e6%8d%ae%e8%8c%83%e5%9b%b4" class="header-mark">&lt;/a>数据范围&lt;/h4>&lt;ul>
+&lt;li>$1\leq n\leq 1e5$&lt;/li>
+&lt;li>$1\leq a_i\leq 1e9$&lt;/li>
+&lt;/ul>
+&lt;h3 id="思路" class="headerLink">
+ &lt;a href="#%e6%80%9d%e8%b7%af" class="header-mark">&lt;/a>思路&lt;/h3>&lt;p>观察到，如果数组中有$1$则不存在这样的数。&lt;/p>
+&lt;p>$1\leq a_i\leq 1e9$，而$1\leq x\leq 1e18$，有解时任意数=输出一个大于$1e9$的质数即可。&lt;/p>
+&lt;h3 id="代码" class="headerLink">
+ &lt;a href="#%e4%bb%a3%e7%a0%81" class="header-mark">&lt;/a>代码&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">void&lt;/span> &lt;span class="nf">solve&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ll&lt;/span> &lt;span class="n">n&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">cin&lt;/span> &lt;span class="o">&amp;gt;&amp;gt;&lt;/span> &lt;span class="n">n&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">ll&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">&amp;lt;=&lt;/span> &lt;span class="n">n&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">cin&lt;/span> &lt;span class="o">&amp;gt;&amp;gt;&lt;/span> &lt;span class="n">a&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">sort&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">a&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">a&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">1&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">n&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">a&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">cout&lt;/span> &lt;span class="o">&amp;lt;&amp;lt;&lt;/span> &lt;span class="s">&amp;#34;-1&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span> &lt;span class="k">else&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">cout&lt;/span> &lt;span class="o">&amp;lt;&amp;lt;&lt;/span> &lt;span class="s">&amp;#34;100000007&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="b-一气贯通之刃" class="headerLink">
+ &lt;a href="#b-%e4%b8%80%e6%b0%94%e8%b4%af%e9%80%9a%e4%b9%8b%e5%88%83" class="header-mark">&lt;/a>B 一气贯通之刃&lt;/h2>&lt;h3 id="题意-1" class="headerLink">
+ &lt;a href="#%e9%a2%98%e6%84%8f-1" class="header-mark">&lt;/a>题意&lt;/h3>&lt;p>给一棵树，寻找一条简单路径，使之遍历树上所有的顶点，输出起点和终点。如果没有这样的解则输出$-1$。&lt;/p></description></item></channel></rss>

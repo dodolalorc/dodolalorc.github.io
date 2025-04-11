@@ -1,15 +1,20 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>DP - 标签 - Doごみ箱🪄</title><link>http://dodolalorc.cn/tags/dp/</link><description>DP - 标签 - Doごみ箱🪄</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>chenflora124@gmail.com (DODOLA)</managingEditor><webMaster>chenflora124@gmail.com (DODOLA)</webMaster><copyright>dodola</copyright><lastBuildDate>Wed, 11 Sep 2024 21:50:26 +0800</lastBuildDate><atom:link href="http://dodolalorc.cn/tags/dp/" rel="self" type="application/rss+xml"/><item><title>刷题记录||区间动态规划</title><link>http://dodolalorc.cn/posts/intervaldp/</link><pubDate>Wed, 11 Sep 2024 21:50:26 +0800</pubDate><author><name>DODOLA</name></author><guid>http://dodolalorc.cn/posts/intervaldp/</guid><description><![CDATA[<div class="featured-image">
-                <img src="https://img.dodolalorc.cn/i/2024/12/10/67580ba9b1658.png" referrerpolicy="no-referrer">
-            </div><p><strong>区间动态规划一般以区间作为动态规划的阶段。</strong></p>
-<h2 id="p1880石子合并" class="headerLink">
-    <a href="#p1880%e7%9f%b3%e5%ad%90%e5%90%88%e5%b9%b6" class="header-mark"></a>[P1880]石子合并</h2><h3 id="题目描述" class="headerLink">
-    <a href="#%e9%a2%98%e7%9b%ae%e6%8f%8f%e8%bf%b0" class="header-mark"></a>题目描述</h3><p>在一个圆形操场的四周摆放 $N$ 堆石子，现要将石子有次序地合并成一堆，规定每次只能选相邻的 $2$ 堆合并成新的一堆，并将新的一堆的石子数，记为该次合并的得分。</p>]]></description></item><item><title>刷题记录||线性动态规划</title><link>http://dodolalorc.cn/posts/lineardp/</link><pubDate>Sat, 09 Mar 2024 21:47:13 +0800</pubDate><author><name>DODOLA</name></author><guid>http://dodolalorc.cn/posts/lineardp/</guid><description><![CDATA[<h2 id="线性动态规划" class="headerLink">
-    <a href="#%e7%ba%bf%e6%80%a7%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92" class="header-mark"></a>线性动态规划</h2><p><strong>线性动态规划，即具有线性阶段划分的动态规划。</strong></p>
-<h2 id="p1216数字三角形" class="headerLink">
-    <a href="#p1216%e6%95%b0%e5%ad%97%e4%b8%89%e8%a7%92%e5%bd%a2" class="header-mark"></a>[P1216]数字三角形</h2><h3 id="题目描述" class="headerLink">
-    <a href="#%e9%a2%98%e7%9b%ae%e6%8f%8f%e8%bf%b0" class="header-mark"></a>题目描述</h3><p>观察下面的数字金字塔。</p>
-<p>写一个程序来查找从最高点到底部任意处结束的路径，使路径经过数字的和最大。每一步可以走到左下方的点也可以到达右下方的点。</p>
-<p><figure><a class="lightgallery" href="https://cdn.luogu.com.cn/upload/image_hosting/95pzs0ne.png" title="img" data-thumbnail="https://cdn.luogu.com.cn/upload/image_hosting/95pzs0ne.png">
-        
-    </a></figure></p>
-<p>在上面的样例中，从 $7 \to 3 \to 8 \to 7 \to 5$ 的路径产生了最大权值。</p>]]></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>DP on Doごみ箱🪄</title><link>http://dodolalorc.cn/tags/dp/</link><description>Recent content in DP on Doごみ箱🪄</description><generator>Hugo</generator><language>zh-CN</language><managingEditor>chenflora124@gmail.com (DODOLA)</managingEditor><webMaster>chenflora124@gmail.com (DODOLA)</webMaster><copyright>dodola</copyright><lastBuildDate>Fri, 11 Apr 2025 05:57:01 +0000</lastBuildDate><atom:link href="http://dodolalorc.cn/tags/dp/index.xml" rel="self" type="application/rss+xml"/><item><title>刷题记录||区间动态规划</title><link>http://dodolalorc.cn/posts/intervaldp/</link><pubDate>Wed, 11 Sep 2024 21:50:26 +0800</pubDate><author>chenflora124@gmail.com (DODOLA)</author><guid>http://dodolalorc.cn/posts/intervaldp/</guid><description>&lt;p>&lt;strong>区间动态规划一般以区间作为动态规划的阶段。&lt;/strong>&lt;/p>
+&lt;h2 id="p1880石子合并" class="headerLink">
+ &lt;a href="#p1880%e7%9f%b3%e5%ad%90%e5%90%88%e5%b9%b6" class="header-mark">&lt;/a>[P1880]石子合并&lt;/h2>&lt;h3 id="题目描述" class="headerLink">
+ &lt;a href="#%e9%a2%98%e7%9b%ae%e6%8f%8f%e8%bf%b0" class="header-mark">&lt;/a>题目描述&lt;/h3>&lt;p>在一个圆形操场的四周摆放 $N$ 堆石子，现要将石子有次序地合并成一堆，规定每次只能选相邻的 $2$ 堆合并成新的一堆，并将新的一堆的石子数，记为该次合并的得分。&lt;/p></description></item><item><title>刷题记录||线性动态规划</title><link>http://dodolalorc.cn/posts/lineardp/</link><pubDate>Sat, 09 Mar 2024 21:47:13 +0800</pubDate><author>chenflora124@gmail.com (DODOLA)</author><guid>http://dodolalorc.cn/posts/lineardp/</guid><description>&lt;h2 id="线性动态规划" class="headerLink">
+ &lt;a href="#%e7%ba%bf%e6%80%a7%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92" class="header-mark">&lt;/a>线性动态规划&lt;/h2>&lt;p>&lt;strong>线性动态规划，即具有线性阶段划分的动态规划。&lt;/strong>&lt;/p>
+&lt;h2 id="p1216数字三角形" class="headerLink">
+ &lt;a href="#p1216%e6%95%b0%e5%ad%97%e4%b8%89%e8%a7%92%e5%bd%a2" class="header-mark">&lt;/a>[P1216]数字三角形&lt;/h2>&lt;h3 id="题目描述" class="headerLink">
+ &lt;a href="#%e9%a2%98%e7%9b%ae%e6%8f%8f%e8%bf%b0" class="header-mark">&lt;/a>题目描述&lt;/h3>&lt;p>观察下面的数字金字塔。&lt;/p>
+&lt;p>写一个程序来查找从最高点到底部任意处结束的路径，使路径经过数字的和最大。每一步可以走到左下方的点也可以到达右下方的点。&lt;/p>
+&lt;p>&lt;figure>&lt;a class="lightgallery" href="https://cdn.luogu.com.cn/upload/image_hosting/95pzs0ne.png" title="img" data-thumbnail="https://cdn.luogu.com.cn/upload/image_hosting/95pzs0ne.png">
+ &lt;img
+ 
+ loading="lazy"
+ src="https://cdn.luogu.com.cn/upload/image_hosting/95pzs0ne.png"
+ srcset="https://cdn.luogu.com.cn/upload/image_hosting/95pzs0ne.png, https://cdn.luogu.com.cn/upload/image_hosting/95pzs0ne.png 1.5x, https://cdn.luogu.com.cn/upload/image_hosting/95pzs0ne.png 2x"
+ 
+ alt="https://cdn.luogu.com.cn/upload/image_hosting/95pzs0ne.png" 
+ >
+ &lt;/a>&lt;/figure>&lt;/p>
+&lt;p>在上面的样例中，从 $7 \to 3 \to 8 \to 7 \to 5$ 的路径产生了最大权值。&lt;/p></description></item></channel></rss>

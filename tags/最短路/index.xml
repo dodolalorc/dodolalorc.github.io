@@ -1,7 +1,7 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>最短路 - 标签 - Doごみ箱🪄</title><link>http://dodolalorc.cn/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF/</link><description>最短路 - 标签 - Doごみ箱🪄</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>chenflora124@gmail.com (DODOLA)</managingEditor><webMaster>chenflora124@gmail.com (DODOLA)</webMaster><copyright>dodola</copyright><lastBuildDate>Sat, 23 Dec 2023 16:08:47 +0800</lastBuildDate><atom:link href="http://dodolalorc.cn/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF/" rel="self" type="application/rss+xml"/><item><title>最短路问题（Dijkstra + SPFA + Floyd）</title><link>http://dodolalorc.cn/posts/shortest_path/</link><pubDate>Sat, 23 Dec 2023 16:08:47 +0800</pubDate><author><name>DODOLA</name></author><guid>http://dodolalorc.cn/posts/shortest_path/</guid><description><![CDATA[<h3 id="思维先行" class="headerLink">
-    <a href="#%e6%80%9d%e7%bb%b4%e5%85%88%e8%a1%8c" class="header-mark"></a>思维先行</h3><p>我们要找某点到某点的最短路径(记为点u到点v)，这样的路径只能从两种路径中选择——</p>
-<ol>
-<li>u和v之间有边连接时，存在边(u, v)，不存在的话可以视作这两点的距离无限大</li>
-<li>u和v可以通过某些点中转相连，这个(最短的)中转路径</li>
-</ol>
-<p>很明显，我们选最短路径肯定是在这两种路径当中选最短的来作为u和v的最短距离，而路径选择2又可以不断拆分，比如我们有<code>u -&gt; P -&gt; v</code>我们再去寻找这条路径的最短时，可以分为<code>u -&gt; P</code>最短+<code>P -&gt; v</code>最短，再去寻找中转点&hellip;而且每次取最小值最小的+最小的肯定得最小的（有一点贪心的感觉）。</p>]]></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>最短路 on Doごみ箱🪄</title><link>http://dodolalorc.cn/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF/</link><description>Recent content in 最短路 on Doごみ箱🪄</description><generator>Hugo</generator><language>zh-CN</language><managingEditor>chenflora124@gmail.com (DODOLA)</managingEditor><webMaster>chenflora124@gmail.com (DODOLA)</webMaster><copyright>dodola</copyright><lastBuildDate>Fri, 11 Apr 2025 05:57:01 +0000</lastBuildDate><atom:link href="http://dodolalorc.cn/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF/index.xml" rel="self" type="application/rss+xml"/><item><title>最短路问题（Dijkstra + SPFA + Floyd）</title><link>http://dodolalorc.cn/posts/shortest_path/</link><pubDate>Sat, 23 Dec 2023 16:08:47 +0800</pubDate><author>chenflora124@gmail.com (DODOLA)</author><guid>http://dodolalorc.cn/posts/shortest_path/</guid><description>&lt;h3 id="思维先行" class="headerLink">
+ &lt;a href="#%e6%80%9d%e7%bb%b4%e5%85%88%e8%a1%8c" class="header-mark">&lt;/a>思维先行&lt;/h3>&lt;p>我们要找某点到某点的最短路径(记为点u到点v)，这样的路径只能从两种路径中选择——&lt;/p>
+&lt;ol>
+&lt;li>u和v之间有边连接时，存在边(u, v)，不存在的话可以视作这两点的距离无限大&lt;/li>
+&lt;li>u和v可以通过某些点中转相连，这个(最短的)中转路径&lt;/li>
+&lt;/ol>
+&lt;p>很明显，我们选最短路径肯定是在这两种路径当中选最短的来作为u和v的最短距离，而路径选择2又可以不断拆分，比如我们有&lt;code>u -&amp;gt; P -&amp;gt; v&lt;/code>我们再去寻找这条路径的最短时，可以分为&lt;code>u -&amp;gt; P&lt;/code>最短+&lt;code>P -&amp;gt; v&lt;/code>最短，再去寻找中转点&amp;hellip;而且每次取最小值最小的+最小的肯定得最小的（有一点贪心的感觉）。&lt;/p></description></item></channel></rss>

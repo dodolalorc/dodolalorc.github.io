@@ -1,26 +1,24 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Rust - 标签 - Doごみ箱🪄</title><link>http://dodolalorc.cn/tags/rust/</link><description>Rust - 标签 - Doごみ箱🪄</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>chenflora124@gmail.com (DODOLA)</managingEditor><webMaster>chenflora124@gmail.com (DODOLA)</webMaster><copyright>dodola</copyright><lastBuildDate>Mon, 03 Mar 2025 15:20:51 +0800</lastBuildDate><atom:link href="http://dodolalorc.cn/tags/rust/" rel="self" type="application/rss+xml"/><item><title>Rust编程区块链项目 BlockChain in Rust</title><link>http://dodolalorc.cn/posts/block_chain/</link><pubDate>Mon, 03 Mar 2025 15:20:51 +0800</pubDate><author><name>DODOLA</name></author><guid>http://dodolalorc.cn/posts/block_chain/</guid><description><![CDATA[<div class="featured-image">
-                <img src="https://img.dodolalorc.cn/i/2025/03/03/67c559ab9df13.jpg" referrerpolicy="no-referrer">
-            </div><div class="details admonition info">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-info-circle fa-fw"></i>GitHub仓库地址<i class="details-icon fas fa-angle-right fa-fw"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content">GitHub 仓库地址：<a href="https://github.com/Florae006/BlockChain" target="_blank" rel="noopener noreferrer">BlockChain</a></div>
-        </div>
-    </div>
-<h2 id="一产品方案" class="headerLink">
-    <a href="#%e4%b8%80%e4%ba%a7%e5%93%81%e6%96%b9%e6%a1%88" class="header-mark"></a>一、产品方案</h2><h3 id="项目目标" class="headerLink">
-    <a href="#%e9%a1%b9%e7%9b%ae%e7%9b%ae%e6%a0%87" class="header-mark"></a>项目目标</h3><p>实现一个轻量的简单高效的区块链系统项目，用于学习和研究。</p>
-<ul>
-<li>学习区块链的相关知识，实现一个由 Rust 实现的简单区块链系统。</li>
-<li>能够生成创世区块，支持区块的创建、验证和链式储存，实现工作量证明算法。</li>
-<li>利用本机端口构建服务系统，实现交易的广播、挖矿功能、简单的交易校验功能。</li>
-</ul>
-<h3 id="用户需求分析" class="headerLink">
-    <a href="#%e7%94%a8%e6%88%b7%e9%9c%80%e6%b1%82%e5%88%86%e6%9e%90" class="header-mark"></a>用户需求分析</h3><ul>
-<li>用户可以通过命令行启动本地服务，在<code>main.rs</code>中配置路由，参考下方的<a href="#%e4%bd%bf%e7%94%a8%e6%89%8b%e5%86%8c" rel="">使用手册</a>，进行创建交易、挖矿、查看信息等。</li>
-<li>通过时间戳、<code>lock_time</code>、签名校验等完成简单的对交易信息的核对。</li>
-<li>系统具有一定的可扩展性，用户可以通过调整 API 接口快速调试。</li>
-</ul>
-<h3 id="主要功能" class="headerLink">
-    <a href="#%e4%b8%bb%e8%a6%81%e5%8a%9f%e8%83%bd" class="header-mark"></a>主要功能</h3><p>本产品主要由<code>src/</code>下的<code>.rs</code>文件实现主要功能。</p>]]></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Rust on Doごみ箱🪄</title><link>http://dodolalorc.cn/tags/rust/</link><description>Recent content in Rust on Doごみ箱🪄</description><generator>Hugo</generator><language>zh-CN</language><managingEditor>chenflora124@gmail.com (DODOLA)</managingEditor><webMaster>chenflora124@gmail.com (DODOLA)</webMaster><copyright>dodola</copyright><lastBuildDate>Fri, 11 Apr 2025 05:57:01 +0000</lastBuildDate><atom:link href="http://dodolalorc.cn/tags/rust/index.xml" rel="self" type="application/rss+xml"/><item><title>Rust编程区块链项目 BlockChain in Rust</title><link>http://dodolalorc.cn/posts/block_chain/</link><pubDate>Mon, 03 Mar 2025 15:20:51 +0800</pubDate><author>chenflora124@gmail.com (DODOLA)</author><guid>http://dodolalorc.cn/posts/block_chain/</guid><description>&lt;div class="details admonition info">
+ &lt;div class="details-summary admonition-title">
+ &lt;i class="icon fas fa-info-circle fa-fw">&lt;/i>GitHub仓库地址&lt;i class="details-icon fas fa-angle-right fa-fw">&lt;/i>
+ &lt;/div>
+ &lt;div class="details-content">
+ &lt;div class="admonition-content">GitHub 仓库地址：&lt;a href="https://github.com/Florae006/BlockChain" target="_blank" rel="noopener noreferrer">BlockChain&lt;/a>&lt;/div>
+ &lt;/div>
+ &lt;/div>
+&lt;h2 id="一产品方案" class="headerLink">
+ &lt;a href="#%e4%b8%80%e4%ba%a7%e5%93%81%e6%96%b9%e6%a1%88" class="header-mark">&lt;/a>一、产品方案&lt;/h2>&lt;h3 id="项目目标" class="headerLink">
+ &lt;a href="#%e9%a1%b9%e7%9b%ae%e7%9b%ae%e6%a0%87" class="header-mark">&lt;/a>项目目标&lt;/h3>&lt;p>实现一个轻量的简单高效的区块链系统项目，用于学习和研究。&lt;/p>
+&lt;ul>
+&lt;li>学习区块链的相关知识，实现一个由 Rust 实现的简单区块链系统。&lt;/li>
+&lt;li>能够生成创世区块，支持区块的创建、验证和链式储存，实现工作量证明算法。&lt;/li>
+&lt;li>利用本机端口构建服务系统，实现交易的广播、挖矿功能、简单的交易校验功能。&lt;/li>
+&lt;/ul>
+&lt;h3 id="用户需求分析" class="headerLink">
+ &lt;a href="#%e7%94%a8%e6%88%b7%e9%9c%80%e6%b1%82%e5%88%86%e6%9e%90" class="header-mark">&lt;/a>用户需求分析&lt;/h3>&lt;ul>
+&lt;li>用户可以通过命令行启动本地服务，在&lt;code>main.rs&lt;/code>中配置路由，参考下方的&lt;a href="#%e4%bd%bf%e7%94%a8%e6%89%8b%e5%86%8c" rel="">使用手册&lt;/a>，进行创建交易、挖矿、查看信息等。&lt;/li>
+&lt;li>通过时间戳、&lt;code>lock_time&lt;/code>、签名校验等完成简单的对交易信息的核对。&lt;/li>
+&lt;li>系统具有一定的可扩展性，用户可以通过调整 API 接口快速调试。&lt;/li>
+&lt;/ul>
+&lt;h3 id="主要功能" class="headerLink">
+ &lt;a href="#%e4%b8%bb%e8%a6%81%e5%8a%9f%e8%83%bd" class="header-mark">&lt;/a>主要功能&lt;/h3>&lt;p>本产品主要由&lt;code>src/&lt;/code>下的&lt;code>.rs&lt;/code>文件实现主要功能。&lt;/p></description></item></channel></rss>

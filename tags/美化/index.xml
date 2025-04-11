@@ -1,216 +1,216 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>美化 - 标签 - Doごみ箱🪄</title><link>http://dodolalorc.cn/tags/%E7%BE%8E%E5%8C%96/</link><description>美化 - 标签 - Doごみ箱🪄</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>chenflora124@gmail.com (DODOLA)</managingEditor><webMaster>chenflora124@gmail.com (DODOLA)</webMaster><copyright>dodola</copyright><lastBuildDate>Tue, 19 Dec 2023 20:57:26 +0800</lastBuildDate><atom:link href="http://dodolalorc.cn/tags/%E7%BE%8E%E5%8C%96/" rel="self" type="application/rss+xml"/><item><title>【网站美化】点击特效2</title><link>http://dodolalorc.cn/posts/beautify_site_clickfollow/</link><pubDate>Tue, 19 Dec 2023 20:57:26 +0800</pubDate><author><name>DODOLA</name></author><guid>http://dodolalorc.cn/posts/beautify_site_clickfollow/</guid><description><![CDATA[<p>增加了一个鼠标追尾的效果 QwQ</p>
-<p>添加文件的方式参考上一篇~指路<a href="/posts/startsite/beautify_site_click/" rel="">这篇</a></p>
-<h1 id="js文件" class="headerLink">
-    <a href="#js%e6%96%87%e4%bb%b6" class="header-mark"></a><code>js</code>文件：</h1><p><a href="/js/_extended/pointerfollow.js" rel="">pointerfollow.js</a></p>
-<p>js 原文件来源：<a href="https://codepen.io/Hyperplexed/pen/OJdpEME" target="_blank" rel="noopener noreferrer">Canva&rsquo;s Magic Mouse Effect (codepen.io)</a></p>
-<p>（我有稍微改了一些样式 qwq，写在代码里了。</p>
-<h1 id="css文件" class="headerLink">
-    <a href="#css%e6%96%87%e4%bb%b6" class="header-mark"></a><code>css</code>文件：</h1><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span><span class="lnt">44
-</span><span class="lnt">45
-</span><span class="lnt">46
-</span><span class="lnt">47
-</span><span class="lnt">48
-</span><span class="lnt">49
-</span><span class="lnt">50
-</span><span class="lnt">51
-</span><span class="lnt">52
-</span><span class="lnt">53
-</span><span class="lnt">54
-</span><span class="lnt">55
-</span><span class="lnt">56
-</span><span class="lnt">57
-</span><span class="lnt">58
-</span><span class="lnt">59
-</span><span class="lnt">60
-</span><span class="lnt">61
-</span><span class="lnt">62
-</span><span class="lnt">63
-</span><span class="lnt">64
-</span><span class="lnt">65
-</span><span class="lnt">66
-</span><span class="lnt">67
-</span><span class="lnt">68
-</span><span class="lnt">69
-</span><span class="lnt">70
-</span><span class="lnt">71
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="p">.</span><span class="nc">star</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="k">position</span><span class="p">:</span> <span class="kc">fixed</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="k">z-index</span><span class="p">:</span> <span class="mi">2</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="k">color</span><span class="p">:</span> <span class="kc">white</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="k">font-size</span><span class="p">:</span> <span class="mi">1</span><span class="kt">rem</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="k">animation-duration</span><span class="p">:</span> <span class="mi">1500</span><span class="kt">ms</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="k">animation-fill-mode</span><span class="p">:</span> <span class="kc">forwards</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="n">pointer-events</span><span class="p">:</span> <span class="kc">none</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">@</span><span class="k">keyframes</span> <span class="nt">fall-1</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">0</span><span class="o">%</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">transform</span><span class="p">:</span> <span class="nb">translate</span><span class="p">(</span><span class="mi">0</span><span class="kt">px</span><span class="p">,</span> <span class="mi">0</span><span class="kt">px</span><span class="p">)</span> <span class="nb">rotateX</span><span class="p">(</span><span class="mi">45</span><span class="kt">deg</span><span class="p">)</span> <span class="nb">rotateY</span><span class="p">(</span><span class="mi">30</span><span class="kt">deg</span><span class="p">)</span> <span class="nb">rotateZ</span><span class="p">(</span><span class="mi">0</span><span class="kt">deg</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="nb">scale</span><span class="p">(</span><span class="mf">0.25</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="k">opacity</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="nt">5</span><span class="o">%</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">transform</span><span class="p">:</span> <span class="nb">translate</span><span class="p">(</span><span class="mi">10</span><span class="kt">px</span><span class="p">,</span> <span class="mi">-10</span><span class="kt">px</span><span class="p">)</span> <span class="nb">rotateX</span><span class="p">(</span><span class="mi">45</span><span class="kt">deg</span><span class="p">)</span> <span class="nb">rotateY</span><span class="p">(</span><span class="mi">30</span><span class="kt">deg</span><span class="p">)</span> <span class="nb">rotateZ</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">        <span class="mi">0</span><span class="kt">deg</span>
-</span></span><span class="line"><span class="cl">      <span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="nb">scale</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="k">opacity</span><span class="p">:</span> <span class="mi">1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="nt">100</span><span class="o">%</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">transform</span><span class="p">:</span> <span class="nb">translate</span><span class="p">(</span><span class="mi">25</span><span class="kt">px</span><span class="p">,</span> <span class="mi">200</span><span class="kt">px</span><span class="p">)</span> <span class="nb">rotateX</span><span class="p">(</span><span class="mi">180</span><span class="kt">deg</span><span class="p">)</span> <span class="nb">rotateY</span><span class="p">(</span><span class="mi">270</span><span class="kt">deg</span><span class="p">)</span> <span class="nb">rotateZ</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">        <span class="mi">90</span><span class="kt">deg</span>
-</span></span><span class="line"><span class="cl">      <span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="nb">scale</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="k">opacity</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">@</span><span class="k">keyframes</span> <span class="nt">fall-2</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">0</span><span class="o">%</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">transform</span><span class="p">:</span> <span class="nb">translate</span><span class="p">(</span><span class="mi">0</span><span class="kt">px</span><span class="p">,</span> <span class="mi">0</span><span class="kt">px</span><span class="p">)</span> <span class="nb">rotateX</span><span class="p">(</span><span class="mi">-20</span><span class="kt">deg</span><span class="p">)</span> <span class="nb">rotateY</span><span class="p">(</span><span class="mi">10</span><span class="kt">deg</span><span class="p">)</span> <span class="nb">scale</span><span class="p">(</span><span class="mf">0.25</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="k">opacity</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="nt">10</span><span class="o">%</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">transform</span><span class="p">:</span> <span class="nb">translate</span><span class="p">(</span><span class="mi">-10</span><span class="kt">px</span><span class="p">,</span> <span class="mi">-5</span><span class="kt">px</span><span class="p">)</span> <span class="nb">rotateX</span><span class="p">(</span><span class="mi">-20</span><span class="kt">deg</span><span class="p">)</span> <span class="nb">rotateY</span><span class="p">(</span><span class="mi">10</span><span class="kt">deg</span><span class="p">)</span> <span class="nb">scale</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="k">opacity</span><span class="p">:</span> <span class="mi">1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="nt">100</span><span class="o">%</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">transform</span><span class="p">:</span> <span class="nb">translate</span><span class="p">(</span><span class="mi">-10</span><span class="kt">px</span><span class="p">,</span> <span class="mi">160</span><span class="kt">px</span><span class="p">)</span> <span class="nb">rotateX</span><span class="p">(</span><span class="mi">-90</span><span class="kt">deg</span><span class="p">)</span> <span class="nb">rotateY</span><span class="p">(</span><span class="mi">45</span><span class="kt">deg</span><span class="p">)</span> <span class="nb">scale</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">        <span class="mf">0.25</span>
-</span></span><span class="line"><span class="cl">      <span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="k">opacity</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">@</span><span class="k">keyframes</span> <span class="nt">fall-3</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">0</span><span class="o">%</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">transform</span><span class="p">:</span> <span class="nb">translate</span><span class="p">(</span><span class="mi">0</span><span class="kt">px</span><span class="p">,</span> <span class="mi">0</span><span class="kt">px</span><span class="p">)</span> <span class="nb">rotateX</span><span class="p">(</span><span class="mi">0</span><span class="kt">deg</span><span class="p">)</span> <span class="nb">rotateY</span><span class="p">(</span><span class="mi">45</span><span class="kt">deg</span><span class="p">)</span> <span class="nb">scale</span><span class="p">(</span><span class="mf">0.5</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="k">opacity</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="nt">15</span><span class="o">%</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">transform</span><span class="p">:</span> <span class="nb">translate</span><span class="p">(</span><span class="mi">7</span><span class="kt">px</span><span class="p">,</span> <span class="mi">5</span><span class="kt">px</span><span class="p">)</span> <span class="nb">rotateX</span><span class="p">(</span><span class="mi">0</span><span class="kt">deg</span><span class="p">)</span> <span class="nb">rotateY</span><span class="p">(</span><span class="mi">45</span><span class="kt">deg</span><span class="p">)</span> <span class="nb">scale</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="k">opacity</span><span class="p">:</span> <span class="mi">1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="nt">100</span><span class="o">%</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">transform</span><span class="p">:</span> <span class="nb">translate</span><span class="p">(</span><span class="mi">20</span><span class="kt">px</span><span class="p">,</span> <span class="mi">120</span><span class="kt">px</span><span class="p">)</span> <span class="nb">rotateX</span><span class="p">(</span><span class="mi">-180</span><span class="kt">deg</span><span class="p">)</span> <span class="nb">rotateY</span><span class="p">(</span><span class="mi">-90</span><span class="kt">deg</span><span class="p">)</span> <span class="nb">scale</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">        <span class="mf">0.5</span>
-</span></span><span class="line"><span class="cl">      <span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="k">opacity</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div>]]></description></item><item><title>【网站美化】点击特效</title><link>http://dodolalorc.cn/posts/beautify_site_click/</link><pubDate>Mon, 18 Dec 2023 14:12:39 +0800</pubDate><author><name>DODOLA</name></author><guid>http://dodolalorc.cn/posts/beautify_site_click/</guid><description><![CDATA[<p>今天摸鱼把网站的点击特效做了QwQ，选用的效果是烟花（/逆飞的流星🎆🎆，主要摸索了如何在Hugo里添加JavaScript代码</p>
-<h1 id="添加js文件" class="headerLink">
-    <a href="#%e6%b7%bb%e5%8a%a0js%e6%96%87%e4%bb%b6" class="header-mark"></a>添加js文件</h1><p>这次用到的两个js文件在这里：</p>
-<p><a href="/js/anime.min.js" rel="">anime.min.js</a></p>
-<p><a href="/js/fireworks.js" rel="">fireworks.js</a></p>
-<p>在<code>./static/</code>下新建一个<code>js</code>文件夹，文件夹下新建两个<code>js</code>文件，命名为<code>anime.min.js</code>和<code>fireworks.js</code>，然后将上面两个文件的内容粘贴进去。</p>]]></description></item><item><title>【网站美化】标签美化</title><link>http://dodolalorc.cn/posts/beautify_site_tags/</link><pubDate>Wed, 13 Dec 2023 23:00:09 +0800</pubDate><author><name>DODOLA</name></author><guid>http://dodolalorc.cn/posts/beautify_site_tags/</guid><description><![CDATA[<h2 id="简单设计" class="headerLink">
-    <a href="#%e7%ae%80%e5%8d%95%e8%ae%be%e8%ae%a1" class="header-mark"></a>简单设计</h2><p><code>assets/css/common/terms.css</code>添加：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="p">.</span><span class="nc">terms-tags</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">padding-left</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">display</span><span class="p">:</span> <span class="kc">flex</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">flex-wrap</span><span class="p">:</span> <span class="kc">wrap</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">align-items</span><span class="p">:</span> <span class="kc">center</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">justify-content</span><span class="p">:</span> <span class="kc">center</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="添加权重" class="headerLink">
-    <a href="#%e6%b7%bb%e5%8a%a0%e6%9d%83%e9%87%8d" class="header-mark"></a>添加权重</h2><p>在<code>./layouts/_default/terms.html</code>中，找到这段代码并在a标签插入<code>data-weight</code>属性</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">ul</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;terms-tags&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">    {{- $type := .Type }}
-</span></span><span class="line"><span class="cl">    {{- range $key, $value := .Data.Terms.Alphabetical }}
-</span></span><span class="line"><span class="cl">    {{- $name := .Name }}
-</span></span><span class="line"><span class="cl">    {{- $count := .Count }}
-</span></span><span class="line"><span class="cl">    {{- with site.GetPage (printf &#34;/%s/%s&#34; $type $name) }}
-</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">a</span> <span class="na">data-weight</span><span class="o">=</span><span class="s">&#34;{{$count}}&#34;</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;{{ .Permalink }}&#34;</span><span class="p">&gt;</span>{{ .Name }} <span class="p">&lt;</span><span class="nt">sup</span><span class="p">&gt;&lt;</span><span class="nt">strong</span><span class="p">&gt;&lt;</span><span class="nt">sup</span><span class="p">&gt;</span>{{ $count }}<span class="p">&lt;/</span><span class="nt">sup</span><span class="p">&gt;&lt;/</span><span class="nt">strong</span><span class="p">&gt;&lt;/</span><span class="nt">sup</span><span class="p">&gt;</span> <span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">    {{- end }}
-</span></span><span class="line"><span class="cl">    {{- end }}
-</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="字体大小按权重显示" class="headerLink">
-    <a href="#%e5%ad%97%e4%bd%93%e5%a4%a7%e5%b0%8f%e6%8c%89%e6%9d%83%e9%87%8d%e6%98%be%e7%a4%ba" class="header-mark"></a>字体大小按权重显示</h2><p><code>assets/css/common/terms.css</code>中设计：</p>]]></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>美化 on Doごみ箱🪄</title><link>http://dodolalorc.cn/tags/%E7%BE%8E%E5%8C%96/</link><description>Recent content in 美化 on Doごみ箱🪄</description><generator>Hugo</generator><language>zh-CN</language><managingEditor>chenflora124@gmail.com (DODOLA)</managingEditor><webMaster>chenflora124@gmail.com (DODOLA)</webMaster><copyright>dodola</copyright><lastBuildDate>Fri, 11 Apr 2025 05:57:01 +0000</lastBuildDate><atom:link href="http://dodolalorc.cn/tags/%E7%BE%8E%E5%8C%96/index.xml" rel="self" type="application/rss+xml"/><item><title>【网站美化】点击特效2</title><link>http://dodolalorc.cn/posts/beautify_site_clickfollow/</link><pubDate>Tue, 19 Dec 2023 20:57:26 +0800</pubDate><author>chenflora124@gmail.com (DODOLA)</author><guid>http://dodolalorc.cn/posts/beautify_site_clickfollow/</guid><description>&lt;p>增加了一个鼠标追尾的效果 QwQ&lt;/p>
+&lt;p>添加文件的方式参考上一篇~指路&lt;a href="http://dodolalorc.cn/posts/startsite/beautify_site_click/" rel="">这篇&lt;/a>&lt;/p>
+&lt;h1 id="js文件" class="headerLink">
+ &lt;a href="#js%e6%96%87%e4%bb%b6" class="header-mark">&lt;/a>&lt;code>js&lt;/code>文件：&lt;/h1>&lt;p>&lt;a href="http://dodolalorc.cn/js/_extended/pointerfollow.js" rel="">pointerfollow.js&lt;/a>&lt;/p>
+&lt;p>js 原文件来源：&lt;a href="https://codepen.io/Hyperplexed/pen/OJdpEME" target="_blank" rel="noopener noreferrer">Canva&amp;rsquo;s Magic Mouse Effect (codepen.io)&lt;/a>&lt;/p>
+&lt;p>（我有稍微改了一些样式 qwq，写在代码里了。&lt;/p>
+&lt;h1 id="css文件" class="headerLink">
+ &lt;a href="#css%e6%96%87%e4%bb%b6" class="header-mark">&lt;/a>&lt;code>css&lt;/code>文件：&lt;/h1>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;span class="lnt">43
+&lt;/span>&lt;span class="lnt">44
+&lt;/span>&lt;span class="lnt">45
+&lt;/span>&lt;span class="lnt">46
+&lt;/span>&lt;span class="lnt">47
+&lt;/span>&lt;span class="lnt">48
+&lt;/span>&lt;span class="lnt">49
+&lt;/span>&lt;span class="lnt">50
+&lt;/span>&lt;span class="lnt">51
+&lt;/span>&lt;span class="lnt">52
+&lt;/span>&lt;span class="lnt">53
+&lt;/span>&lt;span class="lnt">54
+&lt;/span>&lt;span class="lnt">55
+&lt;/span>&lt;span class="lnt">56
+&lt;/span>&lt;span class="lnt">57
+&lt;/span>&lt;span class="lnt">58
+&lt;/span>&lt;span class="lnt">59
+&lt;/span>&lt;span class="lnt">60
+&lt;/span>&lt;span class="lnt">61
+&lt;/span>&lt;span class="lnt">62
+&lt;/span>&lt;span class="lnt">63
+&lt;/span>&lt;span class="lnt">64
+&lt;/span>&lt;span class="lnt">65
+&lt;/span>&lt;span class="lnt">66
+&lt;/span>&lt;span class="lnt">67
+&lt;/span>&lt;span class="lnt">68
+&lt;/span>&lt;span class="lnt">69
+&lt;/span>&lt;span class="lnt">70
+&lt;/span>&lt;span class="lnt">71
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="line">&lt;span class="cl">&lt;span class="p">.&lt;/span>&lt;span class="nc">star&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">position&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">fixed&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">z-index&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">color&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">white&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">font-size&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="kt">rem&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">animation-duration&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">1500&lt;/span>&lt;span class="kt">ms&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">animation-fill-mode&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">forwards&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">pointer-events&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">none&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">@&lt;/span>&lt;span class="k">keyframes&lt;/span> &lt;span class="nt">fall-1&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">0&lt;/span>&lt;span class="o">%&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">transform&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">translate&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="nb">rotateX&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">45&lt;/span>&lt;span class="kt">deg&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="nb">rotateY&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">30&lt;/span>&lt;span class="kt">deg&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="nb">rotateZ&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="kt">deg&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">scale&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mf">0.25&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">opacity&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">5&lt;/span>&lt;span class="o">%&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">transform&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">translate&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">10&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">-10&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="nb">rotateX&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">45&lt;/span>&lt;span class="kt">deg&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="nb">rotateY&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">30&lt;/span>&lt;span class="kt">deg&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="nb">rotateZ&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mi">0&lt;/span>&lt;span class="kt">deg&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">scale&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">opacity&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">100&lt;/span>&lt;span class="o">%&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">transform&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">translate&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">25&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">200&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="nb">rotateX&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">180&lt;/span>&lt;span class="kt">deg&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="nb">rotateY&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">270&lt;/span>&lt;span class="kt">deg&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="nb">rotateZ&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mi">90&lt;/span>&lt;span class="kt">deg&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">scale&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">opacity&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">@&lt;/span>&lt;span class="k">keyframes&lt;/span> &lt;span class="nt">fall-2&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">0&lt;/span>&lt;span class="o">%&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">transform&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">translate&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="nb">rotateX&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">-20&lt;/span>&lt;span class="kt">deg&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="nb">rotateY&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">10&lt;/span>&lt;span class="kt">deg&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="nb">scale&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mf">0.25&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">opacity&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">10&lt;/span>&lt;span class="o">%&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">transform&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">translate&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">-10&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">-5&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="nb">rotateX&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">-20&lt;/span>&lt;span class="kt">deg&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="nb">rotateY&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">10&lt;/span>&lt;span class="kt">deg&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="nb">scale&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">opacity&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">100&lt;/span>&lt;span class="o">%&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">transform&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">translate&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">-10&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">160&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="nb">rotateX&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">-90&lt;/span>&lt;span class="kt">deg&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="nb">rotateY&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">45&lt;/span>&lt;span class="kt">deg&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="nb">scale&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mf">0.25&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">opacity&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">@&lt;/span>&lt;span class="k">keyframes&lt;/span> &lt;span class="nt">fall-3&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">0&lt;/span>&lt;span class="o">%&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">transform&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">translate&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="nb">rotateX&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="kt">deg&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="nb">rotateY&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">45&lt;/span>&lt;span class="kt">deg&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="nb">scale&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mf">0.5&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">opacity&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">15&lt;/span>&lt;span class="o">%&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">transform&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">translate&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">7&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">5&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="nb">rotateX&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="kt">deg&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="nb">rotateY&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">45&lt;/span>&lt;span class="kt">deg&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="nb">scale&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">opacity&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">100&lt;/span>&lt;span class="o">%&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">transform&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">translate&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">20&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">120&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="nb">rotateX&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">-180&lt;/span>&lt;span class="kt">deg&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="nb">rotateY&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">-90&lt;/span>&lt;span class="kt">deg&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="nb">scale&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mf">0.5&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">opacity&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item><item><title>【网站美化】点击特效</title><link>http://dodolalorc.cn/posts/beautify_site_click/</link><pubDate>Mon, 18 Dec 2023 14:12:39 +0800</pubDate><author>chenflora124@gmail.com (DODOLA)</author><guid>http://dodolalorc.cn/posts/beautify_site_click/</guid><description>&lt;p>今天摸鱼把网站的点击特效做了QwQ，选用的效果是烟花（/逆飞的流星🎆🎆，主要摸索了如何在Hugo里添加JavaScript代码&lt;/p>
+&lt;h1 id="添加js文件" class="headerLink">
+ &lt;a href="#%e6%b7%bb%e5%8a%a0js%e6%96%87%e4%bb%b6" class="header-mark">&lt;/a>添加js文件&lt;/h1>&lt;p>这次用到的两个js文件在这里：&lt;/p>
+&lt;p>&lt;a href="http://dodolalorc.cn/js/anime.min.js" rel="">anime.min.js&lt;/a>&lt;/p>
+&lt;p>&lt;a href="http://dodolalorc.cn/js/fireworks.js" rel="">fireworks.js&lt;/a>&lt;/p>
+&lt;p>在&lt;code>./static/&lt;/code>下新建一个&lt;code>js&lt;/code>文件夹，文件夹下新建两个&lt;code>js&lt;/code>文件，命名为&lt;code>anime.min.js&lt;/code>和&lt;code>fireworks.js&lt;/code>，然后将上面两个文件的内容粘贴进去。&lt;/p></description></item><item><title>【网站美化】标签美化</title><link>http://dodolalorc.cn/posts/beautify_site_tags/</link><pubDate>Wed, 13 Dec 2023 23:00:09 +0800</pubDate><author>chenflora124@gmail.com (DODOLA)</author><guid>http://dodolalorc.cn/posts/beautify_site_tags/</guid><description>&lt;h2 id="简单设计" class="headerLink">
+ &lt;a href="#%e7%ae%80%e5%8d%95%e8%ae%be%e8%ae%a1" class="header-mark">&lt;/a>简单设计&lt;/h2>&lt;p>&lt;code>assets/css/common/terms.css&lt;/code>添加：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="line">&lt;span class="cl">&lt;span class="p">.&lt;/span>&lt;span class="nc">terms-tags&lt;/span>&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">padding-left&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">display&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">flex&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">flex-wrap&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">wrap&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">align-items&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">center&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">justify-content&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">center&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="添加权重" class="headerLink">
+ &lt;a href="#%e6%b7%bb%e5%8a%a0%e6%9d%83%e9%87%8d" class="header-mark">&lt;/a>添加权重&lt;/h2>&lt;p>在&lt;code>./layouts/_default/terms.html&lt;/code>中，找到这段代码并在a标签插入&lt;code>data-weight&lt;/code>属性&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">ul&lt;/span> &lt;span class="na">class&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;terms-tags&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {{- $type := .Type }}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {{- range $key, $value := .Data.Terms.Alphabetical }}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {{- $name := .Name }}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {{- $count := .Count }}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {{- with site.GetPage (printf &amp;#34;/%s/%s&amp;#34; $type $name) }}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">li&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">a&lt;/span> &lt;span class="na">data-weight&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;{{$count}}&amp;#34;&lt;/span> &lt;span class="na">href&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;{{ .Permalink }}&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>{{ .Name }} &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">sup&lt;/span>&lt;span class="p">&amp;gt;&amp;lt;&lt;/span>&lt;span class="nt">strong&lt;/span>&lt;span class="p">&amp;gt;&amp;lt;&lt;/span>&lt;span class="nt">sup&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>{{ $count }}&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">sup&lt;/span>&lt;span class="p">&amp;gt;&amp;lt;/&lt;/span>&lt;span class="nt">strong&lt;/span>&lt;span class="p">&amp;gt;&amp;lt;/&lt;/span>&lt;span class="nt">sup&lt;/span>&lt;span class="p">&amp;gt;&lt;/span> &lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">a&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">li&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {{- end }}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {{- end }}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">ul&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="字体大小按权重显示" class="headerLink">
+ &lt;a href="#%e5%ad%97%e4%bd%93%e5%a4%a7%e5%b0%8f%e6%8c%89%e6%9d%83%e9%87%8d%e6%98%be%e7%a4%ba" class="header-mark">&lt;/a>字体大小按权重显示&lt;/h2>&lt;p>&lt;code>assets/css/common/terms.css&lt;/code>中设计：&lt;/p></description></item></channel></rss>

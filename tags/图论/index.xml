@@ -1,8 +1,8 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>图论 - 标签 - Doごみ箱🪄</title><link>http://dodolalorc.cn/tags/%E5%9B%BE%E8%AE%BA/</link><description>图论 - 标签 - Doごみ箱🪄</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>chenflora124@gmail.com (DODOLA)</managingEditor><webMaster>chenflora124@gmail.com (DODOLA)</webMaster><copyright>dodola</copyright><lastBuildDate>Sat, 06 Jan 2024 14:15:17 +0800</lastBuildDate><atom:link href="http://dodolalorc.cn/tags/%E5%9B%BE%E8%AE%BA/" rel="self" type="application/rss+xml"/><item><title>图论基础||存储图||DFS、BFS(图论)</title><link>http://dodolalorc.cn/posts/graph_basic/</link><pubDate>Sat, 06 Jan 2024 14:15:17 +0800</pubDate><author><name>DODOLA</name></author><guid>http://dodolalorc.cn/posts/graph_basic/</guid><description><![CDATA[<h3 id="11图的定义" class="headerLink">
-    <a href="#11%e5%9b%be%e7%9a%84%e5%ae%9a%e4%b9%89" class="header-mark"></a>1.1图的定义</h3><p>上课讲过一大堆这里不再赘述，直接学习代码实现。</p>
-<h3 id="12图的存储" class="headerLink">
-    <a href="#12%e5%9b%be%e7%9a%84%e5%ad%98%e5%82%a8" class="header-mark"></a>1.2图的存储</h3><p>例图展示：</p>
-<pre class="mermaid">graph LR
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>图论 on Doごみ箱🪄</title><link>http://dodolalorc.cn/tags/%E5%9B%BE%E8%AE%BA/</link><description>Recent content in 图论 on Doごみ箱🪄</description><generator>Hugo</generator><language>zh-CN</language><managingEditor>chenflora124@gmail.com (DODOLA)</managingEditor><webMaster>chenflora124@gmail.com (DODOLA)</webMaster><copyright>dodola</copyright><lastBuildDate>Fri, 11 Apr 2025 05:57:01 +0000</lastBuildDate><atom:link href="http://dodolalorc.cn/tags/%E5%9B%BE%E8%AE%BA/index.xml" rel="self" type="application/rss+xml"/><item><title>图论基础||存储图||DFS、BFS(图论)</title><link>http://dodolalorc.cn/posts/graph_basic/</link><pubDate>Sat, 06 Jan 2024 14:15:17 +0800</pubDate><author>chenflora124@gmail.com (DODOLA)</author><guid>http://dodolalorc.cn/posts/graph_basic/</guid><description>&lt;h3 id="11图的定义" class="headerLink">
+ &lt;a href="#11%e5%9b%be%e7%9a%84%e5%ae%9a%e4%b9%89" class="header-mark">&lt;/a>1.1图的定义&lt;/h3>&lt;p>上课讲过一大堆这里不再赘述，直接学习代码实现。&lt;/p>
+&lt;h3 id="12图的存储" class="headerLink">
+ &lt;a href="#12%e5%9b%be%e7%9a%84%e5%ad%98%e5%82%a8" class="header-mark">&lt;/a>1.2图的存储&lt;/h3>&lt;p>例图展示：&lt;/p>
+&lt;pre class="mermaid">graph LR
 v1((v1))--4-->v2((v2))
 v1((v1))--9-->v6((v6))
 v3((v3))--19-->v2((v2))
@@ -15,53 +15,53 @@ v6((v6))--4-->v7((v7))
 v7((v7))--25-->v4((v4))
 v8((v8))--7-->v7((v7))
 v8((v8))--11-->v3((v3))
-</pre><p><code>设n个点，m条边</code></p>
-<p>上图的数据（按照 起点-终点-权值）：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">8 12
-</span></span><span class="line"><span class="cl">5 8 29
-</span></span><span class="line"><span class="cl">6 1 12
-</span></span><span class="line"><span class="cl">8 3 11
-</span></span><span class="line"><span class="cl">1 2 4
-</span></span><span class="line"><span class="cl">3 1 22
-</span></span><span class="line"><span class="cl">4 3 17
-</span></span><span class="line"><span class="cl">7 4 25
-</span></span><span class="line"><span class="cl">6 5 9
-</span></span><span class="line"><span class="cl">8 7 7
-</span></span><span class="line"><span class="cl">1 6 9
-</span></span><span class="line"><span class="cl">3 2 19
-</span></span><span class="line"><span class="cl">6 7 4
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h4 id="邻接矩阵" class="headerLink">
-    <a href="#%e9%82%bb%e6%8e%a5%e7%9f%a9%e9%98%b5" class="header-mark"></a>邻接矩阵</h4><ul>
-<li>遍历效率低、不能存重边、初始化效率低<code>初始化O(n^2)时间，建图O(m)时间</code>、空间开销大<code>O(n^2)</code></li>
-<li>对于稀疏图来说大部分是INF，空间利用效率也不高</li>
-</ul>
-<h4 id="前向星" class="headerLink">
-    <a href="#%e5%89%8d%e5%90%91%e6%98%9f" class="header-mark"></a>前向星</h4><p>前向星涉及排序，所以其时间复杂度和排序算法有关，一般情况下时间复杂度为<code>O(mlog m)</code>，空间上需要两个数组（记录边的边数组、记录各点在边数组中起始位置的head数组），空间复杂度为<code>O(m+n)</code></p>]]></description></item><item><title>拓扑排序</title><link>http://dodolalorc.cn/posts/topo/</link><pubDate>Fri, 05 Jan 2024 14:20:41 +0800</pubDate><author><name>DODOLA</name></author><guid>http://dodolalorc.cn/posts/topo/</guid><description><![CDATA[<h2 id="拓扑排序" class="headerLink">
-    <a href="#%e6%8b%93%e6%89%91%e6%8e%92%e5%ba%8f" class="header-mark"></a>拓扑排序</h2><p>前提：拓扑排序是对<u>有向无环图</u>来说的，无向图、有环图都不存在拓扑排序。</p>
-<p>拓扑排序是将图G中的所有顶点排成一个线性序列，使得对于任意一堆有边顶点&lt;u, v&gt;，在线性序列中，u都出现在v之前。</p>
-<p>拓扑排序可以反应某种方案是否是切实可行的。</p>]]></description></item><item><title>最短路问题（Dijkstra + SPFA + Floyd）</title><link>http://dodolalorc.cn/posts/shortest_path/</link><pubDate>Sat, 23 Dec 2023 16:08:47 +0800</pubDate><author><name>DODOLA</name></author><guid>http://dodolalorc.cn/posts/shortest_path/</guid><description><![CDATA[<h3 id="思维先行" class="headerLink">
-    <a href="#%e6%80%9d%e7%bb%b4%e5%85%88%e8%a1%8c" class="header-mark"></a>思维先行</h3><p>我们要找某点到某点的最短路径(记为点u到点v)，这样的路径只能从两种路径中选择——</p>
-<ol>
-<li>u和v之间有边连接时，存在边(u, v)，不存在的话可以视作这两点的距离无限大</li>
-<li>u和v可以通过某些点中转相连，这个(最短的)中转路径</li>
-</ol>
-<p>很明显，我们选最短路径肯定是在这两种路径当中选最短的来作为u和v的最短距离，而路径选择2又可以不断拆分，比如我们有<code>u -&gt; P -&gt; v</code>我们再去寻找这条路径的最短时，可以分为<code>u -&gt; P</code>最短+<code>P -&gt; v</code>最短，再去寻找中转点&hellip;而且每次取最小值最小的+最小的肯定得最小的（有一点贪心的感觉）。</p>]]></description></item></channel></rss>
+&lt;/pre>&lt;p>&lt;code>设n个点，m条边&lt;/code>&lt;/p>
+&lt;p>上图的数据（按照 起点-终点-权值）：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-plaintext" data-lang="plaintext">&lt;span class="line">&lt;span class="cl">8 12
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">5 8 29
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">6 1 12
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">8 3 11
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">1 2 4
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">3 1 22
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">4 3 17
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">7 4 25
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">6 5 9
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">8 7 7
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">1 6 9
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">3 2 19
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">6 7 4
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h4 id="邻接矩阵" class="headerLink">
+ &lt;a href="#%e9%82%bb%e6%8e%a5%e7%9f%a9%e9%98%b5" class="header-mark">&lt;/a>邻接矩阵&lt;/h4>&lt;ul>
+&lt;li>遍历效率低、不能存重边、初始化效率低&lt;code>初始化O(n^2)时间，建图O(m)时间&lt;/code>、空间开销大&lt;code>O(n^2)&lt;/code>&lt;/li>
+&lt;li>对于稀疏图来说大部分是INF，空间利用效率也不高&lt;/li>
+&lt;/ul>
+&lt;h4 id="前向星" class="headerLink">
+ &lt;a href="#%e5%89%8d%e5%90%91%e6%98%9f" class="header-mark">&lt;/a>前向星&lt;/h4>&lt;p>前向星涉及排序，所以其时间复杂度和排序算法有关，一般情况下时间复杂度为&lt;code>O(mlog m)&lt;/code>，空间上需要两个数组（记录边的边数组、记录各点在边数组中起始位置的head数组），空间复杂度为&lt;code>O(m+n)&lt;/code>&lt;/p></description></item><item><title>拓扑排序</title><link>http://dodolalorc.cn/posts/topo/</link><pubDate>Fri, 05 Jan 2024 14:20:41 +0800</pubDate><author>chenflora124@gmail.com (DODOLA)</author><guid>http://dodolalorc.cn/posts/topo/</guid><description>&lt;h2 id="拓扑排序" class="headerLink">
+ &lt;a href="#%e6%8b%93%e6%89%91%e6%8e%92%e5%ba%8f" class="header-mark">&lt;/a>拓扑排序&lt;/h2>&lt;p>前提：拓扑排序是对&lt;u>有向无环图&lt;/u>来说的，无向图、有环图都不存在拓扑排序。&lt;/p>
+&lt;p>拓扑排序是将图G中的所有顶点排成一个线性序列，使得对于任意一堆有边顶点&amp;lt;u, v&amp;gt;，在线性序列中，u都出现在v之前。&lt;/p>
+&lt;p>拓扑排序可以反应某种方案是否是切实可行的。&lt;/p></description></item><item><title>最短路问题（Dijkstra + SPFA + Floyd）</title><link>http://dodolalorc.cn/posts/shortest_path/</link><pubDate>Sat, 23 Dec 2023 16:08:47 +0800</pubDate><author>chenflora124@gmail.com (DODOLA)</author><guid>http://dodolalorc.cn/posts/shortest_path/</guid><description>&lt;h3 id="思维先行" class="headerLink">
+ &lt;a href="#%e6%80%9d%e7%bb%b4%e5%85%88%e8%a1%8c" class="header-mark">&lt;/a>思维先行&lt;/h3>&lt;p>我们要找某点到某点的最短路径(记为点u到点v)，这样的路径只能从两种路径中选择——&lt;/p>
+&lt;ol>
+&lt;li>u和v之间有边连接时，存在边(u, v)，不存在的话可以视作这两点的距离无限大&lt;/li>
+&lt;li>u和v可以通过某些点中转相连，这个(最短的)中转路径&lt;/li>
+&lt;/ol>
+&lt;p>很明显，我们选最短路径肯定是在这两种路径当中选最短的来作为u和v的最短距离，而路径选择2又可以不断拆分，比如我们有&lt;code>u -&amp;gt; P -&amp;gt; v&lt;/code>我们再去寻找这条路径的最短时，可以分为&lt;code>u -&amp;gt; P&lt;/code>最短+&lt;code>P -&amp;gt; v&lt;/code>最短，再去寻找中转点&amp;hellip;而且每次取最小值最小的+最小的肯定得最小的（有一点贪心的感觉）。&lt;/p></description></item></channel></rss>

@@ -1,295 +1,289 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>CF - 标签 - Doごみ箱🪄</title><link>http://dodolalorc.cn/tags/cf/</link><description>CF - 标签 - Doごみ箱🪄</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>chenflora124@gmail.com (DODOLA)</managingEditor><webMaster>chenflora124@gmail.com (DODOLA)</webMaster><copyright>dodola</copyright><lastBuildDate>Thu, 05 Dec 2024 19:27:40 +0800</lastBuildDate><atom:link href="http://dodolalorc.cn/tags/cf/" rel="self" type="application/rss+xml"/><item><title>Codeforces Round 990 (Div. 2)</title><link>http://dodolalorc.cn/posts/cfround990div2/</link><pubDate>Thu, 05 Dec 2024 19:27:40 +0800</pubDate><author><name>DODOLA</name></author><guid>http://dodolalorc.cn/posts/cfround990div2/</guid><description><![CDATA[<div class="featured-image">
-                <img src="https://img.dodolalorc.cn/i/2024/12/10/67580e40e3ea7.png" referrerpolicy="no-referrer">
-            </div><h2 id="a-alyona-and-a-square-jigsaw-puzzle" class="headerLink">
-    <a href="#a-alyona-and-a-square-jigsaw-puzzle" class="header-mark"></a>A. Alyona and a Square Jigsaw Puzzle</h2><h3 id="题意" class="headerLink">
-    <a href="#%e9%a2%98%e6%84%8f" class="header-mark"></a>题意</h3><p><code>Alyona</code>按照顺时针围绕第一个拼图放置拼图，<code>Alyona</code>每天会按顺序放置一定数量的拼图，如果一天结束时拼图的组装部分没有任何已开始但未完成的层，<code>Alyona</code>会感到开心。给出每天放置拼图的数量，询问<code>Alyona</code>感到快乐的天数。</p>
-<h4 id="数据范围" class="headerLink">
-    <a href="#%e6%95%b0%e6%8d%ae%e8%8c%83%e5%9b%b4" class="header-mark"></a>数据范围</h4><ul>
-<li>$1\leq t\leq 500$</li>
-<li>$1\leq n\leq 100$</li>
-<li>$1\leq a_i\leq 100,a_1=1$</li>
-</ul>
-<h3 id="思路" class="headerLink">
-    <a href="#%e6%80%9d%e8%b7%af" class="header-mark"></a>思路</h3><p>检查每天完成添加拼图时的总拼图数是否恰好是一个奇数的平方数，若是则该天会感到快乐。</p>
-<h3 id="代码" class="headerLink">
-    <a href="#%e4%bb%a3%e7%a0%81" class="header-mark"></a>代码</h3><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">solve</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">n</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="n">ll</span> <span class="n">tot</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="n">ll</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">    <span class="n">tot</span> <span class="o">+=</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">    <span class="n">ld</span> <span class="n">t</span> <span class="o">=</span> <span class="n">sqrtl</span><span class="p">(</span><span class="n">tot</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">((</span><span class="n">ll</span><span class="p">)</span><span class="n">t</span> <span class="o">&amp;</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">t</span> <span class="o">==</span> <span class="p">(</span><span class="n">ll</span><span class="p">)</span><span class="n">t</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="n">ans</span><span class="o">++</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ans</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="b-replace-character" class="headerLink">
-    <a href="#b-replace-character" class="header-mark"></a>B. Replace Character</h2><h3 id="题意-1" class="headerLink">
-    <a href="#%e9%a2%98%e6%84%8f-1" class="header-mark"></a>题意</h3><p>在一个长度为$n$的字符串中，执行<strong>一次</strong>这样的操作：</p>
-<ul>
-<li>选择两个索引$i,j(1\leq i,j\leq n)$，可以选择$i = j$。</li>
-<li>进行赋值$s_i:=s_j$。</li>
-</ul>
-<p>要求输出在进行该操作之后，字典序最小的那个字符串。</p>]]></description></item><item><title>Codeforces Round 980 (Div. 2)</title><link>http://dodolalorc.cn/posts/cfround980div2/</link><pubDate>Tue, 26 Nov 2024 14:28:27 +0800</pubDate><author><name>DODOLA</name></author><guid>http://dodolalorc.cn/posts/cfround980div2/</guid><description><![CDATA[<div class="featured-image">
-                <img src="https://img.dodolalorc.cn/i/2024/12/10/67580e4ad64c9.png" referrerpolicy="no-referrer">
-            </div><h2 id="a-profitable-interest-rate" class="headerLink">
-    <a href="#a-profitable-interest-rate" class="header-mark"></a>A. Profitable Interest Rate</h2><h3 id="题意" class="headerLink">
-    <a href="#%e9%a2%98%e6%84%8f" class="header-mark"></a>题意</h3><p>有两种储值方式——无利可图和盈利，“盈利”可以保证盈利，但是有最低储值要求，“无利可图”类型没有利息，但是可以让“盈利”的最低储值降低。在“无利可图”储值$x$元，可以让“盈利”的最低值要求降低$2\times x$元，最低储值不能低于$0$元，两种储值均不能取出。现在<code>Alice</code>拥有$a$元，并想使存入“盈利”的金额越多越好，求<code>Alice</code>最多存入多少“盈利”类型的金额。</p>]]></description></item><item><title>Codeforces Round 977 (Div. 2, based on COMPFEST 16 - Final Round)</title><link>http://dodolalorc.cn/posts/cfround977div2/</link><pubDate>Fri, 25 Oct 2024 14:57:19 +0800</pubDate><author><name>DODOLA</name></author><guid>http://dodolalorc.cn/posts/cfround977div2/</guid><description><![CDATA[<div class="featured-image">
-                <img src="https://img.dodolalorc.cn/i/2024/12/10/67580a1859420.jpeg" referrerpolicy="no-referrer">
-            </div><h1 id="a-meaning-mean" class="headerLink">
-    <a href="#a-meaning-mean" class="header-mark"></a>A. Meaning Mean</h1><h2 id="题意" class="headerLink">
-    <a href="#%e9%a2%98%e6%84%8f" class="header-mark"></a>题意</h2><p>可以选择 2 个不同的索引$i,j$，将数组中这两个索引对应的数删除，然后将$\lfloor \frac{a_i+a_j}{2} \rfloor$添加到数组的最后。可知到最后只会剩下一个数，最大化最后剩余的这个数$x$，并输出。</p>]]></description></item><item><title>Codeforces Round 930(div2)</title><link>http://dodolalorc.cn/posts/cfround930div2/</link><pubDate>Wed, 13 Mar 2024 12:26:38 +0800</pubDate><author><name>DODOLA</name></author><guid>http://dodolalorc.cn/posts/cfround930div2/</guid><description><![CDATA[<h1 id="a-shuffle-party" class="headerLink">
-    <a href="#a-shuffle-party" class="header-mark"></a>A-Shuffle Party</h1><h2 id="题意" class="headerLink">
-    <a href="#%e9%a2%98%e6%84%8f" class="header-mark"></a>题意</h2><p>对一个数组，起初是$a_i=i$</p>
-<p>对操作<code>swap(k)</code>：</p>
-<p>设$d$是不等于$k$本身的$k$的最大除数，然后交换元素$a_d$和$a_k$。</p>
-<p>按顺序对每一个$i=2,3,..,n$进行$swap(i)$之后，找出$1$在数组中的位置。</p>]]></description></item><item><title>Codeforces Round 931(div2)</title><link>http://dodolalorc.cn/posts/cfround931div2/</link><pubDate>Wed, 13 Mar 2024 12:26:22 +0800</pubDate><author><name>DODOLA</name></author><guid>http://dodolalorc.cn/posts/cfround931div2/</guid><description><![CDATA[<h1 id="a-too-min-too-max" class="headerLink">
-    <a href="#a-too-min-too-max" class="header-mark"></a>A-Too Min Too Max</h1><h2 id="题意" class="headerLink">
-    <a href="#%e9%a2%98%e6%84%8f" class="header-mark"></a>题意</h2><p>对一个数组，找到索引$(i,j,k,l)$使得$|a_i-a_j|+|a_j-a_k|+|a_k-a_l|+|a_l-a_i|$最大的值。</p>
-<h4 id="数据范围" class="headerLink">
-    <a href="#%e6%95%b0%e6%8d%ae%e8%8c%83%e5%9b%b4" class="header-mark"></a>数据范围</h4><p>$t(1≤t≤500)$</p>
-<p>$n(4≤n≤100)$​</p>
-<p>$a_i(-10^6\le a_i\le 10^6)$</p>
-<h2 id="思路" class="headerLink">
-    <a href="#%e6%80%9d%e8%b7%af" class="header-mark"></a>思路</h2><p>选则最大的两个数和最小的两个数，结果为最大-最小+次大-最小+最大-次小+次大-次小。</p>
-<h2 id="参考代码" class="headerLink">
-    <a href="#%e5%8f%82%e8%80%83%e4%bb%a3%e7%a0%81" class="header-mark"></a>参考代码</h2><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">solve</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">n</span><span class="p">;</span><span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">n</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">ll</span><span class="o">&gt;</span><span class="n">a</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">    <span class="n">sort</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">a</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
-</span></span><span class="line"><span class="cl">    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">a</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">a</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">a</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">a</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h1 id="b-yet-another-coin-problem" class="headerLink">
-    <a href="#b-yet-another-coin-problem" class="header-mark"></a>B-Yet Another Coin Problem</h1><h2 id="题意-1" class="headerLink">
-    <a href="#%e9%a2%98%e6%84%8f-1" class="header-mark"></a>题意</h2><p>有一些5种不同面值的金币，面值有：$1,3,6,10,15$。找到使用金币数目最少的组合方式达到数值为$n$的组合。</p>
-<h4 id="数据范围-1" class="headerLink">
-    <a href="#%e6%95%b0%e6%8d%ae%e8%8c%83%e5%9b%b4-1" class="header-mark"></a>数据范围</h4><p>$t(1≤t≤10^4)$</p>
-<p>$n(1≤n≤10^9)$​</p>
-<h2 id="思路-1" class="headerLink">
-    <a href="#%e6%80%9d%e8%b7%af-1" class="header-mark"></a>思路</h2><p>打表。</p>
-<h2 id="参考代码-1" class="headerLink">
-    <a href="#%e5%8f%82%e8%80%83%e4%bb%a3%e7%a0%81-1" class="header-mark"></a>参考代码</h2><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">solve</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">ll</span> <span class="n">n</span><span class="p">;</span><span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">n</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">ll</span><span class="o">&gt;</span><span class="n">p</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">0</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span>
-</span></span><span class="line"><span class="cl">    <span class="p">};</span>
-</span></span><span class="line"><span class="cl">    <span class="n">ll</span> <span class="n">ans</span> <span class="o">=</span> <span class="n">n</span> <span class="o">/</span> <span class="mi">15</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="n">n</span> <span class="o">%</span> <span class="mi">15</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">/</span> <span class="mi">15</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="n">ans</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">n</span> <span class="o">/</span> <span class="mi">15</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="n">n</span> <span class="o">%</span> <span class="mi">15</span> <span class="o">+</span> <span class="mi">15</span><span class="p">]);</span>
-</span></span><span class="line"><span class="cl">    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ans</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h1 id="c-find-a-mine" class="headerLink">
-    <a href="#c-find-a-mine" class="header-mark"></a>C-Find a Mine</h1><h2 id="题意-2" class="headerLink">
-    <a href="#%e9%a2%98%e6%84%8f-2" class="header-mark"></a>题意</h2><p>交互题。</p>]]></description></item><item><title>Codeforces Round 932(div2)</title><link>http://dodolalorc.cn/posts/cfround932div2/</link><pubDate>Wed, 13 Mar 2024 12:26:06 +0800</pubDate><author><name>DODOLA</name></author><guid>http://dodolalorc.cn/posts/cfround932div2/</guid><description><![CDATA[<h1 id="a-entertainment-in-mac" class="headerLink">
-    <a href="#a-entertainment-in-mac" class="header-mark"></a>A-Entertainment in MAC</h1><h2 id="题意" class="headerLink">
-    <a href="#%e9%a2%98%e6%84%8f" class="header-mark"></a>题意</h2><p>可以对一个字符串进行两种操作：</p>
-<ol>
-<li>将字符串反转</li>
-<li>将该字符串反转后接在原串的后面。</li>
-</ol>
-<p>可以进行任意次上述操作，获得字典序最小的字符串。</p>
-<h4 id="数据范围" class="headerLink">
-    <a href="#%e6%95%b0%e6%8d%ae%e8%8c%83%e5%9b%b4" class="header-mark"></a>数据范围</h4><p>$t(1≤t≤500)$</p>
-<p>$n(2≤n≤10^9)$​</p>
-<p>$s(1\le |s|\le 100)$</p>
-<h2 id="思路" class="headerLink">
-    <a href="#%e6%80%9d%e8%b7%af" class="header-mark"></a>思路</h2><p>对比反转前后的字符串字典序大小，再决定是操作1还是操作2</p>
-<h2 id="参考代码" class="headerLink">
-    <a href="#%e5%8f%82%e8%80%83%e4%bb%a3%e7%a0%81" class="header-mark"></a>参考代码</h2><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">solve</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">ll</span> <span class="n">n</span><span class="p">;</span><span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">n</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">string</span> <span class="n">s</span><span class="p">;</span><span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">s</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">string</span> <span class="n">t</span> <span class="o">=</span> <span class="n">s</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">reverse</span><span class="p">(</span><span class="n">t</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">t</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">s</span> <span class="o">&gt;</span> <span class="n">t</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">t</span> <span class="o">&lt;&lt;</span> <span class="n">s</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="k">else</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">s</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h1 id="b-informatics-in-mac" class="headerLink">
-    <a href="#b-informatics-in-mac" class="header-mark"></a>B-Informatics in MAC</h1><h2 id="题意-1" class="headerLink">
-    <a href="#%e9%a2%98%e6%84%8f-1" class="header-mark"></a>题意</h2><p>$MEX$：不属于该数组的最小非负整数。</p>]]></description></item><item><title>Codeforces Round 933(div3)</title><link>http://dodolalorc.cn/posts/cfround933div3/</link><pubDate>Wed, 13 Mar 2024 12:25:46 +0800</pubDate><author><name>DODOLA</name></author><guid>http://dodolalorc.cn/posts/cfround933div3/</guid><description><![CDATA[<h1 id="a-rudolf-and-the-ticket" class="headerLink">
-    <a href="#a-rudolf-and-the-ticket" class="header-mark"></a>A-Rudolf and the Ticket</h1><h2 id="题意" class="headerLink">
-    <a href="#%e9%a2%98%e6%84%8f" class="header-mark"></a>题意</h2><p>左边口袋有一些面值为$b_1,b_2,b_3,&hellip;,b_n$的硬币，右边有一些面值为$c_1,c_2,c_3,&hellip;,c_m$的硬币，问有多少个$(f,s)$可以使得$b_f+c_s\le k$成立</p>
-<h4 id="数据范围" class="headerLink">
-    <a href="#%e6%95%b0%e6%8d%ae%e8%8c%83%e5%9b%b4" class="header-mark"></a>数据范围</h4><p>$t(1≤t≤100)$</p>
-<p>$n,m(1≤n,m≤100)$</p>
-<p>$k(1\le k\le 2000)$</p>
-<p>$b_i,c_i(1\le b_i,c_i\le 1000)$</p>
-<h2 id="思路" class="headerLink">
-    <a href="#%e6%80%9d%e8%b7%af" class="header-mark"></a>思路</h2><p>双层循环遍历</p>
-<h2 id="参考代码" class="headerLink">
-    <a href="#%e5%8f%82%e8%80%83%e4%bb%a3%e7%a0%81" class="header-mark"></a>参考代码</h2><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">solve</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">ll</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">k</span><span class="p">;</span><span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">n</span> <span class="o">&gt;&gt;</span> <span class="n">m</span> <span class="o">&gt;&gt;</span> <span class="n">k</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">ll</span><span class="o">&gt;</span><span class="n">b</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">c</span><span class="p">(</span><span class="n">m</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="n">ll</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="n">ll</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">    <span class="n">ll</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">sort</span><span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">b</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
-</span></span><span class="line"><span class="cl">    <span class="n">sort</span><span class="p">(</span><span class="n">c</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">c</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="n">ll</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="n">ll</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">j</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">c</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="n">ans</span><span class="o">++</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            <span class="k">else</span> <span class="p">{</span> <span class="k">break</span><span class="p">;</span> <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">ans</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h1 id="b-rudolf-and-121" class="headerLink">
-    <a href="#b-rudolf-and-121" class="header-mark"></a>B-Rudolf and 121</h1><h2 id="题意-1" class="headerLink">
-    <a href="#%e9%a2%98%e6%84%8f-1" class="header-mark"></a>题意</h2><p>可以对一个数组执行如下操作：</p>]]></description></item><item><title>Codeforces Round 929(div3)</title><link>http://dodolalorc.cn/posts/cfround929div3/</link><pubDate>Thu, 29 Feb 2024 14:56:16 +0800</pubDate><author><name>DODOLA</name></author><guid>http://dodolalorc.cn/posts/cfround929div3/</guid><description><![CDATA[<h1 id="a-turtle-puzzle-rearrange-and-negate" class="headerLink">
-    <a href="#a-turtle-puzzle-rearrange-and-negate" class="header-mark"></a>A-Turtle Puzzle: Rearrange and Negate</h1><h2 id="题意" class="headerLink">
-    <a href="#%e9%a2%98%e6%84%8f" class="header-mark"></a>题意</h2><p>对一个数组执行两个操作：</p>
-<ol>
-<li>对数组进行重新排序或保持元素顺序不变</li>
-<li>选择连续的一段，对该段中的元素取相反数，也可以不选择任何一段，即保持所有的元素符号不变。</li>
-</ol>
-<p>求进行上述操作之后数组的最大和是多少。</p>]]></description></item><item><title>Codeforces Round 927(div3)</title><link>http://dodolalorc.cn/posts/cfround927div3/</link><pubDate>Thu, 29 Feb 2024 14:47:05 +0800</pubDate><author><name>DODOLA</name></author><guid>http://dodolalorc.cn/posts/cfround927div3/</guid><description><![CDATA[<h1 id="a-thorns-and-coins" class="headerLink">
-    <a href="#a-thorns-and-coins" class="header-mark"></a>A-Thorns and Coins</h1><h2 id="题意" class="headerLink">
-    <a href="#%e9%a2%98%e6%84%8f" class="header-mark"></a>题意</h2><p>长度为$n$的单元格路径，每个单元格有空、有金币、荆棘三种可能，人物从最左边开始向右移动，每次步长不多于2格，求能获得的最多金币数。</p>
-<h4 id="数据范围" class="headerLink">
-    <a href="#%e6%95%b0%e6%8d%ae%e8%8c%83%e5%9b%b4" class="header-mark"></a>数据范围</h4><p>$t(1≤t≤1000)$</p>
-<p>$n(1≤n≤50)$​</p>
-<p><code>.</code>代表空，<code>*</code>代表荆棘，<code>@</code>代表金币</p>
-<h2 id="思路" class="headerLink">
-    <a href="#%e6%80%9d%e8%b7%af" class="header-mark"></a>思路</h2><p>从左往右，寻找第一个含有2个以上<code>*</code>的<code>*</code>连通块，其前的金币都可以达到。</p>
-<h2 id="参考代码" class="headerLink">
-    <a href="#%e5%8f%82%e8%80%83%e4%bb%a3%e7%a0%81" class="header-mark"></a>参考代码</h2><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">solve</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">n</span><span class="p">;</span><span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">n</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">string</span> <span class="n">s</span><span class="p">;</span><span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">s</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">f</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;@&#39;</span><span class="p">)</span><span class="n">cnt</span><span class="o">++</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;*&#39;</span> <span class="o">&amp;&amp;</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;*&#39;</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">            <span class="k">break</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">cnt</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h1 id="b-chaya-calendar" class="headerLink">
-    <a href="#b-chaya-calendar" class="header-mark"></a>B-Chaya Calendar</h1><h2 id="题意-1" class="headerLink">
-    <a href="#%e9%a2%98%e6%84%8f-1" class="header-mark"></a>题意</h2><p>查亚部落相信世界末日有$n$个征兆，第$i$个征兆每隔$a_i$年出现一次，当观测到第$i-1$个征兆后才会等待第$i$个征兆。给出每个征兆的出现间隔，询问观测到所有$n$个征兆所需要的年数。</p>]]></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>CF on Doごみ箱🪄</title><link>http://dodolalorc.cn/tags/cf/</link><description>Recent content in CF on Doごみ箱🪄</description><generator>Hugo</generator><language>zh-CN</language><managingEditor>chenflora124@gmail.com (DODOLA)</managingEditor><webMaster>chenflora124@gmail.com (DODOLA)</webMaster><copyright>dodola</copyright><lastBuildDate>Fri, 11 Apr 2025 05:57:01 +0000</lastBuildDate><atom:link href="http://dodolalorc.cn/tags/cf/index.xml" rel="self" type="application/rss+xml"/><item><title>Codeforces Round 990 (Div. 2)</title><link>http://dodolalorc.cn/posts/cfround990div2/</link><pubDate>Thu, 05 Dec 2024 19:27:40 +0800</pubDate><author>chenflora124@gmail.com (DODOLA)</author><guid>http://dodolalorc.cn/posts/cfround990div2/</guid><description>&lt;h2 id="a-alyona-and-a-square-jigsaw-puzzle" class="headerLink">
+ &lt;a href="#a-alyona-and-a-square-jigsaw-puzzle" class="header-mark">&lt;/a>A. Alyona and a Square Jigsaw Puzzle&lt;/h2>&lt;h3 id="题意" class="headerLink">
+ &lt;a href="#%e9%a2%98%e6%84%8f" class="header-mark">&lt;/a>题意&lt;/h3>&lt;p>&lt;code>Alyona&lt;/code>按照顺时针围绕第一个拼图放置拼图，&lt;code>Alyona&lt;/code>每天会按顺序放置一定数量的拼图，如果一天结束时拼图的组装部分没有任何已开始但未完成的层，&lt;code>Alyona&lt;/code>会感到开心。给出每天放置拼图的数量，询问&lt;code>Alyona&lt;/code>感到快乐的天数。&lt;/p>
+&lt;h4 id="数据范围" class="headerLink">
+ &lt;a href="#%e6%95%b0%e6%8d%ae%e8%8c%83%e5%9b%b4" class="header-mark">&lt;/a>数据范围&lt;/h4>&lt;ul>
+&lt;li>$1\leq t\leq 500$&lt;/li>
+&lt;li>$1\leq n\leq 100$&lt;/li>
+&lt;li>$1\leq a_i\leq 100,a_1=1$&lt;/li>
+&lt;/ul>
+&lt;h3 id="思路" class="headerLink">
+ &lt;a href="#%e6%80%9d%e8%b7%af" class="header-mark">&lt;/a>思路&lt;/h3>&lt;p>检查每天完成添加拼图时的总拼图数是否恰好是一个奇数的平方数，若是则该天会感到快乐。&lt;/p>
+&lt;h3 id="代码" class="headerLink">
+ &lt;a href="#%e4%bb%a3%e7%a0%81" class="header-mark">&lt;/a>代码&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">void&lt;/span> &lt;span class="nf">solve&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">cin&lt;/span> &lt;span class="o">&amp;gt;&amp;gt;&lt;/span> &lt;span class="n">n&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ll&lt;/span> &lt;span class="n">tot&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">ans&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">ll&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">&amp;lt;=&lt;/span> &lt;span class="n">n&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">cin&lt;/span> &lt;span class="o">&amp;gt;&amp;gt;&lt;/span> &lt;span class="n">a&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">tot&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="n">a&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ld&lt;/span> &lt;span class="n">t&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">sqrtl&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">tot&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">((&lt;/span>&lt;span class="n">ll&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="n">t&lt;/span> &lt;span class="o">&amp;amp;&lt;/span> &lt;span class="mi">1&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="n">t&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">ll&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="n">t&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ans&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">cout&lt;/span> &lt;span class="o">&amp;lt;&amp;lt;&lt;/span> &lt;span class="n">ans&lt;/span> &lt;span class="o">&amp;lt;&amp;lt;&lt;/span> &lt;span class="sc">&amp;#39;\n&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="b-replace-character" class="headerLink">
+ &lt;a href="#b-replace-character" class="header-mark">&lt;/a>B. Replace Character&lt;/h2>&lt;h3 id="题意-1" class="headerLink">
+ &lt;a href="#%e9%a2%98%e6%84%8f-1" class="header-mark">&lt;/a>题意&lt;/h3>&lt;p>在一个长度为$n$的字符串中，执行&lt;strong>一次&lt;/strong>这样的操作：&lt;/p>
+&lt;ul>
+&lt;li>选择两个索引$i,j(1\leq i,j\leq n)$，可以选择$i = j$。&lt;/li>
+&lt;li>进行赋值$s_i:=s_j$。&lt;/li>
+&lt;/ul>
+&lt;p>要求输出在进行该操作之后，字典序最小的那个字符串。&lt;/p></description></item><item><title>Codeforces Round 980 (Div. 2)</title><link>http://dodolalorc.cn/posts/cfround980div2/</link><pubDate>Tue, 26 Nov 2024 14:28:27 +0800</pubDate><author>chenflora124@gmail.com (DODOLA)</author><guid>http://dodolalorc.cn/posts/cfround980div2/</guid><description>&lt;h2 id="a-profitable-interest-rate" class="headerLink">
+ &lt;a href="#a-profitable-interest-rate" class="header-mark">&lt;/a>A. Profitable Interest Rate&lt;/h2>&lt;h3 id="题意" class="headerLink">
+ &lt;a href="#%e9%a2%98%e6%84%8f" class="header-mark">&lt;/a>题意&lt;/h3>&lt;p>有两种储值方式——无利可图和盈利，“盈利”可以保证盈利，但是有最低储值要求，“无利可图”类型没有利息，但是可以让“盈利”的最低储值降低。在“无利可图”储值$x$元，可以让“盈利”的最低值要求降低$2\times x$元，最低储值不能低于$0$元，两种储值均不能取出。现在&lt;code>Alice&lt;/code>拥有$a$元，并想使存入“盈利”的金额越多越好，求&lt;code>Alice&lt;/code>最多存入多少“盈利”类型的金额。&lt;/p></description></item><item><title>Codeforces Round 977 (Div. 2, based on COMPFEST 16 - Final Round)</title><link>http://dodolalorc.cn/posts/cfround977div2/</link><pubDate>Fri, 25 Oct 2024 14:57:19 +0800</pubDate><author>chenflora124@gmail.com (DODOLA)</author><guid>http://dodolalorc.cn/posts/cfround977div2/</guid><description>&lt;h1 id="a-meaning-mean" class="headerLink">
+ &lt;a href="#a-meaning-mean" class="header-mark">&lt;/a>A. Meaning Mean&lt;/h1>&lt;h2 id="题意" class="headerLink">
+ &lt;a href="#%e9%a2%98%e6%84%8f" class="header-mark">&lt;/a>题意&lt;/h2>&lt;p>可以选择 2 个不同的索引$i,j$，将数组中这两个索引对应的数删除，然后将$\lfloor \frac{a_i+a_j}{2} \rfloor$添加到数组的最后。可知到最后只会剩下一个数，最大化最后剩余的这个数$x$，并输出。&lt;/p></description></item><item><title>Codeforces Round 930(div2)</title><link>http://dodolalorc.cn/posts/cfround930div2/</link><pubDate>Wed, 13 Mar 2024 12:26:38 +0800</pubDate><author>chenflora124@gmail.com (DODOLA)</author><guid>http://dodolalorc.cn/posts/cfround930div2/</guid><description>&lt;h1 id="a-shuffle-party" class="headerLink">
+ &lt;a href="#a-shuffle-party" class="header-mark">&lt;/a>A-Shuffle Party&lt;/h1>&lt;h2 id="题意" class="headerLink">
+ &lt;a href="#%e9%a2%98%e6%84%8f" class="header-mark">&lt;/a>题意&lt;/h2>&lt;p>对一个数组，起初是$a_i=i$&lt;/p>
+&lt;p>对操作&lt;code>swap(k)&lt;/code>：&lt;/p>
+&lt;p>设$d$是不等于$k$本身的$k$的最大除数，然后交换元素$a_d$和$a_k$。&lt;/p>
+&lt;p>按顺序对每一个$i=2,3,..,n$进行$swap(i)$之后，找出$1$在数组中的位置。&lt;/p></description></item><item><title>Codeforces Round 931(div2)</title><link>http://dodolalorc.cn/posts/cfround931div2/</link><pubDate>Wed, 13 Mar 2024 12:26:22 +0800</pubDate><author>chenflora124@gmail.com (DODOLA)</author><guid>http://dodolalorc.cn/posts/cfround931div2/</guid><description>&lt;h1 id="a-too-min-too-max" class="headerLink">
+ &lt;a href="#a-too-min-too-max" class="header-mark">&lt;/a>A-Too Min Too Max&lt;/h1>&lt;h2 id="题意" class="headerLink">
+ &lt;a href="#%e9%a2%98%e6%84%8f" class="header-mark">&lt;/a>题意&lt;/h2>&lt;p>对一个数组，找到索引$(i,j,k,l)$使得$|a_i-a_j|+|a_j-a_k|+|a_k-a_l|+|a_l-a_i|$最大的值。&lt;/p>
+&lt;h4 id="数据范围" class="headerLink">
+ &lt;a href="#%e6%95%b0%e6%8d%ae%e8%8c%83%e5%9b%b4" class="header-mark">&lt;/a>数据范围&lt;/h4>&lt;p>$t(1≤t≤500)$&lt;/p>
+&lt;p>$n(4≤n≤100)$​&lt;/p>
+&lt;p>$a_i(-10^6\le a_i\le 10^6)$&lt;/p>
+&lt;h2 id="思路" class="headerLink">
+ &lt;a href="#%e6%80%9d%e8%b7%af" class="header-mark">&lt;/a>思路&lt;/h2>&lt;p>选则最大的两个数和最小的两个数，结果为最大-最小+次大-最小+最大-次小+次大-次小。&lt;/p>
+&lt;h2 id="参考代码" class="headerLink">
+ &lt;a href="#%e5%8f%82%e8%80%83%e4%bb%a3%e7%a0%81" class="header-mark">&lt;/a>参考代码&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">void&lt;/span> &lt;span class="nf">solve&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">int&lt;/span> &lt;span class="n">n&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="n">cin&lt;/span> &lt;span class="o">&amp;gt;&amp;gt;&lt;/span> &lt;span class="n">n&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">vector&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">ll&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="n">a&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">n&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="kt">int&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="n">i&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="n">n&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">cin&lt;/span> &lt;span class="o">&amp;gt;&amp;gt;&lt;/span> &lt;span class="n">a&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">sort&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">a&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">begin&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="n">a&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">end&lt;/span>&lt;span class="p">());&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">cout&lt;/span> &lt;span class="o">&amp;lt;&amp;lt;&lt;/span> &lt;span class="n">a&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">n&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">a&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">a&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">n&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">a&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">a&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">n&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">a&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">a&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">n&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">a&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">&amp;lt;&amp;lt;&lt;/span> &lt;span class="sc">&amp;#39;\n&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h1 id="b-yet-another-coin-problem" class="headerLink">
+ &lt;a href="#b-yet-another-coin-problem" class="header-mark">&lt;/a>B-Yet Another Coin Problem&lt;/h1>&lt;h2 id="题意-1" class="headerLink">
+ &lt;a href="#%e9%a2%98%e6%84%8f-1" class="header-mark">&lt;/a>题意&lt;/h2>&lt;p>有一些5种不同面值的金币，面值有：$1,3,6,10,15$。找到使用金币数目最少的组合方式达到数值为$n$的组合。&lt;/p>
+&lt;h4 id="数据范围-1" class="headerLink">
+ &lt;a href="#%e6%95%b0%e6%8d%ae%e8%8c%83%e5%9b%b4-1" class="header-mark">&lt;/a>数据范围&lt;/h4>&lt;p>$t(1≤t≤10^4)$&lt;/p>
+&lt;p>$n(1≤n≤10^9)$​&lt;/p>
+&lt;h2 id="思路-1" class="headerLink">
+ &lt;a href="#%e6%80%9d%e8%b7%af-1" class="header-mark">&lt;/a>思路&lt;/h2>&lt;p>打表。&lt;/p>
+&lt;h2 id="参考代码-1" class="headerLink">
+ &lt;a href="#%e5%8f%82%e8%80%83%e4%bb%a3%e7%a0%81-1" class="header-mark">&lt;/a>参考代码&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">void&lt;/span> &lt;span class="nf">solve&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ll&lt;/span> &lt;span class="n">n&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="n">cin&lt;/span> &lt;span class="o">&amp;gt;&amp;gt;&lt;/span> &lt;span class="n">n&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">vector&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">ll&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="n">p&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">3&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">3&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">3&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">3&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">3&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">3&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">3&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">3&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">3&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">3&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">3&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">4&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ll&lt;/span> &lt;span class="n">ans&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">n&lt;/span> &lt;span class="o">/&lt;/span> &lt;span class="mi">15&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">p&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">n&lt;/span> &lt;span class="o">%&lt;/span> &lt;span class="mi">15&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">n&lt;/span> &lt;span class="o">/&lt;/span> &lt;span class="mi">15&lt;/span> &lt;span class="o">&amp;gt;&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ans&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">min&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">ans&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">n&lt;/span> &lt;span class="o">/&lt;/span> &lt;span class="mi">15&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="mi">1&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">p&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">n&lt;/span> &lt;span class="o">%&lt;/span> &lt;span class="mi">15&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">15&lt;/span>&lt;span class="p">]);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">cout&lt;/span> &lt;span class="o">&amp;lt;&amp;lt;&lt;/span> &lt;span class="n">ans&lt;/span> &lt;span class="o">&amp;lt;&amp;lt;&lt;/span> &lt;span class="n">endl&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h1 id="c-find-a-mine" class="headerLink">
+ &lt;a href="#c-find-a-mine" class="header-mark">&lt;/a>C-Find a Mine&lt;/h1>&lt;h2 id="题意-2" class="headerLink">
+ &lt;a href="#%e9%a2%98%e6%84%8f-2" class="header-mark">&lt;/a>题意&lt;/h2>&lt;p>交互题。&lt;/p></description></item><item><title>Codeforces Round 932(div2)</title><link>http://dodolalorc.cn/posts/cfround932div2/</link><pubDate>Wed, 13 Mar 2024 12:26:06 +0800</pubDate><author>chenflora124@gmail.com (DODOLA)</author><guid>http://dodolalorc.cn/posts/cfround932div2/</guid><description>&lt;h1 id="a-entertainment-in-mac" class="headerLink">
+ &lt;a href="#a-entertainment-in-mac" class="header-mark">&lt;/a>A-Entertainment in MAC&lt;/h1>&lt;h2 id="题意" class="headerLink">
+ &lt;a href="#%e9%a2%98%e6%84%8f" class="header-mark">&lt;/a>题意&lt;/h2>&lt;p>可以对一个字符串进行两种操作：&lt;/p>
+&lt;ol>
+&lt;li>将字符串反转&lt;/li>
+&lt;li>将该字符串反转后接在原串的后面。&lt;/li>
+&lt;/ol>
+&lt;p>可以进行任意次上述操作，获得字典序最小的字符串。&lt;/p>
+&lt;h4 id="数据范围" class="headerLink">
+ &lt;a href="#%e6%95%b0%e6%8d%ae%e8%8c%83%e5%9b%b4" class="header-mark">&lt;/a>数据范围&lt;/h4>&lt;p>$t(1≤t≤500)$&lt;/p>
+&lt;p>$n(2≤n≤10^9)$​&lt;/p>
+&lt;p>$s(1\le |s|\le 100)$&lt;/p>
+&lt;h2 id="思路" class="headerLink">
+ &lt;a href="#%e6%80%9d%e8%b7%af" class="header-mark">&lt;/a>思路&lt;/h2>&lt;p>对比反转前后的字符串字典序大小，再决定是操作1还是操作2&lt;/p>
+&lt;h2 id="参考代码" class="headerLink">
+ &lt;a href="#%e5%8f%82%e8%80%83%e4%bb%a3%e7%a0%81" class="header-mark">&lt;/a>参考代码&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">void&lt;/span> &lt;span class="nf">solve&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ll&lt;/span> &lt;span class="n">n&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="n">cin&lt;/span> &lt;span class="o">&amp;gt;&amp;gt;&lt;/span> &lt;span class="n">n&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">string&lt;/span> &lt;span class="n">s&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="n">cin&lt;/span> &lt;span class="o">&amp;gt;&amp;gt;&lt;/span> &lt;span class="n">s&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">string&lt;/span> &lt;span class="n">t&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">s&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">reverse&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">t&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">begin&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="n">t&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">end&lt;/span>&lt;span class="p">());&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">s&lt;/span> &lt;span class="o">&amp;gt;&lt;/span> &lt;span class="n">t&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">cout&lt;/span> &lt;span class="o">&amp;lt;&amp;lt;&lt;/span> &lt;span class="n">t&lt;/span> &lt;span class="o">&amp;lt;&amp;lt;&lt;/span> &lt;span class="n">s&lt;/span> &lt;span class="o">&amp;lt;&amp;lt;&lt;/span> &lt;span class="n">endl&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">else&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">cout&lt;/span> &lt;span class="o">&amp;lt;&amp;lt;&lt;/span> &lt;span class="n">s&lt;/span> &lt;span class="o">&amp;lt;&amp;lt;&lt;/span> &lt;span class="n">endl&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h1 id="b-informatics-in-mac" class="headerLink">
+ &lt;a href="#b-informatics-in-mac" class="header-mark">&lt;/a>B-Informatics in MAC&lt;/h1>&lt;h2 id="题意-1" class="headerLink">
+ &lt;a href="#%e9%a2%98%e6%84%8f-1" class="header-mark">&lt;/a>题意&lt;/h2>&lt;p>$MEX$：不属于该数组的最小非负整数。&lt;/p></description></item><item><title>Codeforces Round 933(div3)</title><link>http://dodolalorc.cn/posts/cfround933div3/</link><pubDate>Wed, 13 Mar 2024 12:25:46 +0800</pubDate><author>chenflora124@gmail.com (DODOLA)</author><guid>http://dodolalorc.cn/posts/cfround933div3/</guid><description>&lt;h1 id="a-rudolf-and-the-ticket" class="headerLink">
+ &lt;a href="#a-rudolf-and-the-ticket" class="header-mark">&lt;/a>A-Rudolf and the Ticket&lt;/h1>&lt;h2 id="题意" class="headerLink">
+ &lt;a href="#%e9%a2%98%e6%84%8f" class="header-mark">&lt;/a>题意&lt;/h2>&lt;p>左边口袋有一些面值为$b_1,b_2,b_3,&amp;hellip;,b_n$的硬币，右边有一些面值为$c_1,c_2,c_3,&amp;hellip;,c_m$的硬币，问有多少个$(f,s)$可以使得$b_f+c_s\le k$成立&lt;/p>
+&lt;h4 id="数据范围" class="headerLink">
+ &lt;a href="#%e6%95%b0%e6%8d%ae%e8%8c%83%e5%9b%b4" class="header-mark">&lt;/a>数据范围&lt;/h4>&lt;p>$t(1≤t≤100)$&lt;/p>
+&lt;p>$n,m(1≤n,m≤100)$&lt;/p>
+&lt;p>$k(1\le k\le 2000)$&lt;/p>
+&lt;p>$b_i,c_i(1\le b_i,c_i\le 1000)$&lt;/p>
+&lt;h2 id="思路" class="headerLink">
+ &lt;a href="#%e6%80%9d%e8%b7%af" class="header-mark">&lt;/a>思路&lt;/h2>&lt;p>双层循环遍历&lt;/p>
+&lt;h2 id="参考代码" class="headerLink">
+ &lt;a href="#%e5%8f%82%e8%80%83%e4%bb%a3%e7%a0%81" class="header-mark">&lt;/a>参考代码&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">void&lt;/span> &lt;span class="nf">solve&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ll&lt;/span> &lt;span class="n">n&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">m&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">k&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="n">cin&lt;/span> &lt;span class="o">&amp;gt;&amp;gt;&lt;/span> &lt;span class="n">n&lt;/span> &lt;span class="o">&amp;gt;&amp;gt;&lt;/span> &lt;span class="n">m&lt;/span> &lt;span class="o">&amp;gt;&amp;gt;&lt;/span> &lt;span class="n">k&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">vector&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">ll&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="n">b&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">n&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="n">c&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">m&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">ll&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="n">n&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">cin&lt;/span> &lt;span class="o">&amp;gt;&amp;gt;&lt;/span> &lt;span class="n">b&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">ll&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="n">m&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">cin&lt;/span> &lt;span class="o">&amp;gt;&amp;gt;&lt;/span> &lt;span class="n">c&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ll&lt;/span> &lt;span class="n">ans&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">sort&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">b&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">begin&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="n">b&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">end&lt;/span>&lt;span class="p">());&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">sort&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">c&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">begin&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="n">c&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">end&lt;/span>&lt;span class="p">());&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">ll&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="n">i&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="n">n&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">ll&lt;/span> &lt;span class="n">j&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="n">j&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="n">m&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="n">j&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">b&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">c&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">j&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">&amp;lt;=&lt;/span> &lt;span class="n">k&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ans&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">else&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="k">break&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">cout&lt;/span>&lt;span class="o">&amp;lt;&amp;lt;&lt;/span>&lt;span class="n">ans&lt;/span>&lt;span class="o">&amp;lt;&amp;lt;&lt;/span>&lt;span class="n">endl&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h1 id="b-rudolf-and-121" class="headerLink">
+ &lt;a href="#b-rudolf-and-121" class="header-mark">&lt;/a>B-Rudolf and 121&lt;/h1>&lt;h2 id="题意-1" class="headerLink">
+ &lt;a href="#%e9%a2%98%e6%84%8f-1" class="header-mark">&lt;/a>题意&lt;/h2>&lt;p>可以对一个数组执行如下操作：&lt;/p></description></item><item><title>Codeforces Round 929(div3)</title><link>http://dodolalorc.cn/posts/cfround929div3/</link><pubDate>Thu, 29 Feb 2024 14:56:16 +0800</pubDate><author>chenflora124@gmail.com (DODOLA)</author><guid>http://dodolalorc.cn/posts/cfround929div3/</guid><description>&lt;h1 id="a-turtle-puzzle-rearrange-and-negate" class="headerLink">
+ &lt;a href="#a-turtle-puzzle-rearrange-and-negate" class="header-mark">&lt;/a>A-Turtle Puzzle: Rearrange and Negate&lt;/h1>&lt;h2 id="题意" class="headerLink">
+ &lt;a href="#%e9%a2%98%e6%84%8f" class="header-mark">&lt;/a>题意&lt;/h2>&lt;p>对一个数组执行两个操作：&lt;/p>
+&lt;ol>
+&lt;li>对数组进行重新排序或保持元素顺序不变&lt;/li>
+&lt;li>选择连续的一段，对该段中的元素取相反数，也可以不选择任何一段，即保持所有的元素符号不变。&lt;/li>
+&lt;/ol>
+&lt;p>求进行上述操作之后数组的最大和是多少。&lt;/p></description></item><item><title>Codeforces Round 927(div3)</title><link>http://dodolalorc.cn/posts/cfround927div3/</link><pubDate>Thu, 29 Feb 2024 14:47:05 +0800</pubDate><author>chenflora124@gmail.com (DODOLA)</author><guid>http://dodolalorc.cn/posts/cfround927div3/</guid><description>&lt;h1 id="a-thorns-and-coins" class="headerLink">
+ &lt;a href="#a-thorns-and-coins" class="header-mark">&lt;/a>A-Thorns and Coins&lt;/h1>&lt;h2 id="题意" class="headerLink">
+ &lt;a href="#%e9%a2%98%e6%84%8f" class="header-mark">&lt;/a>题意&lt;/h2>&lt;p>长度为$n$的单元格路径，每个单元格有空、有金币、荆棘三种可能，人物从最左边开始向右移动，每次步长不多于2格，求能获得的最多金币数。&lt;/p>
+&lt;h4 id="数据范围" class="headerLink">
+ &lt;a href="#%e6%95%b0%e6%8d%ae%e8%8c%83%e5%9b%b4" class="header-mark">&lt;/a>数据范围&lt;/h4>&lt;p>$t(1≤t≤1000)$&lt;/p>
+&lt;p>$n(1≤n≤50)$​&lt;/p>
+&lt;p>&lt;code>.&lt;/code>代表空，&lt;code>*&lt;/code>代表荆棘，&lt;code>@&lt;/code>代表金币&lt;/p>
+&lt;h2 id="思路" class="headerLink">
+ &lt;a href="#%e6%80%9d%e8%b7%af" class="header-mark">&lt;/a>思路&lt;/h2>&lt;p>从左往右，寻找第一个含有2个以上&lt;code>*&lt;/code>的&lt;code>*&lt;/code>连通块，其前的金币都可以达到。&lt;/p>
+&lt;h2 id="参考代码" class="headerLink">
+ &lt;a href="#%e5%8f%82%e8%80%83%e4%bb%a3%e7%a0%81" class="header-mark">&lt;/a>参考代码&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">void&lt;/span> &lt;span class="nf">solve&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">int&lt;/span> &lt;span class="n">n&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="n">cin&lt;/span> &lt;span class="o">&amp;gt;&amp;gt;&lt;/span> &lt;span class="n">n&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">string&lt;/span> &lt;span class="n">s&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="n">cin&lt;/span> &lt;span class="o">&amp;gt;&amp;gt;&lt;/span> &lt;span class="n">s&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">int&lt;/span> &lt;span class="n">cnt&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">bool&lt;/span> &lt;span class="n">f&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">true&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="kt">int&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="n">i&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="n">n&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">s&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="sc">&amp;#39;@&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="n">cnt&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">i&lt;/span> &lt;span class="o">&amp;gt;&lt;/span> &lt;span class="mi">0&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="n">s&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="sc">&amp;#39;*&amp;#39;&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="n">s&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="sc">&amp;#39;*&amp;#39;&lt;/span>&lt;span class="p">){&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">break&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">cout&lt;/span> &lt;span class="o">&amp;lt;&amp;lt;&lt;/span> &lt;span class="n">cnt&lt;/span> &lt;span class="o">&amp;lt;&amp;lt;&lt;/span> &lt;span class="sc">&amp;#39;\n&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h1 id="b-chaya-calendar" class="headerLink">
+ &lt;a href="#b-chaya-calendar" class="header-mark">&lt;/a>B-Chaya Calendar&lt;/h1>&lt;h2 id="题意-1" class="headerLink">
+ &lt;a href="#%e9%a2%98%e6%84%8f-1" class="header-mark">&lt;/a>题意&lt;/h2>&lt;p>查亚部落相信世界末日有$n$个征兆，第$i$个征兆每隔$a_i$年出现一次，当观测到第$i-1$个征兆后才会等待第$i$个征兆。给出每个征兆的出现间隔，询问观测到所有$n$个征兆所需要的年数。&lt;/p></description></item></channel></rss>

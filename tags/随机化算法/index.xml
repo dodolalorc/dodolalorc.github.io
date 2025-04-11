@@ -1,12 +1,10 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>随机化算法 - 标签 - Doごみ箱🪄</title><link>http://dodolalorc.cn/tags/%E9%9A%8F%E6%9C%BA%E5%8C%96%E7%AE%97%E6%B3%95/</link><description>随机化算法 - 标签 - Doごみ箱🪄</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>chenflora124@gmail.com (DODOLA)</managingEditor><webMaster>chenflora124@gmail.com (DODOLA)</webMaster><copyright>dodola</copyright><lastBuildDate>Sun, 16 Feb 2025 08:53:02 +0800</lastBuildDate><atom:link href="http://dodolalorc.cn/tags/%E9%9A%8F%E6%9C%BA%E5%8C%96%E7%AE%97%E6%B3%95/" rel="self" type="application/rss+xml"/><item><title>2025牛客暑寒假多校训练营Day3（完結）</title><link>http://dodolalorc.cn/posts/nc25wd3/</link><pubDate>Sun, 16 Feb 2025 08:53:02 +0800</pubDate><author><name>DODOLA</name></author><guid>http://dodolalorc.cn/posts/nc25wd3/</guid><description><![CDATA[<div class="featured-image">
-                <img src="https://img.dodolalorc.cn/i/2025/02/16/67b17bacd70e1.jpg" referrerpolicy="no-referrer">
-            </div><h2 id="a-智乃的博弈游戏" class="headerLink">
-    <a href="#a-%e6%99%ba%e4%b9%83%e7%9a%84%e5%8d%9a%e5%bc%88%e6%b8%b8%e6%88%8f" class="header-mark"></a>A 智乃的博弈游戏</h2><h3 id="题意" class="headerLink">
-    <a href="#%e9%a2%98%e6%84%8f" class="header-mark"></a>题意</h3><p>有一堆$n$个石子，每次可以拿走$x$个石子，要求$x$是一个不大于$n$且与$n$互质的数，当面对$1$时选手获胜，询问智乃（先手玩家）能否获胜。</p>
-<h4 id="数据范围" class="headerLink">
-    <a href="#%e6%95%b0%e6%8d%ae%e8%8c%83%e5%9b%b4" class="header-mark"></a>数据范围</h4><ul>
-<li>$1\leq n\leq 1e18$</li>
-</ul>
-<h3 id="思路" class="headerLink">
-    <a href="#%e6%80%9d%e8%b7%af" class="header-mark"></a>思路</h3><p>必胜点是剩余 1，则 2 是必败点，两个选手都不希望对手面对 1，都希望对手面对 2。</p>
-<p>如果当前剩余$n$是奇数，则选手一定可以操作将剩余数量变成偶数（只拿一个）。面对偶数的选手，能选的互质的数一定是一个奇数，偶数减去奇数会变成奇数，下一轮回到奇数的情况，如果某一方保持偶数，一定会到剩余$2$的情况，也就是必败点。</p>]]></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>随机化算法 on Doごみ箱🪄</title><link>http://dodolalorc.cn/tags/%E9%9A%8F%E6%9C%BA%E5%8C%96%E7%AE%97%E6%B3%95/</link><description>Recent content in 随机化算法 on Doごみ箱🪄</description><generator>Hugo</generator><language>zh-CN</language><managingEditor>chenflora124@gmail.com (DODOLA)</managingEditor><webMaster>chenflora124@gmail.com (DODOLA)</webMaster><copyright>dodola</copyright><lastBuildDate>Fri, 11 Apr 2025 05:57:01 +0000</lastBuildDate><atom:link href="http://dodolalorc.cn/tags/%E9%9A%8F%E6%9C%BA%E5%8C%96%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml"/><item><title>2025牛客暑寒假多校训练营Day3（完結）</title><link>http://dodolalorc.cn/posts/nc25wd3/</link><pubDate>Sun, 16 Feb 2025 08:53:02 +0800</pubDate><author>chenflora124@gmail.com (DODOLA)</author><guid>http://dodolalorc.cn/posts/nc25wd3/</guid><description>&lt;h2 id="a-智乃的博弈游戏" class="headerLink">
+ &lt;a href="#a-%e6%99%ba%e4%b9%83%e7%9a%84%e5%8d%9a%e5%bc%88%e6%b8%b8%e6%88%8f" class="header-mark">&lt;/a>A 智乃的博弈游戏&lt;/h2>&lt;h3 id="题意" class="headerLink">
+ &lt;a href="#%e9%a2%98%e6%84%8f" class="header-mark">&lt;/a>题意&lt;/h3>&lt;p>有一堆$n$个石子，每次可以拿走$x$个石子，要求$x$是一个不大于$n$且与$n$互质的数，当面对$1$时选手获胜，询问智乃（先手玩家）能否获胜。&lt;/p>
+&lt;h4 id="数据范围" class="headerLink">
+ &lt;a href="#%e6%95%b0%e6%8d%ae%e8%8c%83%e5%9b%b4" class="header-mark">&lt;/a>数据范围&lt;/h4>&lt;ul>
+&lt;li>$1\leq n\leq 1e18$&lt;/li>
+&lt;/ul>
+&lt;h3 id="思路" class="headerLink">
+ &lt;a href="#%e6%80%9d%e8%b7%af" class="header-mark">&lt;/a>思路&lt;/h3>&lt;p>必胜点是剩余 1，则 2 是必败点，两个选手都不希望对手面对 1，都希望对手面对 2。&lt;/p>
+&lt;p>如果当前剩余$n$是奇数，则选手一定可以操作将剩余数量变成偶数（只拿一个）。面对偶数的选手，能选的互质的数一定是一个奇数，偶数减去奇数会变成奇数，下一轮回到奇数的情况，如果某一方保持偶数，一定会到剩余$2$的情况，也就是必败点。&lt;/p></description></item></channel></rss>

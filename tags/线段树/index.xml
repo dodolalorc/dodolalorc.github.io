@@ -1,34 +1,32 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>线段树 - 标签 - Doごみ箱🪄</title><link>http://dodolalorc.cn/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/</link><description>线段树 - 标签 - Doごみ箱🪄</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>chenflora124@gmail.com (DODOLA)</managingEditor><webMaster>chenflora124@gmail.com (DODOLA)</webMaster><copyright>dodola</copyright><lastBuildDate>Fri, 16 Aug 2024 22:43:59 +0800</lastBuildDate><atom:link href="http://dodolalorc.cn/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="self" type="application/rss+xml"/><item><title>线段树专题练习</title><link>http://dodolalorc.cn/posts/segtree_practice/</link><pubDate>Fri, 16 Aug 2024 22:43:59 +0800</pubDate><author><name>DODOLA</name></author><guid>http://dodolalorc.cn/posts/segtree_practice/</guid><description><![CDATA[<div class="featured-image">
-                <img src="https://img.dodolalorc.cn/i/2024/12/10/67580e58b035a.png" referrerpolicy="no-referrer">
-            </div><div class="details admonition abstract open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-list-ul fa-fw"></i>前言<i class="details-icon fas fa-angle-right fa-fw"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content">痛定思痛练习线段树QAQ。</div>
-        </div>
-    </div>
-<p>此篇包含尚未写完的题，事实上是一个<strong>TODO List</strong>。</p>
-<h3 id="todo-list" class="headerLink">
-    <a href="#todo-list" class="header-mark"></a>TODO List</h3><ul>
-<li><i class="far fa-check-square fa-fw"></i> <a href="https://acm.hdu.edu.cn/showproblem.php?pid=1542" target="_blank" rel="noopener noreferrer">Atlantis</a></li>
-<li><i class="far fa-check-square fa-fw"></i> <a href="https://www.luogu.com.cn/problem/P5490" target="_blank" rel="noopener noreferrer">P5490 【模板】扫描线 &amp; 矩形面积并 - 洛谷 | 计算机科学教育新生态 (luogu.com.cn)</a></li>
-<li><i class="far fa-check-square fa-fw"></i> <a href="https://acm.hdu.edu.cn/showproblem.php?pid=1754" target="_blank" rel="noopener noreferrer">I Hate It</a></li>
-<li><i class="far fa-check-square fa-fw"></i> <a href="https://acm.hdu.edu.cn/showproblem.php?pid=1255" target="_blank" rel="noopener noreferrer">覆盖的面积</a></li>
-<li><i class="far fa-check-square fa-fw"></i> <a href="https://acm.hdu.edu.cn/showproblem.php?pid=1166" target="_blank" rel="noopener noreferrer">敌兵布阵</a></li>
-<li><i class="far fa-square fa-fw"></i> <a href="https://www.luogu.com.cn/problem/P4588" target="_blank" rel="noopener noreferrer">P4588 TJOI2018 数学计算 - 洛谷 | 计算机科学教育新生态 (luogu.com.cn)</a></li>
-<li><i class="far fa-check-square fa-fw"></i> <a href="https://acm.hdu.edu.cn/showproblem.php?pid=7463" target="_blank" rel="noopener noreferrer">单峰数列</a> ✅ 2024-09-26</li>
-<li><i class="far fa-square fa-fw"></i> <a href="https://acm.hdu.edu.cn/showproblem.php?pid=7530" target="_blank" rel="noopener noreferrer">树上询问</a></li>
-<li><i class="far fa-square fa-fw"></i> <a href="https://www.luogu.com.cn/problem/P1502" target="_blank" rel="noopener noreferrer">P1502 窗口的星星 - 洛谷 | 计算机科学教育新生态 (luogu.com.cn)</a></li>
-<li><i class="far fa-square fa-fw"></i> <a href="https://www.luogu.com.cn/problem/P2471" target="_blank" rel="noopener noreferrer">P2471 SCOI2007 降雨量 - 洛谷 | 计算机科学教育新生态 (luogu.com.cn)</a></li>
-</ul>
-<h2 id="atlantis--p5490-扫描线矩形面积并" class="headerLink">
-    <a href="#atlantis--p5490-%e6%89%ab%e6%8f%8f%e7%ba%bf%e7%9f%a9%e5%bd%a2%e9%9d%a2%e7%a7%af%e5%b9%b6" class="header-mark"></a>Atlantis &amp; P5490 扫描线矩形面积并</h2><p><a href="https://acm.hdu.edu.cn/showproblem.php?pid=1542" target="_blank" rel="noopener noreferrer">Problem - 1542 (hdu.edu.cn)</a></p>]]></description></item><item><title>线段树讲义||寒假</title><link>http://dodolalorc.cn/posts/segtreelecnote/</link><pubDate>Wed, 13 Mar 2024 13:29:07 +0800</pubDate><author><name>DODOLA</name></author><guid>http://dodolalorc.cn/posts/segtreelecnote/</guid><description><![CDATA[<h2 id="线段树介绍" class="headerLink">
-    <a href="#%e7%ba%bf%e6%ae%b5%e6%a0%91%e4%bb%8b%e7%bb%8d" class="header-mark"></a>线段树介绍</h2><ul>
-<li>线段树是一棵二叉树，每个节点维护一个区间内$[l,r]$的信息</li>
-<li>左子树区间维护$[l,\lfloor \frac{l+r}{2} \rfloor]$的信息，右子树维护$[\lfloor \frac{l+r}{2} \rfloor+1,r]$的信息</li>
-<li>节点信息可以由两个子节点合并得到</li>
-<li>任意一个区间会被分为线段树上$O(\log n)$个节点</li>
-</ul>
-<p>线段树可以在$O(\log N)$的时间复杂度内实现<strong>单点修改</strong>、<strong>区间修改</strong>、**区间查询（区间求和/区间最大值/区间最小值）**等操作。</p>]]></description></item><item><title>线段树模板</title><link>http://dodolalorc.cn/posts/seg_tree/</link><pubDate>Sat, 06 Jan 2024 21:53:21 +0800</pubDate><author><name>DODOLA</name></author><guid>http://dodolalorc.cn/posts/seg_tree/</guid><description><![CDATA[<h3 id="线段树segment-tree" class="headerLink">
-    <a href="#%e7%ba%bf%e6%ae%b5%e6%a0%91segment-tree" class="header-mark"></a>线段树(segment tree)</h3><p>线段树主要用于维护区间信息，与传统的树状数组相比，可以实现<code>O(log n)</code>的区间修改，还可以同时支持多种操作(加、乘)，更具通用性。</p>]]></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>线段树 on Doごみ箱🪄</title><link>http://dodolalorc.cn/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/</link><description>Recent content in 线段树 on Doごみ箱🪄</description><generator>Hugo</generator><language>zh-CN</language><managingEditor>chenflora124@gmail.com (DODOLA)</managingEditor><webMaster>chenflora124@gmail.com (DODOLA)</webMaster><copyright>dodola</copyright><lastBuildDate>Fri, 11 Apr 2025 05:57:01 +0000</lastBuildDate><atom:link href="http://dodolalorc.cn/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/index.xml" rel="self" type="application/rss+xml"/><item><title>线段树专题练习</title><link>http://dodolalorc.cn/posts/segtree_practice/</link><pubDate>Fri, 16 Aug 2024 22:43:59 +0800</pubDate><author>chenflora124@gmail.com (DODOLA)</author><guid>http://dodolalorc.cn/posts/segtree_practice/</guid><description>&lt;div class="details admonition abstract open">
+ &lt;div class="details-summary admonition-title">
+ &lt;i class="icon fas fa-list-ul fa-fw">&lt;/i>前言&lt;i class="details-icon fas fa-angle-right fa-fw">&lt;/i>
+ &lt;/div>
+ &lt;div class="details-content">
+ &lt;div class="admonition-content">痛定思痛练习线段树QAQ。&lt;/div>
+ &lt;/div>
+ &lt;/div>
+&lt;p>此篇包含尚未写完的题，事实上是一个&lt;strong>TODO List&lt;/strong>。&lt;/p>
+&lt;h3 id="todo-list" class="headerLink">
+ &lt;a href="#todo-list" class="header-mark">&lt;/a>TODO List&lt;/h3>&lt;ul>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> &lt;a href="https://acm.hdu.edu.cn/showproblem.php?pid=1542" target="_blank" rel="noopener noreferrer">Atlantis&lt;/a>&lt;/li>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> &lt;a href="https://www.luogu.com.cn/problem/P5490" target="_blank" rel="noopener noreferrer">P5490 【模板】扫描线 &amp;amp; 矩形面积并 - 洛谷 | 计算机科学教育新生态 (luogu.com.cn)&lt;/a>&lt;/li>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> &lt;a href="https://acm.hdu.edu.cn/showproblem.php?pid=1754" target="_blank" rel="noopener noreferrer">I Hate It&lt;/a>&lt;/li>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> &lt;a href="https://acm.hdu.edu.cn/showproblem.php?pid=1255" target="_blank" rel="noopener noreferrer">覆盖的面积&lt;/a>&lt;/li>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> &lt;a href="https://acm.hdu.edu.cn/showproblem.php?pid=1166" target="_blank" rel="noopener noreferrer">敌兵布阵&lt;/a>&lt;/li>
+&lt;li>&lt;input disabled="" type="checkbox"> &lt;a href="https://www.luogu.com.cn/problem/P4588" target="_blank" rel="noopener noreferrer">P4588 TJOI2018 数学计算 - 洛谷 | 计算机科学教育新生态 (luogu.com.cn)&lt;/a>&lt;/li>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> &lt;a href="https://acm.hdu.edu.cn/showproblem.php?pid=7463" target="_blank" rel="noopener noreferrer">单峰数列&lt;/a> ✅ 2024-09-26&lt;/li>
+&lt;li>&lt;input disabled="" type="checkbox"> &lt;a href="https://acm.hdu.edu.cn/showproblem.php?pid=7530" target="_blank" rel="noopener noreferrer">树上询问&lt;/a>&lt;/li>
+&lt;li>&lt;input disabled="" type="checkbox"> &lt;a href="https://www.luogu.com.cn/problem/P1502" target="_blank" rel="noopener noreferrer">P1502 窗口的星星 - 洛谷 | 计算机科学教育新生态 (luogu.com.cn)&lt;/a>&lt;/li>
+&lt;li>&lt;input disabled="" type="checkbox"> &lt;a href="https://www.luogu.com.cn/problem/P2471" target="_blank" rel="noopener noreferrer">P2471 SCOI2007 降雨量 - 洛谷 | 计算机科学教育新生态 (luogu.com.cn)&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="atlantis--p5490-扫描线矩形面积并" class="headerLink">
+ &lt;a href="#atlantis--p5490-%e6%89%ab%e6%8f%8f%e7%ba%bf%e7%9f%a9%e5%bd%a2%e9%9d%a2%e7%a7%af%e5%b9%b6" class="header-mark">&lt;/a>Atlantis &amp;amp; P5490 扫描线矩形面积并&lt;/h2>&lt;p>&lt;a href="https://acm.hdu.edu.cn/showproblem.php?pid=1542" target="_blank" rel="noopener noreferrer">Problem - 1542 (hdu.edu.cn)&lt;/a>&lt;/p></description></item><item><title>线段树讲义||寒假</title><link>http://dodolalorc.cn/posts/segtreelecnote/</link><pubDate>Wed, 13 Mar 2024 13:29:07 +0800</pubDate><author>chenflora124@gmail.com (DODOLA)</author><guid>http://dodolalorc.cn/posts/segtreelecnote/</guid><description>&lt;h2 id="线段树介绍" class="headerLink">
+ &lt;a href="#%e7%ba%bf%e6%ae%b5%e6%a0%91%e4%bb%8b%e7%bb%8d" class="header-mark">&lt;/a>线段树介绍&lt;/h2>&lt;ul>
+&lt;li>线段树是一棵二叉树，每个节点维护一个区间内$[l,r]$的信息&lt;/li>
+&lt;li>左子树区间维护$[l,\lfloor \frac{l+r}{2} \rfloor]$的信息，右子树维护$[\lfloor \frac{l+r}{2} \rfloor+1,r]$的信息&lt;/li>
+&lt;li>节点信息可以由两个子节点合并得到&lt;/li>
+&lt;li>任意一个区间会被分为线段树上$O(\log n)$个节点&lt;/li>
+&lt;/ul>
+&lt;p>线段树可以在$O(\log N)$的时间复杂度内实现&lt;strong>单点修改&lt;/strong>、&lt;strong>区间修改&lt;/strong>、**区间查询（区间求和/区间最大值/区间最小值）**等操作。&lt;/p></description></item><item><title>线段树模板</title><link>http://dodolalorc.cn/posts/seg_tree/</link><pubDate>Sat, 06 Jan 2024 21:53:21 +0800</pubDate><author>chenflora124@gmail.com (DODOLA)</author><guid>http://dodolalorc.cn/posts/seg_tree/</guid><description>&lt;h3 id="线段树segment-tree" class="headerLink">
+ &lt;a href="#%e7%ba%bf%e6%ae%b5%e6%a0%91segment-tree" class="header-mark">&lt;/a>线段树(segment tree)&lt;/h3>&lt;p>线段树主要用于维护区间信息，与传统的树状数组相比，可以实现&lt;code>O(log n)&lt;/code>的区间修改，还可以同时支持多种操作(加、乘)，更具通用性。&lt;/p></description></item></channel></rss>
