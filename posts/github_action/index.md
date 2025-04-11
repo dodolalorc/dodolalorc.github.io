@@ -149,16 +149,15 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4 # 一个自动发布github pages的action
         with:
           # github_token: ${{ secrets.GITHUB_TOKEN }} 该项适用于发布到源码相同repo的情况，不能用于发布到其他repo
-          external_repository: Florae006/Florae006.github.io # 发布到哪个repo
+          external_repository: dodolalorc/dodolalorc.github.io # 发布到哪个repo
           personal_token: ${{ secrets.ACTION_ACCESS_TOKEN }} # 发布到其他repo需要提供上面生成的personal access token
           publish_dir: ./public/ # 注意这里指的是要发布哪个文件夹的内容，而不是指发布到目的仓库的什么位置，因为hugo默认生成静态网页到public文件夹，所以这里发布public文件夹里的内容
           keep_files: true # 是否保留其他文件
           publish_branch: main # 发布到哪个branch
           commit_message: ${{ github.event.head_commit.message }} # 提交信息
-
 ```
 
-由于现在的`xxx.github.io`对应的仓库是在GitHub action中构建站点后直接commit同步的，故原来在公开仓库中的workflows并不方便添加到这个commit里，我这里的解决思路是将原来ssh连接云服务器进行deploy的代码进行修改，添加自动构建内容，再直接用ssh连接到云服务器，完成云服务器的内容更新。修改后的`remote-deploy.yml`参考如下：
+由于现在的`xxx.github.io`对应的仓库是在 GitHub action 中构建站点后直接 commit 同步的，故原来在公开仓库中的 workflows 并不方便添加到这个 commit 里，我这里的解决思路是将原来 ssh 连接云服务器进行 deploy 的代码进行修改，添加自动构建内容，再直接用 ssh 连接到云服务器，完成云服务器的内容更新。修改后的`remote-deploy.yml`参考如下：
 
 ```yaml
 name: Deploy to remote server
@@ -166,45 +165,45 @@ name: Deploy to remote server
 # 触发条件
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch:
 
 jobs:
   deploy:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Install Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '16.x'
+      - uses: actions/checkout@v3
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16.x"
 
-    - name: Setup Hugo
-      uses: peaceiris/actions-hugo@v2
-      with:
-        hugo-version: 'latest'
-        extended: true
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: "latest"
+          extended: true
 
-    - name: Build
-      run: hugo --minify
+      - name: Build
+        run: hugo --minify
 
-    - name: ssh deploy
-      uses: easingthemes/ssh-deploy@v5.1.0
-      with:
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        ARGS: "-rlgoDzvc -i"
-        REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-        REMOTE_USER: ${{ secrets.REMOTE_USER }}
-        TARGET: ${{ secrets.REMOTE_TARGET }}
-        SOURCE: "public/"
-        # SCRIPT_BEFORE: |
-        #   whoami
-        #   ls -al
-        # SCRIPT_AFTER: |
-        #   cd ${{ secrets.REMOTE_TARGET }}
-        #   ls -al
-        #   pwd
-        #   echo "Deployed successfully"
+      - name: ssh deploy
+        uses: easingthemes/ssh-deploy@v5.1.0
+        with:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          ARGS: "-rlgoDzvc -i"
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          TARGET: ${{ secrets.REMOTE_TARGET }}
+          SOURCE: "public/"
+          # SCRIPT_BEFORE: |
+          #   whoami
+          #   ls -al
+          # SCRIPT_AFTER: |
+          #   cd ${{ secrets.REMOTE_TARGET }}
+          #   ls -al
+          #   pwd
+          #   echo "Deployed successfully"
 ```
+

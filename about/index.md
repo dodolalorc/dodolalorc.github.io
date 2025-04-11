@@ -34,11 +34,11 @@
 
 * 博客框架：Hugo v0.139.4
 * 主题：~~PaperMod~~  2024/07 更换为DoIt
-* 仓库：[GitHub](https://github.com/Florae006/Florae006.github.io.git)
+* 仓库：[GitHub](https://github.com/dodolalorc/dodolalorc.github.io.git)
 
 **线路信息**
 
-* 初始域名：[florae006.github.io](https://florae006.github.io/)
+* 初始域名：[dodolalorc.github.io](https://dodolalorc.github.io/)
 * 主域名：[dodolalorc.cn](https://dodolalorc.cn/)
 
 

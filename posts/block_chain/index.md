@@ -2,7 +2,7 @@
 
 
 {{< admonition type=info title="GitHub仓库地址" open=false >}}
-GitHub 仓库地址：[BlockChain](https://github.com/Florae006/BlockChain)
+GitHub 仓库地址：[BlockChain](https://github.com/dodolalorc/BlockChain)
 {{< /admonition >}}
 
 ## 一、产品方案
@@ -97,7 +97,7 @@ GitHub 仓库地址：[BlockChain](https://github.com/Florae006/BlockChain)
 拉取本项目
 
 ```bash
-git clone git@github.com:Florae006/BlockChain.git
+git clone git@github.com:dodolalorc/BlockChain.git
 ```
 
 启动项目，开启本地服务器

@@ -1,14 +1,12 @@
 # 线段树讲义||寒假
 
 
-
-
 ## 线段树介绍
 
-* 线段树是一棵二叉树，每个节点维护一个区间内$[l,r]$的信息
-* 左子树区间维护$[l,\lfloor \frac{l+r}{2} \rfloor]$的信息，右子树维护$[\lfloor \frac{l+r}{2} \rfloor+1,r]$的信息
-* 节点信息可以由两个子节点合并得到
-* 任意一个区间会被分为线段树上$O(\log n)$个节点
+- 线段树是一棵二叉树，每个节点维护一个区间内$[l,r]$的信息
+- 左子树区间维护$[l,\lfloor \frac{l+r}{2} \rfloor]$的信息，右子树维护$[\lfloor \frac{l+r}{2} \rfloor+1,r]$的信息
+- 节点信息可以由两个子节点合并得到
+- 任意一个区间会被分为线段树上$O(\log n)$个节点
 
 线段树可以在$O(\log N)$的时间复杂度内实现**单点修改**、**区间修改**、**区间查询（区间求和/区间最大值/区间最小值）**等操作。
 
@@ -23,7 +21,7 @@
 
 ### 建树
 
-![img](https://cdn.jsdelivr.net/gh/Florae006/dodolaPicBed/segt1.svg)
+![img](https://cdn.jsdelivr.net/gh/dodolalorc/dodolaPicBed/segt1.svg)
 
 #### 实现
 
@@ -123,13 +121,13 @@ ll getsum(int l, int r, int cl, int cr, int p) {
     if (cl >= l && cr <= r)return tree[p].d;
 
     int m = cl + ((cr - cl) >> 1);
-    
+
     if (tree[p].lazy) {
         tree[p << 1].lazy += tree[p].lazy, tree[(p << 1) | 1].lazy += tree[p].lazy;
         tree[p << 1].d += tree[p].lazy * (m + 1 - cl), tree[(p << 1) | 1].d += tree[p].lazy * (cr - m);
         tree[p].lazy = 0;
     }
-    
+
     ll sum = 0ll;
     if (m >= l)
         sum += getsum(l, r, cl, m, p << 1);
@@ -246,20 +244,20 @@ int main() {
 
 相似的，如果是将某个区间内的值都修改为某个值，应该如何操作？
 
-### 例题1（两种懒标记）
+### 例题 1（两种懒标记）
 
 [P3373 【模板】线段树 2 - 洛谷 | 计算机科学教育新生态 (luogu.com.cn)](https://www.luogu.com.cn/problem/P3373)
 
-> 操作 1： 格式：`1 x y k` 含义：将区间$[x,y]$内每个数乘上k
+> 操作 1： 格式：`1 x y k` 含义：将区间$[x,y]$内每个数乘上 k
 >
-> 操作 2： 格式：`2 x y k` 含义：将区间$[x,y]$ 内每个数加上k
+> 操作 2： 格式：`2 x y k` 含义：将区间$[x,y]$ 内每个数加上 k
 >
-> 操作 3： 格式：`3 x y` 含义：输出区间 $[x,y]$ 内每个数的和对m取模所得的结果
+> 操作 3： 格式：`3 x y` 含义：输出区间 $[x,y]$ 内每个数的和对 m 取模所得的结果
 >
 > 这题需要考虑两种修改值的操作之间的相互影响。
 >
-> * 每次对节点加/乘之前，要判断是否需要将当前节点的两种懒标记向下传递
-> * 判断时应该先乘后加
+> - 每次对节点加/乘之前，要判断是否需要将当前节点的两种懒标记向下传递
+> - 判断时应该先乘后加
 
 #### 参考
 
@@ -283,7 +281,7 @@ vector<ll>a(maxn);  // 原数据
 vector<segTreeNode>tree(maxn * 4);
 
 void build(int l, int r, int p) {
-    tree[p].lazyTime = 1ll; 
+    tree[p].lazyTime = 1ll;
     if (l == r) {
         tree[p].d = a[l] % mo;
         return;
@@ -515,7 +513,7 @@ int main() {
 
 线段树合并通过递归实现，需要有合并操作的线段树需要使用动态开点的技巧。
 
-将线段树a和b合并，从1号点开始递归，若递归到某个节点为空，直接返回另一个树上的对应节点；若递归到叶子节点，我们合并两棵树上的对应节点。
+将线段树 a 和 b 合并，从 1 号点开始递归，若递归到某个节点为空，直接返回另一个树上的对应节点；若递归到叶子节点，我们合并两棵树上的对应节点。
 
 ```cpp
 void pushup(int a) {
@@ -530,7 +528,7 @@ int merge(int a, int b, int l, int r) {
         // do sth
         return a;
     }
-    
+
     int mid = (l + r) >> 1;
     tree[a].lson = merge(tree[a].lson, tree[b].lson, l, mid);
     tree[a].rson = merge(tree[a].rson, tree[b].rson, mid + 1, r);
@@ -540,9 +538,7 @@ int merge(int a, int b, int l, int r) {
 }
 ```
 
-
-
-模板题：[P4556 [Vani有约会\] 雨天的尾巴 /【模板】线段树合并 - 洛谷 | 计算机科学教育新生态 (luogu.com.cn)](https://www.luogu.com.cn/problem/P4556)
+模板题：[P4556 [Vani 有约会\] 雨天的尾巴 /【模板】线段树合并 - 洛谷 | 计算机科学教育新生态 (luogu.com.cn)](https://www.luogu.com.cn/problem/P4556)
 
 ### 线段树分裂
 
@@ -591,7 +587,7 @@ void split(int& p, int& q, int s, int t, int l, int r) {
 
 [Problem - 5306 (hdu.edu.cn)](https://acm.hdu.edu.cn/showproblem.php?pid=5306)
 
-[P4556 [Vani有约会\] 雨天的尾巴 /【模板】线段树合并 - 洛谷 | 计算机科学教育新生态 (luogu.com.cn)](https://www.luogu.com.cn/problem/P4556)
+[P4556 [Vani 有约会\] 雨天的尾巴 /【模板】线段树合并 - 洛谷 | 计算机科学教育新生态 (luogu.com.cn)](https://www.luogu.com.cn/problem/P4556)
 
 [P5494 【模板】线段树分裂 - 洛谷 | 计算机科学教育新生态 (luogu.com.cn)](https://www.luogu.com.cn/problem/P5494)
 
