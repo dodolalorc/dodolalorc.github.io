@@ -3,7 +3,7 @@
 
 ## 友链
 
-{{<friend name="思想犯" url="https://topdeoo.github.io/" avatar="https://avatars.githubusercontent.com/u/71817082?v=4" bio="一个活的相对失败的 CSer" siteshot="" >}}
+{{<friend name="思想犯" url="https://virgiling.github.io/" avatar="https://avatars.githubusercontent.com/u/71817082?v=4" bio="一个活的相对失败的 CSer" siteshot="" >}}
 {{<friend name="Windlinxy" url="https://windlinxy.github.io/" avatar="https://windlinxy.github.io/images/windlinxy.jpg" bio="测试岗牛马的失败生活" siteshot="" >}}
 {{<friend name="DODOLA-github.io" url="https://dodolalorc.github.io/" avatar="https://dodolalorc.github.io/img/dodola.png" bio="ddlの初始域名自链接" siteshot="" >}}
 {{<friend name="YorkWu's Blog" url="https://wyy.ink/" avatar="https://wyy.ink/img/%E5%A4%B4%E5%83%8F.jpg" bio="ddl:一个很强的学长QwQ！！" siteshot="" >}}
@@ -16,7 +16,7 @@
 
 ✨️✨️ 本站友链信息：
 
-> name: DODOLA
+> name: dodola
 >
 > url: https://dodolalorc.cn/
 >
@@ -39,8 +39,6 @@
 🎉 本站支持交换友链，在您提出申请之前，请将本站添加至友链
 
 🏵️ 为了保障本站用户，本站仅支持个人网站的友链申请
-
-🍧 申请本站友链需要拥有独立域名（非免费域名），建议开启全站 HTTPS
 
 💐 友链中的链接信息需要保证可以正常访问哦
 
