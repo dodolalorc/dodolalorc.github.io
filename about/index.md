@@ -16,10 +16,14 @@
 
 **废话**：INTJer，跟其他INTJ一样有一些不顾人死活的人机感。
 
-> I Navigate The Journey
-> Ideals Never Tolerate Jeers
-> I Negate Tainted Joys
-> In Night, Truths Judge
+> I Navigate The Journey.
+>
+> Ideals Never Tolerate Jeers.
+>
+> I Negate Tainted Joys.
+>
+> In Night, Truths Judge.
+>
 > ...... and, int j; 嘻嘻:)
 
 本科2026届东师计科专业，不太打算读研，正在当实习生努力学习进军互联网。

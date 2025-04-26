@@ -2,10 +2,15 @@
 
 
 > System：Windows 11
+>
 > Python：Python 3.13.3
+>
 > node：v22.14.0
+>
 > npm：10.9.2
+>
 > yarn：1.22.22
+>
 > 足够的磁盘空间和流量
 
 ## 初始化环境

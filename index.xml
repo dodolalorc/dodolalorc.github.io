@@ -1,12 +1,12 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Doごみ箱🪄</title><link>http://dodolalorc.cn/</link><description>Doごみ箱2.1</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>chenflora124@gmail.com (DODOLA)</managingEditor><webMaster>chenflora124@gmail.com (DODOLA)</webMaster><copyright>dodola</copyright><lastBuildDate>Fri, 25 Apr 2025 13:27:50 +0800</lastBuildDate><atom:link href="http://dodolalorc.cn/index.xml" rel="self" type="application/rss+xml"/><item><title>Electron 构建记录</title><link>http://dodolalorc.cn/posts/build_electron/</link><pubDate>Fri, 25 Apr 2025 13:27:50 +0800</pubDate><author><name>DODOLA</name></author><guid>http://dodolalorc.cn/posts/build_electron/</guid><description><![CDATA[<div class="featured-image">
                 <img src="https://img.dodolalorc.cn/i/2025/04/26/680c60755e10f.png" referrerpolicy="no-referrer">
             </div><blockquote>
-<p>System：Windows 11
-Python：Python 3.13.3
-node：v22.14.0
-npm：10.9.2
-yarn：1.22.22
-足够的磁盘空间和流量</p>]]></description></item><item><title>大文件上传和下载问题</title><link>http://dodolalorc.cn/posts/large_file_upload/</link><pubDate>Mon, 17 Mar 2025 13:17:45 +0800</pubDate><author><name>DODOLA</name></author><guid>http://dodolalorc.cn/posts/large_file_upload/</guid><description><![CDATA[<div class="featured-image">
+<p>System：Windows 11</p>
+<p>Python：Python 3.13.3</p>
+<p>node：v22.14.0</p>
+<p>npm：10.9.2</p>
+<p>yarn：1.22.22</p>
+<p>足够的磁盘空间和流量</p>]]></description></item><item><title>大文件上传和下载问题</title><link>http://dodolalorc.cn/posts/large_file_upload/</link><pubDate>Mon, 17 Mar 2025 13:17:45 +0800</pubDate><author><name>DODOLA</name></author><guid>http://dodolalorc.cn/posts/large_file_upload/</guid><description><![CDATA[<div class="featured-image">
                 <img src="https://img.dodolalorc.cn/i/2025/03/03/67c558f57d10e.png" referrerpolicy="no-referrer">
             </div><div class="details admonition abstract open">
         <div class="details-summary admonition-title">
