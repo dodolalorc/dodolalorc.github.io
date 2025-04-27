@@ -91,5 +91,21 @@ Checking for build-tools updates
 
 在进行`e build`之后，初次构建需要鉴权，点击命令行提示的网址操作一下就好啦~
 
-然后就是继续泡一杯咖啡等待构建。
+然后就是继续泡 n 杯咖啡等待构建。
+
+构建成功之后的结果会存在`./src/out/..`目录下，在命令行执行：
+
+```bash
+e start
+```
+
+可以在命令行看到当前构建出的`Electron`信息，以及弹出的窗口。
+
+![image.png](https://img.dodolalorc.cn/i/2025/04/27/680dd921a3158.png)
+
+根据提示的命令启动本地的 electron demo
+
+![50d9f84772570dea5e3f8dd6c1fd2dd2.png](https://img.dodolalorc.cn/i/2025/04/27/680dd96b91c23.png)
+
+合影😗
 
