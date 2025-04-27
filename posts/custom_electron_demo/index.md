@@ -11,7 +11,7 @@
 
 找到`src/electron`目录，在`lib/browser/api/app.ts`添加：
 
-```bash
+```typescript
 app.getElectronVersion = () => { // This is for test
   return 'dodola test demo' + process.versions.electron;
 };
@@ -19,7 +19,7 @@ app.getElectronVersion = () => { // This is for test
 
 再到`electron.d.ts`中更新添加：
 
-```bash
+```typescript
 declare namespace Electron {
   const NodeEventEmitter: typeof import('events').EventEmitter;
 
@@ -55,7 +55,7 @@ RBE Stats: down 0 B, up 0 B, 1 local fallback
 
 在`package.json`中修改启动脚本`start`的部分，原来是`electron .`启动，将`electron`改为构建的`electron.exe`路径：
 
-```bash
+```json
 {
   "name": "electron-demo",
   "version": "1.0.0",
@@ -76,7 +76,7 @@ RBE Stats: down 0 B, up 0 B, 1 local fallback
 `chcp 65001`只是为了在命令行中能够正常显示中文字符用的
 {{< /admonition >}}
 
-### 调用`getElectronVersion()`
+### 调用 Api
 
 在`main.js`中添加 console.log 语句：
 
