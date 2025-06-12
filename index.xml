@@ -1,438 +1,70 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Doごみ箱🪄</title><link>http://dodolalorc.cn/</link><description>Doごみ箱2.1</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>chenflora124@gmail.com (DODOLA)</managingEditor><webMaster>chenflora124@gmail.com (DODOLA)</webMaster><copyright>dodola</copyright><lastBuildDate>Sun, 27 Apr 2025 16:51:01 +0800</lastBuildDate><atom:link href="http://dodolalorc.cn/index.xml" rel="self" type="application/rss+xml"/><item><title>自定义Electron.exe的使用</title><link>http://dodolalorc.cn/posts/custom_electron_demo/</link><pubDate>Sun, 27 Apr 2025 16:51:01 +0800</pubDate><author><name>DODOLA</name></author><guid>http://dodolalorc.cn/posts/custom_electron_demo/</guid><description><![CDATA[<div class="featured-image">
-                <img src="https://img.dodolalorc.cn/i/2025/04/26/680c601796399.png" referrerpolicy="no-referrer">
-            </div><p>初始化环境可以阅读<a href="/posts/build_electron/" rel="">这篇</a>。</p>
-<p>上接之前的构建过程，经过第一次构建之后，后续修改源码添加 api 等都不会再构建那么久了。</p>
-<h2 id="添加简单的-api" class="headerLink">
-    <a href="#%e6%b7%bb%e5%8a%a0%e7%ae%80%e5%8d%95%e7%9a%84-api" class="header-mark"></a>添加简单的 API</h2><p>当前目录在构建时相同的目录下，其下包含<code>src</code>、<code>.gclient</code>、<code>node_modules</code>等。</p>]]></description></item><item><title>Electron 构建记录</title><link>http://dodolalorc.cn/posts/build_electron/</link><pubDate>Fri, 25 Apr 2025 13:27:50 +0800</pubDate><author><name>DODOLA</name></author><guid>http://dodolalorc.cn/posts/build_electron/</guid><description><![CDATA[<div class="featured-image">
-                <img src="https://img.dodolalorc.cn/i/2025/04/26/680c60755e10f.png" referrerpolicy="no-referrer">
-            </div><blockquote>
-<p>System：Windows 11</p>
-<p>Python：Python 3.13.3</p>
-<p>node：v22.14.0</p>
-<p>npm：10.9.2</p>
-<p>yarn：1.22.22</p>
-<p>足够的磁盘空间和流量</p>]]></description></item><item><title>大文件上传和下载问题</title><link>http://dodolalorc.cn/posts/large_file_upload/</link><pubDate>Mon, 17 Mar 2025 13:17:45 +0800</pubDate><author><name>DODOLA</name></author><guid>http://dodolalorc.cn/posts/large_file_upload/</guid><description><![CDATA[<div class="featured-image">
-                <img src="https://img.dodolalorc.cn/i/2025/03/03/67c558f57d10e.png" referrerpolicy="no-referrer">
-            </div><div class="details admonition abstract open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-list-ul fa-fw"></i>问题预设<i class="details-icon fas fa-angle-right fa-fw"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p>网络断开之后，之前上传的部分没了？</p>
-<p>传着传着，网络波动了，结果没有了。</p>
-<p>关机后可不可以接着传，怎么做到？</p>
-</div>
-        </div>
-    </div>
-<h3 id="术语" class="headerLink">
-    <a href="#%e6%9c%af%e8%af%ad" class="header-mark"></a>术语</h3><ul>
-<li>断点续传</li>
-<li>断开重连重传</li>
-<li><strong>切片上传</strong></li>
-</ul>
-<h2 id="切片上传" class="headerLink">
-    <a href="#%e5%88%87%e7%89%87%e4%b8%8a%e4%bc%a0" class="header-mark"></a>切片上传</h2><p><strong>步骤</strong></p>
-<ol>
-<li>前端切片 chunk 5MB</li>
-<li>将切片传递给后端，切片要去名：hash、index</li>
-<li>后端组合切片</li>
-</ol>
-<h3 id="代码示例" class="headerLink">
-    <a href="#%e4%bb%a3%e7%a0%81%e7%a4%ba%e4%be%8b" class="header-mark"></a>代码示例</h3><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span><span class="lnt">44
-</span><span class="lnt">45
-</span><span class="lnt">46
-</span><span class="lnt">47
-</span><span class="lnt">48
-</span><span class="lnt">49
-</span><span class="lnt">50
-</span><span class="lnt">51
-</span><span class="lnt">52
-</span><span class="lnt">53
-</span><span class="lnt">54
-</span><span class="lnt">55
-</span><span class="lnt">56
-</span><span class="lnt">57
-</span><span class="lnt">58
-</span><span class="lnt">59
-</span><span class="lnt">60
-</span><span class="lnt">61
-</span><span class="lnt">62
-</span><span class="lnt">63
-</span><span class="lnt">64
-</span><span class="lnt">65
-</span><span class="lnt">66
-</span><span class="lnt">67
-</span><span class="lnt">68
-</span><span class="lnt">69
-</span><span class="lnt">70
-</span><span class="lnt">71
-</span><span class="lnt">72
-</span><span class="lnt">73
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="cp">&lt;!DOCTYPE html&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;en&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&#34;UTF-8&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;viewport&#34;</span> <span class="na">content</span><span class="o">=</span><span class="s">&#34;width=device-width, initial-scale=1.0&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>大文件上传<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;file&#34;</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;file&#34;</span> <span class="na">multiple</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">button</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;upload&#34;</span><span class="p">&gt;</span>上传<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">CHUNK_SIZE</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">;</span> <span class="c1">// 5MB
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nx">uploadFile</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">file</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;file&#39;</span><span class="p">).</span><span class="nx">files</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;上传文件&#39;</span><span class="p">,</span> <span class="nx">file</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">file</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="k">return</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">totalSize</span> <span class="o">=</span> <span class="nx">file</span><span class="p">.</span><span class="nx">size</span>
-</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">totalChunks</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">ceil</span><span class="p">(</span><span class="nx">totalSize</span> <span class="o">/</span> <span class="nx">CHUNK_SIZE</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nx">currentChunk</span> <span class="o">=</span> <span class="mi">0</span>
-</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">chunks</span> <span class="o">=</span> <span class="p">[]</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kd">function</span> <span class="nx">uploadChunk</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;上传第&#39;</span><span class="p">,</span> <span class="nx">currentChunk</span><span class="p">,</span> <span class="s1">&#39;块&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="nx">currentChunk</span> <span class="o">&gt;=</span> <span class="nx">totalChunks</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;上传完成&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span>
-</span></span><span class="line"><span class="cl">      <span class="p">}</span>
-</span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">start</span> <span class="o">=</span> <span class="nx">currentChunk</span> <span class="o">*</span> <span class="nx">CHUNK_SIZE</span>
-</span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">end</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">min</span><span class="p">(</span><span class="nx">totalSize</span><span class="p">,</span> <span class="nx">start</span> <span class="o">+</span> <span class="nx">CHUNK_SIZE</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">chunk</span> <span class="o">=</span> <span class="nx">file</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="nx">start</span><span class="p">,</span> <span class="nx">end</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">formData</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FormData</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">formData</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">&#39;file&#39;</span><span class="p">,</span> <span class="nx">chunk</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">formData</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">,</span> <span class="nx">currentChunk</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">formData</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">&#39;totalChunks&#39;</span><span class="p">,</span> <span class="nx">totalChunks</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">formData</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">&#39;filename&#39;</span><span class="p">,</span> <span class="nx">file</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">      <span class="c1">// fetch(&#39;/api/upload&#39;, {
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="c1">//   method: &#39;POST&#39;,
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="c1">//   body: formData
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="c1">// }).then(res =&gt; {
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="c1">//   if (res.ok) {
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="c1">//     currentChunk++;
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="c1">//     uploadChunk() // 递归上传下一块
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="c1">//   } else {
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="c1">//     throw new Error(&#39;上传失败&#39;)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="c1">//   }
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="c1">// }).catch(err =&gt; {
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="c1">//   console.error(err)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="c1">// });
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl">      <span class="nx">currentChunk</span><span class="o">++</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">uploadChunk</span><span class="p">()</span> <span class="c1">// 递归上传下一块
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">};</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// 开始上传
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">uploadChunk</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">  <span class="p">};</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;upload&#39;</span><span class="p">).</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="nx">uploadFile</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="优化" class="headerLink">
-    <a href="#%e4%bc%98%e5%8c%96" class="header-mark"></a>优化</h3><h4 id="压缩文件" class="headerLink">
-    <a href="#%e5%8e%8b%e7%bc%a9%e6%96%87%e4%bb%b6" class="header-mark"></a>压缩文件</h4><p>上传前对文件进行压缩，减少传输的数据量。</p>]]></description></item><item><title>前端流量控制常用手段</title><link>http://dodolalorc.cn/posts/flow_control/</link><pubDate>Mon, 17 Mar 2025 11:40:19 +0800</pubDate><author><name>DODOLA</name></author><guid>http://dodolalorc.cn/posts/flow_control/</guid><description><![CDATA[<div class="featured-image">
-                <img src="https://img.dodolalorc.cn/i/2025/03/03/67c5599367fe0.jpg" referrerpolicy="no-referrer">
-            </div><div class="details admonition abstract open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-list-ul fa-fw"></i>问题预设<i class="details-icon fas fa-angle-right fa-fw"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content">如何解决页面请求接口的大规模并发问题？</div>
-        </div>
-    </div>
-<p>在需要处理大规模请求的情境中，做好流量控制可以提升系统稳定性和性能。</p>
-<h2 id="防抖节流" class="headerLink">
-    <a href="#%e9%98%b2%e6%8a%96%e8%8a%82%e6%b5%81" class="header-mark"></a>防抖/节流</h2><h3 id="防抖debounce" class="headerLink">
-    <a href="#%e9%98%b2%e6%8a%96debounce" class="header-mark"></a>防抖（Debounce）</h3><p>在事件触发后，延迟执行函数，若在延迟期间再次出发，则重新计时，如在搜索框输入、调整窗口大小时。</p>
-<h4 id="实现" class="headerLink">
-    <a href="#%e5%ae%9e%e7%8e%b0" class="header-mark"></a>实现</h4><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">debounce</span><span class="p">(</span><span class="nx">fn</span><span class="p">,</span> <span class="nx">wait</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nx">timeout</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="kd">let</span> <span class="nx">context</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="kd">let</span> <span class="nx">args</span> <span class="o">=</span> <span class="nx">arguments</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">clearTimeout</span><span class="p">(</span><span class="nx">timeout</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">timeout</span> <span class="o">=</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="nx">fn</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">context</span><span class="p">,</span> <span class="nx">args</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="p">},</span> <span class="nx">wait</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">sample</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;xxx&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;resize&#39;</span><span class="p">,</span> <span class="nx">debounce</span><span class="p">(</span><span class="nx">sample</span><span class="p">,</span> <span class="mi">300</span><span class="p">));</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h4 id="为什么在-debounce-函数中使用-let" class="headerLink">
-    <a href="#%e4%b8%ba%e4%bb%80%e4%b9%88%e5%9c%a8-debounce-%e5%87%bd%e6%95%b0%e4%b8%ad%e4%bd%bf%e7%94%a8-let" class="header-mark"></a>为什么在  <code>debounce</code>  函数中使用  <code>let</code>？</h4><p>在  <code>debounce</code>  函数中，<code>timeout</code>  变量需要满足以下条件：</p>]]></description></item><item><title>JavaScript 链式调用 | 设计模式 笔记</title><link>http://dodolalorc.cn/posts/method_chaining/</link><pubDate>Mon, 17 Mar 2025 09:26:02 +0800</pubDate><author><name>DODOLA</name></author><guid>http://dodolalorc.cn/posts/method_chaining/</guid><description><![CDATA[<div class="featured-image">
-                <img src="https://img.dodolalorc.cn/i/2025/03/03/67c55994138f8.jpg" referrerpolicy="no-referrer">
-            </div><h2 id="vue-从-createapp-开始的链式调用" class="headerLink">
-    <a href="#vue-%e4%bb%8e-createapp-%e5%bc%80%e5%a7%8b%e7%9a%84%e9%93%be%e5%bc%8f%e8%b0%83%e7%94%a8" class="header-mark"></a>Vue :从 createApp 开始的链式调用</h2><h3 id="代码示例" class="headerLink">
-    <a href="#%e4%bb%a3%e7%a0%81%e7%a4%ba%e4%be%8b" class="header-mark"></a>代码示例</h3><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">createApp</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;vue&#39;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// 创建一个 Vue 应用实例
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">createApp</span><span class="p">({</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">data() {</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">message</span><span class="o">:</span> <span class="s1">&#39;Hello, Vue!&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">};</span>
-</span></span><span class="line"><span class="cl">  <span class="p">},</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">methods</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">handleClick() {</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;Button clicked!&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">});</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// 链式调用：配置应用并绑定事件
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">app</span>
-</span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="nx">component</span><span class="p">(</span><span class="s1">&#39;MyButton&#39;</span><span class="p">,</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">template</span><span class="o">:</span> <span class="sb">`&lt;button @click=&#34;handleClick&#34;&gt;Click Me&lt;/button&gt;`</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">methods</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">handleClick() {</span>
-</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="nx">$emit</span><span class="p">(</span><span class="s1">&#39;custom-click&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">      <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="p">})</span>
-</span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="nx">directive</span><span class="p">(</span><span class="s1">&#39;highlight&#39;</span><span class="p">,</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">mounted</span><span class="p">(</span><span class="nx">el</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">el</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="o">=</span> <span class="s1">&#39;yellow&#39;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="p">})</span>
-</span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="nx">mixin</span><span class="p">({</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">created() {</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Mixin created hook&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="p">})</span>
-</span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="nx">mount</span><span class="p">(</span><span class="s1">&#39;#app&#39;</span><span class="p">);</span> <span class="c1">// 挂载到 DOM
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="解释" class="headerLink">
-    <a href="#%e8%a7%a3%e9%87%8a" class="header-mark"></a>解释</h3><p><code>createApp</code>:创建一个 Vue 应用实例。传入一个根组件配置对象，包含 data 和 methods。</p>]]></description></item><item><title>LeetCode Hot 100记录（19/100）</title><link>http://dodolalorc.cn/posts/lchot100/</link><pubDate>Thu, 13 Mar 2025 14:13:22 +0800</pubDate><author><name>DODOLA</name></author><guid>http://dodolalorc.cn/posts/lchot100/</guid><description><![CDATA[<div class="featured-image">
-                <img src="https://img.dodolalorc.cn/i/2025/03/03/67c55994b7733.jpg" referrerpolicy="no-referrer">
-            </div><h1 id="哈希33" class="headerLink">
-    <a href="#%e5%93%88%e5%b8%8c33" class="header-mark"></a>哈希(3/3)</h1><h2 id="1-两数之和" class="headerLink">
-    <a href="#1-%e4%b8%a4%e6%95%b0%e4%b9%8b%e5%92%8c" class="header-mark"></a>1. 两数之和</h2><h3 id="题意" class="headerLink">
-    <a href="#%e9%a2%98%e6%84%8f" class="header-mark"></a>题意</h3><p>给定一个整数数组  <code>nums</code>  和一个整数目标值  <code>target</code>，请你在该数组中找出  <strong>和为目标值</strong> <em><code>target</code></em>  的那  <strong>两个</strong>  整数，并返回它们的数组下标。</p>
-<p>你可以假设每种输入只会对应一个答案，并且你不能使用两次相同的元素。</p>]]></description></item><item><title>Rust编程区块链项目 BlockChain in Rust</title><link>http://dodolalorc.cn/posts/block_chain/</link><pubDate>Mon, 03 Mar 2025 15:20:51 +0800</pubDate><author><name>DODOLA</name></author><guid>http://dodolalorc.cn/posts/block_chain/</guid><description><![CDATA[<div class="featured-image">
-                <img src="https://img.dodolalorc.cn/i/2025/03/03/67c559ab9df13.jpg" referrerpolicy="no-referrer">
-            </div><div class="details admonition info">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-info-circle fa-fw"></i>GitHub仓库地址<i class="details-icon fas fa-angle-right fa-fw"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content">GitHub 仓库地址：<a href="https://github.com/dodolalorc/BlockChain" target="_blank" rel="noopener noreferrer">BlockChain</a></div>
-        </div>
-    </div>
-<h2 id="一产品方案" class="headerLink">
-    <a href="#%e4%b8%80%e4%ba%a7%e5%93%81%e6%96%b9%e6%a1%88" class="header-mark"></a>一、产品方案</h2><h3 id="项目目标" class="headerLink">
-    <a href="#%e9%a1%b9%e7%9b%ae%e7%9b%ae%e6%a0%87" class="header-mark"></a>项目目标</h3><p>实现一个轻量的简单高效的区块链系统项目，用于学习和研究。</p>
-<ul>
-<li>学习区块链的相关知识，实现一个由 Rust 实现的简单区块链系统。</li>
-<li>能够生成创世区块，支持区块的创建、验证和链式储存，实现工作量证明算法。</li>
-<li>利用本机端口构建服务系统，实现交易的广播、挖矿功能、简单的交易校验功能。</li>
-</ul>
-<h3 id="用户需求分析" class="headerLink">
-    <a href="#%e7%94%a8%e6%88%b7%e9%9c%80%e6%b1%82%e5%88%86%e6%9e%90" class="header-mark"></a>用户需求分析</h3><ul>
-<li>用户可以通过命令行启动本地服务，在<code>main.rs</code>中配置路由，参考下方的<a href="#%e4%bd%bf%e7%94%a8%e6%89%8b%e5%86%8c" rel="">使用手册</a>，进行创建交易、挖矿、查看信息等。</li>
-<li>通过时间戳、<code>lock_time</code>、签名校验等完成简单的对交易信息的核对。</li>
-<li>系统具有一定的可扩展性，用户可以通过调整 API 接口快速调试。</li>
-</ul>
-<h3 id="主要功能" class="headerLink">
-    <a href="#%e4%b8%bb%e8%a6%81%e5%8a%9f%e8%83%bd" class="header-mark"></a>主要功能</h3><p>本产品主要由<code>src/</code>下的<code>.rs</code>文件实现主要功能。</p>]]></description></item><item><title>2025牛客暑寒假多校训练营Day4</title><link>http://dodolalorc.cn/posts/nc25wd4/</link><pubDate>Sun, 02 Mar 2025 18:46:04 +0800</pubDate><author><name>DODOLA</name></author><guid>http://dodolalorc.cn/posts/nc25wd4/</guid><description><![CDATA[<div class="featured-image">
-                <img src="https://img.dodolalorc.cn/i/2025/03/02/67c461f0d8665.jpg" referrerpolicy="no-referrer">
-            </div><h2 id="a" class="headerLink">
-    <a href="#a" class="header-mark"></a>A</h2><h3 id="题意" class="headerLink">
-    <a href="#%e9%a2%98%e6%84%8f" class="header-mark"></a>题意</h3><h4 id="数据范围" class="headerLink">
-    <a href="#%e6%95%b0%e6%8d%ae%e8%8c%83%e5%9b%b4" class="header-mark"></a>数据范围</h4><h3 id="思路" class="headerLink">
-    <a href="#%e6%80%9d%e8%b7%af" class="header-mark"></a>思路</h3><h3 id="代码" class="headerLink">
-    <a href="#%e4%bb%a3%e7%a0%81" class="header-mark"></a>代码</h3><h2 id="b-tokitsukaze-and-balance-string-easy" class="headerLink">
-    <a href="#b-tokitsukaze-and-balance-string-easy" class="header-mark"></a>B Tokitsukaze and Balance String (easy)</h2><h3 id="题意-1" class="headerLink">
-    <a href="#%e9%a2%98%e6%84%8f-1" class="header-mark"></a>题意</h3><p>定义字符串是平衡的：字符串中<code>01</code>的连续子串的数量和<code>10</code>的连续子串的数量相同。</p>
-<p>定义字符串<code>s</code>的<code>val(s)</code>：</p>
-<ul>
-<li>将字符串<code>s</code>的某位置<code>i</code>的字符倒置（<code>1</code>变成<code>0</code>，<code>0</code>变成<code>1</code>）后，字符串是平衡的，这样的位置的总数</li>
-</ul>
-<p>现在有一个由<code>1</code>、<code>0</code>和<code>?</code>组成的字符串，<code>?</code>可以任意换成<code>1</code>或<code>0</code>，求所有的填写完成的字符串的<code>val(s)</code>的总和，模数是$10^9+7$。</p>]]></description></item><item><title>2025牛客暑寒假多校训练营Day3（完結）</title><link>http://dodolalorc.cn/posts/nc25wd3/</link><pubDate>Sun, 16 Feb 2025 08:53:02 +0800</pubDate><author><name>DODOLA</name></author><guid>http://dodolalorc.cn/posts/nc25wd3/</guid><description><![CDATA[<div class="featured-image">
-                <img src="https://img.dodolalorc.cn/i/2025/02/16/67b17bacd70e1.jpg" referrerpolicy="no-referrer">
-            </div><h2 id="a-智乃的博弈游戏" class="headerLink">
-    <a href="#a-%e6%99%ba%e4%b9%83%e7%9a%84%e5%8d%9a%e5%bc%88%e6%b8%b8%e6%88%8f" class="header-mark"></a>A 智乃的博弈游戏</h2><h3 id="题意" class="headerLink">
-    <a href="#%e9%a2%98%e6%84%8f" class="header-mark"></a>题意</h3><p>有一堆$n$个石子，每次可以拿走$x$个石子，要求$x$是一个不大于$n$且与$n$互质的数，当面对$1$时选手获胜，询问智乃（先手玩家）能否获胜。</p>
-<h4 id="数据范围" class="headerLink">
-    <a href="#%e6%95%b0%e6%8d%ae%e8%8c%83%e5%9b%b4" class="header-mark"></a>数据范围</h4><ul>
-<li>$1\leq n\leq 1e18$</li>
-</ul>
-<h3 id="思路" class="headerLink">
-    <a href="#%e6%80%9d%e8%b7%af" class="header-mark"></a>思路</h3><p>必胜点是剩余 1，则 2 是必败点，两个选手都不希望对手面对 1，都希望对手面对 2。</p>
-<p>如果当前剩余$n$是奇数，则选手一定可以操作将剩余数量变成偶数（只拿一个）。面对偶数的选手，能选的互质的数一定是一个奇数，偶数减去奇数会变成奇数，下一轮回到奇数的情况，如果某一方保持偶数，一定会到剩余$2$的情况，也就是必败点。</p>]]></description></item><item><title>2025牛客暑寒假多校训练营Day2</title><link>http://dodolalorc.cn/posts/nc25wd2/</link><pubDate>Thu, 06 Feb 2025 00:40:31 +0800</pubDate><author><name>DODOLA</name></author><guid>http://dodolalorc.cn/posts/nc25wd2/</guid><description><![CDATA[<div class="featured-image">
-                <img src="https://img.dodolalorc.cn/i/2025/02/06/67a3a57b557f6.jpg" referrerpolicy="no-referrer">
-            </div><h2 id="a-一起奏响历史之音" class="headerLink">
-    <a href="#a-%e4%b8%80%e8%b5%b7%e5%a5%8f%e5%93%8d%e5%8e%86%e5%8f%b2%e4%b9%8b%e9%9f%b3" class="header-mark"></a>A 一起奏响历史之音！</h2><h3 id="题意" class="headerLink">
-    <a href="#%e9%a2%98%e6%84%8f" class="header-mark"></a>题意</h3><p>中国传统五声调中包含 1、2、3、5、6，判断一个乐谱是否仅由全部或部分五声调铺成。</p>
-<h3 id="思路" class="headerLink">
-    <a href="#%e6%80%9d%e8%b7%af" class="header-mark"></a>思路</h3><p>按题意判断即可。</p>
-<h3 id="代码" class="headerLink">
-    <a href="#%e4%bb%a3%e7%a0%81" class="header-mark"></a>代码</h3><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">solve</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="n">flag</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="n">set</span><span class="o">&lt;</span><span class="n">ll</span><span class="o">&gt;</span> <span class="n">st</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">};</span>
-</span></span><span class="line"><span class="cl">  <span class="n">ll</span> <span class="n">x</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="k">while</span> <span class="p">(</span><span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">st</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="n">st</span><span class="p">.</span><span class="n">end</span><span class="p">())</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="n">flag</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">flag</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;YES</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;NO</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="b-能去你家蹭口饭吃吗" class="headerLink">
-    <a href="#b-%e8%83%bd%e5%8e%bb%e4%bd%a0%e5%ae%b6%e8%b9%ad%e5%8f%a3%e9%a5%ad%e5%90%83%e5%90%97" class="header-mark"></a>B 能去你家蹭口饭吃吗</h2><h3 id="题意-1" class="headerLink">
-    <a href="#%e9%a2%98%e6%84%8f-1" class="header-mark"></a>题意</h3><p>给出一个数组$a$，找到一个整数，要求整数尽可能大，但是至少要比数组中一半数量的数小。</p>]]></description></item></channel></rss>
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+    <channel>
+      <title>🎋 Hi from dodola</title>
+      <link>https://dodolalorc.cn</link>
+      <description>最近的10条笔记 on 🎋 Hi from dodola</description>
+      <generator>Quartz -- quartz.jzhao.xyz</generator>
+      <item>
+    <title>项目</title>
+    <link>https://dodolalorc.cn/projects/</link>
+    <guid>https://dodolalorc.cn/projects/</guid>
+    <description>记录一些小玩具.</description>
+    <pubDate>Thu, 12 Jun 2025 08:14:54 GMT</pubDate>
+  </item><item>
+    <title>文章</title>
+    <link>https://dodolalorc.cn/posts/</link>
+    <guid>https://dodolalorc.cn/posts/</guid>
+    <description>记录一些学习笔记和技术文章。.</description>
+    <pubDate>Thu, 12 Jun 2025 08:14:54 GMT</pubDate>
+  </item><item>
+    <title>beautify_site_click</title>
+    <link>https://dodolalorc.cn/posts/startsite/beautify_site_click</link>
+    <guid>https://dodolalorc.cn/posts/startsite/beautify_site_click</guid>
+    <description>今天摸鱼把网站的点击特效做了QwQ，选用的效果是烟花（/逆飞的流星🎆🎆，主要摸索了如何在Hugo里添加JavaScript代码 添加js文件 这次用到的两个js文件在这里： anime.min.js fireworks.js 在./static/下新建一个js文件夹，文件夹下新建两个js文件，命名为anime.min.js和fireworks.js，然后将上面两个文件的内容粘贴进去。 引入js文件 在./layouts/partials/extend_head.html中添加如下代码： &lt;style type=&quot;text/css&quot;&gt; .fireworks {...</description>
+    <pubDate>Thu, 12 Jun 2025 08:14:54 GMT</pubDate>
+  </item><item>
+    <title>beautify_site_clickfollow</title>
+    <link>https://dodolalorc.cn/posts/startsite/beautify_site_clickfollow</link>
+    <guid>https://dodolalorc.cn/posts/startsite/beautify_site_clickfollow</guid>
+    <description>增加了一个鼠标追尾的效果 QwQ 添加文件的方式参考上一篇~指路这篇 js文件： pointerfollow.js js 原文件来源：Canva’s Magic Mouse Effect (codepen.io) （我有稍微改了一些样式 qwq，写在代码里了。 css文件： .star { position: fixed; z-index: 2; color: white; font-size: 1rem; animation-duration: 1500ms; animation-fill-mode: forwards; pointer-events: none; } @keyframes ...</description>
+    <pubDate>Thu, 12 Jun 2025 08:14:54 GMT</pubDate>
+  </item><item>
+    <title>beautify_site_tags</title>
+    <link>https://dodolalorc.cn/posts/startsite/beautify_site_tags</link>
+    <guid>https://dodolalorc.cn/posts/startsite/beautify_site_tags</guid>
+    <description>简单设计 assets/css/common/terms.css添加： .terms-tags{ padding-left: 0; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; } 添加权重 在./layouts/_default/terms.html中，找到这段代码并在a标签插入data-weight属性 &lt;ul class=&quot;terms-tags&quot;&gt; {{- $type := .Type }} {{- range $key, $value := .D...</description>
+    <pubDate>Thu, 12 Jun 2025 08:14:54 GMT</pubDate>
+  </item><item>
+    <title>twikoo_with_imgs</title>
+    <link>https://dodolalorc.cn/posts/startsite/twikoo_with_imgs</link>
+    <guid>https://dodolalorc.cn/posts/startsite/twikoo_with_imgs</guid>
+    <description> 一篇私有配置图床，给 twikoo 评论插件添加图片功能的文章。 背景 背景：最近回想起来本站的 twikoo 评论尚未配置过图床，所以此前评论区不能上传图片，这篇就记录一下 twikoo 官方推荐的 lsky-pro 私有部署图床。 选用的图床是兰空图床 👉lsky-org/lsky-pro: ☁️ 兰空图床(Lsky Pro) - Your photo album on the cloud.</description>
+    <pubDate>Thu, 12 Jun 2025 08:14:54 GMT</pubDate>
+  </item><item>
+    <title>training0</title>
+    <link>https://dodolalorc.cn/posts/algorithm/training0</link>
+    <guid>https://dodolalorc.cn/posts/algorithm/training0</guid>
+    <description>前言点评：本次题目难度不高 A 跳石头 [NOIP2015 提高组] 跳石头 题目背景 NOIP2015 Day2T1 题目描述 一年一度的“跳石头”比赛又要开始了！ 这项比赛将在一条笔直的河道中进行，河道中分布着一些巨大岩石。组委会已经选择好了两块岩石作为比赛起点和终点。在起点和终点之间，有 N 块岩石（不含起点和终点的岩石）。在比赛过程中，选手们将从起点出发，每一步跳向相邻的岩石，直至到达终点。 为了提高比赛难度，组委会计划移走一些岩石，使得选手们在比赛过程中的最短跳跃距离尽可能长。由于预算限制，组委会至多从起点和终点之间移走 M 块岩石（不能移走起点和终点的岩石）。 输入格式 第一行包含...</description>
+    <pubDate>Thu, 12 Jun 2025 08:14:54 GMT</pubDate>
+  </item><item>
+    <title>treedp</title>
+    <link>https://dodolalorc.cn/posts/algorithm/treedp</link>
+    <guid>https://dodolalorc.cn/posts/algorithm/treedp</guid>
+    <description>👾树形动态规划 ==树形动态规划，即在树上进行的动态规划。== ==因为树的递归性质，树形动态规划一般都是递归求解的。== 🫐[P1352]没有上司的舞会 没有上司的舞会 题目描述 某大学有 n 个职员，编号为 1\ldots n。 他们之间有从属关系，也就是说他们的关系就像一棵以校长为根的树，父结点就是子结点的直接上司。 现在有个周年庆宴会，宴会每邀请来一个职员都会增加一定的快乐指数 r_i，但是呢，如果某个职员的直接上司来参加舞会了，那么这个职员就无论如何也不肯来参加舞会了。 所以，请你编程计算，邀请哪些职员可以使快乐指数最大，求最大的快乐指数。 输入格式 输入的第一行是一个整数 n。...</description>
+    <pubDate>Thu, 12 Jun 2025 08:14:54 GMT</pubDate>
+  </item><item>
+    <title>Hi from dodola</title>
+    <link>https://dodolalorc.cn/</link>
+    <guid>https://dodolalorc.cn/</guid>
+    <description>你好哇， 很高兴认识你，这里是 Doごみ箱。 🎐作者信息： 昵称：哆哆啦(DODOLA) 刷新地点：杭州(假期)/长春(上学) 废话：INTJer，跟其他INTJ一样有一些不顾人死活的人机感。 I Navigate The Journey. Ideals Never Tolerate Jeers.</description>
+    <pubDate>Thu, 12 Jun 2025 08:14:54 GMT</pubDate>
+  </item><item>
+    <title>自定义Electron.exe的使用</title>
+    <link>https://dodolalorc.cn/posts/electronjs/custom_electron_demo</link>
+    <guid>https://dodolalorc.cn/posts/electronjs/custom_electron_demo</guid>
+    <description>只是一个本地测试的小流程记录</description>
+    <pubDate>Sun, 27 Apr 2025 08:51:01 GMT</pubDate>
+  </item>
+    </channel>
+  </rss>
