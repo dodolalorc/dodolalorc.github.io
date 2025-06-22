@@ -6,59 +6,59 @@
       <description>最近的10条笔记 on 🎋 Hi from dodola</description>
       <generator>Quartz -- quartz.jzhao.xyz</generator>
       <item>
+    <title>beautify_site_tags</title>
+    <link>https://dodolalorc.cn/posts/startsite/beautify_site_tags</link>
+    <guid>https://dodolalorc.cn/posts/startsite/beautify_site_tags</guid>
+    <description>简单设计 assets/css/common/terms.css添加： .terms-tags{ padding-left: 0; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; } 添加权重 在./layouts/_default/terms.html中，找到这段代码并在a标签插入data-weight属性 &lt;ul class=&quot;terms-tags&quot;&gt; {{- $type := .Type }} {{- range $key, $value := .D...</description>
+    <pubDate>Sun, 22 Jun 2025 13:10:17 GMT</pubDate>
+  </item><item>
     <title>twikoo_with_imgs</title>
     <link>https://dodolalorc.cn/posts/startsite/twikoo_with_imgs</link>
     <guid>https://dodolalorc.cn/posts/startsite/twikoo_with_imgs</guid>
     <description> 一篇私有配置图床，给 twikoo 评论插件添加图片功能的文章。 背景 背景：最近回想起来本站的 twikoo 评论尚未配置过图床，所以此前评论区不能上传图片，这篇就记录一下 twikoo 官方推荐的 lsky-pro 私有部署图床。 选用的图床是兰空图床 👉lsky-org/lsky-pro: ☁️ 兰空图床(Lsky Pro) - Your photo album on the cloud.</description>
-    <pubDate>Sun, 22 Jun 2025 13:06:38 GMT</pubDate>
+    <pubDate>Sun, 22 Jun 2025 13:10:17 GMT</pubDate>
   </item><item>
     <title>项目</title>
     <link>https://dodolalorc.cn/projects/</link>
     <guid>https://dodolalorc.cn/projects/</guid>
     <description>记录一些小玩具.</description>
-    <pubDate>Sun, 22 Jun 2025 13:06:38 GMT</pubDate>
+    <pubDate>Sun, 22 Jun 2025 13:10:17 GMT</pubDate>
   </item><item>
     <title>文章</title>
     <link>https://dodolalorc.cn/posts/</link>
     <guid>https://dodolalorc.cn/posts/</guid>
     <description>记录一些学习笔记和技术文章。.</description>
-    <pubDate>Sun, 22 Jun 2025 13:06:38 GMT</pubDate>
+    <pubDate>Sun, 22 Jun 2025 13:10:17 GMT</pubDate>
   </item><item>
     <title>beautify_site_click</title>
     <link>https://dodolalorc.cn/posts/startsite/beautify_site_click</link>
     <guid>https://dodolalorc.cn/posts/startsite/beautify_site_click</guid>
     <description>今天摸鱼把网站的点击特效做了QwQ，选用的效果是烟花（/逆飞的流星🎆🎆，主要摸索了如何在Hugo里添加JavaScript代码 添加js文件 这次用到的两个js文件在这里： anime.min.js fireworks.js 在./static/下新建一个js文件夹，文件夹下新建两个js文件，命名为anime.min.js和fireworks.js，然后将上面两个文件的内容粘贴进去。 引入js文件 在./layouts/partials/extend_head.html中添加如下代码： &lt;style type=&quot;text/css&quot;&gt; .fireworks {...</description>
-    <pubDate>Sun, 22 Jun 2025 13:06:38 GMT</pubDate>
+    <pubDate>Sun, 22 Jun 2025 13:10:17 GMT</pubDate>
   </item><item>
     <title>beautify_site_clickfollow</title>
     <link>https://dodolalorc.cn/posts/startsite/beautify_site_clickfollow</link>
     <guid>https://dodolalorc.cn/posts/startsite/beautify_site_clickfollow</guid>
     <description>增加了一个鼠标追尾的效果 QwQ 添加文件的方式参考上一篇~指路这篇 js文件： pointerfollow.js js 原文件来源：Canva’s Magic Mouse Effect (codepen.io) （我有稍微改了一些样式 qwq，写在代码里了。 css文件： .star { position: fixed; z-index: 2; color: white; font-size: 1rem; animation-duration: 1500ms; animation-fill-mode: forwards; pointer-events: none; } @keyframes ...</description>
-    <pubDate>Sun, 22 Jun 2025 13:06:38 GMT</pubDate>
-  </item><item>
-    <title>beautify_site_tags</title>
-    <link>https://dodolalorc.cn/posts/startsite/beautify_site_tags</link>
-    <guid>https://dodolalorc.cn/posts/startsite/beautify_site_tags</guid>
-    <description>简单设计 assets/css/common/terms.css添加： .terms-tags{ padding-left: 0; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; } 添加权重 在./layouts/_default/terms.html中，找到这段代码并在a标签插入data-weight属性 &lt;ul class=&quot;terms-tags&quot;&gt; {{- $type := .Type }} {{- range $key, $value := .D...</description>
-    <pubDate>Sun, 22 Jun 2025 13:06:38 GMT</pubDate>
+    <pubDate>Sun, 22 Jun 2025 13:10:17 GMT</pubDate>
   </item><item>
     <title>training0</title>
     <link>https://dodolalorc.cn/posts/algorithm/training0</link>
     <guid>https://dodolalorc.cn/posts/algorithm/training0</guid>
     <description>前言点评：本次题目难度不高 A 跳石头 [NOIP2015 提高组] 跳石头 题目背景 NOIP2015 Day2T1 题目描述 一年一度的“跳石头”比赛又要开始了！ 这项比赛将在一条笔直的河道中进行，河道中分布着一些巨大岩石。组委会已经选择好了两块岩石作为比赛起点和终点。在起点和终点之间，有 N 块岩石（不含起点和终点的岩石）。在比赛过程中，选手们将从起点出发，每一步跳向相邻的岩石，直至到达终点。 为了提高比赛难度，组委会计划移走一些岩石，使得选手们在比赛过程中的最短跳跃距离尽可能长。由于预算限制，组委会至多从起点和终点之间移走 M 块岩石（不能移走起点和终点的岩石）。 输入格式 第一行包含...</description>
-    <pubDate>Sun, 22 Jun 2025 13:06:38 GMT</pubDate>
+    <pubDate>Sun, 22 Jun 2025 13:10:17 GMT</pubDate>
   </item><item>
     <title>treedp</title>
     <link>https://dodolalorc.cn/posts/algorithm/treedp</link>
     <guid>https://dodolalorc.cn/posts/algorithm/treedp</guid>
     <description>👾树形动态规划 ==树形动态规划，即在树上进行的动态规划。== ==因为树的递归性质，树形动态规划一般都是递归求解的。== 🫐[P1352]没有上司的舞会 没有上司的舞会 题目描述 某大学有 n 个职员，编号为 1\ldots n。 他们之间有从属关系，也就是说他们的关系就像一棵以校长为根的树，父结点就是子结点的直接上司。 现在有个周年庆宴会，宴会每邀请来一个职员都会增加一定的快乐指数 r_i，但是呢，如果某个职员的直接上司来参加舞会了，那么这个职员就无论如何也不肯来参加舞会了。 所以，请你编程计算，邀请哪些职员可以使快乐指数最大，求最大的快乐指数。 输入格式 输入的第一行是一个整数 n。...</description>
-    <pubDate>Sun, 22 Jun 2025 13:06:38 GMT</pubDate>
+    <pubDate>Sun, 22 Jun 2025 13:10:17 GMT</pubDate>
   </item><item>
     <title>Hi from dodola</title>
     <link>https://dodolalorc.cn/</link>
     <guid>https://dodolalorc.cn/</guid>
     <description>你好哇， 很高兴认识你，这里是 Doごみ箱。 🎐作者信息： 昵称：哆哆啦(DODOLA) 刷新地点：杭州(假期)/长春(上学) 废话：INTJer，跟其他INTJ一样有一些不顾人死活的人机感。 I Navigate The Journey. Ideals Never Tolerate Jeers.</description>
-    <pubDate>Sun, 22 Jun 2025 13:06:38 GMT</pubDate>
+    <pubDate>Sun, 22 Jun 2025 13:10:17 GMT</pubDate>
   </item><item>
     <title>自定义Electron.exe的使用</title>
     <link>https://dodolalorc.cn/posts/electronjs/custom_electron_demo</link>
