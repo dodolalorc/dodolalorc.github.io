@@ -1,0 +1,245 @@
+---
+title: 友链制作
+---
+
+import { Tab, Tabs } from 'rspress/theme';
+import FriendLink from "@/components/shortcodes/friendLink/friendLink";
+
+使用场景：
+```tsx title="FriendLinkShell.tsx"
+<div className="friend-link-shell">
+  <FriendLink
+        name="dodola"
+        url="https://dodolalorc.cn/"
+        avatar="https://dodolalorc.cn/img/dodola.png"
+        bio="要是人生能像星露谷就好了。"
+        />
+  <FriendLink
+        name="dodola"
+        url="https://dodolalorc.github.io/"
+        avatar="https://dodolalorc.cn/img/dodola.png"
+        bio="要是人生能像星露谷就好了。"
+      />
+</div>
+```
+效果：
+
+<div className="friend-link-shell">
+  <FriendLink
+        name="dodola"
+        url="https://dodolalorc.cn/"
+        avatar="https://dodolalorc.cn/img/dodola.png"
+        bio="要是人生能像星露谷就好了。"
+        />
+  <FriendLink
+        name="dodola"
+        url="https://dodolalorc.github.io/"
+        avatar="https://dodolalorc.cn/img/dodola.png"
+        bio="要是人生能像星露谷就好了。"
+      />
+</div>
+
+<Tabs>
+<Tab label="FriendLink.tsx">
+
+FriendLink 组件 tsx 代码
+
+```tsx title="FriendLink.tsx"
+import type React from "react";
+import "./FriendLink.css";
+
+interface FriendProps {
+  name: string;
+  url: string;
+  avatar: string;
+  bio: string;
+}
+
+const getRandomBackgroundColor = () => {
+  const r = Math.floor(Math.random() * 256);
+  const g = Math.floor(Math.random() * 256);
+  const b = Math.floor(Math.random() * 256);
+  const alpha = 0.5; // Semi-transparent
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+};
+const fallbackAvatar = (event: React.SyntheticEvent<HTMLImageElement>) => {
+  const target = event.target as HTMLImageElement;
+  target.onerror = null; // Prevent infinite loop
+  target.src = "/momo.png"; // Fallback URL
+};
+
+const FriendLink: React.FC<FriendProps> = ({ name, url, avatar, bio }) => {
+  return (
+    <a
+      target="_blank"
+      href={url}
+      title={name}
+      className="friend-link"
+      style={{
+        backgroundColor: getRandomBackgroundColor(),
+        textDecoration: "none",
+        color: "inherit",
+      }}
+      rel="noopener noreferrer"
+    >
+      <div className="friend-link-div">
+        <div className="friend-link-avatar">
+          <img
+            src={avatar}
+            alt={`${name}'s avatar`}
+            onError={(event) => fallbackAvatar(event)}
+          />
+        </div>
+
+        <div className="friend-link-info">
+          <div className="friend-name-div">
+            <span className="friend-name">{name}</span>
+            <i className="i-hugeicons-cursor-magic-selection-02 px-3" />
+          </div>
+          <p className="friend-bio">{bio}</p>
+        </div>
+      </div>
+    </a>
+  );
+};
+
+export default FriendLink;
+```
+</Tab>
+<Tab label="FriendLink.css">
+
+FriendLink 组件 css 代码
+```css title="FriendLink.css"
+.friend-link-shell {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  width: 100%;
+  gap: 10px;
+}
+
+.friend-link {
+  align-items: center;
+  border-radius: 20px;
+  padding: 10px 20px;
+}
+
+.friend-link:hover {
+  transform: scale(1.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.friend-link-div {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+}
+
+/* 用户头像 */
+.friend-link-avatar {
+  grid-column: span 1;
+  margin: 0 14px;
+  position: relative;
+  width: 80%;
+  height: 0;
+  padding-top: 80%;
+
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 2px solid white;
+  }
+}
+
+.friend-link-info {
+  grid-column: span 4;
+  margin: 0 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+
+  .friend-name-div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+
+    .friend-name {
+      font-size: 16px;
+      font-weight: bold;
+      color: #333;
+    }
+  }
+
+  .friend-bio {
+    font-size: 14px;
+    color: #666;
+  }
+}
+
+@keyframes cycle-colors {
+  0% {
+    border-color: #ff7b89;
+  }
+
+  25% {
+    border-color: #8a5082;
+  }
+
+  50% {
+    border-color: #6f5f90;
+  }
+
+  75% {
+    border-color: #758eb7;
+  }
+
+  100% {
+    border-color: #a5cad2;
+  }
+}
+
+@keyframes pulse {
+  to {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+.friend-link-avatar::before,
+.friend-link-avatar::after {
+  animation: pulse 2s linear infinite;
+  border: #fff solid 8px;
+  border-radius: 9999px;
+  box-sizing: border-box;
+  content: " ";
+  height: 140%;
+  left: -20%;
+  opacity: 0.6;
+  position: absolute;
+  top: -20%;
+  transform: scale(0.714);
+  width: 140%;
+  z-index: 1;
+}
+
+.friend-link-avatar::after {
+  animation-delay: 1s;
+}
+
+.friend-link-avatar:hover::before,
+.friend-link-avatar:hover::after {
+  animation: pulse 2s linear infinite, cycle-colors 6s linear infinite;
+}
+
+.friend-link-avatar:hover::after {
+  animation-delay: .5s;
+}
+```
+</Tab>
+</Tabs>
