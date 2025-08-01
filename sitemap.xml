@@ -9,7 +9,7 @@
     <lastmod>2024-07-05T06:30:27.000Z</lastmod>
   </url><url>
     <loc>https://dodolalorc.cn/algorithm/</loc>
-    <lastmod>2025-07-30T05:11:35.734Z</lastmod>
+    <lastmod>2025-08-01T18:46:02.102Z</lastmod>
   </url><url>
     <loc>https://dodolalorc.cn/algorithm/cfedu162div2</loc>
     <lastmod>2024-02-29T06:57:07.000Z</lastmod>
@@ -137,57 +137,69 @@
     <loc>https://dodolalorc.cn/algorithm/training0</loc>
     <lastmod>2023-12-02T08:47:17.000Z</lastmod>
   </url><url>
+    <loc>https://dodolalorc.cn/developer/</loc>
+    <lastmod>2025-08-01T18:46:02.107Z</lastmod>
+  </url><url>
+    <loc>https://dodolalorc.cn/developer/electronjs/</loc>
+    <lastmod>2025-08-01T18:46:02.107Z</lastmod>
+  </url><url>
+    <loc>https://dodolalorc.cn/developer/electronjs/build_electron</loc>
+    <lastmod>2025-04-25T05:27:50.000Z</lastmod>
+  </url><url>
+    <loc>https://dodolalorc.cn/developer/electronjs/custom_electron_demo</loc>
+    <lastmod>2025-04-27T08:51:01.000Z</lastmod>
+  </url><url>
+    <loc>https://dodolalorc.cn/developer/frontend/</loc>
+    <lastmod>2025-08-01T18:46:02.107Z</lastmod>
+  </url><url>
+    <loc>https://dodolalorc.cn/developer/frontend/cart_page_sample</loc>
+    <lastmod>2024-07-06T11:16:27.000Z</lastmod>
+  </url><url>
+    <loc>https://dodolalorc.cn/developer/frontend/flow_control</loc>
+    <lastmod>2025-03-17T03:40:19.000Z</lastmod>
+  </url><url>
+    <loc>https://dodolalorc.cn/developer/frontend/large_file_upload</loc>
+    <lastmod>2025-03-17T05:17:45.000Z</lastmod>
+  </url><url>
+    <loc>https://dodolalorc.cn/developer/frontend/method_chaining</loc>
+    <lastmod>2025-03-17T01:26:02.000Z</lastmod>
+  </url><url>
+    <loc>https://dodolalorc.cn/developer/frontend/mutationObserver</loc>
+    <lastmod>2024-07-04T08:31:24.000Z</lastmod>
+  </url><url>
     <loc>https://dodolalorc.cn/experience/</loc>
-    <lastmod>2025-07-30T05:11:35.739Z</lastmod>
+    <lastmod>2025-08-01T18:46:02.108Z</lastmod>
   </url><url>
     <loc>https://dodolalorc.cn/experience/datalab</loc>
     <lastmod>2024-07-04T12:49:31.000Z</lastmod>
-  </url><url>
-    <loc>https://dodolalorc.cn/front_end/</loc>
-    <lastmod>2025-07-30T05:11:35.739Z</lastmod>
-  </url><url>
-    <loc>https://dodolalorc.cn/front_end/add_featured_image</loc>
-    <lastmod>2025-07-27T17:35:30.000Z</lastmod>
-  </url><url>
-    <loc>https://dodolalorc.cn/front_end/cart_page_sample</loc>
-    <lastmod>2024-07-06T11:16:27.000Z</lastmod>
-  </url><url>
-    <loc>https://dodolalorc.cn/front_end/electronjs/</loc>
-    <lastmod>2025-07-27T12:58:56.000Z</lastmod>
-  </url><url>
-    <loc>https://dodolalorc.cn/front_end/electronjs/build_electron</loc>
-    <lastmod>2025-04-25T05:27:50.000Z</lastmod>
-  </url><url>
-    <loc>https://dodolalorc.cn/front_end/electronjs/custom_electron_demo</loc>
-    <lastmod>2025-04-27T08:51:01.000Z</lastmod>
-  </url><url>
-    <loc>https://dodolalorc.cn/front_end/flow_control</loc>
-    <lastmod>2025-03-17T03:40:19.000Z</lastmod>
-  </url><url>
-    <loc>https://dodolalorc.cn/front_end/large_file_upload</loc>
-    <lastmod>2025-03-17T05:17:45.000Z</lastmod>
-  </url><url>
-    <loc>https://dodolalorc.cn/front_end/method_chaining</loc>
-    <lastmod>2025-03-17T01:26:02.000Z</lastmod>
-  </url><url>
-    <loc>https://dodolalorc.cn/front_end/mutationObserver</loc>
-    <lastmod>2024-07-04T08:31:24.000Z</lastmod>
   </url><url>
     <loc>https://dodolalorc.cn/links</loc>
     <lastmod>2024-07-04T12:24:20.000Z</lastmod>
   </url><url>
     <loc>https://dodolalorc.cn/projects/</loc>
-    <lastmod>2025-07-30T05:11:35.740Z</lastmod>
+    <lastmod>2025-08-01T18:46:02.108Z</lastmod>
+  </url><url>
+    <loc>https://dodolalorc.cn/projects/add_featured_image</loc>
+    <lastmod>2025-07-27T17:35:30.000Z</lastmod>
   </url><url>
     <loc>https://dodolalorc.cn/projects/block_chain</loc>
     <lastmod>2025-03-03T07:20:51.000Z</lastmod>
   </url><url>
     <loc>https://dodolalorc.cn/tools/</loc>
-    <lastmod>2025-07-30T05:11:35.740Z</lastmod>
+    <lastmod>2025-08-01T18:46:02.109Z</lastmod>
+  </url><url>
+    <loc>https://dodolalorc.cn/tools/git_settings</loc>
+    <lastmod>2025-08-01T17:31:10.000Z</lastmod>
   </url><url>
     <loc>https://dodolalorc.cn/tools/github_action</loc>
     <lastmod>2024-07-05T15:11:39.000Z</lastmod>
   </url><url>
+    <loc>https://dodolalorc.cn/tools/mac_start</loc>
+    <lastmod>2025-08-01T15:54:00.000Z</lastmod>
+  </url><url>
     <loc>https://dodolalorc.cn/tools/url_rewrite_rule</loc>
     <lastmod>2025-07-14T00:00:00.000Z</lastmod>
+  </url><url>
+    <loc>https://dodolalorc.cn/tools/xcode_commands</loc>
+    <lastmod>2025-08-01T16:20:02.000Z</lastmod>
   </url></urlset>
