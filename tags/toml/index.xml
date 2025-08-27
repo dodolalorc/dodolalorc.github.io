@@ -1,6 +1,0 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>TOML - 标签 - Doごみ箱🪄</title><link>http://dodolalorc.cn/tags/toml/</link><description>TOML - 标签 - Doごみ箱🪄</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>flora_chen2021@163.com (DODOLA)</managingEditor><webMaster>flora_chen2021@163.com (DODOLA)</webMaster><copyright>dodola</copyright><lastBuildDate>Wed, 29 Nov 2023 19:11:55 +0800</lastBuildDate><atom:link href="http://dodolalorc.cn/tags/toml/" rel="self" type="application/rss+xml"/><item><title>第零话|Hugo建站</title><link>http://dodolalorc.cn/posts/build_hugo/</link><pubDate>Wed, 29 Nov 2023 19:11:55 +0800</pubDate><author><name>DODOLA</name></author><guid>http://dodolalorc.cn/posts/build_hugo/</guid><description><![CDATA[<p>这部分记录的是个人网站的初步构建以及成功渲染到个人github Page的过程</p>
-<blockquote>
-<p>使用环境</p>
-<p>开发环境：Windows 11</p>
-<p>Hugo版本：Hugo v0.114.0</p>
-<p>Git版本： 2.43.0.windows.1</p>]]></description></item></channel></rss>
