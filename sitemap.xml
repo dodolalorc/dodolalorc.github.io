@@ -1,9 +1,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml"><url>
     <loc>https://dodolalorc.cn/01-developer/</loc>
-    <lastmod>2025-10-08T17:50:40.589Z</lastmod>
+    <lastmod>2025-10-08T18:35:59.420Z</lastmod>
   </url><url>
     <loc>https://dodolalorc.cn/01-developer/electronjs/</loc>
-    <lastmod>2025-10-08T17:50:40.589Z</lastmod>
+    <lastmod>2025-10-08T18:35:59.420Z</lastmod>
   </url><url>
     <loc>https://dodolalorc.cn/01-developer/electronjs/build_electron</loc>
     <lastmod>2025-04-25T05:27:50.000Z</lastmod>
@@ -12,16 +12,22 @@
     <lastmod>2025-04-27T08:51:01.000Z</lastmod>
   </url><url>
     <loc>https://dodolalorc.cn/01-developer/frontend/</loc>
-    <lastmod>2025-10-08T17:50:40.589Z</lastmod>
+    <lastmod>2025-10-08T18:35:59.420Z</lastmod>
   </url><url>
     <loc>https://dodolalorc.cn/01-developer/frontend/cart_page_sample</loc>
     <lastmod>2024-07-06T11:16:27.000Z</lastmod>
+  </url><url>
+    <loc>https://dodolalorc.cn/01-developer/frontend/critical_rendering_path</loc>
+    <lastmod>2025-10-08T18:17:10.000Z</lastmod>
   </url><url>
     <loc>https://dodolalorc.cn/01-developer/frontend/css_box_sizing</loc>
     <lastmod>2025-10-02T18:54:15.000Z</lastmod>
   </url><url>
     <loc>https://dodolalorc.cn/01-developer/frontend/css_style_level</loc>
     <lastmod>2025-10-02T18:34:28.000Z</lastmod>
+  </url><url>
+    <loc>https://dodolalorc.cn/01-developer/frontend/dns_query</loc>
+    <lastmod>2025-10-08T18:24:48.000Z</lastmod>
   </url><url>
     <loc>https://dodolalorc.cn/01-developer/frontend/flow_control</loc>
     <lastmod>2025-03-17T03:40:19.000Z</lastmod>
@@ -65,8 +71,11 @@
     <loc>https://dodolalorc.cn/01-developer/frontend/vue_reactivity_system</loc>
     <lastmod>2025-10-02T09:16:24.000Z</lastmod>
   </url><url>
+    <loc>https://dodolalorc.cn/01-developer/frontend/whatsup_in_fetching</loc>
+    <lastmod>2025-10-08T18:10:40.000Z</lastmod>
+  </url><url>
     <loc>https://dodolalorc.cn/02-experience/</loc>
-    <lastmod>2025-10-08T17:50:40.590Z</lastmod>
+    <lastmod>2025-10-08T18:35:59.422Z</lastmod>
   </url><url>
     <loc>https://dodolalorc.cn/02-experience/datalab</loc>
     <lastmod>2024-07-04T12:49:31.000Z</lastmod>
@@ -78,7 +87,7 @@
     <lastmod>2024-07-05T06:30:27.000Z</lastmod>
   </url><url>
     <loc>https://dodolalorc.cn/03-algorithm/</loc>
-    <lastmod>2025-10-08T17:50:40.591Z</lastmod>
+    <lastmod>2025-10-08T18:35:59.422Z</lastmod>
   </url><url>
     <loc>https://dodolalorc.cn/03-algorithm/cfedu162div2</loc>
     <lastmod>2024-02-29T06:57:07.000Z</lastmod>
@@ -207,7 +216,7 @@
     <lastmod>2023-12-02T08:47:17.000Z</lastmod>
   </url><url>
     <loc>https://dodolalorc.cn/04-tools/</loc>
-    <lastmod>2025-10-08T17:50:40.596Z</lastmod>
+    <lastmod>2025-10-08T18:35:59.427Z</lastmod>
   </url><url>
     <loc>https://dodolalorc.cn/04-tools/git_settings</loc>
     <lastmod>2025-08-01T17:31:10.000Z</lastmod>
@@ -228,13 +237,13 @@
     <lastmod>2025-08-01T16:20:02.000Z</lastmod>
   </url><url>
     <loc>https://dodolalorc.cn/05-projects/</loc>
-    <lastmod>2025-10-08T17:50:40.596Z</lastmod>
+    <lastmod>2025-10-08T18:35:59.427Z</lastmod>
   </url><url>
     <loc>https://dodolalorc.cn/05-projects/block_chain</loc>
     <lastmod>2025-03-03T07:20:51.000Z</lastmod>
   </url><url>
     <loc>https://dodolalorc.cn/05-projects/quartz/</loc>
-    <lastmod>2025-10-08T17:50:40.596Z</lastmod>
+    <lastmod>2025-10-08T18:35:59.427Z</lastmod>
   </url><url>
     <loc>https://dodolalorc.cn/05-projects/quartz/add_featured_image</loc>
     <lastmod>2025-07-27T17:35:30.000Z</lastmod>
