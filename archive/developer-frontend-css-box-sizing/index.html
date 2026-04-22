@@ -1,0 +1,109 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><script>
+      (() => {
+        const key = 'theme';
+        let stored = null;
+        try { stored = localStorage.getItem(key); } catch (_) {}
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = stored === 'dark' || stored === 'light' ? stored : (prefersDark ? 'dark' : 'light');
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><title>CSS 中的两种盒子模型 | Astro Themes by Whono</title><meta name="description" content="一个元素的“最终宽度”是由多个属性共同作用的结果，而一切都始于 box sizing 属性，它决定了元素的宽度和高度如何计算。"><meta property="og:site_name" content="Astro Themes by Whono"><meta property="og:title" content="CSS 中的两种盒子模型 | Astro Themes by Whono"><meta property="og:description" content="一个元素的“最终宽度”是由多个属性共同作用的结果，而一切都始于 box sizing 属性，它决定了元素的宽度和高度如何计算。"><meta property="og:type" content="article"><meta property="og:image" content="/og.svg"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="CSS 中的两种盒子模型 | Astro Themes by Whono"><meta name="twitter:description" content="一个元素的“最终宽度”是由多个属性共同作用的结果，而一切都始于 box sizing 属性，它决定了元素的宽度和高度如何计算。"><meta name="twitter:image" content="/og.svg"><link rel="stylesheet" href="/_astro/global.BuWLMclU.css"> <meta property="article:published_time" content="2025-10-02T18:54:15.000Z"> <meta property="article:tag" content="CSS"><meta property="article:tag" content="前端八股文"><meta property="article:tag" content="Web前端"><link rel="stylesheet" href="/_astro/article.DWVgKkkb.css"></head> <body class="article-page immersive-page"> <a class="skip-link" href="#content">跳到内容</a> <div class="shell" data-sidebar-divider="default"> <aside class="sidebar"> <a class="sidebar__title" href="/" aria-label="Whono 首页">Whono</a> <div class="sidebar__quote"> A minimal Astro theme<br> for essays, notes, and docs.<br> Designed for reading,<br> open-source.<br>  </div> <ul class="nav"> <li> <a href="/essay/"> <span>随笔</span> <span class="dot" aria-hidden="true"></span> </a> </li><li> <a href="/bits/"> <span>絮语</span> <span class="dot" aria-hidden="true"></span> </a> </li><li> <a href="/memo/"> <span>小记</span> <span class="dot" aria-hidden="true"></span> </a> </li><li> <a href="/archive/" aria-current="page"> <span>归档</span> <span class="dot" aria-hidden="true"></span> </a> </li><li> <a href="/about/"> <span>关于</span> <span class="dot" aria-hidden="true"></span> </a> </li> </ul> <div class="sidebar-actions"> <button id="reader-toggle" class="icon-button reader-toggle" type="button" aria-label="阅读模式" aria-pressed="false" title="阅读模式"> <svg class="icon icon-book-open" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 6c-2-1.3-4.5-2-7-2v14c2.5 0 5 .7 7 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 6c2-1.3 4.5-2 7-2v14c-2.5 0-5 .7-7 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 6.5V17.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path></svg> <svg class="icon icon-book-closed" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 4.5h9a2.5 2.5 0 0 1 2.5 2.5V19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path><path d="M7 19V4.5M7 19h9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 6.5V17.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path></svg> </button> <a class="icon-button rss-link" href="/archive/rss.xml" aria-label="RSS 订阅" title="RSS 订阅"> <svg class="icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="6" cy="18" r="1.8" fill="currentColor"></circle><path d="M4 11a9 9 0 0 1 9 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path><path d="M4 5a15 15 0 0 1 15 15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path></svg> </a> <button id="theme-toggle" class="icon-button theme-toggle" type="button" aria-label="夜间模式" aria-pressed="false" title="夜间模式"> <svg class="icon icon-moon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg> <svg class="icon icon-sun" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.6"></circle><path d="M12 2.5v2.5M12 19v2.5M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2.5 12h2.5M19 12h2.5M4.2 19.8l1.8-1.8M18 6l1.8-1.8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path></svg> </button> </div> </aside> <div class="divider" aria-hidden="true"></div> <main id="content" class="content" tabindex="-1"> <div class="content__inner">   <div class="article-header reader-exit-anchor"> <h1 class="page-title">CSS 中的两种盒子模型</h1> <button id="reader-exit" class="icon-button reader-exit" type="button" aria-label="退出阅读" title="退出阅读" aria-hidden="true" tabindex="-1"> <svg class="icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 4.5h9.5a2.5 2.5 0 0 1 2.5 2.5V19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path><path d="M6 19V4.5M6 19h9.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path><path d="M14.2 12H10.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path><path d="M10.6 12l2-2M10.6 12l2 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg> </button> <div class="meta-line meta-line--items"> <span class="meta-line__item"> 发布于：2025-10-02 </span> <span class="meta-line__item meta-line__item--tags"> <span class="tag">#CSS</span><span class="tag">#前端八股文</span><span class="tag">#Web前端</span> </span> <span class="meta-line__item meta-line__item--desktop-meta">
+共 995 字
+</span> <span class="meta-line__item meta-line__item--desktop-meta">
+约 4 分钟
+</span> </div> </div> <div class="prose">  <p>一个元素的“最终宽度”是由多个属性共同作用的结果，而一切都始于  <code>box-sizing</code>  属性，它决定了元素的宽度和高度如何计算。</p>
+<h2 id="box-sizing--的值"><code>box-sizing</code>  的值</h2>
+<p><code>box-sizing</code>  有两个主要值：</p>
+<h3 id="content-box默认值"><code>content-box</code>（默认值）</h3>
+<ul>
+<li>宽度和高度只包括<strong>内容</strong>区域。</li>
+<li>你设置的  <code>width</code>  和  <code>height</code>  就是内容区（content）的尺寸。</li>
+<li><strong>内边距（padding）和边框（border）会额外加到元素的总宽度和总高度上。</strong></li>
+</ul>
+<h4 id="公式">公式</h4>
+<ul>
+<li><code>总宽度 = width + padding-left + padding-right + border-left + border-right</code></li>
+<li><code>总高度 = height + padding-top + padding-bottom + border-top + border-bottom</code></li>
+</ul>
+<h3 id="border-box"><code>border-box</code></h3>
+<ul>
+<li><strong>宽度和高度包括内容、内边距和边框。</strong></li>
+<li>你设置的  <code>width</code>  和  <code>height</code>  已经包含了  <code>padding</code>  和  <code>border</code>。</li>
+<li><strong>内容区的实际宽度/高度会自动收缩。</strong></li>
+</ul>
+<h4 id="公式-1">公式</h4>
+<ul>
+<li><code>总宽度 = width</code>（你设置的）</li>
+<li><code>总高度 = height</code>（你设置的）</li>
+<li><code>内容区宽度 = width - padding-left - padding-right - border-left - border-right</code></li>
+<li><code>内容区高度 = height - padding-top - padding-bottom - border-top - border-bottom</code></li>
+</ul>
+<h2 id="视觉化对比">视觉化对比</h2>
+<p>假设我们有一个  <code>div</code>，设置了以下样式：</p>
+<div class="code-block" data-lang="css" data-lines="6"><div class="code-toolbar"><span class="code-lang"><svg class="code-lang-icon is-colored" viewBox="0 0 256 232" aria-hidden="true"><path fill="#444" d="m100.902 231.618l116.456-38.653L256 0H37.867L29.57 43.056h174.812l-5.443 27.49H23.862L15.3 113.602h174.823l-9.602 49.284l-70.547 23.076l-60.955-23.076l4.16-21.528H10.123L0 192.965z"></path></svg><span>CSS</span></span><div class="code-meta"><span class="code-info">UTF-8</span><span class="code-separator">|</span><span class="code-info">6 Lines</span><span class="code-separator">|</span><button class="code-copy" type="button" disabled aria-label="复制代码" title="复制代码" data-state="idle"><svg class="icon-copy" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg><svg class="icon-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 13l4 4L19 7" fill="none" stroke="currentColor" stroke-width="1.8"></path></svg></button></div></div><pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto;" tabindex="0" data-lang="css" data-lines="6"><code><span class="line"><span style="color:#22863A;--shiki-dark:#85E89D">div</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">	width</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#005CC5;--shiki-dark:#79B8FF">200</span><span style="color:#D73A49;--shiki-dark:#F97583">px</span><span style="color:#24292E;--shiki-dark:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">	height</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#005CC5;--shiki-dark:#79B8FF">100</span><span style="color:#D73A49;--shiki-dark:#F97583">px</span><span style="color:#24292E;--shiki-dark:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">	padding</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#005CC5;--shiki-dark:#79B8FF">20</span><span style="color:#D73A49;--shiki-dark:#F97583">px</span><span style="color:#24292E;--shiki-dark:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">	border</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#005CC5;--shiki-dark:#79B8FF">5</span><span style="color:#D73A49;--shiki-dark:#F97583">px</span><span style="color:#005CC5;--shiki-dark:#79B8FF"> solid</span><span style="color:#005CC5;--shiki-dark:#79B8FF"> blue</span><span style="color:#24292E;--shiki-dark:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre></div>
+<p><strong>当  <code>box-sizing: content-box;</code>（默认）时：</strong></p>
+<ul>
+<li>内容区宽：<code>200px</code></li>
+<li>内容区高：<code>100px</code></li>
+<li><strong>总宽度</strong>：<code>200 (内容) + 20 (左padding) + 20 (右padding) + 5 (左边框) + 5 (右边框) = 250px</code></li>
+<li><strong>总高度</strong>：<code>100 (内容) + 20 (上padding) + 20 (下padding) + 5 (上边框) + 5 (下边框) = 150px</code></li>
+</ul>
+<p><strong>当  <code>box-sizing: border-box;</code>  时：</strong></p>
+<ul>
+<li><strong>总宽度</strong>：<code>200px</code>（你设置的，包含了 padding 和 border）</li>
+<li><strong>总高度</strong>：<code>100px</code>（你设置的，包含了 padding 和 border）</li>
+<li>内容区宽：<code>200 - 20 - 20 - 5 - 5 = 150px</code></li>
+<li>内容区高：<code>100 - 20 - 20 - 5 - 5 = 50px</code></li>
+</ul>
+<p>对比图：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th><code>box-sizing: content-box;</code></th><th><code>box-sizing: border-box;</code></th></tr></thead><tbody><tr><td><img src="https://img.dodolalorc.cn/i/2025/10/03/68deceec35517.png" alt="image.png"><br></td><td><img src="https://img.dodolalorc.cn/i/2025/10/03/68deced754c47.png" alt="image.png"><br></td></tr></tbody></table>
+<div class="callout tip"><p class="callout-title">为什么不是计算的 250×150</p><ol>
+<li><strong>浏览器缩放级别</strong>：如果浏览器缩放不是 100%，会导致像素值出现小数</li>
+<li><strong>设备像素比 (DPR)</strong>：高分辨率显示器的设备像素比可能导致计算结果出现小数</li>
+<li><strong>字体大小影响</strong>：某些情况下浏览器的默认字体大小设置会影响布局计算</li>
+</ol></div>
+<p>可以发现<code>content-box</code>属性会受一些非代码问题导致的样式问题，如果对样式有更高像素级的追求，可以优先选择更直观的模型<code>border-box</code>。</p>
+<h2 id="边界盒模型重置">边界盒模型重置</h2>
+<p>边界盒模型重置一般是考虑上面实践中看到的受设备、字体大小等影响最终样式的问题，可以在在 CSS 开头使用通配符重置盒子模型。</p>
+<div class="code-block" data-lang="css" data-lines="5"><div class="code-toolbar"><span class="code-lang"><svg class="code-lang-icon is-colored" viewBox="0 0 256 232" aria-hidden="true"><path fill="#444" d="m100.902 231.618l116.456-38.653L256 0H37.867L29.57 43.056h174.812l-5.443 27.49H23.862L15.3 113.602h174.823l-9.602 49.284l-70.547 23.076l-60.955-23.076l4.16-21.528H10.123L0 192.965z"></path></svg><span>CSS</span></span><div class="code-meta"><span class="code-info">UTF-8</span><span class="code-separator">|</span><span class="code-info">5 Lines</span><span class="code-separator">|</span><button class="code-copy" type="button" disabled aria-label="复制代码" title="复制代码" data-state="idle"><svg class="icon-copy" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg><svg class="icon-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 13l4 4L19 7" fill="none" stroke="currentColor" stroke-width="1.8"></path></svg></button></div></div><pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto;" tabindex="0" data-lang="css" data-lines="5"><code><span class="line"><span style="color:#22863A;--shiki-dark:#85E89D">*</span><span style="color:#24292E;--shiki-dark:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#85E89D">*</span><span style="color:#6F42C1;--shiki-dark:#B392F0">::before</span><span style="color:#24292E;--shiki-dark:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#85E89D">*</span><span style="color:#6F42C1;--shiki-dark:#B392F0">::after</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">  box-sizing</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#005CC5;--shiki-dark:#79B8FF">border-box</span><span style="color:#24292E;--shiki-dark:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre></div>
+<p>这样，所有元素（包括伪元素）都使用更直观的  <code>border-box</code>  模型。</p>
+<h2 id="特殊情况和注意事项debug-思路">特殊情况和注意事项（debug 思路）</h2>
+<h3 id="margin--折叠"><code>margin</code>  折叠</h3>
+<p>可阅读：<a href="/01-developer/frontend/margin_fold.md">CSS Margin 折叠</a></p>
+<ul>
+<li>对于<strong>块级元素</strong>，在垂直方向上的相邻  <code>margin</code>  会发生折叠（合并）。</li>
+<li>例如，上面盒子的  <code>margin-bottom: 30px</code>  和下面盒子的  <code>margin-top: 40px</code>  相遇，它们之间的实际距离是  <code>max(30px, 40px) = 40px</code>，而不是  <code>70px</code>。</li>
+</ul>
+<h3 id="box-sizing-inherit"><code>box-sizing: inherit</code></h3>
+<ul>
+<li>让元素继承其父元素的  <code>box-sizing</code>  值。</li>
+</ul>
+<h3 id="outline轮廓"><code>outline</code>（轮廓）</h3>
+<ul>
+<li>类似于  <code>border</code>，但它<strong>不占用空间</strong>，绘制在元素边框之外，不影响元素尺寸和位置。常用于高亮或<code>:focus</code>状态。</li>
+</ul>
+<h2 id="小结">小结</h2>
+<p>要精确控制一个元素的尺寸，需要综合考虑一个“属性链”：</p>
+<p><strong><code>box-sizing</code> → <code>width</code>/<code>height</code> → <code>padding</code> → <code>border</code> → <code>margin</code></strong></p>  </div> <nav class="prev-next" aria-label="上一篇/下一篇"> <div class="prev-next__item"> <a class="prev-next__link prev-next__link--prev" href="/archive/developer-frontend-margin-fold/" rel="prev"> <span class="prev-next__label">上一篇</span> <span class="prev-next__title">Margin 折叠</span> </a> </div> <div class="prev-next__item"> <a class="prev-next__link prev-next__link--next" href="/archive/developer-frontend-css-style-level/" rel="next"> <span class="prev-next__label">下一篇</span> <span class="prev-next__title">CSS 选择器优先级和覆盖样式</span> </a> </div> </nav><dialog class="lightbox" id="lightbox" aria-label="图片预览" aria-hidden="true" data-lightbox data-enable-zoom="false" data-enable-pan="false" data-enable-swipe-down="false" data-mobile-nav="bottom" data-mobile-count="visible" tabindex="-1" hidden> <button class="lightbox-close" type="button" data-lightbox-close aria-label="关闭">×</button> <div class="lightbox-navs" aria-hidden="true"> <button class="lightbox-nav lightbox-prev" type="button" data-lightbox-prev aria-label="上一张">‹</button> <button class="lightbox-nav lightbox-next" type="button" data-lightbox-next aria-label="下一张">›</button> </div> <figure class="lightbox-figure"> <img data-lightbox-image alt=""> <figcaption class="lightbox-meta"> <span class="lightbox-caption" data-lightbox-caption hidden></span> <span class="lightbox-meta-row"> <span class="lightbox-count" data-lightbox-count aria-live="polite"></span> <span class="lightbox-dots" data-lightbox-dots aria-hidden="true"></span> </span> </figcaption> </figure> </dialog> <script type="module" src="/_astro/ArticleLayout.astro_astro_type_script_index_0_lang.Db3Ig2VS.js"></script>  <footer class="site-footer">© 2025-2026 Whono · Theme Demo · by cxro</footer> </div> </main> </div> <template id="scroll-top-template"> <button type="button" class="icon-button float-action scroll-top" aria-label="回到顶部" title="回到顶部" aria-hidden="true" tabindex="-1"> <svg class="icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 5l8 7-8 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" transform="rotate(-90 12 12)"></path></svg> </button> </template> <script type="module">const I="theme",E=document.documentElement,s=document.body,o=document.getElementById("theme-toggle"),n=document.getElementById("reader-toggle"),a=document.getElementById("reader-exit"),c=a?.closest(".reader-exit-anchor"),u=window.matchMedia("(max-width: 900px)"),T=()=>window.matchMedia("(prefers-reduced-motion: reduce)").matches,B=()=>/^(?:\/(?:archive|essay|memo)(?:\/|$))/.test(window.location.pathname);let A=()=>{};const g=()=>E.dataset.theme==="dark",p=e=>{E.dataset.theme=e;const t=e==="dark";if(o){o.setAttribute("aria-pressed",t?"true":"false");const i=t?"浅色模式":"夜间模式";o.setAttribute("aria-label",i),o.setAttribute("title",i)}},M=()=>{const e=g()?"dark":"light";p(e),o?.addEventListener("click",()=>{const t=g()?"light":"dark";p(t);try{localStorage.setItem(I,t)}catch{}})},v=()=>s?.dataset.reading==="immersive",R=s?.classList.contains("immersive-page"),w=e=>{n&&(n.setAttribute("aria-pressed","false"),n.setAttribute("aria-disabled",e?"true":"false"),e?(n.setAttribute("title","阅读模式（仅文章/小记页可用）"),n.setAttribute("aria-label","阅读模式（仅文章/小记页可用）"),n.tabIndex=-1):(n.setAttribute("title","阅读模式"),n.setAttribute("aria-label","阅读模式"),n.tabIndex=0))},m=e=>{s&&(e?s.dataset.reading="immersive":delete s.dataset.reading,n&&n.setAttribute("aria-pressed",e?"true":"false"),a&&(a.setAttribute("aria-label","退出阅读"),a.setAttribute("title","退出阅读")),f(a,e),A())},H=()=>{const e=document.getElementById("scroll-top-template");if(!(e instanceof HTMLTemplateElement))return null;const t=e.content.firstElementChild?.cloneNode(!0);return t instanceof HTMLButtonElement?(t.addEventListener("click",()=>{const i=T()?"auto":"smooth";window.scrollTo({top:0,behavior:i})}),t):null},f=(e,t)=>{e&&(t?(e.dataset.visible="true",e.removeAttribute("aria-hidden"),e.tabIndex=0):(delete e.dataset.visible,e.setAttribute("aria-hidden","true"),e.tabIndex=-1))},S=e=>{c&&c.hasAttribute("data-reader-exit-inline")!==e&&c.toggleAttribute("data-reader-exit-inline",e)},F=()=>{if(!B())return;let e=null,t=Math.max(600,window.innerHeight*2),i=!1;const x=()=>{if(e||!s)return;const d=H();d&&(e=d,s.appendChild(e))},L=()=>{t=Math.max(600,window.innerHeight*2)},r=()=>{const h=(window.scrollY||document.documentElement.scrollTop||0)>=t,b=v(),l=b&&u.matches&&h;u.matches?(x(),e&&(e.dataset.stack=l?"true":"false"),f(e,h)):f(e,!1),a&&(l?a.classList.add("float-action"):a.classList.remove("float-action")),S(b&&!l)},k=()=>{i||(i=!0,window.requestAnimationFrame(()=>{r(),i=!1}))},y=()=>{L(),r()};A=r,u.addEventListener("change",r),window.addEventListener("scroll",k,{passive:!0}),window.addEventListener("resize",y),r()},P=()=>{if(n){if(!R){w(!0);return}w(!1),m(!1),n.addEventListener("click",()=>{m(!v())}),a?.addEventListener("click",()=>{m(!1)})}};M();F();P();</script> </body> </html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><script>
+      (() => {
+        const key = 'theme';
+        let stored = null;
+        try { stored = localStorage.getItem(key); } catch (_) {}
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = stored === 'dark' || stored === 'light' ? stored : (prefersDark ? 'dark' : 'light');
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><title>生活小记 | Astro Themes by Whono</title><meta name="description" content="整理一些值得留存的片刻与回忆。"><meta property="og:site_name" content="Astro Themes by Whono"><meta property="og:title" content="生活小记 | Astro Themes by Whono"><meta property="og:description" content="整理一些值得留存的片刻与回忆。"><meta property="og:type" content="website"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="生活小记 | Astro Themes by Whono"><meta name="twitter:description" content="整理一些值得留存的片刻与回忆。"><link rel="stylesheet" href="/_astro/global.BuWLMclU.css"><link rel="stylesheet" href="/_astro/article.DWVgKkkb.css">
+<style>.memo-page{--memo-intro-mb: 32px;--memo-toc-mt: 18px;--memo-toc-mb: 46px}.memo-page .intro{margin-bottom:var(--memo-intro-mb)}.memo-toc{margin:18px 0 46px}.memo-page .memo-toc{margin:var(--memo-toc-mt) 0 var(--memo-toc-mb)}.memo-toc details{margin:20px 0}.memo-toc summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;color:var(--text);font-size:15px}.memo-toc summary::-webkit-details-marker{display:none}.memo-toc summary:after{content:"▶";font-size:10px;color:var(--muted);transition:transform .2s ease;margin-left:4px}.memo-toc details[open] summary:after{transform:rotate(90deg)}.memo-toc summary:before{content:"";width:4px;height:4px;border-radius:999px;background:var(--text);opacity:.55}.memo-toc .toc-items{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;padding:12px 0 0 18px;margin:0;list-style:none}.memo-toc .toc-items a{display:inline-flex;gap:8px;align-items:center;color:var(--muted);font-size:13px;border-bottom:none}.toc-num{width:18px;height:18px;border-radius:999px;border:1px solid var(--border);display:inline-flex;align-items:center;justify-content:center;color:var(--muted);font-variant-numeric:tabular-nums}:root[data-theme=dark] .toc-num{background:#242424;border-color:#3a3a3a;color:var(--muted)}.memo-content h2{text-align:center;font-size:16px;font-weight:600;margin:56px 0 18px;color:var(--muted)}.memo-content h2:before,.memo-content h2:after{content:"-";margin:0 10px;color:var(--border)}.memo-content h3{margin:28px 0 10px;font-size:16px;position:relative;padding-left:34px}.memo-content h3:before{content:attr(data-num);position:absolute;left:0;top:50%;width:20px;height:20px;border-radius:999px;background:#f7f7f7;border:1px solid var(--border);display:inline-flex;align-items:center;justify-content:center;font-size:12px;line-height:1;transform:translateY(-50%);color:var(--muted);font-variant-numeric:tabular-nums}:root[data-theme=dark] .memo-content h3:before{background:#242424;border-color:#3a3a3a;color:var(--muted)}body.memo-page[data-reading=immersive] .prose{font-size:16px;line-height:1.85}body.memo-page[data-reading=immersive] .prose p{margin:14px 0}@media(min-width:901px){.memo-page{--memo-intro-mb: 10px;--memo-toc-mt: 8px;--memo-toc-mb: 23px}}@media(max-width:900px){.memo-page{--memo-intro-mb: 12px;--memo-toc-mt: 8px;--memo-toc-mb: 24px}.memo-page .memo-content>h2:first-child{margin-top:12px}}@media(max-width:640px){.memo-toc .toc-items{grid-template-columns:repeat(3,1fr)}}
+</style></head> <body class="memo-page immersive-page"> <a class="skip-link" href="#content">跳到内容</a> <div class="shell" data-sidebar-divider="default"> <aside class="sidebar"> <a class="sidebar__title" href="/" aria-label="Whono 首页">Whono</a> <div class="sidebar__quote"> A minimal Astro theme<br> for essays, notes, and docs.<br> Designed for reading,<br> open-source.<br>  </div> <ul class="nav"> <li> <a href="/essay/"> <span>随笔</span> <span class="dot" aria-hidden="true"></span> </a> </li><li> <a href="/bits/"> <span>絮语</span> <span class="dot" aria-hidden="true"></span> </a> </li><li> <a href="/memo/" aria-current="page"> <span>小记</span> <span class="dot" aria-hidden="true"></span> </a> </li><li> <a href="/archive/"> <span>归档</span> <span class="dot" aria-hidden="true"></span> </a> </li><li> <a href="/about/"> <span>关于</span> <span class="dot" aria-hidden="true"></span> </a> </li> </ul> <div class="sidebar-actions"> <button id="reader-toggle" class="icon-button reader-toggle" type="button" aria-label="阅读模式" aria-pressed="false" title="阅读模式"> <svg class="icon icon-book-open" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 6c-2-1.3-4.5-2-7-2v14c2.5 0 5 .7 7 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 6c2-1.3 4.5-2 7-2v14c-2.5 0-5 .7-7 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 6.5V17.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path></svg> <svg class="icon icon-book-closed" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 4.5h9a2.5 2.5 0 0 1 2.5 2.5V19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path><path d="M7 19V4.5M7 19h9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 6.5V17.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path></svg> </button> <a class="icon-button rss-link" href="/archive/rss.xml" aria-label="RSS 订阅" title="RSS 订阅"> <svg class="icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="6" cy="18" r="1.8" fill="currentColor"></circle><path d="M4 11a9 9 0 0 1 9 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path><path d="M4 5a15 15 0 0 1 15 15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path></svg> </a> <button id="theme-toggle" class="icon-button theme-toggle" type="button" aria-label="夜间模式" aria-pressed="false" title="夜间模式"> <svg class="icon icon-moon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg> <svg class="icon icon-sun" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.6"></circle><path d="M12 2.5v2.5M12 19v2.5M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2.5 12h2.5M19 12h2.5M4.2 19.8l1.8-1.8M18 6l1.8-1.8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path></svg> </button> </div> </aside> <div class="divider" aria-hidden="true"></div> <main id="content" class="content" tabindex="-1"> <div class="content__inner">  <div class="page-header reader-exit-anchor"> <h1 class="page-title">生活小记</h1> <span class="page-subtitle">不曾虚度的光</span> <button id="reader-exit" class="icon-button reader-exit" type="button" aria-label="退出阅读" title="退出阅读" aria-hidden="true" tabindex="-1"> <svg class="icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 4.5h9.5a2.5 2.5 0 0 1 2.5 2.5V19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path><path d="M6 19V4.5M6 19h9.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path><path d="M14.2 12H10.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path><path d="M10.6 12l2-2M10.6 12l2 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg> </button> </div> <div class="intro">
+时间流经我们，如同风穿过回廊。
+<br>总有一些瞬间，携带着特别的气息或光亮，短暂停留后便消散。
+<br>有些感受，无法被镜头承载，有些记忆难以被影像收藏。
+<br>也许，为瞬间的感受留下一份文字备份，正是抵抗遗忘最温柔却最有效的方式。
+</div> <nav class="memo-toc" aria-label="目录"> <details open> <summary>2025年记</summary> <ul class="toc-items"> <li> <a href="#新屋"> <span class="toc-num">1</span> <span>新屋</span> </a> </li><li> <a href="#小城远行"> <span class="toc-num">2</span> <span>小城远行</span> </a> </li><li> <a href="#夜归"> <span class="toc-num">3</span> <span>夜归</span> </a> </li><li> <a href="#旧书店"> <span class="toc-num">4</span> <span>旧书店</span> </a> </li><li> <a href="#烛光饭"> <span class="toc-num">5</span> <span>烛光饭</span> </a> </li><li> <a href="#相框合影"> <span class="toc-num">6</span> <span>相框合影</span> </a> </li><li> <a href="#久别相聚"> <span class="toc-num">7</span> <span>久别相聚</span> </a> </li><li> <a href="#夜跑路"> <span class="toc-num">8</span> <span>夜跑路</span> </a> </li> </ul> </details><details open> <summary>2024年记</summary> <ul class="toc-items"> <li> <a href="#河边晚"> <span class="toc-num">1</span> <span>河边晚</span> </a> </li><li> <a href="#手写信"> <span class="toc-num">2</span> <span>手写信</span> </a> </li><li> <a href="#小城旅"> <span class="toc-num">3</span> <span>小城旅</span> </a> </li> </ul> </details><details open> <summary>2023年记</summary> <ul class="toc-items"> <li> <a href="#初雪"> <span class="toc-num">1</span> <span>初雪</span> </a> </li><li> <a href="#书角落"> <span class="toc-num">2</span> <span>书角落</span> </a> </li><li> <a href="#旧友再见"> <span class="toc-num">3</span> <span>旧友再见</span> </a> </li> </ul> </details> </nav> <div class="memo-content prose"> <h2 id="2025年记">2025年记</h2>
+<h3 id="新屋">新屋</h3>
+<p>搬家当晚把小灯放在地上，屋里还堆着箱子。我们用纸箱当桌子，吃了顿外卖。第二天起床才觉得正式住进来。</p>
+<h3 id="小城远行">小城远行</h3>
+<p>临时决定去海边小城，清晨到站，先在站前吃了热豆浆。沿堤走一圈，海风把帽子吹得东倒西歪。回来时把车票夹进钱包。</p>
+<h3 id="夜归">夜归</h3>
+<p>晚上回到常走的路口，店名换了两次。雨刚停，路面反光。站了一会儿才走。</p>
+<h3 id="旧书店">旧书店</h3>
+<p>下雨时躲进旧书店，门口的小铃一直响。挑了本二手散文，在店里看了几页。老板用旧报纸包书。</p>
+<h3 id="烛光饭">烛光饭</h3>
+<p>一次停电，点蜡烛吃饭。菜很简单，屋里却安静得能听见雨声。后来把备用蜡烛补齐。</p>
+<h3 id="相框合影">相框合影</h3>
+<p>整理相册时挑两张旧照片放在同一相框里。放在窗边，早上光线刚好。路过就会多看一眼。</p>
+<h3 id="久别相聚">久别相聚</h3>
+<p>多年未见的朋友来访，一起散步到河边。聊到很晚，还是很多话没说完。临走前约好下次别隔太久。</p>
+<h3 id="夜跑路">夜跑路</h3>
+<p>转凉后开始夜跑，固定一条长街。路灯一盏盏过去，脚步声很清楚。回家后睡得踏实。</p>
+<blockquote>
+<p>这一年没有大事，但留下不少可以回想的瞬间。</p>
+</blockquote>
+<h2 id="2024年记">2024年记</h2>
+<h3 id="河边晚">河边晚</h3>
+<p>傍晚去河边坐一会儿，远处有人放音乐。风不大，水面有细碎的光。坐到天黑才回。</p>
+<figure class="figure">
+  <img src="/images/memo/demo-memo-01.webp" alt="图注示例图片 1">
+  <figcaption class="figure-caption">图注示例：这是图片的说明文字。</figcaption>
+</figure>
+<h3 id="手写信">手写信</h3>
+<p>给远方朋友写了封信，用掉两张纸。写到最后才发现，很多话平时不会说。寄出前又读了一遍。</p>
+<h3 id="小城旅">小城旅</h3>
+<p>周末去了附近小城，吃了当地早餐。带回几张明信片，贴在书桌前。那趟路短，但很舒服。</p>
+<h2 id="2023年记">2023年记</h2>
+<h3 id="初雪">初雪</h3>
+<p>第一场雪下得很轻，街上很安静。站在窗前看了很久。</p>
+<h3 id="书角落">书角落</h3>
+<p>把旧书架重新刷漆，摆上常读的书。特地留了一层空位。夜里开一盏小灯坐一会儿。</p>
+<h3 id="旧友再见">旧友再见</h3>
+<p>久别的朋友聚在一起吃饭。大家都变了些，但笑起来还是熟悉。散场时心里很暖。</p> </div> <script>
+    (() => {
+      const mq = window.matchMedia('(max-width: 640px)');
+      const sync = () => {
+        if (mq.matches) {
+          document.querySelectorAll('.memo-toc details[open]').forEach((el) => {
+            el.removeAttribute('open');
+          });
+        } else {
+          document.querySelectorAll('.memo-toc details:not([open])').forEach((el) => {
+            el.setAttribute('open', '');
+          });
+        }
+      };
+      sync();
+      mq.addEventListener('change', sync);
+
+      const content = document.querySelector('.memo-content');
+      if (content) {
+        const nodes = content.querySelectorAll('h2, h3');
+        let count = 0;
+        nodes.forEach((node) => {
+          if (node.tagName === 'H2') {
+            count = 0;
+            return;
+          }
+          if (node.tagName === 'H3') {
+            count += 1;
+            node.setAttribute('data-num', String(count));
+          }
+        });
+      }
+    })();
+  </script> <dialog class="lightbox" id="lightbox" aria-label="图片预览" aria-hidden="true" data-lightbox data-enable-zoom="false" data-enable-pan="false" data-enable-swipe-down="false" data-mobile-nav="bottom" data-mobile-count="visible" tabindex="-1" hidden> <button class="lightbox-close" type="button" data-lightbox-close aria-label="关闭">×</button> <div class="lightbox-navs" aria-hidden="true"> <button class="lightbox-nav lightbox-prev" type="button" data-lightbox-prev aria-label="上一张">‹</button> <button class="lightbox-nav lightbox-next" type="button" data-lightbox-next aria-label="下一张">›</button> </div> <figure class="lightbox-figure"> <img data-lightbox-image alt=""> <figcaption class="lightbox-meta"> <span class="lightbox-caption" data-lightbox-caption hidden></span> <span class="lightbox-meta-row"> <span class="lightbox-count" data-lightbox-count aria-live="polite"></span> <span class="lightbox-dots" data-lightbox-dots aria-hidden="true"></span> </span> </figcaption> </figure> </dialog> <script type="module" src="/_astro/index.astro_astro_type_script_index_0_lang.C2kF5Kyn.js"></script>  <footer class="site-footer">© 2025-2026 Whono · Theme Demo · by cxro</footer> </div> </main> </div> <template id="scroll-top-template"> <button type="button" class="icon-button float-action scroll-top" aria-label="回到顶部" title="回到顶部" aria-hidden="true" tabindex="-1"> <svg class="icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 5l8 7-8 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" transform="rotate(-90 12 12)"></path></svg> </button> </template> <script type="module">const I="theme",E=document.documentElement,s=document.body,o=document.getElementById("theme-toggle"),n=document.getElementById("reader-toggle"),a=document.getElementById("reader-exit"),c=a?.closest(".reader-exit-anchor"),u=window.matchMedia("(max-width: 900px)"),T=()=>window.matchMedia("(prefers-reduced-motion: reduce)").matches,B=()=>/^(?:\/(?:archive|essay|memo)(?:\/|$))/.test(window.location.pathname);let A=()=>{};const g=()=>E.dataset.theme==="dark",p=e=>{E.dataset.theme=e;const t=e==="dark";if(o){o.setAttribute("aria-pressed",t?"true":"false");const i=t?"浅色模式":"夜间模式";o.setAttribute("aria-label",i),o.setAttribute("title",i)}},M=()=>{const e=g()?"dark":"light";p(e),o?.addEventListener("click",()=>{const t=g()?"light":"dark";p(t);try{localStorage.setItem(I,t)}catch{}})},v=()=>s?.dataset.reading==="immersive",R=s?.classList.contains("immersive-page"),w=e=>{n&&(n.setAttribute("aria-pressed","false"),n.setAttribute("aria-disabled",e?"true":"false"),e?(n.setAttribute("title","阅读模式（仅文章/小记页可用）"),n.setAttribute("aria-label","阅读模式（仅文章/小记页可用）"),n.tabIndex=-1):(n.setAttribute("title","阅读模式"),n.setAttribute("aria-label","阅读模式"),n.tabIndex=0))},m=e=>{s&&(e?s.dataset.reading="immersive":delete s.dataset.reading,n&&n.setAttribute("aria-pressed",e?"true":"false"),a&&(a.setAttribute("aria-label","退出阅读"),a.setAttribute("title","退出阅读")),f(a,e),A())},H=()=>{const e=document.getElementById("scroll-top-template");if(!(e instanceof HTMLTemplateElement))return null;const t=e.content.firstElementChild?.cloneNode(!0);return t instanceof HTMLButtonElement?(t.addEventListener("click",()=>{const i=T()?"auto":"smooth";window.scrollTo({top:0,behavior:i})}),t):null},f=(e,t)=>{e&&(t?(e.dataset.visible="true",e.removeAttribute("aria-hidden"),e.tabIndex=0):(delete e.dataset.visible,e.setAttribute("aria-hidden","true"),e.tabIndex=-1))},S=e=>{c&&c.hasAttribute("data-reader-exit-inline")!==e&&c.toggleAttribute("data-reader-exit-inline",e)},F=()=>{if(!B())return;let e=null,t=Math.max(600,window.innerHeight*2),i=!1;const x=()=>{if(e||!s)return;const d=H();d&&(e=d,s.appendChild(e))},L=()=>{t=Math.max(600,window.innerHeight*2)},r=()=>{const h=(window.scrollY||document.documentElement.scrollTop||0)>=t,b=v(),l=b&&u.matches&&h;u.matches?(x(),e&&(e.dataset.stack=l?"true":"false"),f(e,h)):f(e,!1),a&&(l?a.classList.add("float-action"):a.classList.remove("float-action")),S(b&&!l)},k=()=>{i||(i=!0,window.requestAnimationFrame(()=>{r(),i=!1}))},y=()=>{L(),r()};A=r,u.addEventListener("change",r),window.addEventListener("scroll",k,{passive:!0}),window.addEventListener("resize",y),r()},P=()=>{if(n){if(!R){w(!0);return}w(!1),m(!1),n.addEventListener("click",()=>{m(!v())}),a?.addEventListener("click",()=>{m(!1)})}};M();F();P();</script> </body> </html>
