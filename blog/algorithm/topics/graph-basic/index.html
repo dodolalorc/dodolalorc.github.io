@@ -1,0 +1,776 @@
+<!DOCTYPE html><html lang="en" data-palette="green-soft" data-astro-cid-bl7sqnst> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/navfolio-site/_astro/ClientRouter.astro_astro_type_script_index_0_lang.CAqDO0tx.js"></script><script>
+  (() => {
+    const storageKey = 'navfolio-theme';
+    const root = document.documentElement;
+    const themeMeta = () => document.querySelector('meta[name="theme-color"]');
+    const systemTheme = () =>
+      window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    const storedTheme = () => {
+      try {
+        return localStorage.getItem(storageKey);
+      } catch {
+        return null;
+      }
+    };
+    const setStoredTheme = (theme) => {
+      try {
+        localStorage.setItem(storageKey, theme);
+      } catch {}
+    };
+    const applyTheme = (theme, persist = true) => {
+      const nextTheme = theme === 'dark' ? 'dark' : 'light';
+      const toggleLabel = nextTheme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme';
+
+      root.dataset.theme = nextTheme;
+      root.style.colorScheme = nextTheme;
+      themeMeta()?.setAttribute('content', nextTheme === 'dark' ? '#171b18' : '#fdfdf9');
+      for (const button of document.querySelectorAll('[data-theme-toggle]')) {
+        button.setAttribute('aria-label', toggleLabel);
+        button.setAttribute('title', toggleLabel);
+      }
+      if (persist) setStoredTheme(nextTheme);
+    };
+    const syncThemeControls = () => {
+      applyTheme(root.dataset.theme || storedTheme() || systemTheme(), false);
+    };
+
+    applyTheme(storedTheme() || systemTheme(), false);
+
+    if (!window.__navfolioTheme) {
+      window.__navfolioTheme = {
+        toggle() {
+          applyTheme(root.dataset.theme === 'dark' ? 'light' : 'dark');
+        },
+      };
+    }
+
+    if (window.__navfolioThemeInitialized) {
+      syncThemeControls();
+      return;
+    }
+
+    window.__navfolioThemeInitialized = true;
+
+    document.addEventListener('click', (event) => {
+      const toggle = event.target.closest?.('[data-theme-toggle]');
+      if (toggle) window.__navfolioTheme.toggle();
+    });
+
+    document.addEventListener('DOMContentLoaded', syncThemeControls, { once: true });
+    document.addEventListener('astro:page-load', syncThemeControls);
+
+    window.matchMedia?.('(prefers-color-scheme: dark)').addEventListener('change', (event) => {
+      if (!storedTheme()) applyTheme(event.matches ? 'dark' : 'light', false);
+    });
+  })();
+</script><link rel="icon" href="/navfolio-sitefavicon.svg" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/navfolio-sitefavicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/navfolio-sitefavicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/navfolio-siteapple-touch-icon.png"><link rel="manifest" href="/navfolio-sitemanifest.json"><meta name="theme-color" content="#fdfdf9"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="navfolio" href="https://dodolalorc.github.io/rss.xml"><meta name="generator" content="Astro v6.3.5"><style>@font-face{font-family:Atkinson-c7f4c4e8b285552f;src:url("/navfolio-site/_astro/fonts/a3ad966ea116c4c9.woff") format("woff");font-display:swap;font-weight:400;font-style:normal;}@font-face{font-family:Atkinson-c7f4c4e8b285552f;src:url("/navfolio-site/_astro/fonts/e558ed6e1d035617.woff") format("woff");font-display:swap;font-weight:700;font-style:normal;}@font-face{font-family:"Atkinson-c7f4c4e8b285552f fallback: Arial";src:local("Arial");font-display:swap;font-weight:400;font-style:normal;size-adjust:99.3717%;ascent-override:80.1033%;descent-override:25.2587%;line-gap-override:0%;}@font-face{font-family:"Atkinson-c7f4c4e8b285552f fallback: Arial";src:local("Arial");font-display:swap;font-weight:700;font-style:normal;size-adjust:99.3717%;ascent-override:80.1033%;descent-override:25.2587%;line-gap-override:0%;}:root{--font-atkinson:Atkinson-c7f4c4e8b285552f,"Atkinson-c7f4c4e8b285552f fallback: Arial",sans-serif;}</style><link rel="preload" href="/navfolio-site/_astro/fonts/a3ad966ea116c4c9.woff" as="font" type="font/woff" crossorigin><link rel="preload" href="/navfolio-site/_astro/fonts/e558ed6e1d035617.woff" as="font" type="font/woff" crossorigin><!-- Canonical URL --><link rel="canonical" href="https://dodolalorc.github.io/navfolio-site/blog/algorithm/topics/graph-basic/"><!-- Primary Meta Tags --><title>图论基础||存储图||DFS、BFS(图论)</title><meta name="title" content="图论基础||存储图||DFS、BFS(图论)"><meta name="description" content><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://dodolalorc.github.io/navfolio-site/blog/algorithm/topics/graph-basic/"><meta property="og:title" content="图论基础||存储图||DFS、BFS(图论)"><meta property="og:description" content><meta property="og:image" content="https://dodolalorc.github.io/navfolio-site/_astro/fail-loading-image.DEm-LhbX.png"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://dodolalorc.github.io/navfolio-site/blog/algorithm/topics/graph-basic/"><meta property="twitter:title" content="图论基础||存储图||DFS、BFS(图论)"><meta property="twitter:description" content><meta property="twitter:image" content="https://dodolalorc.github.io/navfolio-site/_astro/fail-loading-image.DEm-LhbX.png"><link rel="stylesheet" href="/navfolio-site/_astro/_..1O9rtQI6.css">
+<link rel="stylesheet" href="/navfolio-site/_astro/BlogArticle.BLUUC9fD.css">
+<link rel="stylesheet" href="/navfolio-site/_astro/BaseHead.CscXXfv1.css"></head> <body class="blog-detail-page" data-astro-cid-bl7sqnst> <header class="blog-top-nav" data-pagefind-ignore data-astro-cid-sp6fezam> <button class="mobile-menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav-menu" data-mobile-menu-toggle data-astro-cid-sp6fezam> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="18" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-sp6fezam="true" class="lucide lucide-menu">  <path d="M4 5h16"></path> <path d="M4 12h16"></path> <path d="M4 19h16"></path>  </svg> </button> <a class="brand" href="/navfolio-site/" aria-label="Go to navfolio home" data-astro-cid-sp6fezam> <span class="brand-mark" aria-hidden="true" data-astro-cid-sp6fezam></span> <span class="brand-title" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>navfolio</span> <span class="brand-route" data-astro-cid-sp6fezam> · blog</span> </span> </a> <nav class="nav-links" aria-label="Article navigation" data-astro-cid-sp6fezam> <a class="nav-link" href="/navfolio-site/" data-astro-cid-sp6fezam> Home </a><a class="nav-link active" href="/navfolio-site/blog" data-astro-cid-sp6fezam> Blog </a><a class="nav-link" href="/navfolio-site/projects" data-astro-cid-sp6fezam> Projects </a><a class="nav-link" href="/navfolio-site/vibe" data-astro-cid-sp6fezam> Vibe </a><a class="nav-link" href="/navfolio-site/about" data-astro-cid-sp6fezam> About </a> </nav> <nav class="mobile-menu-panel" id="mobile-nav-menu" aria-label="Mobile navigation" data-mobile-menu data-astro-cid-sp6fezam> <a class="mobile-menu-link" href="/navfolio-site/" data-mobile-menu-link data-astro-cid-sp6fezam> Home </a><a class="mobile-menu-link active" href="/navfolio-site/blog" data-mobile-menu-link data-astro-cid-sp6fezam> Blog </a><a class="mobile-menu-link" href="/navfolio-site/projects" data-mobile-menu-link data-astro-cid-sp6fezam> Projects </a><a class="mobile-menu-link" href="/navfolio-site/vibe" data-mobile-menu-link data-astro-cid-sp6fezam> Vibe </a><a class="mobile-menu-link" href="/navfolio-site/about" data-mobile-menu-link data-astro-cid-sp6fezam> About </a> </nav> <div class="nav-actions" aria-label="Page actions" data-astro-cid-sp6fezam> <a href="https://github.com/dodolalorc/astro-navfolio" target="_blank" rel="noreferrer" aria-label="Open GitHub repository" title="GitHub" data-astro-cid-sp6fezam> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="17" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-sp6fezam="true" class="lucide lucide-github">  <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path> <path d="M9 18c-4.51 2-5-2-7-2"></path>  </svg> </a> <button type="button" data-theme-toggle aria-label="Switch theme" data-astro-cid-sp6fezam> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="17" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-sp6fezam="true" class="lucide lucide-moon theme-icon-moon">  <path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"></path>  </svg> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="17" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-sp6fezam="true" class="lucide lucide-sun theme-icon-sun">  <circle cx="12" cy="12" r="4"></circle> <path d="M12 2v2"></path> <path d="M12 20v2"></path> <path d="m4.93 4.93 1.41 1.41"></path> <path d="m17.66 17.66 1.41 1.41"></path> <path d="M2 12h2"></path> <path d="M20 12h2"></path> <path d="m6.34 17.66-1.41 1.41"></path> <path d="m19.07 4.93-1.41 1.41"></path>  </svg> </button> <div class="site-search" data-site-search-root data-search-max-results="6" data-search-idle-label="Start typing to search." data-search-loading-label="Searching..." data-search-empty-label="No notes found." data-search-unavailable-label="Search index is not available yet. Run a production build first." data-pagefind-ignore data-astro-cid-prkij7br> <button class="site-search-trigger" type="button" aria-label="Search site" aria-expanded="false" aria-controls="site-search-dialog" title="Search (Ctrl K / Cmd K)" data-site-search-trigger data-astro-cid-prkij7br> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="17" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-prkij7br="true" class="lucide lucide-search">  <path d="m21 21-4.34-4.34"></path> <circle cx="11" cy="11" r="8"></circle>  </svg> </button> <div class="site-search-layer" data-site-search-backdrop data-astro-cid-prkij7br> <section class="site-search-dialog" id="site-search-dialog" role="dialog" aria-modal="true" aria-labelledby="site-search-title" data-site-search-dialog data-astro-cid-prkij7br> <header class="site-search-head" data-astro-cid-prkij7br> <div data-astro-cid-prkij7br> <p id="site-search-title" data-astro-cid-prkij7br>Search</p> <span data-astro-cid-prkij7br>Ctrl K / Cmd K</span> </div> <button class="site-search-close" type="button" aria-label="Close search" title="Close search" data-site-search-close data-astro-cid-prkij7br> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="17" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-prkij7br="true" class="lucide lucide-x">  <path d="M18 6 6 18"></path> <path d="m6 6 12 12"></path>  </svg> </button> </header> <label class="site-search-input-wrap" data-astro-cid-prkij7br> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="16" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" aria-hidden="true" data-astro-cid-prkij7br="true" class="lucide lucide-search">  <path d="m21 21-4.34-4.34"></path> <circle cx="11" cy="11" r="8"></circle>  </svg> <input type="search" placeholder="Search notes..." autocomplete="off" spellcheck="false" data-site-search-input data-astro-cid-prkij7br> </label> <p class="site-search-status" data-site-search-status data-astro-cid-prkij7br>Start typing to search.</p> <ol class="site-search-results" data-site-search-results data-astro-cid-prkij7br></ol> </section> </div> </div> <script type="module">const L=["a[href]","button:not([disabled])","input:not([disabled])","textarea:not([disabled])","select:not([disabled])",'[tabindex]:not([tabindex="-1"])'].join(","),h="/navfolio-site",w=`${h.replace(/\/$/,"")}/pagefind/pagefind.js`.replace(/^\/pagefind/,"/pagefind");let d=null,m=null;function q(e){if(/^https?:\/\//.test(e))return e;const t=h.replace(/\/$/,"");return!t||t==="/"||e.startsWith(`${t}/`)?e:e.startsWith("/")?`${t}${e}`:`${t}/${e}`}async function g(){return d||(d=import(w).then(async e=>(await e.options?.({baseUrl:h}),await e.init?.(),e)).catch(e=>{throw d=null,e})),d}function i(e,t){const a=e.querySelector("[data-site-search-status]");a&&(a.textContent=t)}function y(e,t){e.dataset.searchOpen=t?"true":"false",e.querySelector("[data-site-search-trigger]")?.setAttribute("aria-expanded",String(t))}function v(e){return Array.from(e.querySelectorAll(L)).filter(t=>t.offsetParent!==null)}function x(e,t){if(e.key!=="Tab")return;const a=v(t);if(a.length===0)return;const s=a[0],c=a[a.length-1];e.shiftKey&&document.activeElement===s?(e.preventDefault(),c.focus()):!e.shiftKey&&document.activeElement===c&&(e.preventDefault(),s.focus())}function f(e,t){const a=e.querySelector("[data-site-search-results]");if(a){a.replaceChildren();for(const s of t){const c=document.createElement("li"),o=document.createElement("a"),r=document.createElement("span"),l=document.createElement("span");o.href=q(s.url),r.className="site-search-result-title",r.textContent=s.title||s.url,l.className="site-search-result-excerpt",l.innerHTML=s.excerpt,o.append(r,l),c.append(o),a.append(c)}}}function k(e,t){let a;return(...s)=>{window.clearTimeout(a),a=window.setTimeout(()=>e(...s),t)}}function p(){for(const e of document.querySelectorAll("[data-site-search-root]")){if(e.dataset.siteSearchReady==="true")continue;e.dataset.siteSearchReady="true";const t=e.querySelector("[data-site-search-trigger]"),a=e.querySelector("[data-site-search-dialog]"),s=e.querySelector("[data-site-search-input]"),c=e.querySelectorAll("[data-site-search-close]"),o=Number(e.dataset.searchMaxResults||6);if(!t||!a||!s)continue;const r=()=>{y(e,!1),s.value="",f(e,[]),i(e,e.dataset.searchIdleLabel||"Start typing to search."),m?.focus?.()},l=()=>{m=document.activeElement instanceof HTMLElement?document.activeElement:null,y(e,!0),window.setTimeout(()=>s.focus(),30),g().catch(()=>{i(e,e.dataset.searchUnavailableLabel||"Search index is not available yet.")})},b=k(async()=>{const n=s.value.trim();if(!n){f(e,[]),i(e,e.dataset.searchIdleLabel||"Start typing to search.");return}i(e,e.dataset.searchLoadingLabel||"Searching...");try{const S=await(await g()).search(n),u=await Promise.all(S.results.slice(0,o).map(E=>E.data()));f(e,u),i(e,u.length>0?`${u.length} result${u.length===1?"":"s"}`:e.dataset.searchEmptyLabel||"No notes found.")}catch{f(e,[]),i(e,e.dataset.searchUnavailableLabel||"Search index is not available yet.")}},120);t.addEventListener("click",l),s.addEventListener("input",b);for(const n of c)n.addEventListener("click",r);e.addEventListener("click",n=>{n.target.matches("[data-site-search-backdrop]")&&r(),n.target.closest("[data-site-search-results] a")&&r()}),e.addEventListener("keydown",n=>{e.dataset.searchOpen==="true"&&(n.key==="Escape"&&r(),x(n,a))})}}document.addEventListener("keydown",e=>{if(!((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==="k"))return;const a=document.querySelector("[data-site-search-root]"),s=a?.querySelector("[data-site-search-trigger]");if(!(!a||!s)){if(e.preventDefault(),a.dataset.searchOpen==="true"){a.querySelector("[data-site-search-input]")?.focus();return}s.click()}});p();document.addEventListener("astro:page-load",p);p();</script> <button class="toc-action" type="button" aria-label="Open table of contents" aria-expanded="false" aria-controls="mobile-toc-menu" title="Table of contents" data-mobile-toc-trigger data-astro-cid-sp6fezam> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="17" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-sp6fezam="true" class="lucide lucide-list-tree">  <path d="M8 5h13"></path> <path d="M13 12h8"></path> <path d="M13 19h8"></path> <path d="M3 10a2 2 0 0 0 2 2h3"></path> <path d="M3 5v12a2 2 0 0 0 2 2h3"></path>  </svg> </button> </div> <nav class="mobile-toc-panel" id="mobile-toc-menu" aria-label="Article table of contents" data-nav-toc-menu data-toc-root data-astro-cid-sp6fezam> <p data-astro-cid-sp6fezam>Table of contents</p> <ol data-astro-cid-sp6fezam> <li data-astro-cid-sp6fezam> <a href="#11图的定义" data-nav-toc-link data-toc-link data-toc-hash="#11图的定义" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>1</span> 1.1图的定义 </a> </li><li data-astro-cid-sp6fezam> <a href="#12图的存储" data-nav-toc-link data-toc-link data-toc-hash="#12图的存储" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>2</span> 1.2图的存储 </a> </li><li data-astro-cid-sp6fezam> <a href="#13图的遍历" data-nav-toc-link data-toc-link data-toc-hash="#13图的遍历" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>3</span> 1.3图的遍历 </a> </li> </ol> </nav> </header> <script type="module">const r=()=>{for(const t of document.querySelectorAll(".blog-top-nav")){const o=t.querySelector("[data-mobile-menu-toggle]"),s=t.querySelector("[data-mobile-menu]"),i=t.querySelector("[data-mobile-toc-trigger]"),l=t.querySelector("[data-nav-toc-menu]");if(o&&s&&!t.dataset.mobileMenuReady){t.dataset.mobileMenuReady="true";const a=e=>{t.dataset.mobileMenuOpen=e?"true":"false",o.setAttribute("aria-expanded",String(e)),o.setAttribute("aria-label",e?"Close navigation menu":"Open navigation menu")},n=e=>{!i||!l||(t.dataset.mobileTocOpen=e?"true":"false",i.setAttribute("aria-expanded",String(e)),i.setAttribute("aria-label",e?"Close table of contents":"Open table of contents"))};o.addEventListener("click",()=>{const e=t.dataset.mobileMenuOpen!=="true";a(e),e&&n(!1)}),s.addEventListener("click",e=>{e.target.closest?.("[data-mobile-menu-link]")&&a(!1)}),i?.addEventListener("click",()=>{const e=t.dataset.mobileTocOpen!=="true";n(e),e&&a(!1)}),l?.addEventListener("click",e=>{e.target.closest?.("[data-nav-toc-link]")&&n(!1)}),document.addEventListener("click",e=>{t.contains(e.target)||(a(!1),n(!1))}),document.addEventListener("keydown",e=>{e.key==="Escape"&&(a(!1),n(!1))})}}};r();document.addEventListener("astro:page-load",r);</script> <div class="blog-background" aria-hidden="true" data-astro-cid-bl7sqnst></div> <main class="blog-layout" data-pagefind-body data-astro-cid-bl7sqnst> <div class="article-column" data-astro-cid-bl7sqnst> <article class="article-card" data-astro-cid-bl7sqnst> <header class="article-header" data-astro-cid-wynq62ua>  <h1 data-astro-cid-wynq62ua>图论基础||存储图||DFS、BFS(图论)</h1> <div class="meta-line" aria-label="Article metadata" data-astro-cid-wynq62ua> <span class="meta-item" data-astro-cid-wynq62ua> <time datetime="2024-01-06T06:15:17.000Z"> Jan 6, 2024 </time> </span> <span class="meta-item" data-astro-cid-wynq62ua>5,073 words</span> <span class="meta-item" data-astro-cid-wynq62ua>15 min read</span> <script type="module">const showPageView = false;
+const serverURL = "";
+const selector = ".waline-pageview-count";
+
+  if (showPageView) {
+    const { pageviewCount } = await import('https://unpkg.com/@waline/client@v3/dist/pageview.js');
+
+    const updatePageViews = () => {
+      pageviewCount({
+        serverURL,
+        selector,
+        path: window.location.pathname,
+      });
+    };
+
+    updatePageViews();
+    document.addEventListener('astro:page-load', updatePageViews);
+  }
+</script>  </div>   </header> <section class="mobile-article-toc" aria-label="Article table of contents" data-astro-cid-bl7sqnst> <nav class="toc-card blog-card compact collapsible" aria-label="Table of contents" data-toc-root data-mobile-toc data-expanded="false" data-astro-cid-ymbpksfa><h2 data-astro-cid-ymbpksfa>Table of contents</h2><ol id="mobile-article-toc-list" data-astro-cid-ymbpksfa><li data-astro-cid-ymbpksfa><a href="#11图的定义" data-toc-link data-toc-hash="#11图的定义" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>1</span>1.1图的定义</a></li><li data-astro-cid-ymbpksfa><a href="#12图的存储" data-toc-link data-toc-hash="#12图的存储" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>2</span>1.2图的存储</a></li><li data-astro-cid-ymbpksfa><a href="#13图的遍历" data-toc-link data-toc-hash="#13图的遍历" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>3</span>1.3图的遍历</a></li></ol></nav><script type="module" src="/navfolio-site/_astro/TableOfContents.astro_astro_type_script_index_0_lang.B3wh3MgY.js"></script> </section> <section id="article-start" class="article-content" data-astro-cid-bl7sqnst>  <h3 id="11图的定义">1.1图的定义</h3>
+<p>上课讲过一大堆这里不再赘述，直接学习代码实现。</p>
+<h3 id="12图的存储">1.2图的存储</h3>
+<p>例图展示：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="mermaid"><code><span class="line"><span style="color:#E1E4E8">graph LR</span></span>
+<span class="line"><span style="color:#E1E4E8">v1((v1))--4-->v2((v2))</span></span>
+<span class="line"><span style="color:#E1E4E8">v1((v1))--9-->v6((v6))</span></span>
+<span class="line"><span style="color:#E1E4E8">v3((v3))--19-->v2((v2))</span></span>
+<span class="line"><span style="color:#E1E4E8">v3((v3))--22-->v1((v1))</span></span>
+<span class="line"><span style="color:#E1E4E8">v4((v4))--17-->v3((v3))</span></span>
+<span class="line"><span style="color:#E1E4E8">v5((v5))--29-->v8((v8))</span></span>
+<span class="line"><span style="color:#E1E4E8">v6((v6))--12-->v1((v1))</span></span>
+<span class="line"><span style="color:#E1E4E8">v6((v6))--9-->v5((v5))</span></span>
+<span class="line"><span style="color:#E1E4E8">v6((v6))--4-->v7((v7))</span></span>
+<span class="line"><span style="color:#E1E4E8">v7((v7))--25-->v4((v4))</span></span>
+<span class="line"><span style="color:#E1E4E8">v8((v8))--7-->v7((v7))</span></span>
+<span class="line"><span style="color:#E1E4E8">v8((v8))--11-->v3((v3))</span></span></code></pre>
+<p><code>设n个点，m条边</code></p>
+<p>上图的数据（按照 起点-终点-权值）：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>8 12</span></span>
+<span class="line"><span>5 8 29</span></span>
+<span class="line"><span>6 1 12</span></span>
+<span class="line"><span>8 3 11</span></span>
+<span class="line"><span>1 2 4</span></span>
+<span class="line"><span>3 1 22</span></span>
+<span class="line"><span>4 3 17</span></span>
+<span class="line"><span>7 4 25</span></span>
+<span class="line"><span>6 5 9</span></span>
+<span class="line"><span>8 7 7</span></span>
+<span class="line"><span>1 6 9</span></span>
+<span class="line"><span>3 2 19</span></span>
+<span class="line"><span>6 7 4</span></span></code></pre>
+<h4 id="邻接矩阵">邻接矩阵</h4>
+<ul>
+<li>遍历效率低、不能存重边、初始化效率低<code>初始化O(n^2)时间，建图O(m)时间</code>、空间开销大<code>O(n^2)</code></li>
+<li>对于稀疏图来说大部分是INF，空间利用效率也不高</li>
+</ul>
+<h4 id="前向星">前向星</h4>
+<p>前向星涉及排序，所以其时间复杂度和排序算法有关，一般情况下时间复杂度为<code>O(mlog m)</code>，空间上需要两个数组（记录边的边数组、记录各点在边数组中起始位置的head数组），空间复杂度为<code>O(m+n)</code></p>
+<p><u>优点：在点特别多时可以存储重边</u></p>
+<p><u>缺点：不能直接判断任意两个点之间是否有边。排序和初始化数组费时间。</u></p>
+<p>需要的数据结构如下：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="cpp"><code><span class="line"><span style="color:#F97583">int</span><span style="color:#E1E4E8"> head[maxn];</span></span>
+<span class="line"><span style="color:#F97583">struct</span><span style="color:#B392F0"> NODE</span><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#F97583">    int</span><span style="color:#E1E4E8"> from;</span><span style="color:#6A737D">	// 起点</span></span>
+<span class="line"><span style="color:#F97583">    int</span><span style="color:#E1E4E8"> to;</span><span style="color:#6A737D">		// 终点</span></span>
+<span class="line"><span style="color:#F97583">    int</span><span style="color:#E1E4E8"> w;</span><span style="color:#6A737D">		// 权值</span></span>
+<span class="line"><span style="color:#E1E4E8">};</span></span>
+<span class="line"><span style="color:#E1E4E8">NODE edge[maxm];</span></span></code></pre>
+<p>NODE用来存储每条边的信息，边按照输入读取后再排序，排序之后使用<code>head[maxn]</code>来储存各个点的在<code>edge[maxm]</code>里的起始位置。</p>
+<p>排序方式：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="cpp"><code><span class="line"><span style="color:#F97583">bool</span><span style="color:#B392F0"> cmp</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">NODE</span><span style="color:#FFAB70"> a</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">NODE</span><span style="color:#FFAB70"> b</span><span style="color:#E1E4E8">){</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8">(a.from</span><span style="color:#F97583">==</span><span style="color:#E1E4E8">b.from</span><span style="color:#F97583">&#x26;&#x26;</span><span style="color:#E1E4E8">a.to</span><span style="color:#F97583">==</span><span style="color:#E1E4E8">b.to)</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> a.w</span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8">b.w;</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8">(a.from</span><span style="color:#F97583">==</span><span style="color:#E1E4E8">b.from)</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> a.to</span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8">b.to;</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#E1E4E8"> a.from</span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8">b.from;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>完整代码：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="cpp"><code><span class="line"><span style="color:#F97583">#include</span><span style="color:#9ECBFF">&#x3C;bits/stdc++.h></span></span>
+<span class="line"><span style="color:#F97583">using</span><span style="color:#F97583"> namespace</span><span style="color:#B392F0"> std</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#F97583"> long</span><span style="color:#F97583"> long</span><span style="color:#E1E4E8"> maxn </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 1</span><span style="color:#F97583">e</span><span style="color:#79B8FF">5</span><span style="color:#F97583"> +</span><span style="color:#79B8FF"> 50</span><span style="color:#E1E4E8">, maxm </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 1</span><span style="color:#F97583">e</span><span style="color:#79B8FF">7</span><span style="color:#F97583"> +</span><span style="color:#79B8FF"> 50</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">struct</span><span style="color:#B392F0"> NODE</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">	int</span><span style="color:#E1E4E8"> from, to, w;</span></span>
+<span class="line"><span style="color:#E1E4E8">}edge[maxm];</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">int</span><span style="color:#E1E4E8"> head[maxn];</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">bool</span><span style="color:#B392F0"> cmp</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">NODE</span><span style="color:#FFAB70"> a</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">NODE</span><span style="color:#FFAB70"> b</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">	if</span><span style="color:#E1E4E8"> (a.from </span><span style="color:#F97583">==</span><span style="color:#E1E4E8"> b.from </span><span style="color:#F97583">&#x26;&#x26;</span><span style="color:#E1E4E8"> a.to </span><span style="color:#F97583">==</span><span style="color:#E1E4E8"> b.to)</span></span>
+<span class="line"><span style="color:#F97583">		return</span><span style="color:#E1E4E8"> a.w </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> b.w;</span></span>
+<span class="line"><span style="color:#F97583">	if</span><span style="color:#E1E4E8"> (a.from </span><span style="color:#F97583">==</span><span style="color:#E1E4E8"> b.from)</span></span>
+<span class="line"><span style="color:#F97583">		return</span><span style="color:#E1E4E8"> a.to </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> b.to;</span></span>
+<span class="line"><span style="color:#F97583">	return</span><span style="color:#E1E4E8"> a.from </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> b.from;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">int</span><span style="color:#B392F0"> main</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">	int</span><span style="color:#E1E4E8"> n, m;</span></span>
+<span class="line"><span style="color:#E1E4E8">	cin </span><span style="color:#F97583">>></span><span style="color:#E1E4E8"> n </span><span style="color:#F97583">>></span><span style="color:#E1E4E8"> m;</span></span>
+<span class="line"><span style="color:#E1E4E8">	</span></span>
+<span class="line"><span style="color:#6A737D">	// 读入数据</span></span>
+<span class="line"><span style="color:#F97583">	for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">int</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;i </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> m;i</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">		cin </span><span style="color:#F97583">>></span><span style="color:#E1E4E8"> edge[i].from </span><span style="color:#F97583">>></span><span style="color:#E1E4E8"> edge[i].to </span><span style="color:#F97583">>></span><span style="color:#E1E4E8"> edge[i].w;</span></span>
+<span class="line"><span style="color:#E1E4E8">	</span></span>
+<span class="line"><span style="color:#6A737D">	// 排序</span></span>
+<span class="line"><span style="color:#B392F0">	sort</span><span style="color:#E1E4E8">(edge, edge </span><span style="color:#F97583">+</span><span style="color:#E1E4E8"> m, cmp);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">	// 初始化head</span></span>
+<span class="line"><span style="color:#B392F0">	memset</span><span style="color:#E1E4E8">(head, </span><span style="color:#F97583">-</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">sizeof</span><span style="color:#E1E4E8">(head));</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">	// 制成点位数组</span></span>
+<span class="line"><span style="color:#E1E4E8">	head[edge[</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">].from] </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span><span style="color:#6A737D">	// 初始化</span></span>
+<span class="line"><span style="color:#6A737D">	// edge数组中起点为点i的在数组里的第一条边在下标head[i]处</span></span>
+<span class="line"><span style="color:#F97583">	for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">int</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">;i </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> m;i</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">		if</span><span style="color:#E1E4E8"> (edge[i].from </span><span style="color:#F97583">!=</span><span style="color:#E1E4E8"> edge[i </span><span style="color:#F97583">-</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">].from)</span></span>
+<span class="line"><span style="color:#6A737D">			// 表明是新的起始点</span></span>
+<span class="line"><span style="color:#E1E4E8">			head[edge[i].from] </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> i;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">	// 遍历输出各边信息（按点位输出）</span></span>
+<span class="line"><span style="color:#F97583">	for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">int</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">;i </span><span style="color:#F97583">&#x3C;=</span><span style="color:#E1E4E8"> n;i</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">		cout </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#9ECBFF"> "以点v"</span><span style="color:#F97583"> &#x3C;&#x3C;</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#9ECBFF"> "为起点的边："</span><span style="color:#F97583"> &#x3C;&#x3C;</span><span style="color:#E1E4E8"> endl;</span></span>
+<span class="line"><span style="color:#F97583">		for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">int</span><span style="color:#E1E4E8"> j </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> head[i];j </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> m </span><span style="color:#F97583">&#x26;&#x26;</span><span style="color:#E1E4E8"> edge[j].from </span><span style="color:#F97583">==</span><span style="color:#E1E4E8"> i;j</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">			cout </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#9ECBFF"> "v"</span><span style="color:#F97583"> &#x3C;&#x3C;</span><span style="color:#E1E4E8"> edge[j].from </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#9ECBFF"> "-->v"</span><span style="color:#F97583"> &#x3C;&#x3C;</span><span style="color:#E1E4E8"> edge[j].to </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#9ECBFF"> " 权值为："</span><span style="color:#F97583"> &#x3C;&#x3C;</span><span style="color:#E1E4E8"> edge[j].w </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#9ECBFF"> " 该边在数组edge中的序号为"</span><span style="color:#F97583"> &#x3C;&#x3C;</span><span style="color:#E1E4E8"> j </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#E1E4E8"> endl;</span></span>
+<span class="line"><span style="color:#E1E4E8">		}</span></span>
+<span class="line"><span style="color:#E1E4E8">		cout </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#E1E4E8"> endl;</span></span>
+<span class="line"><span style="color:#E1E4E8">	}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">	return</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// Output：</span></span>
+<span class="line"><span style="color:#6A737D">/*</span></span>
+<span class="line"><span style="color:#6A737D">以点v1为起点的边：</span></span>
+<span class="line"><span style="color:#6A737D">v1-->v2 权值为：4 该边在数组edge中的序号为0</span></span>
+<span class="line"><span style="color:#6A737D">v1-->v6 权值为：9 该边在数组edge中的序号为1</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">以点v2为起点的边：</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">以点v3为起点的边：</span></span>
+<span class="line"><span style="color:#6A737D">v3-->v1 权值为：22 该边在数组edge中的序号为2</span></span>
+<span class="line"><span style="color:#6A737D">v3-->v2 权值为：19 该边在数组edge中的序号为3</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">以点v4为起点的边：</span></span>
+<span class="line"><span style="color:#6A737D">v4-->v3 权值为：17 该边在数组edge中的序号为4</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">以点v5为起点的边：</span></span>
+<span class="line"><span style="color:#6A737D">v5-->v8 权值为：29 该边在数组edge中的序号为5</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">以点v6为起点的边：</span></span>
+<span class="line"><span style="color:#6A737D">v6-->v1 权值为：12 该边在数组edge中的序号为6</span></span>
+<span class="line"><span style="color:#6A737D">v6-->v5 权值为：9 该边在数组edge中的序号为7</span></span>
+<span class="line"><span style="color:#6A737D">v6-->v7 权值为：4 该边在数组edge中的序号为8</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">以点v7为起点的边：</span></span>
+<span class="line"><span style="color:#6A737D">v7-->v4 权值为：25 该边在数组edge中的序号为9</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">以点v8为起点的边：</span></span>
+<span class="line"><span style="color:#6A737D">v8-->v3 权值为：11 该边在数组edge中的序号为10</span></span>
+<span class="line"><span style="color:#6A737D">v8-->v7 权值为：7 该边在数组edge中的序号为11</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">*/</span></span></code></pre>
+<h4 id="邻接表">邻接表</h4>
+<p>图的一种链式存储结构，把图G中所有邻接于v<del>i</del>的顶点链接成为一个v<del>i</del>的单链表。</p>
+<p>三种实现方法：</p>
+<h5 id="1-动态建表">1. 动态建表</h5>
+<p>动态建表的时间效率是<code>O(m)</code>，空间效率是<code>O(m)</code>，主要的时间损耗在于不断地申请新空间，且判断任意两个点之间是否有边相连的效率也低（需要搜索各个点的单链表）(感觉还好？)。</p>
+<p>数据结构：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="cpp"><code><span class="line"><span style="color:#F97583">struct</span><span style="color:#B392F0"> EdgeNode</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">	int</span><span style="color:#E1E4E8"> to;</span><span style="color:#6A737D">		// 终点</span></span>
+<span class="line"><span style="color:#F97583">	int</span><span style="color:#E1E4E8"> w;</span><span style="color:#6A737D">		// 权值</span></span>
+<span class="line"><span style="color:#E1E4E8">	EdgeNode</span><span style="color:#F97583">*</span><span style="color:#E1E4E8"> next;</span><span style="color:#6A737D">		// 下一边的指针</span></span>
+<span class="line"><span style="color:#E1E4E8">};</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">struct</span><span style="color:#B392F0"> VNode</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">	int</span><span style="color:#E1E4E8"> from;</span><span style="color:#6A737D">	// 起点（这个数据结构中from没有传值，我们以遍历Adjlist时的遍历时序用于指定起点）</span></span>
+<span class="line"><span style="color:#E1E4E8">	EdgeNode</span><span style="color:#F97583">*</span><span style="color:#E1E4E8"> first;</span><span style="color:#6A737D">	// 邻接表的头指针</span></span>
+<span class="line"><span style="color:#E1E4E8">};</span></span></code></pre>
+<p>完整代码：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="cpp"><code><span class="line"><span style="color:#F97583">#include</span><span style="color:#9ECBFF">&#x3C;bits/stdc++.h></span></span>
+<span class="line"><span style="color:#F97583">using</span><span style="color:#F97583"> namespace</span><span style="color:#B392F0"> std</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#F97583"> long</span><span style="color:#F97583"> long</span><span style="color:#E1E4E8"> maxn </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 1</span><span style="color:#F97583">e</span><span style="color:#79B8FF">5</span><span style="color:#F97583"> +</span><span style="color:#79B8FF"> 50</span><span style="color:#E1E4E8">, maxm </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 1</span><span style="color:#F97583">e</span><span style="color:#79B8FF">7</span><span style="color:#F97583"> +</span><span style="color:#79B8FF"> 50</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">struct</span><span style="color:#B392F0"> EdgeNode</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">	int</span><span style="color:#E1E4E8"> to;</span><span style="color:#6A737D">		// 终点</span></span>
+<span class="line"><span style="color:#F97583">	int</span><span style="color:#E1E4E8"> w;</span><span style="color:#6A737D">		// 权值</span></span>
+<span class="line"><span style="color:#E1E4E8">	EdgeNode</span><span style="color:#F97583">*</span><span style="color:#E1E4E8"> next;</span><span style="color:#6A737D">		// 下一边的指针</span></span>
+<span class="line"><span style="color:#E1E4E8">};</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">struct</span><span style="color:#B392F0"> VNode</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">	int</span><span style="color:#E1E4E8"> from;</span><span style="color:#6A737D">	// 起点（这个数据结构中from没有传值，我们以遍历Adjlist时的遍历时序用于指定起点）</span></span>
+<span class="line"><span style="color:#E1E4E8">	EdgeNode</span><span style="color:#F97583">*</span><span style="color:#E1E4E8"> first;</span><span style="color:#6A737D">	// 邻接表的头指针</span></span>
+<span class="line"><span style="color:#E1E4E8">};</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">VNode Adjlist[maxn];</span><span style="color:#6A737D">	// 全图</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">int</span><span style="color:#B392F0"> main</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">	int</span><span style="color:#E1E4E8"> n, m;</span></span>
+<span class="line"><span style="color:#E1E4E8">	cin </span><span style="color:#F97583">>></span><span style="color:#E1E4E8"> n </span><span style="color:#F97583">>></span><span style="color:#E1E4E8"> m;</span></span>
+<span class="line"><span style="color:#E1E4E8">	</span></span>
+<span class="line"><span style="color:#6A737D">	// 读入数据</span></span>
+<span class="line"><span style="color:#F97583">	for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">int</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;i </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> m;i</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">		int</span><span style="color:#E1E4E8"> fi, ti, wi;</span></span>
+<span class="line"><span style="color:#E1E4E8">		cin </span><span style="color:#F97583">>></span><span style="color:#E1E4E8"> fi </span><span style="color:#F97583">>></span><span style="color:#E1E4E8"> ti </span><span style="color:#F97583">>></span><span style="color:#E1E4E8"> wi;</span></span>
+<span class="line"><span style="color:#6A737D">		// 创建一个新的边结构数据</span></span>
+<span class="line"><span style="color:#E1E4E8">		EdgeNode</span><span style="color:#F97583">*</span><span style="color:#E1E4E8"> p </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> EdgeNode</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#6A737D">		// 给该数据传值</span></span>
+<span class="line"><span style="color:#E1E4E8">		p->to </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> ti;</span></span>
+<span class="line"><span style="color:#E1E4E8">		p->w </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> wi;</span></span>
+<span class="line"><span style="color:#E1E4E8">        </span></span>
+<span class="line"><span style="color:#6A737D">		// 该新边的next指针指向上一个链接到起点为fi的单链表中的起点</span></span>
+<span class="line"><span style="color:#6A737D">        /*</span></span>
+<span class="line"><span style="color:#6A737D">        （相当于在前面插入，这点可以观察遍历输出部分发现，比如先读入的v1-->v2后读入的v1-->v6，但在储存时我们将后来的v1-->v6插入在了v1-->v2前面）</span></span>
+<span class="line"><span style="color:#6A737D">        */</span></span>
+<span class="line"><span style="color:#E1E4E8">		p->next </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Adjlist[fi].first;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">		// 将起点为fi的单链表的指针更新为这个新传入边的地址</span></span>
+<span class="line"><span style="color:#E1E4E8">		Adjlist[fi].first </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> p;</span></span>
+<span class="line"><span style="color:#E1E4E8">	}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">	// 遍历</span></span>
+<span class="line"><span style="color:#F97583">	for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">int</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">;i </span><span style="color:#F97583">&#x3C;=</span><span style="color:#E1E4E8"> n;i</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">		cout </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#9ECBFF"> "点v"</span><span style="color:#F97583"> &#x3C;&#x3C;</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#9ECBFF"> "为起点的边："</span><span style="color:#F97583"> &#x3C;&#x3C;</span><span style="color:#E1E4E8"> endl;</span></span>
+<span class="line"><span style="color:#F97583">		int</span><span style="color:#E1E4E8"> ind </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">		for</span><span style="color:#E1E4E8"> (EdgeNode</span><span style="color:#F97583">*</span><span style="color:#E1E4E8"> k </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Adjlist[i].first;k </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> NULL</span><span style="color:#E1E4E8">;k </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> k->next) {</span></span>
+<span class="line"><span style="color:#6A737D">			// 指针遍历该链表至结束</span></span>
+<span class="line"><span style="color:#E1E4E8">			cout </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#9ECBFF"> "v"</span><span style="color:#F97583"> &#x3C;&#x3C;</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#9ECBFF"> " -->v"</span><span style="color:#F97583"> &#x3C;&#x3C;</span><span style="color:#E1E4E8"> k->to </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#9ECBFF"> " 权值为："</span><span style="color:#F97583"> &#x3C;&#x3C;</span><span style="color:#E1E4E8"> k->w </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#9ECBFF"> " 该边记录在点v"</span><span style="color:#F97583"> &#x3C;&#x3C;</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#9ECBFF"> "的单链表的第"</span><span style="color:#F97583"> &#x3C;&#x3C;</span><span style="color:#E1E4E8"> ind</span><span style="color:#F97583">++</span><span style="color:#F97583"> &#x3C;&#x3C;</span><span style="color:#9ECBFF"> "个"</span><span style="color:#F97583"> &#x3C;&#x3C;</span><span style="color:#E1E4E8"> endl;</span></span>
+<span class="line"><span style="color:#E1E4E8">		}</span></span>
+<span class="line"><span style="color:#E1E4E8">		cout </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#9ECBFF"> "点v"</span><span style="color:#F97583"> &#x3C;&#x3C;</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#9ECBFF"> "为的度数为："</span><span style="color:#F97583"> &#x3C;&#x3C;</span><span style="color:#E1E4E8"> ind </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#E1E4E8"> endl;</span></span>
+<span class="line"><span style="color:#E1E4E8">		cout </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#E1E4E8"> endl;</span></span>
+<span class="line"><span style="color:#E1E4E8">	}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">	return</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// Output:</span></span>
+<span class="line"><span style="color:#6A737D">/*</span></span>
+<span class="line"><span style="color:#6A737D">点v1为起点的边：</span></span>
+<span class="line"><span style="color:#6A737D">v1 -->v6 权值为：9 该边记录在点v1的单链表的第0个</span></span>
+<span class="line"><span style="color:#6A737D">v1 -->v2 权值为：4 该边记录在点v1的单链表的第1个</span></span>
+<span class="line"><span style="color:#6A737D">点v1为的度数为：2</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">点v2为起点的边：</span></span>
+<span class="line"><span style="color:#6A737D">点v2为的度数为：0</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">点v3为起点的边：</span></span>
+<span class="line"><span style="color:#6A737D">v3 -->v2 权值为：19 该边记录在点v3的单链表的第0个</span></span>
+<span class="line"><span style="color:#6A737D">v3 -->v1 权值为：22 该边记录在点v3的单链表的第1个</span></span>
+<span class="line"><span style="color:#6A737D">点v3为的度数为：2</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">点v4为起点的边：</span></span>
+<span class="line"><span style="color:#6A737D">v4 -->v3 权值为：17 该边记录在点v4的单链表的第0个</span></span>
+<span class="line"><span style="color:#6A737D">点v4为的度数为：1</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">点v5为起点的边：</span></span>
+<span class="line"><span style="color:#6A737D">v5 -->v8 权值为：29 该边记录在点v5的单链表的第0个</span></span>
+<span class="line"><span style="color:#6A737D">点v5为的度数为：1</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">点v6为起点的边：</span></span>
+<span class="line"><span style="color:#6A737D">v6 -->v7 权值为：4 该边记录在点v6的单链表的第0个</span></span>
+<span class="line"><span style="color:#6A737D">v6 -->v5 权值为：9 该边记录在点v6的单链表的第1个</span></span>
+<span class="line"><span style="color:#6A737D">v6 -->v1 权值为：12 该边记录在点v6的单链表的第2个</span></span>
+<span class="line"><span style="color:#6A737D">点v6为的度数为：3</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">点v7为起点的边：</span></span>
+<span class="line"><span style="color:#6A737D">v7 -->v4 权值为：25 该边记录在点v7的单链表的第0个</span></span>
+<span class="line"><span style="color:#6A737D">点v7为的度数为：1</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">点v8为起点的边：</span></span>
+<span class="line"><span style="color:#6A737D">v8 -->v7 权值为：7 该边记录在点v8的单链表的第0个</span></span>
+<span class="line"><span style="color:#6A737D">v8 -->v3 权值为：11 该边记录在点v8的单链表的第1个</span></span>
+<span class="line"><span style="color:#6A737D">点v8为的度数为：2</span></span>
+<span class="line"><span style="color:#6A737D">*/</span></span></code></pre>
+<p>注意到，无向图中各点的度正好是各点的单链表中链节的个数，也就是上述代码中<code>ind</code>最后的结果值，而之余有向图，<code>ind</code>就是对应顶点的出度。</p>
+<p>若要求得入度则必须遍历整个邻接表或者建立一个逆链接表（以v<del>i</del>边为终边的链接表）。</p>
+<p>注意：一个图 的邻接表不是唯一的，其具体的邻接次序与边的输入次序有关。</p>
+<h5 id="2-vector模拟链表实现">2. vector模拟链表实现</h5>
+<p>vector模拟链表的实现方式与前一种区别不大（前插入和后插入的区别？反正基本没有质变）</p>
+<p>不过这种方式代码量少，不容易出错，也不用指针指来指去。也不需要我们来考虑内存的申请和释放。比较友好（qwq）</p>
+<p>需要数据结构：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="cpp"><code><span class="line"><span style="color:#F97583">struct</span><span style="color:#B392F0"> EdgeNode</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">	int</span><span style="color:#E1E4E8"> to;</span><span style="color:#6A737D">		// 终点</span></span>
+<span class="line"><span style="color:#F97583">	int</span><span style="color:#E1E4E8"> w;</span><span style="color:#6A737D">		// 权值</span></span>
+<span class="line"><span style="color:#E1E4E8">};</span></span>
+<span class="line"><span style="color:#E1E4E8">vector</span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8">EdgeNode</span><span style="color:#F97583">></span><span style="color:#E1E4E8">mp[maxn];</span></span></code></pre>
+<p>完整代码：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="cpp"><code><span class="line"><span style="color:#F97583">#include</span><span style="color:#9ECBFF">&#x3C;bits/stdc++.h></span></span>
+<span class="line"><span style="color:#F97583">using</span><span style="color:#F97583"> namespace</span><span style="color:#B392F0"> std</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#F97583"> long</span><span style="color:#F97583"> long</span><span style="color:#E1E4E8"> maxn </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 1</span><span style="color:#F97583">e</span><span style="color:#79B8FF">5</span><span style="color:#F97583"> +</span><span style="color:#79B8FF"> 50</span><span style="color:#E1E4E8">, maxm </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 1</span><span style="color:#F97583">e</span><span style="color:#79B8FF">7</span><span style="color:#F97583"> +</span><span style="color:#79B8FF"> 50</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">struct</span><span style="color:#B392F0"> EdgeNode</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">	int</span><span style="color:#E1E4E8"> to;</span><span style="color:#6A737D">		// 终点</span></span>
+<span class="line"><span style="color:#F97583">	int</span><span style="color:#E1E4E8"> w;</span><span style="color:#6A737D">		// 权值</span></span>
+<span class="line"><span style="color:#E1E4E8">};</span></span>
+<span class="line"><span style="color:#E1E4E8">vector</span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8">EdgeNode</span><span style="color:#F97583">></span><span style="color:#E1E4E8">mp[maxn];</span></span>
+<span class="line"><span style="color:#F97583">int</span><span style="color:#B392F0"> main</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">	int</span><span style="color:#E1E4E8"> n, m;</span></span>
+<span class="line"><span style="color:#E1E4E8">	cin </span><span style="color:#F97583">>></span><span style="color:#E1E4E8"> n </span><span style="color:#F97583">>></span><span style="color:#E1E4E8"> m;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">	// 读入数据</span></span>
+<span class="line"><span style="color:#F97583">	for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">int</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;i </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> m;i</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">		EdgeNode e;</span></span>
+<span class="line"><span style="color:#F97583">		int</span><span style="color:#E1E4E8"> fi, ti, wi;</span></span>
+<span class="line"><span style="color:#E1E4E8">		cin </span><span style="color:#F97583">>></span><span style="color:#E1E4E8"> fi </span><span style="color:#F97583">>></span><span style="color:#E1E4E8"> ti </span><span style="color:#F97583">>></span><span style="color:#E1E4E8"> wi;</span></span>
+<span class="line"><span style="color:#E1E4E8">		</span></span>
+<span class="line"><span style="color:#E1E4E8">		e.to </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> ti;</span></span>
+<span class="line"><span style="color:#E1E4E8">		e.w </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> wi;</span></span>
+<span class="line"><span style="color:#E1E4E8">		mp[fi].</span><span style="color:#B392F0">push_back</span><span style="color:#E1E4E8">(e);</span></span>
+<span class="line"><span style="color:#E1E4E8">	}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">	// 遍历</span></span>
+<span class="line"><span style="color:#F97583">	for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">int</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">;i </span><span style="color:#F97583">&#x3C;=</span><span style="color:#E1E4E8"> n;i</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">		cout </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#9ECBFF"> "点v"</span><span style="color:#F97583"> &#x3C;&#x3C;</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#9ECBFF"> "为起点的边："</span><span style="color:#F97583"> &#x3C;&#x3C;</span><span style="color:#E1E4E8"> endl;</span></span>
+<span class="line"><span style="color:#E1E4E8">		</span></span>
+<span class="line"><span style="color:#B392F0">		vector</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">EdgeNode</span><span style="color:#E1E4E8">>::iterator it </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> mp[i].</span><span style="color:#B392F0">begin</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">		int</span><span style="color:#E1E4E8"> ind </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">		for</span><span style="color:#E1E4E8"> (;it </span><span style="color:#F97583">!=</span><span style="color:#E1E4E8"> mp[i].</span><span style="color:#B392F0">end</span><span style="color:#E1E4E8">();it</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">			cout </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#9ECBFF"> "v"</span><span style="color:#F97583"> &#x3C;&#x3C;</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#9ECBFF"> "-->v"</span><span style="color:#F97583"> &#x3C;&#x3C;</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">*</span><span style="color:#E1E4E8">it).to </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#9ECBFF"> " 权值为："</span><span style="color:#F97583"> &#x3C;&#x3C;</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">*</span><span style="color:#E1E4E8">it).w </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#9ECBFF"> " 该边在所有以点v"</span><span style="color:#F97583"> &#x3C;&#x3C;</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#9ECBFF"> "为起点的边中序号为"</span><span style="color:#F97583"> &#x3C;&#x3C;</span><span style="color:#E1E4E8"> ind</span><span style="color:#F97583">++</span><span style="color:#F97583"> &#x3C;&#x3C;</span><span style="color:#E1E4E8"> endl;</span></span>
+<span class="line"><span style="color:#E1E4E8">		}</span></span>
+<span class="line"><span style="color:#E1E4E8">		cout </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#9ECBFF"> "点v"</span><span style="color:#F97583"> &#x3C;&#x3C;</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#9ECBFF"> "的度数为："</span><span style="color:#F97583"> &#x3C;&#x3C;</span><span style="color:#E1E4E8"> ind </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#E1E4E8"> endl;</span></span>
+<span class="line"><span style="color:#E1E4E8">		cout </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#E1E4E8"> endl;</span></span>
+<span class="line"><span style="color:#E1E4E8">	}</span></span>
+<span class="line"><span style="color:#E1E4E8">	</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">	return</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"><span style="color:#6A737D">// Output:</span></span>
+<span class="line"><span style="color:#6A737D">/*</span></span>
+<span class="line"><span style="color:#6A737D">点v1为起点的边：</span></span>
+<span class="line"><span style="color:#6A737D">v1-->v2 权值为：4 该边在所有以点v1为起点的边中序号为0</span></span>
+<span class="line"><span style="color:#6A737D">v1-->v6 权值为：9 该边在所有以点v1为起点的边中序号为1</span></span>
+<span class="line"><span style="color:#6A737D">点v1的度数为：2</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">点v2为起点的边：</span></span>
+<span class="line"><span style="color:#6A737D">点v2的度数为：0</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">点v3为起点的边：</span></span>
+<span class="line"><span style="color:#6A737D">v3-->v1 权值为：22 该边在所有以点v3为起点的边中序号为0</span></span>
+<span class="line"><span style="color:#6A737D">v3-->v2 权值为：19 该边在所有以点v3为起点的边中序号为1</span></span>
+<span class="line"><span style="color:#6A737D">点v3的度数为：2</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">点v4为起点的边：</span></span>
+<span class="line"><span style="color:#6A737D">v4-->v3 权值为：17 该边在所有以点v4为起点的边中序号为0</span></span>
+<span class="line"><span style="color:#6A737D">点v4的度数为：1</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">点v5为起点的边：</span></span>
+<span class="line"><span style="color:#6A737D">v5-->v8 权值为：29 该边在所有以点v5为起点的边中序号为0</span></span>
+<span class="line"><span style="color:#6A737D">点v5的度数为：1</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">点v6为起点的边：</span></span>
+<span class="line"><span style="color:#6A737D">v6-->v1 权值为：12 该边在所有以点v6为起点的边中序号为0</span></span>
+<span class="line"><span style="color:#6A737D">v6-->v5 权值为：9 该边在所有以点v6为起点的边中序号为1</span></span>
+<span class="line"><span style="color:#6A737D">v6-->v7 权值为：4 该边在所有以点v6为起点的边中序号为2</span></span>
+<span class="line"><span style="color:#6A737D">点v6的度数为：3</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">点v7为起点的边：</span></span>
+<span class="line"><span style="color:#6A737D">v7-->v4 权值为：25 该边在所有以点v7为起点的边中序号为0</span></span>
+<span class="line"><span style="color:#6A737D">点v7的度数为：1</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">点v8为起点的边：</span></span>
+<span class="line"><span style="color:#6A737D">v8-->v3 权值为：11 该边在所有以点v8为起点的边中序号为0</span></span>
+<span class="line"><span style="color:#6A737D">v8-->v7 权值为：7 该边在所有以点v8为起点的边中序号为1</span></span>
+<span class="line"><span style="color:#6A737D">点v8的度数为：2</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">*/</span></span></code></pre>
+<h5 id="3-静态建表链式前向星">3. ★★★静态建表（链式前向星）</h5>
+<p>邻接表的静态建表存储图的方式也称链式前向星，基于前向星，以提高构造效率为目的设计的存储方式，最终形成的数据是一个变形的邻接表。</p>
+<p>链式前向星采用数组模拟链表的方式实现邻接表的功能，使用很少的额外空间，<u>是目前建图和遍历效率最高的存储方式。</u></p>
+<p>数据结构：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="cpp"><code><span class="line"><span style="color:#F97583">struct</span><span style="color:#B392F0"> EdgeNode</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">	int</span><span style="color:#E1E4E8"> to;</span><span style="color:#6A737D">		// 终点</span></span>
+<span class="line"><span style="color:#F97583">	int</span><span style="color:#E1E4E8"> w;</span><span style="color:#6A737D">		// 权值</span></span>
+<span class="line"><span style="color:#F97583">	int</span><span style="color:#E1E4E8"> next;</span><span style="color:#6A737D">	// 下一位置</span></span>
+<span class="line"><span style="color:#E1E4E8">};</span></span>
+<span class="line"><span style="color:#E1E4E8">EdgeNode Edge[maxm];</span></span>
+<span class="line"><span style="color:#F97583">int</span><span style="color:#E1E4E8"> head[maxn];</span></span></code></pre>
+<p>数组模拟链表的主要方式是记录下一节点的位置在整个数组的位置坐标，并将这个标志坐标存在一个head数组中，遍历时根据输入的边的信息更新head对应的更新位置，并将原来的节点信息存在此时读入的边的next数据中。</p>
+<p>存值方式：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="cpp"><code><span class="line"><span style="color:#6A737D">// 读入数据</span></span>
+<span class="line"><span style="color:#F97583">for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">int</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;i </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> m;i</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">    int</span><span style="color:#E1E4E8"> fi, ti, wi;</span></span>
+<span class="line"><span style="color:#E1E4E8">    cin </span><span style="color:#F97583">>></span><span style="color:#E1E4E8"> fi </span><span style="color:#F97583">>></span><span style="color:#E1E4E8"> ti </span><span style="color:#F97583">>></span><span style="color:#E1E4E8"> wi;</span></span>
+<span class="line"><span style="color:#E1E4E8">    Edge[i].to </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> ti;</span></span>
+<span class="line"><span style="color:#E1E4E8">    Edge[i].w </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> wi;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    Edge[i].next </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> head[fi];</span></span>
+<span class="line"><span style="color:#E1E4E8">    head[fi] </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> i;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>完整代码：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="cpp"><code><span class="line"><span style="color:#F97583">#include</span><span style="color:#9ECBFF">&#x3C;bits/stdc++.h></span></span>
+<span class="line"><span style="color:#F97583">using</span><span style="color:#F97583"> namespace</span><span style="color:#B392F0"> std</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#F97583"> long</span><span style="color:#F97583"> long</span><span style="color:#E1E4E8"> maxn </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 1</span><span style="color:#F97583">e</span><span style="color:#79B8FF">5</span><span style="color:#F97583"> +</span><span style="color:#79B8FF"> 50</span><span style="color:#E1E4E8">, maxm </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 1</span><span style="color:#F97583">e</span><span style="color:#79B8FF">7</span><span style="color:#F97583"> +</span><span style="color:#79B8FF"> 50</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">struct</span><span style="color:#B392F0"> EdgeNode</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">	int</span><span style="color:#E1E4E8"> to;</span><span style="color:#6A737D">		// 终点</span></span>
+<span class="line"><span style="color:#F97583">	int</span><span style="color:#E1E4E8"> w;</span><span style="color:#6A737D">		// 权值</span></span>
+<span class="line"><span style="color:#F97583">	int</span><span style="color:#E1E4E8"> next;</span><span style="color:#6A737D">	// 下一位置</span></span>
+<span class="line"><span style="color:#E1E4E8">};</span></span>
+<span class="line"><span style="color:#E1E4E8">EdgeNode Edge[maxm];</span></span>
+<span class="line"><span style="color:#F97583">int</span><span style="color:#E1E4E8"> head[maxn];</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">int</span><span style="color:#B392F0"> main</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">	int</span><span style="color:#E1E4E8"> n, m;</span></span>
+<span class="line"><span style="color:#E1E4E8">	cin </span><span style="color:#F97583">>></span><span style="color:#E1E4E8"> n </span><span style="color:#F97583">>></span><span style="color:#E1E4E8"> m;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">	// 初始化head</span></span>
+<span class="line"><span style="color:#B392F0">	memset</span><span style="color:#E1E4E8">(head, </span><span style="color:#F97583">-</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">sizeof</span><span style="color:#E1E4E8">(head));</span></span>
+<span class="line"><span style="color:#E1E4E8">	</span></span>
+<span class="line"><span style="color:#6A737D">	// 读入数据</span></span>
+<span class="line"><span style="color:#F97583">	for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">int</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;i </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> m;i</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">		int</span><span style="color:#E1E4E8"> fi, ti, wi;</span></span>
+<span class="line"><span style="color:#E1E4E8">		cin </span><span style="color:#F97583">>></span><span style="color:#E1E4E8"> fi </span><span style="color:#F97583">>></span><span style="color:#E1E4E8"> ti </span><span style="color:#F97583">>></span><span style="color:#E1E4E8"> wi;</span></span>
+<span class="line"><span style="color:#E1E4E8">		Edge[i].to </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> ti;</span></span>
+<span class="line"><span style="color:#E1E4E8">		Edge[i].w </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> wi;</span></span>
+<span class="line"><span style="color:#E1E4E8">		</span></span>
+<span class="line"><span style="color:#E1E4E8">		Edge[i].next </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> head[fi];</span></span>
+<span class="line"><span style="color:#E1E4E8">		head[fi] </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> i;</span></span>
+<span class="line"><span style="color:#E1E4E8">	}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">	</span></span>
+<span class="line"><span style="color:#6A737D">	// 遍历</span></span>
+<span class="line"><span style="color:#F97583">	for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">int</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">;i </span><span style="color:#F97583">&#x3C;=</span><span style="color:#E1E4E8"> n;i</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">		cout </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#9ECBFF"> "点v"</span><span style="color:#F97583"> &#x3C;&#x3C;</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#9ECBFF"> "为起点的边："</span><span style="color:#F97583"> &#x3C;&#x3C;</span><span style="color:#E1E4E8"> endl;</span></span>
+<span class="line"><span style="color:#E1E4E8">		</span></span>
+<span class="line"><span style="color:#F97583">		int</span><span style="color:#E1E4E8"> ind </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">		for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">int</span><span style="color:#E1E4E8"> j </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> head[i];j </span><span style="color:#F97583">!=</span><span style="color:#F97583"> -</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">;j </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Edge[j].next) {</span></span>
+<span class="line"><span style="color:#E1E4E8">			cout </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#9ECBFF"> "v"</span><span style="color:#F97583"> &#x3C;&#x3C;</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#9ECBFF"> "-->v"</span><span style="color:#F97583"> &#x3C;&#x3C;</span><span style="color:#E1E4E8"> Edge[j].to </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#9ECBFF"> " 权值为："</span><span style="color:#F97583"> &#x3C;&#x3C;</span><span style="color:#E1E4E8"> Edge[j].w </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#9ECBFF"> " 该边在所有以点v"</span><span style="color:#F97583"> &#x3C;&#x3C;</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#9ECBFF"> "为起点的边中序号为"</span><span style="color:#F97583"> &#x3C;&#x3C;</span><span style="color:#E1E4E8"> ind</span><span style="color:#F97583">++</span><span style="color:#F97583"> &#x3C;&#x3C;</span><span style="color:#E1E4E8"> endl;</span></span>
+<span class="line"><span style="color:#E1E4E8">		}</span></span>
+<span class="line"><span style="color:#E1E4E8">		cout </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#9ECBFF"> "点v"</span><span style="color:#F97583"> &#x3C;&#x3C;</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#9ECBFF"> "的度数为："</span><span style="color:#F97583"> &#x3C;&#x3C;</span><span style="color:#E1E4E8"> ind </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#E1E4E8"> endl;</span></span>
+<span class="line"><span style="color:#E1E4E8">		cout </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#E1E4E8"> endl;</span></span>
+<span class="line"><span style="color:#E1E4E8">	}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">	// 展示一下head数组里的内容：</span></span>
+<span class="line"><span style="color:#E1E4E8">	cout </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#9ECBFF"> "----------head数组里的内容----------"</span><span style="color:#F97583"> &#x3C;&#x3C;</span><span style="color:#E1E4E8"> endl;</span></span>
+<span class="line"><span style="color:#F97583">	for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">int</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">;i </span><span style="color:#F97583">&#x3C;=</span><span style="color:#E1E4E8"> n;i</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">		cout </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#9ECBFF"> "head["</span><span style="color:#F97583"> &#x3C;&#x3C;</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#9ECBFF"> "]="</span><span style="color:#F97583"> &#x3C;&#x3C;</span><span style="color:#E1E4E8"> head[i] </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#E1E4E8"> endl;</span></span>
+<span class="line"><span style="color:#E1E4E8">	cout </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#E1E4E8"> endl;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">	return</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// Output:</span></span>
+<span class="line"><span style="color:#6A737D">/*</span></span>
+<span class="line"><span style="color:#6A737D">点v1为起点的边：</span></span>
+<span class="line"><span style="color:#6A737D">v1-->v6 权值为：9 该边在所有以点v1为起点的边中序号为0</span></span>
+<span class="line"><span style="color:#6A737D">v1-->v2 权值为：4 该边在所有以点v1为起点的边中序号为1</span></span>
+<span class="line"><span style="color:#6A737D">点v1的度数为：2</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">点v2为起点的边：</span></span>
+<span class="line"><span style="color:#6A737D">点v2的度数为：0</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">点v3为起点的边：</span></span>
+<span class="line"><span style="color:#6A737D">v3-->v2 权值为：19 该边在所有以点v3为起点的边中序号为0</span></span>
+<span class="line"><span style="color:#6A737D">v3-->v1 权值为：22 该边在所有以点v3为起点的边中序号为1</span></span>
+<span class="line"><span style="color:#6A737D">点v3的度数为：2</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">点v4为起点的边：</span></span>
+<span class="line"><span style="color:#6A737D">v4-->v3 权值为：17 该边在所有以点v4为起点的边中序号为0</span></span>
+<span class="line"><span style="color:#6A737D">点v4的度数为：1</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">点v5为起点的边：</span></span>
+<span class="line"><span style="color:#6A737D">v5-->v8 权值为：29 该边在所有以点v5为起点的边中序号为0</span></span>
+<span class="line"><span style="color:#6A737D">点v5的度数为：1</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">点v6为起点的边：</span></span>
+<span class="line"><span style="color:#6A737D">v6-->v7 权值为：4 该边在所有以点v6为起点的边中序号为0</span></span>
+<span class="line"><span style="color:#6A737D">v6-->v5 权值为：9 该边在所有以点v6为起点的边中序号为1</span></span>
+<span class="line"><span style="color:#6A737D">v6-->v1 权值为：12 该边在所有以点v6为起点的边中序号为2</span></span>
+<span class="line"><span style="color:#6A737D">点v6的度数为：3</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">点v7为起点的边：</span></span>
+<span class="line"><span style="color:#6A737D">v7-->v4 权值为：25 该边在所有以点v7为起点的边中序号为0</span></span>
+<span class="line"><span style="color:#6A737D">点v7的度数为：1</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">点v8为起点的边：</span></span>
+<span class="line"><span style="color:#6A737D">v8-->v7 权值为：7 该边在所有以点v8为起点的边中序号为0</span></span>
+<span class="line"><span style="color:#6A737D">v8-->v3 权值为：11 该边在所有以点v8为起点的边中序号为1</span></span>
+<span class="line"><span style="color:#6A737D">点v8的度数为：2</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">----------head数组里的内容----------</span></span>
+<span class="line"><span style="color:#6A737D">head[1]=9</span></span>
+<span class="line"><span style="color:#6A737D">head[2]=-1</span></span>
+<span class="line"><span style="color:#6A737D">head[3]=10</span></span>
+<span class="line"><span style="color:#6A737D">head[4]=5</span></span>
+<span class="line"><span style="color:#6A737D">head[5]=0</span></span>
+<span class="line"><span style="color:#6A737D">head[6]=11</span></span>
+<span class="line"><span style="color:#6A737D">head[7]=6</span></span>
+<span class="line"><span style="color:#6A737D">head[8]=8</span></span>
+<span class="line"><span style="color:#6A737D">*/</span></span></code></pre>
+<p>除了不能直接用起点终点确定是否有边外，链式前向星几乎是完美的。</p>
+<h3 id="13图的遍历">1.3图的遍历</h3>
+<p>从v<del>0</del>出发系统的访问图G中所有的顶点，每个顶点访问一次，称为图的遍历。</p>
+<h4 id="深度优先遍历">深度优先遍历</h4>
+<p>从一个节点开始，按照连接，访问到最后一个没有被访问的顶点，然后再从顺序上没有被访问的分路继续访问到最深处，如此循环至全部被访问。</p>
+<p>深度优先样例代码：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="cpp"><code><span class="line"><span style="color:#6A737D">// 用一个布尔型数组来标记是否被遍历到</span></span>
+<span class="line"><span style="color:#F97583">bool</span><span style="color:#E1E4E8"> s[maxn] </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> { </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8"> };</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">void</span><span style="color:#B392F0"> dfs</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">int</span><span style="color:#FFAB70"> x</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#6A737D">	// 传入节点名x</span></span>
+<span class="line"><span style="color:#E1E4E8">	s[x] </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> true</span><span style="color:#E1E4E8">;</span><span style="color:#6A737D">	// 标记被访问</span></span>
+<span class="line"><span style="color:#E1E4E8">	cout </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#E1E4E8"> x </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#9ECBFF"> " "</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">	for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">int</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> head[x];i </span><span style="color:#F97583">!=</span><span style="color:#F97583"> -</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">;i </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Edge[i].next) {</span></span>
+<span class="line"><span style="color:#6A737D">		// 找到该节点为起点的头位置，然后按顺序去遍历下一个和节点x相连的节点位置，并标记访问</span></span>
+<span class="line"><span style="color:#F97583">		if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#E1E4E8">s[Edge[i].to])</span></span>
+<span class="line"><span style="color:#6A737D">			// 如果当前边的终点未被访问，我们就去访问它</span></span>
+<span class="line"><span style="color:#B392F0">			dfs</span><span style="color:#E1E4E8">(Edge[i].to);</span></span>
+<span class="line"><span style="color:#E1E4E8">		</span></span>
+<span class="line"><span style="color:#6A737D">		// 当前边的终点如果已被访问，我们就访问和节点x的下一条边，即给i赋值为Edge[i].next</span></span>
+<span class="line"><span style="color:#E1E4E8">	}</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>完整代码：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="cpp"><code><span class="line"><span style="color:#F97583">#include</span><span style="color:#9ECBFF">&#x3C;bits/stdc++.h></span></span>
+<span class="line"><span style="color:#F97583">using</span><span style="color:#F97583"> namespace</span><span style="color:#B392F0"> std</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#F97583"> long</span><span style="color:#F97583"> long</span><span style="color:#E1E4E8"> maxn </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 1</span><span style="color:#F97583">e</span><span style="color:#79B8FF">5</span><span style="color:#F97583"> +</span><span style="color:#79B8FF"> 50</span><span style="color:#E1E4E8">, maxm </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 1</span><span style="color:#F97583">e</span><span style="color:#79B8FF">7</span><span style="color:#F97583"> +</span><span style="color:#79B8FF"> 50</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">struct</span><span style="color:#B392F0"> EdgeNode</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">	int</span><span style="color:#E1E4E8"> to;</span><span style="color:#6A737D">		// 终点</span></span>
+<span class="line"><span style="color:#F97583">	int</span><span style="color:#E1E4E8"> w;</span><span style="color:#6A737D">		// 权值</span></span>
+<span class="line"><span style="color:#F97583">	int</span><span style="color:#E1E4E8"> next;</span><span style="color:#6A737D">	// 下一位置</span></span>
+<span class="line"><span style="color:#E1E4E8">};</span></span>
+<span class="line"><span style="color:#E1E4E8">EdgeNode Edge[maxm];</span></span>
+<span class="line"><span style="color:#F97583">int</span><span style="color:#E1E4E8"> head[maxn];</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// 用一个布尔型数组来标记是否被遍历到</span></span>
+<span class="line"><span style="color:#F97583">bool</span><span style="color:#E1E4E8"> s[maxn] </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> { </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8"> };</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">void</span><span style="color:#B392F0"> dfs</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">int</span><span style="color:#FFAB70"> x</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#6A737D">	// 传入节点名x</span></span>
+<span class="line"><span style="color:#E1E4E8">	s[x] </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> true</span><span style="color:#E1E4E8">;</span><span style="color:#6A737D">	// 标记被访问</span></span>
+<span class="line"><span style="color:#E1E4E8">	cout </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#E1E4E8"> x </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#9ECBFF"> " "</span><span style="color:#E1E4E8">;</span><span style="color:#6A737D">	// 输出被标记的点（观察顺序）</span></span>
+<span class="line"><span style="color:#F97583">	for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">int</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> head[x];i </span><span style="color:#F97583">!=</span><span style="color:#F97583"> -</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">;i </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Edge[i].next) {</span></span>
+<span class="line"><span style="color:#6A737D">		// 找到该节点为起点的头位置，然后按顺序去遍历下一个和节点x相连的节点位置，并标记访问</span></span>
+<span class="line"><span style="color:#F97583">		if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#E1E4E8">s[Edge[i].to])</span></span>
+<span class="line"><span style="color:#6A737D">			// 如果当前边的终点未被访问，我们就去访问它</span></span>
+<span class="line"><span style="color:#B392F0">			dfs</span><span style="color:#E1E4E8">(Edge[i].to);</span></span>
+<span class="line"><span style="color:#E1E4E8">		</span></span>
+<span class="line"><span style="color:#6A737D">		// 当前边的终点如果已被访问，我们就访问和节点x的下一条边，即给i赋值为Edge[i].next</span></span>
+<span class="line"><span style="color:#E1E4E8">	}</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">int</span><span style="color:#B392F0"> main</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">	int</span><span style="color:#E1E4E8"> n, m;</span></span>
+<span class="line"><span style="color:#E1E4E8">	cin </span><span style="color:#F97583">>></span><span style="color:#E1E4E8"> n </span><span style="color:#F97583">>></span><span style="color:#E1E4E8"> m;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">	// 初始化head</span></span>
+<span class="line"><span style="color:#B392F0">	memset</span><span style="color:#E1E4E8">(head, </span><span style="color:#F97583">-</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">sizeof</span><span style="color:#E1E4E8">(head));</span></span>
+<span class="line"><span style="color:#E1E4E8">	</span></span>
+<span class="line"><span style="color:#6A737D">	// 读入数据</span></span>
+<span class="line"><span style="color:#F97583">	for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">int</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;i </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> m;i</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">		int</span><span style="color:#E1E4E8"> fi, ti, wi;</span></span>
+<span class="line"><span style="color:#E1E4E8">		cin </span><span style="color:#F97583">>></span><span style="color:#E1E4E8"> fi </span><span style="color:#F97583">>></span><span style="color:#E1E4E8"> ti </span><span style="color:#F97583">>></span><span style="color:#E1E4E8"> wi;</span></span>
+<span class="line"><span style="color:#E1E4E8">		Edge[i].to </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> ti;</span></span>
+<span class="line"><span style="color:#E1E4E8">		Edge[i].w </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> wi;</span></span>
+<span class="line"><span style="color:#E1E4E8">		</span></span>
+<span class="line"><span style="color:#E1E4E8">		Edge[i].next </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> head[fi];</span></span>
+<span class="line"><span style="color:#E1E4E8">		head[fi] </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> i;</span></span>
+<span class="line"><span style="color:#E1E4E8">	}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">	// 深度优先访问，从顶点1开始（没有点0啦）</span></span>
+<span class="line"><span style="color:#B392F0">	dfs</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#6A737D">	// Output:</span></span>
+<span class="line"><span style="color:#6A737D">	/*</span></span>
+<span class="line"><span style="color:#6A737D">		1 6 7 4 3 2 5 8</span></span>
+<span class="line"><span style="color:#6A737D">	*/</span></span>
+<span class="line"><span style="color:#6A737D">	// 可以结合图去观察这个顺序，便于理解深度优先搜索</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">	return</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span></code></pre>
+<p>注意：这里还是使用强推的<u>链式前向星</u>数据结构来储存图，因为边在读入的时候是前插入，所以后读入的边会先被遍历。</p>
+<h4 id="广度优先遍历">广度优先遍历</h4>
+<p>广度优先就是先访问顶点v<del>0</del>的所有边的终点，然后再访问第一条边往下延续的未被访问的顶点（第一条边往下没有就第二条边…如此搜索）</p>
+<p>广度优先用到了队列来记录遍历某顶点广度时，遍历的这个终点的下一点(next)是否被遍历，如果未被遍历则标记入队，等待当前顶点按照广度优先被遍历完终点后从该队列中获得下一轮被遍历的点。</p>
+<p>广度优先样例代码：</p>
+<p>（啊啊啊突然发现拼错单词了，其实队列的单词是queue，不过在c++里引用了stl容器还用queue命名不太好吧(虽然没影响)…不管了！算了，还是改过来吧QAQ）</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="cpp"><code><span class="line"><span style="color:#6A737D">// 用一个布尔型数组来标记是否被遍历到</span></span>
+<span class="line"><span style="color:#F97583">bool</span><span style="color:#E1E4E8"> s[maxn] </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> { </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8"> };</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">void</span><span style="color:#B392F0"> bfs</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">int</span><span style="color:#FFAB70"> x</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">	int</span><span style="color:#E1E4E8"> queue[maxn];</span></span>
+<span class="line"><span style="color:#F97583">	int</span><span style="color:#E1E4E8"> iq </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span><span style="color:#6A737D">		// 遍历以x为顶点的起始状态时，队列是空的</span></span>
+<span class="line"><span style="color:#E1E4E8">	queue[iq</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">] </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> x;</span><span style="color:#6A737D">	// 给当前队列添加被访问的这个顶点x</span></span>
+<span class="line"><span style="color:#E1E4E8">	</span></span>
+<span class="line"><span style="color:#F97583">	for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">int</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;i </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> iq;i</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">		</span></span>
+<span class="line"><span style="color:#6A737D">		// 这个队列按序输出可以反应搜索顺序</span></span>
+<span class="line"><span style="color:#E1E4E8">		cout </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#E1E4E8"> queue[i] </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#9ECBFF"> " "</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">		</span></span>
+<span class="line"><span style="color:#6A737D">		// 按照广度优先构造顺序队列(入队的都算作被访问了，下次执行当前循环(i++)将会输出最后入队的该顶点)</span></span>
+<span class="line"><span style="color:#E1E4E8">		</span></span>
+<span class="line"><span style="color:#F97583">		for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">int</span><span style="color:#E1E4E8"> k </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> head[queue[i]];k </span><span style="color:#F97583">!=</span><span style="color:#F97583"> -</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">;k </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Edge[k].next) {</span></span>
+<span class="line"><span style="color:#6A737D">			// 遍历当前节点x相连的节点，即当前边的终点，如果该点没有被访问过，则入队，标记已访问，队长++</span></span>
+<span class="line"><span style="color:#F97583">			if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#E1E4E8">s[Edge[k].to]) {</span></span>
+<span class="line"><span style="color:#E1E4E8">				s[Edge[k].to] </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> true</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">				queue[iq</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">] </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Edge[k].to;</span></span>
+<span class="line"><span style="color:#E1E4E8">			}</span></span>
+<span class="line"><span style="color:#E1E4E8">		}</span></span>
+<span class="line"><span style="color:#E1E4E8">	}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>完整代码：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="cpp"><code><span class="line"><span style="color:#F97583">#include</span><span style="color:#9ECBFF">&#x3C;bits/stdc++.h></span></span>
+<span class="line"><span style="color:#F97583">using</span><span style="color:#F97583"> namespace</span><span style="color:#B392F0"> std</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#F97583"> long</span><span style="color:#F97583"> long</span><span style="color:#E1E4E8"> maxn </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 1</span><span style="color:#F97583">e</span><span style="color:#79B8FF">5</span><span style="color:#F97583"> +</span><span style="color:#79B8FF"> 50</span><span style="color:#E1E4E8">, maxm </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 1</span><span style="color:#F97583">e</span><span style="color:#79B8FF">7</span><span style="color:#F97583"> +</span><span style="color:#79B8FF"> 50</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">struct</span><span style="color:#B392F0"> EdgeNode</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">	int</span><span style="color:#E1E4E8"> to;</span><span style="color:#6A737D">		// 终点</span></span>
+<span class="line"><span style="color:#F97583">	int</span><span style="color:#E1E4E8"> w;</span><span style="color:#6A737D">		// 权值</span></span>
+<span class="line"><span style="color:#F97583">	int</span><span style="color:#E1E4E8"> next;</span><span style="color:#6A737D">	// 下一位置</span></span>
+<span class="line"><span style="color:#E1E4E8">};</span></span>
+<span class="line"><span style="color:#E1E4E8">EdgeNode Edge[maxm];</span></span>
+<span class="line"><span style="color:#F97583">int</span><span style="color:#E1E4E8"> head[maxn];</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// 用一个布尔型数组来标记是否被遍历到</span></span>
+<span class="line"><span style="color:#F97583">bool</span><span style="color:#E1E4E8"> s[maxn] </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> { </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8"> };</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">void</span><span style="color:#B392F0"> bfs</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">int</span><span style="color:#FFAB70"> x</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">	int</span><span style="color:#E1E4E8"> queue[maxn];</span></span>
+<span class="line"><span style="color:#F97583">	int</span><span style="color:#E1E4E8"> iq </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span><span style="color:#6A737D">		// 遍历以x为顶点的起始状态时，队列是空的</span></span>
+<span class="line"><span style="color:#E1E4E8">	queue[iq</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">] </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> x;</span><span style="color:#6A737D">	// 给当前队列添加被访问的这个顶点x</span></span>
+<span class="line"><span style="color:#E1E4E8">	</span></span>
+<span class="line"><span style="color:#F97583">	for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">int</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;i </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> iq;i</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">		</span></span>
+<span class="line"><span style="color:#6A737D">		// 这个队列按序输出可以反应搜索顺序</span></span>
+<span class="line"><span style="color:#E1E4E8">		cout </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#E1E4E8"> queue[i] </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#9ECBFF"> " "</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">		</span></span>
+<span class="line"><span style="color:#6A737D">		// 按照广度优先构造顺序队列(入队的都算作被访问了，下次执行当前循环(i++)将会输出最后入队的该顶点)</span></span>
+<span class="line"><span style="color:#E1E4E8">		</span></span>
+<span class="line"><span style="color:#F97583">		for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">int</span><span style="color:#E1E4E8"> k </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> head[queue[i]];k </span><span style="color:#F97583">!=</span><span style="color:#F97583"> -</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">;k </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Edge[k].next) {</span></span>
+<span class="line"><span style="color:#6A737D">			// 遍历当前节点x相连的节点，即当前边的终点，如果该点没有被访问过，则入队，标记已访问，队长++</span></span>
+<span class="line"><span style="color:#F97583">			if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#E1E4E8">s[Edge[k].to]) {</span></span>
+<span class="line"><span style="color:#E1E4E8">				s[Edge[k].to] </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> true</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">				queue[iq</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">] </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Edge[k].to;</span></span>
+<span class="line"><span style="color:#E1E4E8">			}</span></span>
+<span class="line"><span style="color:#E1E4E8">		}</span></span>
+<span class="line"><span style="color:#E1E4E8">	}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">int</span><span style="color:#B392F0"> main</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">	int</span><span style="color:#E1E4E8"> n, m;</span></span>
+<span class="line"><span style="color:#E1E4E8">	cin </span><span style="color:#F97583">>></span><span style="color:#E1E4E8"> n </span><span style="color:#F97583">>></span><span style="color:#E1E4E8"> m;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">	// 初始化head</span></span>
+<span class="line"><span style="color:#B392F0">	memset</span><span style="color:#E1E4E8">(head, </span><span style="color:#F97583">-</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">sizeof</span><span style="color:#E1E4E8">(head));</span></span>
+<span class="line"><span style="color:#E1E4E8">	</span></span>
+<span class="line"><span style="color:#6A737D">	// 读入数据</span></span>
+<span class="line"><span style="color:#F97583">	for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">int</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;i </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> m;i</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">		int</span><span style="color:#E1E4E8"> fi, ti, wi;</span></span>
+<span class="line"><span style="color:#E1E4E8">		cin </span><span style="color:#F97583">>></span><span style="color:#E1E4E8"> fi </span><span style="color:#F97583">>></span><span style="color:#E1E4E8"> ti </span><span style="color:#F97583">>></span><span style="color:#E1E4E8"> wi;</span></span>
+<span class="line"><span style="color:#E1E4E8">		Edge[i].to </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> ti;</span></span>
+<span class="line"><span style="color:#E1E4E8">		Edge[i].w </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> wi;</span></span>
+<span class="line"><span style="color:#E1E4E8">		</span></span>
+<span class="line"><span style="color:#E1E4E8">		Edge[i].next </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> head[fi];</span></span>
+<span class="line"><span style="color:#E1E4E8">		head[fi] </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> i;</span></span>
+<span class="line"><span style="color:#E1E4E8">	}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">	bfs</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#6A737D">	// Output:</span></span>
+<span class="line"><span style="color:#6A737D">	/*</span></span>
+<span class="line"><span style="color:#6A737D">		1 6 2 7 5 1 4 8 3</span></span>
+<span class="line"><span style="color:#6A737D">	*/</span></span>
+<span class="line"><span style="color:#6A737D">	// 结合图去观察该顺序，便于理解广度优先搜索</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">	return</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span></code></pre>
+<ul>
+<li>深度优先和广度优先都是通过边来搜索检查邻边是否被遍历到，所以时间复杂度相同，不过访问序列不同。</li>
+</ul> <script type="module">let o,c="";const d=e=>!!e.closest(".article-content")&&!e.closest("[data-zoomable-image]")&&!e.closest("a[href]")&&(e.parentElement?.matches(".article-content > p, .article-content figure")??!1),r=e=>{if(!(e instanceof Element))return;const t=e.closest("[data-zoomable-image]")?.querySelector("[data-zoomable-image-target]");if(t instanceof HTMLImageElement&&!t.closest("a[href]"))return t;if(e instanceof HTMLImageElement&&d(e))return e},a=()=>{o&&(o.root.classList.remove("is-open"),o.root.setAttribute("aria-hidden","true"),document.body.style.overflow=c,o.image.removeAttribute("src"),o.image.alt="",o.image.removeAttribute("title"))},m=()=>{const e=document.createElement("div");e.className="zoomable-image-lightbox",e.setAttribute("aria-hidden","true"),e.innerHTML=`
+    <button class="zoomable-image-lightbox__close" type="button" aria-label="Close image preview">
+      <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22">
+        <path d="M18 6 6 18M6 6l12 12" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+      </svg>
+    </button>
+    <img class="zoomable-image-lightbox__image" alt="" />
+  `,document.body.append(e);const t=e.querySelector(".zoomable-image-lightbox__image"),i=e.querySelector(".zoomable-image-lightbox__close");if(!(t instanceof HTMLImageElement)||!(i instanceof HTMLButtonElement))throw new Error("Failed to initialize zoomable image lightbox.");return e.addEventListener("click",n=>{n.target===e&&a()}),i.addEventListener("click",a),{root:e,image:t,closeButton:i}},u=()=>(o??=m(),o),l=e=>{const{root:t,image:i,closeButton:n}=u();c=document.body.style.overflow,i.src=e.currentSrc||e.src,i.alt=e.alt||"",e.title?i.title=e.title:i.removeAttribute("title"),document.body.style.overflow="hidden",t.classList.add("is-open"),t.setAttribute("aria-hidden","false"),n.focus({preventScroll:!0})},s=()=>{window.__navfolioZoomableImagesReady||(window.__navfolioZoomableImagesReady=!0,document.addEventListener("click",e=>{const t=r(e.target);t&&l(t)}),document.addEventListener("keydown",e=>{if(e.key==="Escape"&&o?.root.classList.contains("is-open")){a();return}const t=r(e.target);!t||e.key!=="Enter"&&e.key!==" "||(e.preventDefault(),l(t))}))};document.readyState==="loading"?document.addEventListener("DOMContentLoaded",s,{once:!0}):s();</script>  </section> </article>  <section class="comment-section" aria-label="Comments" data-comment-path="/navfolio-site/blog/algorithm/topics/graph-basic/" data-astro-cid-wwpfc3k4><div class="comment-section-heading" data-astro-cid-wwpfc3k4><p data-astro-cid-wwpfc3k4>Comments</p><span data-astro-cid-wwpfc3k4>Quiet notes for this article.</span></div><div class="comment-provider" data-comment-provider="giscus"></div> <script type="module">const config = {"repo":"dodolalorc/astro-navfolio","repo_id":"R_kgDOSaQejw","category":"Announcements","category_id":"DIC_kwDOSaQej84C9di9","mapping":"pathname","strict":"0","reactions_enabled":"1","emit_metadata":"0","input_position":"top","theme":"preferred_color_scheme","lang":"zh-CN","loading":"lazy"};
+
+  const mountGiscus = () => {
+    const container = document.querySelector('[data-comment-provider="giscus"]');
+
+    if (!container) {
+      return;
+    }
+
+    const script = document.createElement('script');
+    script.src = 'https://giscus.app/client.js';
+    script.async = true;
+    script.crossOrigin = 'anonymous';
+    script.setAttribute('data-repo', config.repo);
+    script.setAttribute('data-repo-id', config.repo_id);
+    script.setAttribute('data-category', config.category);
+    script.setAttribute('data-category-id', config.category_id);
+    script.setAttribute('data-mapping', config.mapping);
+    script.setAttribute('data-strict', config.strict);
+    script.setAttribute('data-reactions-enabled', config.reactions_enabled);
+    script.setAttribute('data-emit-metadata', config.emit_metadata);
+    script.setAttribute('data-input-position', config.input_position);
+    script.setAttribute('data-theme', config.theme);
+    script.setAttribute('data-lang', config.lang);
+    script.setAttribute('data-loading', config.loading);
+
+    container.replaceChildren(script);
+  };
+
+  mountGiscus();
+  document.addEventListener('astro:page-load', mountGiscus);
+</script></section> </div> <aside class="right-sidebar" aria-label="Reading tools" data-astro-cid-bl7sqnst> <div class="right-sidebar-inner" data-astro-cid-bl7sqnst><nav class="toc-card blog-card" aria-label="Table of contents" data-toc-root data-astro-cid-ymbpksfa><h2 data-astro-cid-ymbpksfa>Table of contents</h2><ol data-astro-cid-ymbpksfa><li data-astro-cid-ymbpksfa><a href="#11图的定义" data-toc-link data-toc-hash="#11图的定义" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>1</span>1.1图的定义</a></li><li data-astro-cid-ymbpksfa><a href="#12图的存储" data-toc-link data-toc-hash="#12图的存储" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>2</span>1.2图的存储</a></li><li data-astro-cid-ymbpksfa><a href="#13图的遍历" data-toc-link data-toc-hash="#13图的遍历" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>3</span>1.3图的遍历</a></li></ol></nav></div> </aside> </main></body></html>

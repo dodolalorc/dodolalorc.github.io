@@ -1,0 +1,237 @@
+<!DOCTYPE html><html lang="en" data-palette="green-soft" data-astro-cid-bl7sqnst> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/navfolio-site/_astro/ClientRouter.astro_astro_type_script_index_0_lang.CAqDO0tx.js"></script><script>
+  (() => {
+    const storageKey = 'navfolio-theme';
+    const root = document.documentElement;
+    const themeMeta = () => document.querySelector('meta[name="theme-color"]');
+    const systemTheme = () =>
+      window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    const storedTheme = () => {
+      try {
+        return localStorage.getItem(storageKey);
+      } catch {
+        return null;
+      }
+    };
+    const setStoredTheme = (theme) => {
+      try {
+        localStorage.setItem(storageKey, theme);
+      } catch {}
+    };
+    const applyTheme = (theme, persist = true) => {
+      const nextTheme = theme === 'dark' ? 'dark' : 'light';
+      const toggleLabel = nextTheme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme';
+
+      root.dataset.theme = nextTheme;
+      root.style.colorScheme = nextTheme;
+      themeMeta()?.setAttribute('content', nextTheme === 'dark' ? '#171b18' : '#fdfdf9');
+      for (const button of document.querySelectorAll('[data-theme-toggle]')) {
+        button.setAttribute('aria-label', toggleLabel);
+        button.setAttribute('title', toggleLabel);
+      }
+      if (persist) setStoredTheme(nextTheme);
+    };
+    const syncThemeControls = () => {
+      applyTheme(root.dataset.theme || storedTheme() || systemTheme(), false);
+    };
+
+    applyTheme(storedTheme() || systemTheme(), false);
+
+    if (!window.__navfolioTheme) {
+      window.__navfolioTheme = {
+        toggle() {
+          applyTheme(root.dataset.theme === 'dark' ? 'light' : 'dark');
+        },
+      };
+    }
+
+    if (window.__navfolioThemeInitialized) {
+      syncThemeControls();
+      return;
+    }
+
+    window.__navfolioThemeInitialized = true;
+
+    document.addEventListener('click', (event) => {
+      const toggle = event.target.closest?.('[data-theme-toggle]');
+      if (toggle) window.__navfolioTheme.toggle();
+    });
+
+    document.addEventListener('DOMContentLoaded', syncThemeControls, { once: true });
+    document.addEventListener('astro:page-load', syncThemeControls);
+
+    window.matchMedia?.('(prefers-color-scheme: dark)').addEventListener('change', (event) => {
+      if (!storedTheme()) applyTheme(event.matches ? 'dark' : 'light', false);
+    });
+  })();
+</script><link rel="icon" href="/navfolio-sitefavicon.svg" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/navfolio-sitefavicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/navfolio-sitefavicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/navfolio-siteapple-touch-icon.png"><link rel="manifest" href="/navfolio-sitemanifest.json"><meta name="theme-color" content="#fdfdf9"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="navfolio" href="https://dodolalorc.github.io/rss.xml"><meta name="generator" content="Astro v6.3.5"><style>@font-face{font-family:Atkinson-c7f4c4e8b285552f;src:url("/navfolio-site/_astro/fonts/a3ad966ea116c4c9.woff") format("woff");font-display:swap;font-weight:400;font-style:normal;}@font-face{font-family:Atkinson-c7f4c4e8b285552f;src:url("/navfolio-site/_astro/fonts/e558ed6e1d035617.woff") format("woff");font-display:swap;font-weight:700;font-style:normal;}@font-face{font-family:"Atkinson-c7f4c4e8b285552f fallback: Arial";src:local("Arial");font-display:swap;font-weight:400;font-style:normal;size-adjust:99.3717%;ascent-override:80.1033%;descent-override:25.2587%;line-gap-override:0%;}@font-face{font-family:"Atkinson-c7f4c4e8b285552f fallback: Arial";src:local("Arial");font-display:swap;font-weight:700;font-style:normal;size-adjust:99.3717%;ascent-override:80.1033%;descent-override:25.2587%;line-gap-override:0%;}:root{--font-atkinson:Atkinson-c7f4c4e8b285552f,"Atkinson-c7f4c4e8b285552f fallback: Arial",sans-serif;}</style><link rel="preload" href="/navfolio-site/_astro/fonts/a3ad966ea116c4c9.woff" as="font" type="font/woff" crossorigin><link rel="preload" href="/navfolio-site/_astro/fonts/e558ed6e1d035617.woff" as="font" type="font/woff" crossorigin><!-- Canonical URL --><link rel="canonical" href="https://dodolalorc.github.io/navfolio-site/blog/tech/frontend/dns-query/"><!-- Primary Meta Tags --><title>DNS 查询简述</title><meta name="title" content="DNS 查询简述"><meta name="description" content><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://dodolalorc.github.io/navfolio-site/blog/tech/frontend/dns-query/"><meta property="og:title" content="DNS 查询简述"><meta property="og:description" content><meta property="og:image" content="https://dodolalorc.github.io/navfolio-site/_astro/fail-loading-image.DEm-LhbX.png"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://dodolalorc.github.io/navfolio-site/blog/tech/frontend/dns-query/"><meta property="twitter:title" content="DNS 查询简述"><meta property="twitter:description" content><meta property="twitter:image" content="https://dodolalorc.github.io/navfolio-site/_astro/fail-loading-image.DEm-LhbX.png"><link rel="stylesheet" href="/navfolio-site/_astro/_..1O9rtQI6.css">
+<link rel="stylesheet" href="/navfolio-site/_astro/BlogArticle.BLUUC9fD.css">
+<link rel="stylesheet" href="/navfolio-site/_astro/BaseHead.CscXXfv1.css"></head> <body class="blog-detail-page" data-astro-cid-bl7sqnst> <header class="blog-top-nav" data-pagefind-ignore data-astro-cid-sp6fezam> <button class="mobile-menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav-menu" data-mobile-menu-toggle data-astro-cid-sp6fezam> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="18" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-sp6fezam="true" class="lucide lucide-menu">  <path d="M4 5h16"></path> <path d="M4 12h16"></path> <path d="M4 19h16"></path>  </svg> </button> <a class="brand" href="/navfolio-site/" aria-label="Go to navfolio home" data-astro-cid-sp6fezam> <span class="brand-mark" aria-hidden="true" data-astro-cid-sp6fezam></span> <span class="brand-title" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>navfolio</span> <span class="brand-route" data-astro-cid-sp6fezam> · blog</span> </span> </a> <nav class="nav-links" aria-label="Article navigation" data-astro-cid-sp6fezam> <a class="nav-link" href="/navfolio-site/" data-astro-cid-sp6fezam> Home </a><a class="nav-link active" href="/navfolio-site/blog" data-astro-cid-sp6fezam> Blog </a><a class="nav-link" href="/navfolio-site/projects" data-astro-cid-sp6fezam> Projects </a><a class="nav-link" href="/navfolio-site/vibe" data-astro-cid-sp6fezam> Vibe </a><a class="nav-link" href="/navfolio-site/about" data-astro-cid-sp6fezam> About </a> </nav> <nav class="mobile-menu-panel" id="mobile-nav-menu" aria-label="Mobile navigation" data-mobile-menu data-astro-cid-sp6fezam> <a class="mobile-menu-link" href="/navfolio-site/" data-mobile-menu-link data-astro-cid-sp6fezam> Home </a><a class="mobile-menu-link active" href="/navfolio-site/blog" data-mobile-menu-link data-astro-cid-sp6fezam> Blog </a><a class="mobile-menu-link" href="/navfolio-site/projects" data-mobile-menu-link data-astro-cid-sp6fezam> Projects </a><a class="mobile-menu-link" href="/navfolio-site/vibe" data-mobile-menu-link data-astro-cid-sp6fezam> Vibe </a><a class="mobile-menu-link" href="/navfolio-site/about" data-mobile-menu-link data-astro-cid-sp6fezam> About </a> </nav> <div class="nav-actions" aria-label="Page actions" data-astro-cid-sp6fezam> <a href="https://github.com/dodolalorc/astro-navfolio" target="_blank" rel="noreferrer" aria-label="Open GitHub repository" title="GitHub" data-astro-cid-sp6fezam> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="17" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-sp6fezam="true" class="lucide lucide-github">  <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path> <path d="M9 18c-4.51 2-5-2-7-2"></path>  </svg> </a> <button type="button" data-theme-toggle aria-label="Switch theme" data-astro-cid-sp6fezam> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="17" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-sp6fezam="true" class="lucide lucide-moon theme-icon-moon">  <path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"></path>  </svg> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="17" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-sp6fezam="true" class="lucide lucide-sun theme-icon-sun">  <circle cx="12" cy="12" r="4"></circle> <path d="M12 2v2"></path> <path d="M12 20v2"></path> <path d="m4.93 4.93 1.41 1.41"></path> <path d="m17.66 17.66 1.41 1.41"></path> <path d="M2 12h2"></path> <path d="M20 12h2"></path> <path d="m6.34 17.66-1.41 1.41"></path> <path d="m19.07 4.93-1.41 1.41"></path>  </svg> </button> <div class="site-search" data-site-search-root data-search-max-results="6" data-search-idle-label="Start typing to search." data-search-loading-label="Searching..." data-search-empty-label="No notes found." data-search-unavailable-label="Search index is not available yet. Run a production build first." data-pagefind-ignore data-astro-cid-prkij7br> <button class="site-search-trigger" type="button" aria-label="Search site" aria-expanded="false" aria-controls="site-search-dialog" title="Search (Ctrl K / Cmd K)" data-site-search-trigger data-astro-cid-prkij7br> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="17" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-prkij7br="true" class="lucide lucide-search">  <path d="m21 21-4.34-4.34"></path> <circle cx="11" cy="11" r="8"></circle>  </svg> </button> <div class="site-search-layer" data-site-search-backdrop data-astro-cid-prkij7br> <section class="site-search-dialog" id="site-search-dialog" role="dialog" aria-modal="true" aria-labelledby="site-search-title" data-site-search-dialog data-astro-cid-prkij7br> <header class="site-search-head" data-astro-cid-prkij7br> <div data-astro-cid-prkij7br> <p id="site-search-title" data-astro-cid-prkij7br>Search</p> <span data-astro-cid-prkij7br>Ctrl K / Cmd K</span> </div> <button class="site-search-close" type="button" aria-label="Close search" title="Close search" data-site-search-close data-astro-cid-prkij7br> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="17" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-prkij7br="true" class="lucide lucide-x">  <path d="M18 6 6 18"></path> <path d="m6 6 12 12"></path>  </svg> </button> </header> <label class="site-search-input-wrap" data-astro-cid-prkij7br> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="16" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" aria-hidden="true" data-astro-cid-prkij7br="true" class="lucide lucide-search">  <path d="m21 21-4.34-4.34"></path> <circle cx="11" cy="11" r="8"></circle>  </svg> <input type="search" placeholder="Search notes..." autocomplete="off" spellcheck="false" data-site-search-input data-astro-cid-prkij7br> </label> <p class="site-search-status" data-site-search-status data-astro-cid-prkij7br>Start typing to search.</p> <ol class="site-search-results" data-site-search-results data-astro-cid-prkij7br></ol> </section> </div> </div> <script type="module">const L=["a[href]","button:not([disabled])","input:not([disabled])","textarea:not([disabled])","select:not([disabled])",'[tabindex]:not([tabindex="-1"])'].join(","),h="/navfolio-site",w=`${h.replace(/\/$/,"")}/pagefind/pagefind.js`.replace(/^\/pagefind/,"/pagefind");let d=null,m=null;function q(e){if(/^https?:\/\//.test(e))return e;const t=h.replace(/\/$/,"");return!t||t==="/"||e.startsWith(`${t}/`)?e:e.startsWith("/")?`${t}${e}`:`${t}/${e}`}async function g(){return d||(d=import(w).then(async e=>(await e.options?.({baseUrl:h}),await e.init?.(),e)).catch(e=>{throw d=null,e})),d}function i(e,t){const a=e.querySelector("[data-site-search-status]");a&&(a.textContent=t)}function y(e,t){e.dataset.searchOpen=t?"true":"false",e.querySelector("[data-site-search-trigger]")?.setAttribute("aria-expanded",String(t))}function v(e){return Array.from(e.querySelectorAll(L)).filter(t=>t.offsetParent!==null)}function x(e,t){if(e.key!=="Tab")return;const a=v(t);if(a.length===0)return;const s=a[0],c=a[a.length-1];e.shiftKey&&document.activeElement===s?(e.preventDefault(),c.focus()):!e.shiftKey&&document.activeElement===c&&(e.preventDefault(),s.focus())}function f(e,t){const a=e.querySelector("[data-site-search-results]");if(a){a.replaceChildren();for(const s of t){const c=document.createElement("li"),o=document.createElement("a"),r=document.createElement("span"),l=document.createElement("span");o.href=q(s.url),r.className="site-search-result-title",r.textContent=s.title||s.url,l.className="site-search-result-excerpt",l.innerHTML=s.excerpt,o.append(r,l),c.append(o),a.append(c)}}}function k(e,t){let a;return(...s)=>{window.clearTimeout(a),a=window.setTimeout(()=>e(...s),t)}}function p(){for(const e of document.querySelectorAll("[data-site-search-root]")){if(e.dataset.siteSearchReady==="true")continue;e.dataset.siteSearchReady="true";const t=e.querySelector("[data-site-search-trigger]"),a=e.querySelector("[data-site-search-dialog]"),s=e.querySelector("[data-site-search-input]"),c=e.querySelectorAll("[data-site-search-close]"),o=Number(e.dataset.searchMaxResults||6);if(!t||!a||!s)continue;const r=()=>{y(e,!1),s.value="",f(e,[]),i(e,e.dataset.searchIdleLabel||"Start typing to search."),m?.focus?.()},l=()=>{m=document.activeElement instanceof HTMLElement?document.activeElement:null,y(e,!0),window.setTimeout(()=>s.focus(),30),g().catch(()=>{i(e,e.dataset.searchUnavailableLabel||"Search index is not available yet.")})},b=k(async()=>{const n=s.value.trim();if(!n){f(e,[]),i(e,e.dataset.searchIdleLabel||"Start typing to search.");return}i(e,e.dataset.searchLoadingLabel||"Searching...");try{const S=await(await g()).search(n),u=await Promise.all(S.results.slice(0,o).map(E=>E.data()));f(e,u),i(e,u.length>0?`${u.length} result${u.length===1?"":"s"}`:e.dataset.searchEmptyLabel||"No notes found.")}catch{f(e,[]),i(e,e.dataset.searchUnavailableLabel||"Search index is not available yet.")}},120);t.addEventListener("click",l),s.addEventListener("input",b);for(const n of c)n.addEventListener("click",r);e.addEventListener("click",n=>{n.target.matches("[data-site-search-backdrop]")&&r(),n.target.closest("[data-site-search-results] a")&&r()}),e.addEventListener("keydown",n=>{e.dataset.searchOpen==="true"&&(n.key==="Escape"&&r(),x(n,a))})}}document.addEventListener("keydown",e=>{if(!((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==="k"))return;const a=document.querySelector("[data-site-search-root]"),s=a?.querySelector("[data-site-search-trigger]");if(!(!a||!s)){if(e.preventDefault(),a.dataset.searchOpen==="true"){a.querySelector("[data-site-search-input]")?.focus();return}s.click()}});p();document.addEventListener("astro:page-load",p);p();</script> <button class="toc-action" type="button" aria-label="Open table of contents" aria-expanded="false" aria-controls="mobile-toc-menu" title="Table of contents" data-mobile-toc-trigger data-astro-cid-sp6fezam> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="17" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-sp6fezam="true" class="lucide lucide-list-tree">  <path d="M8 5h13"></path> <path d="M13 12h8"></path> <path d="M13 19h8"></path> <path d="M3 10a2 2 0 0 0 2 2h3"></path> <path d="M3 5v12a2 2 0 0 0 2 2h3"></path>  </svg> </button> </div> <nav class="mobile-toc-panel" id="mobile-toc-menu" aria-label="Article table of contents" data-nav-toc-menu data-toc-root data-astro-cid-sp6fezam> <p data-astro-cid-sp6fezam>Table of contents</p> <ol data-astro-cid-sp6fezam> <li data-astro-cid-sp6fezam> <a href="#技术性的-dns-查询过程" data-nav-toc-link data-toc-link data-toc-hash="#技术性的-dns-查询过程" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>1</span> 技术性的 DNS 查询过程 </a> </li><li data-astro-cid-sp6fezam> <a href="#第-1-步检查本地缓存浏览器--操作系统" data-nav-toc-link data-toc-link data-toc-hash="#第-1-步检查本地缓存浏览器--操作系统" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>2</span> 第 1 步：检查本地缓存（浏览器 &amp; 操作系统） </a> </li><li data-astro-cid-sp6fezam> <a href="#第-2-步联系递归解析器" data-nav-toc-link data-toc-link data-toc-hash="#第-2-步联系递归解析器" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>3</span> 第 2 步：联系递归解析器 </a> </li><li data-astro-cid-sp6fezam> <a href="#第-3--4-步迭代查询过程递归解析器的工作" data-nav-toc-link data-toc-link data-toc-hash="#第-3--4-步迭代查询过程递归解析器的工作" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>4</span> 第 3 &amp; 4 步：迭代查询过程（递归解析器的工作） </a> </li><li data-astro-cid-sp6fezam> <a href="#第-5-步返回结果并缓存" data-nav-toc-link data-toc-link data-toc-hash="#第-5-步返回结果并缓存" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>5</span> 第 5 步：返回结果并缓存 </a> </li><li data-astro-cid-sp6fezam> <a href="#第-6-步建立连接" data-nav-toc-link data-toc-link data-toc-hash="#第-6-步建立连接" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>6</span> 第 6 步：建立连接 </a> </li><li data-astro-cid-sp6fezam> <a href="#重要的补充概念" data-nav-toc-link data-toc-link data-toc-hash="#重要的补充概念" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>7</span> 重要的补充概念 </a> </li> </ol> </nav> </header> <script type="module">const r=()=>{for(const t of document.querySelectorAll(".blog-top-nav")){const o=t.querySelector("[data-mobile-menu-toggle]"),s=t.querySelector("[data-mobile-menu]"),i=t.querySelector("[data-mobile-toc-trigger]"),l=t.querySelector("[data-nav-toc-menu]");if(o&&s&&!t.dataset.mobileMenuReady){t.dataset.mobileMenuReady="true";const a=e=>{t.dataset.mobileMenuOpen=e?"true":"false",o.setAttribute("aria-expanded",String(e)),o.setAttribute("aria-label",e?"Close navigation menu":"Open navigation menu")},n=e=>{!i||!l||(t.dataset.mobileTocOpen=e?"true":"false",i.setAttribute("aria-expanded",String(e)),i.setAttribute("aria-label",e?"Close table of contents":"Open table of contents"))};o.addEventListener("click",()=>{const e=t.dataset.mobileMenuOpen!=="true";a(e),e&&n(!1)}),s.addEventListener("click",e=>{e.target.closest?.("[data-mobile-menu-link]")&&a(!1)}),i?.addEventListener("click",()=>{const e=t.dataset.mobileTocOpen!=="true";n(e),e&&a(!1)}),l?.addEventListener("click",e=>{e.target.closest?.("[data-nav-toc-link]")&&n(!1)}),document.addEventListener("click",e=>{t.contains(e.target)||(a(!1),n(!1))}),document.addEventListener("keydown",e=>{e.key==="Escape"&&(a(!1),n(!1))})}}};r();document.addEventListener("astro:page-load",r);</script> <div class="blog-background" aria-hidden="true" data-astro-cid-bl7sqnst></div> <main class="blog-layout" data-pagefind-body data-astro-cid-bl7sqnst> <div class="article-column" data-astro-cid-bl7sqnst> <article class="article-card" data-astro-cid-bl7sqnst> <header class="article-header" data-astro-cid-wynq62ua>  <h1 data-astro-cid-wynq62ua>DNS 查询简述</h1> <div class="meta-line" aria-label="Article metadata" data-astro-cid-wynq62ua> <span class="meta-item" data-astro-cid-wynq62ua> <time datetime="2025-10-08T18:24:48.000Z"> Oct 8, 2025 </time> </span> <span class="meta-item" data-astro-cid-wynq62ua>1,710 words</span> <span class="meta-item" data-astro-cid-wynq62ua>4 min read</span> <script type="module">const showPageView = false;
+const serverURL = "";
+const selector = ".waline-pageview-count";
+
+  if (showPageView) {
+    const { pageviewCount } = await import('https://unpkg.com/@waline/client@v3/dist/pageview.js');
+
+    const updatePageViews = () => {
+      pageviewCount({
+        serverURL,
+        selector,
+        path: window.location.pathname,
+      });
+    };
+
+    updatePageViews();
+    document.addEventListener('astro:page-load', updatePageViews);
+  }
+</script>  </div>   </header> <section class="mobile-article-toc" aria-label="Article table of contents" data-astro-cid-bl7sqnst> <nav class="toc-card blog-card compact collapsible can-collapse" aria-label="Table of contents" data-toc-root data-mobile-toc data-expanded="false" data-astro-cid-ymbpksfa><h2 data-astro-cid-ymbpksfa>Table of contents</h2><ol id="mobile-article-toc-list" data-astro-cid-ymbpksfa><li data-astro-cid-ymbpksfa><a href="#技术性的-dns-查询过程" data-toc-link data-toc-hash="#技术性的-dns-查询过程" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>1</span>技术性的 DNS 查询过程</a></li><li data-astro-cid-ymbpksfa><a href="#第-1-步检查本地缓存浏览器--操作系统" data-toc-link data-toc-hash="#第-1-步检查本地缓存浏览器--操作系统" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>2</span>第 1 步：检查本地缓存（浏览器 &amp; 操作系统）</a></li><li data-astro-cid-ymbpksfa><a href="#第-2-步联系递归解析器" data-toc-link data-toc-hash="#第-2-步联系递归解析器" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>3</span>第 2 步：联系递归解析器</a></li><li data-astro-cid-ymbpksfa><a href="#第-3--4-步迭代查询过程递归解析器的工作" data-toc-link data-toc-hash="#第-3--4-步迭代查询过程递归解析器的工作" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>4</span>第 3 &amp; 4 步：迭代查询过程（递归解析器的工作）</a></li><li data-astro-cid-ymbpksfa><a href="#第-5-步返回结果并缓存" data-toc-link data-toc-hash="#第-5-步返回结果并缓存" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>5</span>第 5 步：返回结果并缓存</a></li><li data-astro-cid-ymbpksfa><a href="#第-6-步建立连接" data-toc-link data-toc-hash="#第-6-步建立连接" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>6</span>第 6 步：建立连接</a></li><li data-astro-cid-ymbpksfa><a href="#重要的补充概念" data-toc-link data-toc-hash="#重要的补充概念" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>7</span>重要的补充概念</a></li></ol><button class="toc-expand" type="button" aria-label="Expand table of contents" aria-expanded="false" aria-controls="mobile-article-toc-list" data-toc-expand data-astro-cid-ymbpksfa><span data-expand-label data-astro-cid-ymbpksfa>Show all</span><i aria-hidden="true" data-astro-cid-ymbpksfa></i></button></nav><script type="module" src="/navfolio-site/_astro/TableOfContents.astro_astro_type_script_index_0_lang.B3wh3MgY.js"></script> </section> <section id="article-start" class="article-content" data-astro-cid-bl7sqnst>  <blockquote>
+<p>[!abstract]+ 简单比喻：电话簿查询
+想象一下你要找一个你不太熟悉的同事“张三”的电话号码：</p>
+<ol>
+<li><strong>检查手机通讯录</strong>：你先在自己的手机通讯录里找“张三”。（<strong>本地 DNS 缓存</strong>）</li>
+<li><strong>询问办公室前台</strong>：如果通讯录里没有，你会问公司前台，他们有一份全公司的电话簿。（<strong>本地 DNS 解析器</strong>）</li>
+<li><strong>前台查询总部分机目录</strong>：前台也不知道，他会打电话给集团总部的人事部查询。（<strong>根域名服务器</strong>）</li>
+<li><strong>总部指引到分公司人事</strong>：总部人事部说：“张三是上海分公司的，我给你上海分公司人事部的电话。”（<strong>顶级域域名服务器</strong>）</li>
+<li><strong>分公司人事提供号码</strong>：前台打给上海分公司人事部，对方准确地给出了张三的分机号。（<strong>权威域名服务器</strong>）</li>
+<li><strong>前台告诉你号码</strong>：前台把号码告诉你，同时自己也记录一下，下次有人问可以快速回答。（<strong>缓存结果</strong>）</li>
+<li><strong>你拨打号码</strong>：你最终拿到号码，并打给张三。（<strong>建立连接</strong>）</li>
+</ol>
+</blockquote>
+<h2 id="技术性的-dns-查询过程">技术性的 DNS 查询过程</h2>
+<p>DNS 查询的目标是将人类可读的域名（如 <code>www.google.com</code>）转换为机器可读的 IP 地址（如 <code>142.251.42.196</code>）。这个过程是分层的、分布式的。</p>
+<p>一次完整的 DNS 查询会经历以下步骤。下图清晰地展示了这个过程：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="mermaid"><code><span class="line"><span style="color:#E1E4E8">flowchart TD</span></span>
+<span class="line"><span style="color:#E1E4E8">    A[用户访问 www.example.com] --> B{本地缓存/ Hosts文件&#x3C;br>有记录?}</span></span>
+<span class="line"><span style="color:#E1E4E8">    B -- 有 --> C[返回IP地址&#x3C;br>查询结束]</span></span>
+<span class="line"><span style="color:#E1E4E8">    B -- 没有 --> D[向递归解析器查询]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    D --> E{递归解析器缓存&#x3C;br>有记录?}</span></span>
+<span class="line"><span style="color:#E1E4E8">    E -- 有 --> C</span></span>
+<span class="line"><span style="color:#E1E4E8">    E -- 没有 --> F[开始迭代查询]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    subgraph F [迭代查询]</span></span>
+<span class="line"><span style="color:#E1E4E8">        direction TB</span></span>
+<span class="line"><span style="color:#E1E4E8">        G[询问根域名服务器] --> H[返回 .com TLD服务器地址]</span></span>
+<span class="line"><span style="color:#E1E4E8">        H --> I[询问 .com TLD服务器]</span></span>
+<span class="line"><span style="color:#E1E4E8">        I --> J[返回 example.com 权威服务器地址]</span></span>
+<span class="line"><span style="color:#E1E4E8">        J --> K[询问 example.com 权威服务器]</span></span>
+<span class="line"><span style="color:#E1E4E8">        K --> L[返回 www.example.com 的IP地址]</span></span>
+<span class="line"><span style="color:#E1E4E8">    end</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    L --> M[递归解析器向用户&#x3C;br>返回IP并缓存]</span></span>
+<span class="line"><span style="color:#E1E4E8">    M --> N[浏览器向该IP&#x3C;br>发起HTTP连接]</span></span></code></pre>
+<p>现在，我们来详细说明图中的每一步。</p>
+<h3 id="第-1-步检查本地缓存浏览器--操作系统">第 1 步：检查本地缓存（浏览器 &#x26; 操作系统）</h3>
+<p>当你在浏览器中输入一个网址后，计算机会首先在以下地方查找是否有这个域名的 IP 地址缓存：</p>
+<ul>
+<li><strong>浏览器缓存</strong>：浏览器会保存你最近访问过的网站的 DNS 记录。</li>
+<li><strong>操作系统缓存</strong>：操作系统（如 Windows、macOS、Linux）也有自己的 DNS 缓存（例如，在 Windows 中可以通过 <code>ipconfig /displaydns</code> 命令查看）。</li>
+<li><strong>Hosts 文件</strong>：操作系统还会检查本地的 <code>hosts</code> 文件，这个文件可以手动设置域名和 IP 的映射关系。</li>
+</ul>
+<p>如果本地有记录且未过期，则直接使用该 IP，查询结束。</p>
+<h3 id="第-2-步联系递归解析器">第 2 步：联系递归解析器</h3>
+<p>如果本地没有缓存，你的计算机会将查询请求发送到<strong>递归解析器</strong>。</p>
+<ul>
+<li>这个解析器通常由你的<strong>网络服务提供商（ISP）</strong> 提供，你也可以使用公共的 DNS 解析器，如 <code>Google DNS (8.8.8.8)</code> 或 <code>Cloudflare DNS (1.1.1.1)</code>。</li>
+<li>递归解析器有责任替你完成整个查询过程，直到给你返回最终的 IP 地址。它自己也有一个巨大的缓存。如果它缓存了你要查询的域名记录，它会直接返回给你，查询结束。</li>
+</ul>
+<h3 id="第-3--4-步迭代查询过程递归解析器的工作">第 3 &#x26; 4 步：迭代查询过程（递归解析器的工作）</h3>
+<p>如果递归解析器也没有缓存，它就会开始一个“迭代查询”的过程，如下图所示，它会从上至下逐级查询全球的 DNS 系统。</p>
+<ul>
+<li>
+<p><strong>询问根域名服务器</strong>：</p>
+<ul>
+<li>递归解析器首先会去询问 13 组<strong>根域名服务器</strong>（分布在全球）。</li>
+<li>根服务器不存储具体域名的 IP，但它会查看域名的后缀（如 <code>.com</code>），然后返回负责该顶级域的 <strong>TLD 域名服务器</strong>的地址。</li>
+<li>这就好比问“世界的电话总局”：“请问谁知道 <code>.com</code> 区域的事？” 总局告诉你：“你去问 <code>.com</code> 分局吧，这是他们的地址。”</li>
+</ul>
+</li>
+<li>
+<p><strong>询问顶级域域名服务器</strong>：</p>
+<ul>
+<li>递归解析器拿着地址，去询问 <code>.com</code> 的 TLD 服务器。</li>
+<li>TLD 服务器存储着所有以 <code>.com</code> 结尾的域名的信息。它会查看下一部分（如 <code>example</code>），然后返回负责该域（<code>example.com</code>）的<strong>权威域名服务器</strong>的地址。</li>
+<li>这就好比问“.com 分局”：“请问谁知道 <code>example.com</code> 这个公司的事？” 分局告诉你：“你去问 <code>example.com</code> 公司自己的总机吧，这是他们的地址。”</li>
+</ul>
+</li>
+<li>
+<p><strong>询问权威域名服务器</strong>：</p>
+<ul>
+<li>递归解析器最后去询问 <code>example.com</code> 的权威域名服务器。</li>
+<li>这个服务器是域名记录的最终来源，它掌握着该域名下所有主机的真实记录（如 <code>www</code>、<code>mail</code> 等）。它会查找记录，并将 <code>www.example.com</code> 对应的 IP 地址返回给递归解析器。</li>
+<li>这就好比问“公司的总机”：“请给我 <code>www</code> 这个部门的电话。” 总机准确地告诉了你号码。</li>
+</ul>
+</li>
+</ul>
+<h3 id="第-5-步返回结果并缓存">第 5 步：返回结果并缓存</h3>
+<ul>
+<li>递归解析器终于拿到了 <code>www.example.com</code> 的 IP 地址。</li>
+<li>它首先将这个记录<strong>保存到自己的缓存</strong>中一段时间（根据记录中的 TTL 值决定），以便下次快速响应。</li>
+<li>然后，它将最终的 IP 地址<strong>返回给你的操作系统</strong>，操作系统也会缓存它，再传递给浏览器。</li>
+</ul>
+<h3 id="第-6-步建立连接">第 6 步：建立连接</h3>
+<ul>
+<li>浏览器现在拿到了 IP 地址，它就可以向该 IP 的 80（HTTP）或 443（HTTPS）端口发起 TCP 连接，开始加载网页内容。</li>
+</ul>
+<hr>
+<h2 id="重要的补充概念">重要的补充概念</h2>
+<ul>
+<li>
+<p><strong>递归查询 vs. 迭代查询</strong>：</p>
+<ul>
+<li><strong>递归查询</strong>：发生在你的电脑和递归解析器之间。意思是：“我不管你怎么做，你必须给我最终答案（IP）或一个错误消息。”</li>
+<li><strong>迭代查询</strong>：发生在递归解析器和根、TLD、权威服务器之间。意思是：“我问你一个问题，如果你不知道答案，请告诉我下一个该问谁。”</li>
+</ul>
+</li>
+<li>
+<p><strong>DNS 记录类型</strong>：</p>
+<ul>
+<li><strong>A 记录</strong>：将域名指向一个 IPv4 地址。</li>
+<li><strong>AAAA 记录</strong>：将域名指向一个 IPv6 地址。</li>
+<li><strong>CNAME 记录</strong>：将域名指向另一个域名（别名）。</li>
+<li><strong>MX 记录</strong>：指定接收邮件的服务器。</li>
+<li><strong>NS 记录</strong>：指定该域名由哪台权威服务器来解析。</li>
+</ul>
+</li>
+<li>
+<p><strong>DNS 的重要性</strong>：
+DNS 是互联网的“基石”，它使得我们无需记忆复杂的数字 IP 地址。没有 DNS，今天的互联网将无法正常运转。</p>
+</li>
+</ul> <script type="module">let o,c="";const d=e=>!!e.closest(".article-content")&&!e.closest("[data-zoomable-image]")&&!e.closest("a[href]")&&(e.parentElement?.matches(".article-content > p, .article-content figure")??!1),r=e=>{if(!(e instanceof Element))return;const t=e.closest("[data-zoomable-image]")?.querySelector("[data-zoomable-image-target]");if(t instanceof HTMLImageElement&&!t.closest("a[href]"))return t;if(e instanceof HTMLImageElement&&d(e))return e},a=()=>{o&&(o.root.classList.remove("is-open"),o.root.setAttribute("aria-hidden","true"),document.body.style.overflow=c,o.image.removeAttribute("src"),o.image.alt="",o.image.removeAttribute("title"))},m=()=>{const e=document.createElement("div");e.className="zoomable-image-lightbox",e.setAttribute("aria-hidden","true"),e.innerHTML=`
+    <button class="zoomable-image-lightbox__close" type="button" aria-label="Close image preview">
+      <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22">
+        <path d="M18 6 6 18M6 6l12 12" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+      </svg>
+    </button>
+    <img class="zoomable-image-lightbox__image" alt="" />
+  `,document.body.append(e);const t=e.querySelector(".zoomable-image-lightbox__image"),i=e.querySelector(".zoomable-image-lightbox__close");if(!(t instanceof HTMLImageElement)||!(i instanceof HTMLButtonElement))throw new Error("Failed to initialize zoomable image lightbox.");return e.addEventListener("click",n=>{n.target===e&&a()}),i.addEventListener("click",a),{root:e,image:t,closeButton:i}},u=()=>(o??=m(),o),l=e=>{const{root:t,image:i,closeButton:n}=u();c=document.body.style.overflow,i.src=e.currentSrc||e.src,i.alt=e.alt||"",e.title?i.title=e.title:i.removeAttribute("title"),document.body.style.overflow="hidden",t.classList.add("is-open"),t.setAttribute("aria-hidden","false"),n.focus({preventScroll:!0})},s=()=>{window.__navfolioZoomableImagesReady||(window.__navfolioZoomableImagesReady=!0,document.addEventListener("click",e=>{const t=r(e.target);t&&l(t)}),document.addEventListener("keydown",e=>{if(e.key==="Escape"&&o?.root.classList.contains("is-open")){a();return}const t=r(e.target);!t||e.key!=="Enter"&&e.key!==" "||(e.preventDefault(),l(t))}))};document.readyState==="loading"?document.addEventListener("DOMContentLoaded",s,{once:!0}):s();</script>  </section> </article>  <section class="comment-section" aria-label="Comments" data-comment-path="/navfolio-site/blog/tech/frontend/dns-query/" data-astro-cid-wwpfc3k4><div class="comment-section-heading" data-astro-cid-wwpfc3k4><p data-astro-cid-wwpfc3k4>Comments</p><span data-astro-cid-wwpfc3k4>Quiet notes for this article.</span></div><div class="comment-provider" data-comment-provider="giscus"></div> <script type="module">const config = {"repo":"dodolalorc/astro-navfolio","repo_id":"R_kgDOSaQejw","category":"Announcements","category_id":"DIC_kwDOSaQej84C9di9","mapping":"pathname","strict":"0","reactions_enabled":"1","emit_metadata":"0","input_position":"top","theme":"preferred_color_scheme","lang":"zh-CN","loading":"lazy"};
+
+  const mountGiscus = () => {
+    const container = document.querySelector('[data-comment-provider="giscus"]');
+
+    if (!container) {
+      return;
+    }
+
+    const script = document.createElement('script');
+    script.src = 'https://giscus.app/client.js';
+    script.async = true;
+    script.crossOrigin = 'anonymous';
+    script.setAttribute('data-repo', config.repo);
+    script.setAttribute('data-repo-id', config.repo_id);
+    script.setAttribute('data-category', config.category);
+    script.setAttribute('data-category-id', config.category_id);
+    script.setAttribute('data-mapping', config.mapping);
+    script.setAttribute('data-strict', config.strict);
+    script.setAttribute('data-reactions-enabled', config.reactions_enabled);
+    script.setAttribute('data-emit-metadata', config.emit_metadata);
+    script.setAttribute('data-input-position', config.input_position);
+    script.setAttribute('data-theme', config.theme);
+    script.setAttribute('data-lang', config.lang);
+    script.setAttribute('data-loading', config.loading);
+
+    container.replaceChildren(script);
+  };
+
+  mountGiscus();
+  document.addEventListener('astro:page-load', mountGiscus);
+</script></section> </div> <aside class="right-sidebar" aria-label="Reading tools" data-astro-cid-bl7sqnst> <div class="right-sidebar-inner" data-astro-cid-bl7sqnst><nav class="toc-card blog-card" aria-label="Table of contents" data-toc-root data-astro-cid-ymbpksfa><h2 data-astro-cid-ymbpksfa>Table of contents</h2><ol data-astro-cid-ymbpksfa><li data-astro-cid-ymbpksfa><a href="#技术性的-dns-查询过程" data-toc-link data-toc-hash="#技术性的-dns-查询过程" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>1</span>技术性的 DNS 查询过程</a></li><li data-astro-cid-ymbpksfa><a href="#第-1-步检查本地缓存浏览器--操作系统" data-toc-link data-toc-hash="#第-1-步检查本地缓存浏览器--操作系统" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>2</span>第 1 步：检查本地缓存（浏览器 &amp; 操作系统）</a></li><li data-astro-cid-ymbpksfa><a href="#第-2-步联系递归解析器" data-toc-link data-toc-hash="#第-2-步联系递归解析器" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>3</span>第 2 步：联系递归解析器</a></li><li data-astro-cid-ymbpksfa><a href="#第-3--4-步迭代查询过程递归解析器的工作" data-toc-link data-toc-hash="#第-3--4-步迭代查询过程递归解析器的工作" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>4</span>第 3 &amp; 4 步：迭代查询过程（递归解析器的工作）</a></li><li data-astro-cid-ymbpksfa><a href="#第-5-步返回结果并缓存" data-toc-link data-toc-hash="#第-5-步返回结果并缓存" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>5</span>第 5 步：返回结果并缓存</a></li><li data-astro-cid-ymbpksfa><a href="#第-6-步建立连接" data-toc-link data-toc-hash="#第-6-步建立连接" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>6</span>第 6 步：建立连接</a></li><li data-astro-cid-ymbpksfa><a href="#重要的补充概念" data-toc-link data-toc-hash="#重要的补充概念" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>7</span>重要的补充概念</a></li></ol></nav></div> </aside> </main></body></html>

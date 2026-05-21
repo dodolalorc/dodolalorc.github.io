@@ -1,0 +1,298 @@
+<!DOCTYPE html><html lang="en" data-palette="green-soft" data-astro-cid-bl7sqnst> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/navfolio-site/_astro/ClientRouter.astro_astro_type_script_index_0_lang.CAqDO0tx.js"></script><script>
+  (() => {
+    const storageKey = 'navfolio-theme';
+    const root = document.documentElement;
+    const themeMeta = () => document.querySelector('meta[name="theme-color"]');
+    const systemTheme = () =>
+      window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    const storedTheme = () => {
+      try {
+        return localStorage.getItem(storageKey);
+      } catch {
+        return null;
+      }
+    };
+    const setStoredTheme = (theme) => {
+      try {
+        localStorage.setItem(storageKey, theme);
+      } catch {}
+    };
+    const applyTheme = (theme, persist = true) => {
+      const nextTheme = theme === 'dark' ? 'dark' : 'light';
+      const toggleLabel = nextTheme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme';
+
+      root.dataset.theme = nextTheme;
+      root.style.colorScheme = nextTheme;
+      themeMeta()?.setAttribute('content', nextTheme === 'dark' ? '#171b18' : '#fdfdf9');
+      for (const button of document.querySelectorAll('[data-theme-toggle]')) {
+        button.setAttribute('aria-label', toggleLabel);
+        button.setAttribute('title', toggleLabel);
+      }
+      if (persist) setStoredTheme(nextTheme);
+    };
+    const syncThemeControls = () => {
+      applyTheme(root.dataset.theme || storedTheme() || systemTheme(), false);
+    };
+
+    applyTheme(storedTheme() || systemTheme(), false);
+
+    if (!window.__navfolioTheme) {
+      window.__navfolioTheme = {
+        toggle() {
+          applyTheme(root.dataset.theme === 'dark' ? 'light' : 'dark');
+        },
+      };
+    }
+
+    if (window.__navfolioThemeInitialized) {
+      syncThemeControls();
+      return;
+    }
+
+    window.__navfolioThemeInitialized = true;
+
+    document.addEventListener('click', (event) => {
+      const toggle = event.target.closest?.('[data-theme-toggle]');
+      if (toggle) window.__navfolioTheme.toggle();
+    });
+
+    document.addEventListener('DOMContentLoaded', syncThemeControls, { once: true });
+    document.addEventListener('astro:page-load', syncThemeControls);
+
+    window.matchMedia?.('(prefers-color-scheme: dark)').addEventListener('change', (event) => {
+      if (!storedTheme()) applyTheme(event.matches ? 'dark' : 'light', false);
+    });
+  })();
+</script><link rel="icon" href="/navfolio-sitefavicon.svg" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/navfolio-sitefavicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/navfolio-sitefavicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/navfolio-siteapple-touch-icon.png"><link rel="manifest" href="/navfolio-sitemanifest.json"><meta name="theme-color" content="#fdfdf9"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="navfolio" href="https://dodolalorc.github.io/rss.xml"><meta name="generator" content="Astro v6.3.5"><style>@font-face{font-family:Atkinson-c7f4c4e8b285552f;src:url("/navfolio-site/_astro/fonts/a3ad966ea116c4c9.woff") format("woff");font-display:swap;font-weight:400;font-style:normal;}@font-face{font-family:Atkinson-c7f4c4e8b285552f;src:url("/navfolio-site/_astro/fonts/e558ed6e1d035617.woff") format("woff");font-display:swap;font-weight:700;font-style:normal;}@font-face{font-family:"Atkinson-c7f4c4e8b285552f fallback: Arial";src:local("Arial");font-display:swap;font-weight:400;font-style:normal;size-adjust:99.3717%;ascent-override:80.1033%;descent-override:25.2587%;line-gap-override:0%;}@font-face{font-family:"Atkinson-c7f4c4e8b285552f fallback: Arial";src:local("Arial");font-display:swap;font-weight:700;font-style:normal;size-adjust:99.3717%;ascent-override:80.1033%;descent-override:25.2587%;line-gap-override:0%;}:root{--font-atkinson:Atkinson-c7f4c4e8b285552f,"Atkinson-c7f4c4e8b285552f fallback: Arial",sans-serif;}</style><link rel="preload" href="/navfolio-site/_astro/fonts/a3ad966ea116c4c9.woff" as="font" type="font/woff" crossorigin><link rel="preload" href="/navfolio-site/_astro/fonts/e558ed6e1d035617.woff" as="font" type="font/woff" crossorigin><!-- Canonical URL --><link rel="canonical" href="https://dodolalorc.github.io/navfolio-site/blog/algorithm/contest/cfround977div2/"><!-- Primary Meta Tags --><title>💭Codeforces Round 977 (Div. 2, based on COMPFEST 16 - Final Round)</title><meta name="title" content="💭Codeforces Round 977 (Div. 2, based on COMPFEST 16 - Final Round)"><meta name="description" content><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://dodolalorc.github.io/navfolio-site/blog/algorithm/contest/cfround977div2/"><meta property="og:title" content="💭Codeforces Round 977 (Div. 2, based on COMPFEST 16 - Final Round)"><meta property="og:description" content><meta property="og:image" content="https://dodolalorc.github.io/navfolio-site/_astro/fail-loading-image.DEm-LhbX.png"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://dodolalorc.github.io/navfolio-site/blog/algorithm/contest/cfround977div2/"><meta property="twitter:title" content="💭Codeforces Round 977 (Div. 2, based on COMPFEST 16 - Final Round)"><meta property="twitter:description" content><meta property="twitter:image" content="https://dodolalorc.github.io/navfolio-site/_astro/fail-loading-image.DEm-LhbX.png"><link rel="stylesheet" href="/navfolio-site/_astro/_..1O9rtQI6.css">
+<link rel="stylesheet" href="/navfolio-site/_astro/BlogArticle.BLUUC9fD.css">
+<link rel="stylesheet" href="/navfolio-site/_astro/BaseHead.CscXXfv1.css"></head> <body class="blog-detail-page" data-astro-cid-bl7sqnst> <header class="blog-top-nav" data-pagefind-ignore data-astro-cid-sp6fezam> <button class="mobile-menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav-menu" data-mobile-menu-toggle data-astro-cid-sp6fezam> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="18" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-sp6fezam="true" class="lucide lucide-menu">  <path d="M4 5h16"></path> <path d="M4 12h16"></path> <path d="M4 19h16"></path>  </svg> </button> <a class="brand" href="/navfolio-site/" aria-label="Go to navfolio home" data-astro-cid-sp6fezam> <span class="brand-mark" aria-hidden="true" data-astro-cid-sp6fezam></span> <span class="brand-title" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>navfolio</span> <span class="brand-route" data-astro-cid-sp6fezam> · blog</span> </span> </a> <nav class="nav-links" aria-label="Article navigation" data-astro-cid-sp6fezam> <a class="nav-link" href="/navfolio-site/" data-astro-cid-sp6fezam> Home </a><a class="nav-link active" href="/navfolio-site/blog" data-astro-cid-sp6fezam> Blog </a><a class="nav-link" href="/navfolio-site/projects" data-astro-cid-sp6fezam> Projects </a><a class="nav-link" href="/navfolio-site/vibe" data-astro-cid-sp6fezam> Vibe </a><a class="nav-link" href="/navfolio-site/about" data-astro-cid-sp6fezam> About </a> </nav> <nav class="mobile-menu-panel" id="mobile-nav-menu" aria-label="Mobile navigation" data-mobile-menu data-astro-cid-sp6fezam> <a class="mobile-menu-link" href="/navfolio-site/" data-mobile-menu-link data-astro-cid-sp6fezam> Home </a><a class="mobile-menu-link active" href="/navfolio-site/blog" data-mobile-menu-link data-astro-cid-sp6fezam> Blog </a><a class="mobile-menu-link" href="/navfolio-site/projects" data-mobile-menu-link data-astro-cid-sp6fezam> Projects </a><a class="mobile-menu-link" href="/navfolio-site/vibe" data-mobile-menu-link data-astro-cid-sp6fezam> Vibe </a><a class="mobile-menu-link" href="/navfolio-site/about" data-mobile-menu-link data-astro-cid-sp6fezam> About </a> </nav> <div class="nav-actions" aria-label="Page actions" data-astro-cid-sp6fezam> <a href="https://github.com/dodolalorc/astro-navfolio" target="_blank" rel="noreferrer" aria-label="Open GitHub repository" title="GitHub" data-astro-cid-sp6fezam> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="17" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-sp6fezam="true" class="lucide lucide-github">  <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path> <path d="M9 18c-4.51 2-5-2-7-2"></path>  </svg> </a> <button type="button" data-theme-toggle aria-label="Switch theme" data-astro-cid-sp6fezam> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="17" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-sp6fezam="true" class="lucide lucide-moon theme-icon-moon">  <path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"></path>  </svg> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="17" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-sp6fezam="true" class="lucide lucide-sun theme-icon-sun">  <circle cx="12" cy="12" r="4"></circle> <path d="M12 2v2"></path> <path d="M12 20v2"></path> <path d="m4.93 4.93 1.41 1.41"></path> <path d="m17.66 17.66 1.41 1.41"></path> <path d="M2 12h2"></path> <path d="M20 12h2"></path> <path d="m6.34 17.66-1.41 1.41"></path> <path d="m19.07 4.93-1.41 1.41"></path>  </svg> </button> <div class="site-search" data-site-search-root data-search-max-results="6" data-search-idle-label="Start typing to search." data-search-loading-label="Searching..." data-search-empty-label="No notes found." data-search-unavailable-label="Search index is not available yet. Run a production build first." data-pagefind-ignore data-astro-cid-prkij7br> <button class="site-search-trigger" type="button" aria-label="Search site" aria-expanded="false" aria-controls="site-search-dialog" title="Search (Ctrl K / Cmd K)" data-site-search-trigger data-astro-cid-prkij7br> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="17" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-prkij7br="true" class="lucide lucide-search">  <path d="m21 21-4.34-4.34"></path> <circle cx="11" cy="11" r="8"></circle>  </svg> </button> <div class="site-search-layer" data-site-search-backdrop data-astro-cid-prkij7br> <section class="site-search-dialog" id="site-search-dialog" role="dialog" aria-modal="true" aria-labelledby="site-search-title" data-site-search-dialog data-astro-cid-prkij7br> <header class="site-search-head" data-astro-cid-prkij7br> <div data-astro-cid-prkij7br> <p id="site-search-title" data-astro-cid-prkij7br>Search</p> <span data-astro-cid-prkij7br>Ctrl K / Cmd K</span> </div> <button class="site-search-close" type="button" aria-label="Close search" title="Close search" data-site-search-close data-astro-cid-prkij7br> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="17" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-prkij7br="true" class="lucide lucide-x">  <path d="M18 6 6 18"></path> <path d="m6 6 12 12"></path>  </svg> </button> </header> <label class="site-search-input-wrap" data-astro-cid-prkij7br> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="16" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" aria-hidden="true" data-astro-cid-prkij7br="true" class="lucide lucide-search">  <path d="m21 21-4.34-4.34"></path> <circle cx="11" cy="11" r="8"></circle>  </svg> <input type="search" placeholder="Search notes..." autocomplete="off" spellcheck="false" data-site-search-input data-astro-cid-prkij7br> </label> <p class="site-search-status" data-site-search-status data-astro-cid-prkij7br>Start typing to search.</p> <ol class="site-search-results" data-site-search-results data-astro-cid-prkij7br></ol> </section> </div> </div> <script type="module">const L=["a[href]","button:not([disabled])","input:not([disabled])","textarea:not([disabled])","select:not([disabled])",'[tabindex]:not([tabindex="-1"])'].join(","),h="/navfolio-site",w=`${h.replace(/\/$/,"")}/pagefind/pagefind.js`.replace(/^\/pagefind/,"/pagefind");let d=null,m=null;function q(e){if(/^https?:\/\//.test(e))return e;const t=h.replace(/\/$/,"");return!t||t==="/"||e.startsWith(`${t}/`)?e:e.startsWith("/")?`${t}${e}`:`${t}/${e}`}async function g(){return d||(d=import(w).then(async e=>(await e.options?.({baseUrl:h}),await e.init?.(),e)).catch(e=>{throw d=null,e})),d}function i(e,t){const a=e.querySelector("[data-site-search-status]");a&&(a.textContent=t)}function y(e,t){e.dataset.searchOpen=t?"true":"false",e.querySelector("[data-site-search-trigger]")?.setAttribute("aria-expanded",String(t))}function v(e){return Array.from(e.querySelectorAll(L)).filter(t=>t.offsetParent!==null)}function x(e,t){if(e.key!=="Tab")return;const a=v(t);if(a.length===0)return;const s=a[0],c=a[a.length-1];e.shiftKey&&document.activeElement===s?(e.preventDefault(),c.focus()):!e.shiftKey&&document.activeElement===c&&(e.preventDefault(),s.focus())}function f(e,t){const a=e.querySelector("[data-site-search-results]");if(a){a.replaceChildren();for(const s of t){const c=document.createElement("li"),o=document.createElement("a"),r=document.createElement("span"),l=document.createElement("span");o.href=q(s.url),r.className="site-search-result-title",r.textContent=s.title||s.url,l.className="site-search-result-excerpt",l.innerHTML=s.excerpt,o.append(r,l),c.append(o),a.append(c)}}}function k(e,t){let a;return(...s)=>{window.clearTimeout(a),a=window.setTimeout(()=>e(...s),t)}}function p(){for(const e of document.querySelectorAll("[data-site-search-root]")){if(e.dataset.siteSearchReady==="true")continue;e.dataset.siteSearchReady="true";const t=e.querySelector("[data-site-search-trigger]"),a=e.querySelector("[data-site-search-dialog]"),s=e.querySelector("[data-site-search-input]"),c=e.querySelectorAll("[data-site-search-close]"),o=Number(e.dataset.searchMaxResults||6);if(!t||!a||!s)continue;const r=()=>{y(e,!1),s.value="",f(e,[]),i(e,e.dataset.searchIdleLabel||"Start typing to search."),m?.focus?.()},l=()=>{m=document.activeElement instanceof HTMLElement?document.activeElement:null,y(e,!0),window.setTimeout(()=>s.focus(),30),g().catch(()=>{i(e,e.dataset.searchUnavailableLabel||"Search index is not available yet.")})},b=k(async()=>{const n=s.value.trim();if(!n){f(e,[]),i(e,e.dataset.searchIdleLabel||"Start typing to search.");return}i(e,e.dataset.searchLoadingLabel||"Searching...");try{const S=await(await g()).search(n),u=await Promise.all(S.results.slice(0,o).map(E=>E.data()));f(e,u),i(e,u.length>0?`${u.length} result${u.length===1?"":"s"}`:e.dataset.searchEmptyLabel||"No notes found.")}catch{f(e,[]),i(e,e.dataset.searchUnavailableLabel||"Search index is not available yet.")}},120);t.addEventListener("click",l),s.addEventListener("input",b);for(const n of c)n.addEventListener("click",r);e.addEventListener("click",n=>{n.target.matches("[data-site-search-backdrop]")&&r(),n.target.closest("[data-site-search-results] a")&&r()}),e.addEventListener("keydown",n=>{e.dataset.searchOpen==="true"&&(n.key==="Escape"&&r(),x(n,a))})}}document.addEventListener("keydown",e=>{if(!((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==="k"))return;const a=document.querySelector("[data-site-search-root]"),s=a?.querySelector("[data-site-search-trigger]");if(!(!a||!s)){if(e.preventDefault(),a.dataset.searchOpen==="true"){a.querySelector("[data-site-search-input]")?.focus();return}s.click()}});p();document.addEventListener("astro:page-load",p);p();</script> <button class="toc-action" type="button" aria-label="Open table of contents" aria-expanded="false" aria-controls="mobile-toc-menu" title="Table of contents" data-mobile-toc-trigger data-astro-cid-sp6fezam> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="17" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-sp6fezam="true" class="lucide lucide-list-tree">  <path d="M8 5h13"></path> <path d="M13 12h8"></path> <path d="M13 19h8"></path> <path d="M3 10a2 2 0 0 0 2 2h3"></path> <path d="M3 5v12a2 2 0 0 0 2 2h3"></path>  </svg> </button> </div> <nav class="mobile-toc-panel" id="mobile-toc-menu" aria-label="Article table of contents" data-nav-toc-menu data-toc-root data-astro-cid-sp6fezam> <p data-astro-cid-sp6fezam>Table of contents</p> <ol data-astro-cid-sp6fezam> <li data-astro-cid-sp6fezam> <a href="#题意" data-nav-toc-link data-toc-link data-toc-hash="#题意" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>1</span> 题意 </a> </li><li data-astro-cid-sp6fezam> <a href="#思路" data-nav-toc-link data-toc-link data-toc-hash="#思路" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>2</span> 思路 </a> </li><li data-astro-cid-sp6fezam> <a href="#参考代码" data-nav-toc-link data-toc-link data-toc-hash="#参考代码" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>3</span> 参考代码 </a> </li><li data-astro-cid-sp6fezam> <a href="#题意-1" data-nav-toc-link data-toc-link data-toc-hash="#题意-1" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>4</span> 题意 </a> </li><li data-astro-cid-sp6fezam> <a href="#思路-1" data-nav-toc-link data-toc-link data-toc-hash="#思路-1" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>5</span> 思路 </a> </li><li data-astro-cid-sp6fezam> <a href="#参考代码-1" data-nav-toc-link data-toc-link data-toc-hash="#参考代码-1" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>6</span> 参考代码 </a> </li><li data-astro-cid-sp6fezam> <a href="#题意-2" data-nav-toc-link data-toc-link data-toc-hash="#题意-2" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>7</span> 题意 </a> </li><li data-astro-cid-sp6fezam> <a href="#思路-2" data-nav-toc-link data-toc-link data-toc-hash="#思路-2" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>8</span> 思路 </a> </li><li data-astro-cid-sp6fezam> <a href="#题意-3" data-nav-toc-link data-toc-link data-toc-hash="#题意-3" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>9</span> 题意 </a> </li><li data-astro-cid-sp6fezam> <a href="#思路-3" data-nav-toc-link data-toc-link data-toc-hash="#思路-3" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>10</span> 思路 </a> </li><li data-astro-cid-sp6fezam> <a href="#参考代码-2" data-nav-toc-link data-toc-link data-toc-hash="#参考代码-2" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>11</span> 参考代码 </a> </li> </ol> </nav> </header> <script type="module">const r=()=>{for(const t of document.querySelectorAll(".blog-top-nav")){const o=t.querySelector("[data-mobile-menu-toggle]"),s=t.querySelector("[data-mobile-menu]"),i=t.querySelector("[data-mobile-toc-trigger]"),l=t.querySelector("[data-nav-toc-menu]");if(o&&s&&!t.dataset.mobileMenuReady){t.dataset.mobileMenuReady="true";const a=e=>{t.dataset.mobileMenuOpen=e?"true":"false",o.setAttribute("aria-expanded",String(e)),o.setAttribute("aria-label",e?"Close navigation menu":"Open navigation menu")},n=e=>{!i||!l||(t.dataset.mobileTocOpen=e?"true":"false",i.setAttribute("aria-expanded",String(e)),i.setAttribute("aria-label",e?"Close table of contents":"Open table of contents"))};o.addEventListener("click",()=>{const e=t.dataset.mobileMenuOpen!=="true";a(e),e&&n(!1)}),s.addEventListener("click",e=>{e.target.closest?.("[data-mobile-menu-link]")&&a(!1)}),i?.addEventListener("click",()=>{const e=t.dataset.mobileTocOpen!=="true";n(e),e&&a(!1)}),l?.addEventListener("click",e=>{e.target.closest?.("[data-nav-toc-link]")&&n(!1)}),document.addEventListener("click",e=>{t.contains(e.target)||(a(!1),n(!1))}),document.addEventListener("keydown",e=>{e.key==="Escape"&&(a(!1),n(!1))})}}};r();document.addEventListener("astro:page-load",r);</script> <div class="blog-background" aria-hidden="true" data-astro-cid-bl7sqnst></div> <main class="blog-layout" data-pagefind-body data-astro-cid-bl7sqnst> <div class="article-column" data-astro-cid-bl7sqnst> <article class="article-card" data-astro-cid-bl7sqnst> <header class="article-header" data-astro-cid-wynq62ua>  <h1 data-astro-cid-wynq62ua>💭Codeforces Round 977 (Div. 2, based on COMPFEST 16 - Final Round)</h1> <div class="meta-line" aria-label="Article metadata" data-astro-cid-wynq62ua> <span class="meta-item" data-astro-cid-wynq62ua> <time datetime="2024-10-25T06:57:19.000Z"> Oct 25, 2024 </time> </span> <span class="meta-item" data-astro-cid-wynq62ua>1,408 words</span> <span class="meta-item" data-astro-cid-wynq62ua>5 min read</span> <script type="module">const showPageView = false;
+const serverURL = "";
+const selector = ".waline-pageview-count";
+
+  if (showPageView) {
+    const { pageviewCount } = await import('https://unpkg.com/@waline/client@v3/dist/pageview.js');
+
+    const updatePageViews = () => {
+      pageviewCount({
+        serverURL,
+        selector,
+        path: window.location.pathname,
+      });
+    };
+
+    updatePageViews();
+    document.addEventListener('astro:page-load', updatePageViews);
+  }
+</script>  </div>   </header> <section class="mobile-article-toc" aria-label="Article table of contents" data-astro-cid-bl7sqnst> <nav class="toc-card blog-card compact collapsible can-collapse" aria-label="Table of contents" data-toc-root data-mobile-toc data-expanded="false" data-astro-cid-ymbpksfa><h2 data-astro-cid-ymbpksfa>Table of contents</h2><ol id="mobile-article-toc-list" data-astro-cid-ymbpksfa><li data-astro-cid-ymbpksfa><a href="#题意" data-toc-link data-toc-hash="#题意" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>1</span>题意</a></li><li data-astro-cid-ymbpksfa><a href="#思路" data-toc-link data-toc-hash="#思路" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>2</span>思路</a></li><li data-astro-cid-ymbpksfa><a href="#参考代码" data-toc-link data-toc-hash="#参考代码" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>3</span>参考代码</a></li><li data-astro-cid-ymbpksfa><a href="#题意-1" data-toc-link data-toc-hash="#题意-1" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>4</span>题意</a></li><li data-astro-cid-ymbpksfa><a href="#思路-1" data-toc-link data-toc-hash="#思路-1" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>5</span>思路</a></li><li data-astro-cid-ymbpksfa><a href="#参考代码-1" data-toc-link data-toc-hash="#参考代码-1" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>6</span>参考代码</a></li><li data-astro-cid-ymbpksfa><a href="#题意-2" data-toc-link data-toc-hash="#题意-2" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>7</span>题意</a></li><li data-astro-cid-ymbpksfa><a href="#思路-2" data-toc-link data-toc-hash="#思路-2" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>8</span>思路</a></li><li data-astro-cid-ymbpksfa><a href="#题意-3" data-toc-link data-toc-hash="#题意-3" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>9</span>题意</a></li><li data-astro-cid-ymbpksfa><a href="#思路-3" data-toc-link data-toc-hash="#思路-3" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>10</span>思路</a></li><li data-astro-cid-ymbpksfa><a href="#参考代码-2" data-toc-link data-toc-hash="#参考代码-2" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>11</span>参考代码</a></li></ol><button class="toc-expand" type="button" aria-label="Expand table of contents" aria-expanded="false" aria-controls="mobile-article-toc-list" data-toc-expand data-astro-cid-ymbpksfa><span data-expand-label data-astro-cid-ymbpksfa>Show all</span><i aria-hidden="true" data-astro-cid-ymbpksfa></i></button></nav><script type="module" src="/navfolio-site/_astro/TableOfContents.astro_astro_type_script_index_0_lang.B3wh3MgY.js"></script> </section> <section id="article-start" class="article-content" data-astro-cid-bl7sqnst>  <h1 id="a-meaning-mean">A. Meaning Mean</h1>
+<h2 id="题意">题意</h2>
+<p>可以选择 2 个不同的索引$i,j$，将数组中这两个索引对应的数删除，然后将$\lfloor \frac{a_i+a_j}{2} \rfloor$添加到数组的最后。可知到最后只会剩下一个数，最大化最后剩余的这个数$x$，并输出。</p>
+<h4 id="数据范围">数据范围</h4>
+<ul>
+<li>$2\leq n \leq 50$</li>
+<li>$1\leq a_i\leq 10^9$</li>
+</ul>
+<h2 id="思路">思路</h2>
+<p>考虑三个数$a\lt b\lt c$时，按照各种顺序合并的情况下，$\lfloor \frac{\lfloor \frac{a+b}{2} \rfloor+c}{2}\rfloor$是最好的操作。</p>
+<h2 id="参考代码">参考代码</h2>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="cpp"><code><span class="line"><span style="color:#E1E4E8">ll a[maxn];</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">void</span><span style="color:#B392F0"> solve</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">  int</span><span style="color:#E1E4E8"> n;</span></span>
+<span class="line"><span style="color:#E1E4E8">  cin </span><span style="color:#F97583">>></span><span style="color:#E1E4E8"> n;</span></span>
+<span class="line"><span style="color:#F97583">  for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">int</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">; i </span><span style="color:#F97583">&#x3C;=</span><span style="color:#E1E4E8"> n; i</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    cin </span><span style="color:#F97583">>></span><span style="color:#E1E4E8"> a[i];</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#B392F0">  sort</span><span style="color:#E1E4E8">(a </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">, a </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> 1</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> n);</span></span>
+<span class="line"><span style="color:#E1E4E8">  ll tot </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> a[</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">];</span></span>
+<span class="line"><span style="color:#F97583">  for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">int</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 2</span><span style="color:#E1E4E8">; i </span><span style="color:#F97583">&#x3C;=</span><span style="color:#E1E4E8"> n; i</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    ll x </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> a[i];</span></span>
+<span class="line"><span style="color:#E1E4E8">    tot </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> (tot </span><span style="color:#F97583">+</span><span style="color:#E1E4E8"> x) </span><span style="color:#F97583">/</span><span style="color:#79B8FF"> 2</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">  cout </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#E1E4E8"> tot </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#9ECBFF"> '</span><span style="color:#79B8FF">\n</span><span style="color:#9ECBFF">'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h1 id="b-maximize-mex">B. Maximize Mex</h1>
+<h2 id="题意-1">题意</h2>
+<p>对一个给定的数组$a$和给定的数$x$，可以进行如下操作：</p>
+<ul>
+<li>选择一个索引，$a_i:=a_i + x$。</li>
+</ul>
+<p>可以执行这个操作任意次，询问这个数组最大的$MEX$值是多少。</p>
+<h4 id="数据范围-1">数据范围</h4>
+<ul>
+<li>$1\leq t\leq 5000$</li>
+<li>$1\leq n\leq 2\times 10^5$</li>
+<li>$0\leq x\leq 10^9$</li>
+</ul>
+<h2 id="思路-1">思路</h2>
+<p>赛后再交发现 T 了…剪枝优化了一下。</p>
+<p>首先容易观察到，$a_i:=a_i + x$的操作不会改变$a_i$所属的模$x$的同余系，在把$a$按照模$x$的值进行分组之后，对每个组，check 对应集合中是否能满足$[1, n-1]$的范围内的$a_i$都存在，遍历时，计数$a_i=k\times x + (a_i \mod x)$的$k$的数量，如果$k$从$0$到$\lfloor \frac{n-1}{x}\rfloor + ((n-1) \mod x >= a_i \mod x)$每一位都满足$\sum_0^{k_i} cnt[k_i] \gt k_i$，则说明同余集合中到$ki\times x+a_i\mod x$的值都是可以满足的。</p>
+<p>最后检测一下$vis$数组，寻找$mex$。</p>
+<h2 id="参考代码-1">参考代码</h2>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="cpp"><code><span class="line"><span style="color:#E1E4E8">ll a[maxn];</span></span>
+<span class="line"><span style="color:#F97583">bool</span><span style="color:#E1E4E8"> vis[maxn];</span></span>
+<span class="line"><span style="color:#F97583">void</span><span style="color:#B392F0"> solve</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">  ll n, x;</span></span>
+<span class="line"><span style="color:#E1E4E8">  cin </span><span style="color:#F97583">>></span><span style="color:#E1E4E8"> n </span><span style="color:#F97583">>></span><span style="color:#E1E4E8"> x;</span></span>
+<span class="line"><span style="color:#F97583">  for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">int</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">; i </span><span style="color:#F97583">&#x3C;=</span><span style="color:#E1E4E8"> n; i</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    vis[i] </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> false</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">  map</span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8">ll, vector</span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8">ll</span><span style="color:#F97583">>></span><span style="color:#E1E4E8"> mp;</span></span>
+<span class="line"><span style="color:#F97583">  for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">int</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">; i </span><span style="color:#F97583">&#x3C;=</span><span style="color:#E1E4E8"> n; i</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    cin </span><span style="color:#F97583">>></span><span style="color:#E1E4E8"> a[i];</span></span>
+<span class="line"><span style="color:#E1E4E8">    mp[a[i] </span><span style="color:#F97583">%</span><span style="color:#E1E4E8"> x].</span><span style="color:#B392F0">push_back</span><span style="color:#E1E4E8">(a[i]);</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">auto</span><span style="color:#F97583"> &#x26;</span><span style="color:#E1E4E8">[i, v] : mp) {</span></span>
+<span class="line"><span style="color:#B392F0">    sort</span><span style="color:#E1E4E8">(v.</span><span style="color:#B392F0">begin</span><span style="color:#E1E4E8">(), v.</span><span style="color:#B392F0">end</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"><span style="color:#E1E4E8">    ll tot </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> (n </span><span style="color:#F97583">-</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">/</span><span style="color:#E1E4E8"> x;</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> ((n </span><span style="color:#F97583">-</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">%</span><span style="color:#E1E4E8"> x </span><span style="color:#F97583">>=</span><span style="color:#E1E4E8"> i)</span></span>
+<span class="line"><span style="color:#E1E4E8">      tot </span><span style="color:#F97583">+=</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    vector</span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8">ll</span><span style="color:#F97583">></span><span style="color:#B392F0"> cnt</span><span style="color:#E1E4E8">(tot, </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">    for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">auto</span><span style="color:#E1E4E8"> j : v) {</span></span>
+<span class="line"><span style="color:#F97583">      if</span><span style="color:#E1E4E8"> ((j </span><span style="color:#F97583">-</span><span style="color:#E1E4E8"> i) </span><span style="color:#F97583">/</span><span style="color:#E1E4E8"> x </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> tot) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        cnt[(j </span><span style="color:#F97583">-</span><span style="color:#E1E4E8"> i) </span><span style="color:#F97583">/</span><span style="color:#E1E4E8"> x]</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">      } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        break</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">      }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">    ll sum </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#F97583">ll</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">    for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">int</span><span style="color:#E1E4E8"> j </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">; j </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> tot; j</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">      sum </span><span style="color:#F97583">+=</span><span style="color:#E1E4E8"> cnt[j];</span></span>
+<span class="line"><span style="color:#F97583">      if</span><span style="color:#E1E4E8"> (sum </span><span style="color:#F97583">&#x3C;=</span><span style="color:#E1E4E8"> j) {</span></span>
+<span class="line"><span style="color:#F97583">        break</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">      }</span></span>
+<span class="line"><span style="color:#E1E4E8">      vis[j </span><span style="color:#F97583">*</span><span style="color:#E1E4E8"> x </span><span style="color:#F97583">+</span><span style="color:#E1E4E8"> i] </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> true</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">int</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">; i </span><span style="color:#F97583">&#x3C;=</span><span style="color:#E1E4E8"> n; i</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#E1E4E8">vis[i]) {</span></span>
+<span class="line"><span style="color:#E1E4E8">      cout </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#9ECBFF"> '</span><span style="color:#79B8FF">\n</span><span style="color:#9ECBFF">'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">      return</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h1 id="c-adjust-the-presentation-easy-version--hard-version">C. Adjust The Presentation (Easy Version &#x26;&#x26; Hard Version)</h1>
+<h2 id="题意-2">题意</h2>
+<p>$n$个人排成一队，依次播放$m$张幻灯片，当一个人播放过幻灯片之后，可以重新将他插入任意的位置，或者留在队首播放下一张幻灯片。每张幻灯片都有一个最佳播放者，如果所有的幻灯片都由其最佳播放者播放，则整个播放是完美的，输出<code>YA</code>，否则输出<code>TIDAK</code>。询问是否可以通过调整，使得所有的幻灯片都完美播放。</p>
+<p>同时支持$q$次修改幻灯片的最佳播放者，询问每次修改之后的播放效果，输出<code>YA</code>或<code>TIDAK</code>。</p>
+<h4 id="数据范围-2">数据范围</h4>
+<ul>
+<li>$1 \leq t\leq 10^4$</li>
+<li>$1\leq n,m \leq 2\times 10^5$</li>
+<li>$0\leq q\leq 2\times 10^5$</li>
+<li>$1\leq a_i,b_i\leq n$</li>
+<li>$1\leq s_i\leq m,1\leq t_i\leq n$</li>
+</ul>
+<h2 id="思路-2">思路</h2>
+<p>幻灯片$i$是否能被最佳播放者播放，只需要保证其播放者$s_i$在播放$i$时或之前出现，也就是说，如果数组$b$中每个编号最先出现的次序排序后，若恰好是$a$的前缀，则是可以满足的。</p>
+<p>差分数组计数$a$数组中第$i$个数$a[i]$在$b$中最先出现次序排序后的次序是否大于等于前一个数，即是否上升。利用$set$更新$b$中每个编号最先出现的位置。</p>
+<p>每次$b_{s_i}:=t_i$操作后，更新检查编号$b[s_i]$前后编号的新次序是否合法（与$a$中$b[s_i]$的前一位置的编号的最早位置相比是否上升），编号$t_i$前后是否合法，更新$diff$数组和$sum$值。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="cpp"><code><span class="line"><span style="color:#E1E4E8">ll a[maxn], b[maxn], pos[maxn], diff[maxn];</span></span>
+<span class="line"><span style="color:#E1E4E8">vector</span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8">set</span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8">ll</span><span style="color:#F97583">>></span><span style="color:#E1E4E8"> st;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">void</span><span style="color:#B392F0"> YorT</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">bool</span><span style="color:#FFAB70"> f</span><span style="color:#E1E4E8">) { f </span><span style="color:#F97583">?</span><span style="color:#E1E4E8"> cout </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#9ECBFF"> "YA</span><span style="color:#79B8FF">\n</span><span style="color:#9ECBFF">"</span><span style="color:#F97583"> :</span><span style="color:#E1E4E8"> cout </span><span style="color:#F97583">&#x3C;&#x3C;</span><span style="color:#9ECBFF"> "TIDAK</span><span style="color:#79B8FF">\n</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">; }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">void</span><span style="color:#B392F0"> solve</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">  int</span><span style="color:#E1E4E8"> n, m, q;</span></span>
+<span class="line"><span style="color:#E1E4E8">  cin </span><span style="color:#F97583">>></span><span style="color:#E1E4E8"> n </span><span style="color:#F97583">>></span><span style="color:#E1E4E8"> m </span><span style="color:#F97583">>></span><span style="color:#E1E4E8"> q;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">  st.</span><span style="color:#B392F0">assign</span><span style="color:#E1E4E8">(n </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">set</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">ll</span><span style="color:#E1E4E8">>());</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">int</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">; i </span><span style="color:#F97583">&#x3C;=</span><span style="color:#E1E4E8"> n; i</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    cin </span><span style="color:#F97583">>></span><span style="color:#E1E4E8"> a[i];</span></span>
+<span class="line"><span style="color:#E1E4E8">    pos[a[i]] </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> i;</span></span>
+<span class="line"><span style="color:#E1E4E8">    st[i].</span><span style="color:#B392F0">insert</span><span style="color:#E1E4E8">(m </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    diff[i] </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#F97583">  for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">int</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">; i </span><span style="color:#F97583">&#x3C;=</span><span style="color:#E1E4E8"> m; i</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    cin </span><span style="color:#F97583">>></span><span style="color:#E1E4E8"> b[i];</span></span>
+<span class="line"><span style="color:#E1E4E8">    st[b[i]].</span><span style="color:#B392F0">insert</span><span style="color:#E1E4E8">(i);</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  auto</span><span style="color:#E1E4E8"> check </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> [</span><span style="color:#F97583">&#x26;</span><span style="color:#E1E4E8">](</span><span style="color:#F97583">int</span><span style="color:#FFAB70"> s</span><span style="color:#E1E4E8">) {</span><span style="color:#6A737D"> // 检查a[s-1] -> a[s]的合法情况,是否上升</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (s </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> 1</span><span style="color:#F97583"> ||</span><span style="color:#E1E4E8"> s </span><span style="color:#F97583">></span><span style="color:#E1E4E8"> n)</span></span>
+<span class="line"><span style="color:#F97583">      return</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">    int</span><span style="color:#E1E4E8"> res </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (diff[s] </span><span style="color:#F97583">&#x26;&#x26;</span><span style="color:#F97583"> !</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">*</span><span style="color:#E1E4E8">st[a[s </span><span style="color:#F97583">-</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">]].</span><span style="color:#B392F0">begin</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">&#x3C;=</span><span style="color:#F97583"> *</span><span style="color:#E1E4E8">st[a[s]].</span><span style="color:#B392F0">begin</span><span style="color:#E1E4E8">())) {</span></span>
+<span class="line"><span style="color:#E1E4E8">      diff[s] </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">      res </span><span style="color:#F97583">=</span><span style="color:#F97583"> -</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">    } </span><span style="color:#F97583">else</span><span style="color:#F97583"> if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#E1E4E8">diff[s] </span><span style="color:#F97583">&#x26;&#x26;</span><span style="color:#F97583"> *</span><span style="color:#E1E4E8">st[a[s </span><span style="color:#F97583">-</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">]].</span><span style="color:#B392F0">begin</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">&#x3C;=</span><span style="color:#F97583"> *</span><span style="color:#E1E4E8">st[a[s]].</span><span style="color:#B392F0">begin</span><span style="color:#E1E4E8">()) {</span></span>
+<span class="line"><span style="color:#E1E4E8">      diff[s] </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">      res </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#E1E4E8"> res;</span></span>
+<span class="line"><span style="color:#E1E4E8">  };</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">  ll sum </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#F97583">ll</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">  for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">int</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 2</span><span style="color:#E1E4E8">; i </span><span style="color:#F97583">&#x3C;=</span><span style="color:#E1E4E8"> n; i</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    sum </span><span style="color:#F97583">+=</span><span style="color:#B392F0"> check</span><span style="color:#E1E4E8">(i);</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">  YorT</span><span style="color:#E1E4E8">(sum </span><span style="color:#F97583">==</span><span style="color:#E1E4E8"> n </span><span style="color:#F97583">-</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  while</span><span style="color:#E1E4E8"> (q</span><span style="color:#F97583">--</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">    int</span><span style="color:#E1E4E8"> s, t;</span></span>
+<span class="line"><span style="color:#E1E4E8">    cin </span><span style="color:#F97583">>></span><span style="color:#E1E4E8"> s </span><span style="color:#F97583">>></span><span style="color:#E1E4E8"> t;</span></span>
+<span class="line"><span style="color:#E1E4E8">    st[b[s]].</span><span style="color:#B392F0">erase</span><span style="color:#E1E4E8">(s);</span></span>
+<span class="line"><span style="color:#E1E4E8">    st[t].</span><span style="color:#B392F0">insert</span><span style="color:#E1E4E8">(s);</span></span>
+<span class="line"><span style="color:#E1E4E8">    sum </span><span style="color:#F97583">+=</span><span style="color:#B392F0"> check</span><span style="color:#E1E4E8">(pos[b[s]]) </span><span style="color:#F97583">+</span><span style="color:#B392F0"> check</span><span style="color:#E1E4E8">(pos[b[s]] </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">+</span><span style="color:#B392F0"> check</span><span style="color:#E1E4E8">(pos[t]) </span><span style="color:#F97583">+</span></span>
+<span class="line"><span style="color:#B392F0">           check</span><span style="color:#E1E4E8">(pos[t] </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    b[s] </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> t;</span></span>
+<span class="line"><span style="color:#B392F0">    YorT</span><span style="color:#E1E4E8">(sum </span><span style="color:#F97583">==</span><span style="color:#E1E4E8"> n </span><span style="color:#F97583">-</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h1 id="d-boss-thirsty">D. Boss, Thirsty</h1>
+<h1 id="e1-digital-village-easy-version--hard-version">E1. Digital Village (Easy Version) &#x26;&#x26; (Hard Version)</h1>
+<h2 id="题意-3">题意</h2>
+<p>居民房屋构成一个无向图，包含$n$个点$m$条边，其中$p$户需要网络服务，可以在任意的房屋中安置交换机，房屋$s_i$与交换机所在房屋$s_j$之间的延迟是$s_i$到$s_j$的简单路径上最大的延迟。可以任意选择放置交换机的位置，询问在逐渐增加交换机的过程中，所有需要网络服务的居民的最小总延迟。</p>
+<h4 id="数据范围-3">数据范围</h4>
+<ul>
+<li>$1\leq t \leq 2000$</li>
+<li>$2\leq n,\leq 5000$</li>
+<li>$n-1\leq m \leq 5000$</li>
+<li>$1\leq p \leq n$</li>
+<li>$1\leq s\leq n$</li>
+<li>$1\leq u_i\lt w_i\leq n;1\leq w_i\leq 10^9$</li>
+</ul>
+<h2 id="思路-3">思路</h2>
+<h2 id="参考代码-2">参考代码</h2> <script type="module">let o,c="";const d=e=>!!e.closest(".article-content")&&!e.closest("[data-zoomable-image]")&&!e.closest("a[href]")&&(e.parentElement?.matches(".article-content > p, .article-content figure")??!1),r=e=>{if(!(e instanceof Element))return;const t=e.closest("[data-zoomable-image]")?.querySelector("[data-zoomable-image-target]");if(t instanceof HTMLImageElement&&!t.closest("a[href]"))return t;if(e instanceof HTMLImageElement&&d(e))return e},a=()=>{o&&(o.root.classList.remove("is-open"),o.root.setAttribute("aria-hidden","true"),document.body.style.overflow=c,o.image.removeAttribute("src"),o.image.alt="",o.image.removeAttribute("title"))},m=()=>{const e=document.createElement("div");e.className="zoomable-image-lightbox",e.setAttribute("aria-hidden","true"),e.innerHTML=`
+    <button class="zoomable-image-lightbox__close" type="button" aria-label="Close image preview">
+      <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22">
+        <path d="M18 6 6 18M6 6l12 12" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+      </svg>
+    </button>
+    <img class="zoomable-image-lightbox__image" alt="" />
+  `,document.body.append(e);const t=e.querySelector(".zoomable-image-lightbox__image"),i=e.querySelector(".zoomable-image-lightbox__close");if(!(t instanceof HTMLImageElement)||!(i instanceof HTMLButtonElement))throw new Error("Failed to initialize zoomable image lightbox.");return e.addEventListener("click",n=>{n.target===e&&a()}),i.addEventListener("click",a),{root:e,image:t,closeButton:i}},u=()=>(o??=m(),o),l=e=>{const{root:t,image:i,closeButton:n}=u();c=document.body.style.overflow,i.src=e.currentSrc||e.src,i.alt=e.alt||"",e.title?i.title=e.title:i.removeAttribute("title"),document.body.style.overflow="hidden",t.classList.add("is-open"),t.setAttribute("aria-hidden","false"),n.focus({preventScroll:!0})},s=()=>{window.__navfolioZoomableImagesReady||(window.__navfolioZoomableImagesReady=!0,document.addEventListener("click",e=>{const t=r(e.target);t&&l(t)}),document.addEventListener("keydown",e=>{if(e.key==="Escape"&&o?.root.classList.contains("is-open")){a();return}const t=r(e.target);!t||e.key!=="Enter"&&e.key!==" "||(e.preventDefault(),l(t))}))};document.readyState==="loading"?document.addEventListener("DOMContentLoaded",s,{once:!0}):s();</script>  </section> </article>  <section class="comment-section" aria-label="Comments" data-comment-path="/navfolio-site/blog/algorithm/contest/cfround977div2/" data-astro-cid-wwpfc3k4><div class="comment-section-heading" data-astro-cid-wwpfc3k4><p data-astro-cid-wwpfc3k4>Comments</p><span data-astro-cid-wwpfc3k4>Quiet notes for this article.</span></div><div class="comment-provider" data-comment-provider="giscus"></div> <script type="module">const config = {"repo":"dodolalorc/astro-navfolio","repo_id":"R_kgDOSaQejw","category":"Announcements","category_id":"DIC_kwDOSaQej84C9di9","mapping":"pathname","strict":"0","reactions_enabled":"1","emit_metadata":"0","input_position":"top","theme":"preferred_color_scheme","lang":"zh-CN","loading":"lazy"};
+
+  const mountGiscus = () => {
+    const container = document.querySelector('[data-comment-provider="giscus"]');
+
+    if (!container) {
+      return;
+    }
+
+    const script = document.createElement('script');
+    script.src = 'https://giscus.app/client.js';
+    script.async = true;
+    script.crossOrigin = 'anonymous';
+    script.setAttribute('data-repo', config.repo);
+    script.setAttribute('data-repo-id', config.repo_id);
+    script.setAttribute('data-category', config.category);
+    script.setAttribute('data-category-id', config.category_id);
+    script.setAttribute('data-mapping', config.mapping);
+    script.setAttribute('data-strict', config.strict);
+    script.setAttribute('data-reactions-enabled', config.reactions_enabled);
+    script.setAttribute('data-emit-metadata', config.emit_metadata);
+    script.setAttribute('data-input-position', config.input_position);
+    script.setAttribute('data-theme', config.theme);
+    script.setAttribute('data-lang', config.lang);
+    script.setAttribute('data-loading', config.loading);
+
+    container.replaceChildren(script);
+  };
+
+  mountGiscus();
+  document.addEventListener('astro:page-load', mountGiscus);
+</script></section> </div> <aside class="right-sidebar" aria-label="Reading tools" data-astro-cid-bl7sqnst> <div class="right-sidebar-inner" data-astro-cid-bl7sqnst><nav class="toc-card blog-card" aria-label="Table of contents" data-toc-root data-astro-cid-ymbpksfa><h2 data-astro-cid-ymbpksfa>Table of contents</h2><ol data-astro-cid-ymbpksfa><li data-astro-cid-ymbpksfa><a href="#题意" data-toc-link data-toc-hash="#题意" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>1</span>题意</a></li><li data-astro-cid-ymbpksfa><a href="#思路" data-toc-link data-toc-hash="#思路" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>2</span>思路</a></li><li data-astro-cid-ymbpksfa><a href="#参考代码" data-toc-link data-toc-hash="#参考代码" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>3</span>参考代码</a></li><li data-astro-cid-ymbpksfa><a href="#题意-1" data-toc-link data-toc-hash="#题意-1" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>4</span>题意</a></li><li data-astro-cid-ymbpksfa><a href="#思路-1" data-toc-link data-toc-hash="#思路-1" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>5</span>思路</a></li><li data-astro-cid-ymbpksfa><a href="#参考代码-1" data-toc-link data-toc-hash="#参考代码-1" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>6</span>参考代码</a></li><li data-astro-cid-ymbpksfa><a href="#题意-2" data-toc-link data-toc-hash="#题意-2" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>7</span>题意</a></li><li data-astro-cid-ymbpksfa><a href="#思路-2" data-toc-link data-toc-hash="#思路-2" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>8</span>思路</a></li><li data-astro-cid-ymbpksfa><a href="#题意-3" data-toc-link data-toc-hash="#题意-3" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>9</span>题意</a></li><li data-astro-cid-ymbpksfa><a href="#思路-3" data-toc-link data-toc-hash="#思路-3" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>10</span>思路</a></li><li data-astro-cid-ymbpksfa><a href="#参考代码-2" data-toc-link data-toc-hash="#参考代码-2" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>11</span>参考代码</a></li></ol></nav></div> </aside> </main></body></html>

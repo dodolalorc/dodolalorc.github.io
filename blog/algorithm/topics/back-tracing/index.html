@@ -1,0 +1,425 @@
+<!DOCTYPE html><html lang="en" data-palette="green-soft" data-astro-cid-bl7sqnst> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/navfolio-site/_astro/ClientRouter.astro_astro_type_script_index_0_lang.CAqDO0tx.js"></script><script>
+  (() => {
+    const storageKey = 'navfolio-theme';
+    const root = document.documentElement;
+    const themeMeta = () => document.querySelector('meta[name="theme-color"]');
+    const systemTheme = () =>
+      window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    const storedTheme = () => {
+      try {
+        return localStorage.getItem(storageKey);
+      } catch {
+        return null;
+      }
+    };
+    const setStoredTheme = (theme) => {
+      try {
+        localStorage.setItem(storageKey, theme);
+      } catch {}
+    };
+    const applyTheme = (theme, persist = true) => {
+      const nextTheme = theme === 'dark' ? 'dark' : 'light';
+      const toggleLabel = nextTheme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme';
+
+      root.dataset.theme = nextTheme;
+      root.style.colorScheme = nextTheme;
+      themeMeta()?.setAttribute('content', nextTheme === 'dark' ? '#171b18' : '#fdfdf9');
+      for (const button of document.querySelectorAll('[data-theme-toggle]')) {
+        button.setAttribute('aria-label', toggleLabel);
+        button.setAttribute('title', toggleLabel);
+      }
+      if (persist) setStoredTheme(nextTheme);
+    };
+    const syncThemeControls = () => {
+      applyTheme(root.dataset.theme || storedTheme() || systemTheme(), false);
+    };
+
+    applyTheme(storedTheme() || systemTheme(), false);
+
+    if (!window.__navfolioTheme) {
+      window.__navfolioTheme = {
+        toggle() {
+          applyTheme(root.dataset.theme === 'dark' ? 'light' : 'dark');
+        },
+      };
+    }
+
+    if (window.__navfolioThemeInitialized) {
+      syncThemeControls();
+      return;
+    }
+
+    window.__navfolioThemeInitialized = true;
+
+    document.addEventListener('click', (event) => {
+      const toggle = event.target.closest?.('[data-theme-toggle]');
+      if (toggle) window.__navfolioTheme.toggle();
+    });
+
+    document.addEventListener('DOMContentLoaded', syncThemeControls, { once: true });
+    document.addEventListener('astro:page-load', syncThemeControls);
+
+    window.matchMedia?.('(prefers-color-scheme: dark)').addEventListener('change', (event) => {
+      if (!storedTheme()) applyTheme(event.matches ? 'dark' : 'light', false);
+    });
+  })();
+</script><link rel="icon" href="/navfolio-sitefavicon.svg" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/navfolio-sitefavicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/navfolio-sitefavicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/navfolio-siteapple-touch-icon.png"><link rel="manifest" href="/navfolio-sitemanifest.json"><meta name="theme-color" content="#fdfdf9"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="navfolio" href="https://dodolalorc.github.io/rss.xml"><meta name="generator" content="Astro v6.3.5"><style>@font-face{font-family:Atkinson-c7f4c4e8b285552f;src:url("/navfolio-site/_astro/fonts/a3ad966ea116c4c9.woff") format("woff");font-display:swap;font-weight:400;font-style:normal;}@font-face{font-family:Atkinson-c7f4c4e8b285552f;src:url("/navfolio-site/_astro/fonts/e558ed6e1d035617.woff") format("woff");font-display:swap;font-weight:700;font-style:normal;}@font-face{font-family:"Atkinson-c7f4c4e8b285552f fallback: Arial";src:local("Arial");font-display:swap;font-weight:400;font-style:normal;size-adjust:99.3717%;ascent-override:80.1033%;descent-override:25.2587%;line-gap-override:0%;}@font-face{font-family:"Atkinson-c7f4c4e8b285552f fallback: Arial";src:local("Arial");font-display:swap;font-weight:700;font-style:normal;size-adjust:99.3717%;ascent-override:80.1033%;descent-override:25.2587%;line-gap-override:0%;}:root{--font-atkinson:Atkinson-c7f4c4e8b285552f,"Atkinson-c7f4c4e8b285552f fallback: Arial",sans-serif;}</style><link rel="preload" href="/navfolio-site/_astro/fonts/a3ad966ea116c4c9.woff" as="font" type="font/woff" crossorigin><link rel="preload" href="/navfolio-site/_astro/fonts/e558ed6e1d035617.woff" as="font" type="font/woff" crossorigin><!-- Canonical URL --><link rel="canonical" href="https://dodolalorc.github.io/navfolio-site/blog/algorithm/topics/back-tracing/"><!-- Primary Meta Tags --><title>一些回溯相关的刷题记录</title><meta name="title" content="一些回溯相关的刷题记录"><meta name="description" content><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://dodolalorc.github.io/navfolio-site/blog/algorithm/topics/back-tracing/"><meta property="og:title" content="一些回溯相关的刷题记录"><meta property="og:description" content><meta property="og:image" content="https://dodolalorc.github.io/navfolio-site/_astro/fail-loading-image.DEm-LhbX.png"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://dodolalorc.github.io/navfolio-site/blog/algorithm/topics/back-tracing/"><meta property="twitter:title" content="一些回溯相关的刷题记录"><meta property="twitter:description" content><meta property="twitter:image" content="https://dodolalorc.github.io/navfolio-site/_astro/fail-loading-image.DEm-LhbX.png"><link rel="stylesheet" href="/navfolio-site/_astro/_..1O9rtQI6.css">
+<link rel="stylesheet" href="/navfolio-site/_astro/BlogArticle.BLUUC9fD.css">
+<link rel="stylesheet" href="/navfolio-site/_astro/BaseHead.CscXXfv1.css"></head> <body class="blog-detail-page" data-astro-cid-bl7sqnst> <header class="blog-top-nav" data-pagefind-ignore data-astro-cid-sp6fezam> <button class="mobile-menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav-menu" data-mobile-menu-toggle data-astro-cid-sp6fezam> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="18" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-sp6fezam="true" class="lucide lucide-menu">  <path d="M4 5h16"></path> <path d="M4 12h16"></path> <path d="M4 19h16"></path>  </svg> </button> <a class="brand" href="/navfolio-site/" aria-label="Go to navfolio home" data-astro-cid-sp6fezam> <span class="brand-mark" aria-hidden="true" data-astro-cid-sp6fezam></span> <span class="brand-title" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>navfolio</span> <span class="brand-route" data-astro-cid-sp6fezam> · blog</span> </span> </a> <nav class="nav-links" aria-label="Article navigation" data-astro-cid-sp6fezam> <a class="nav-link" href="/navfolio-site/" data-astro-cid-sp6fezam> Home </a><a class="nav-link active" href="/navfolio-site/blog" data-astro-cid-sp6fezam> Blog </a><a class="nav-link" href="/navfolio-site/projects" data-astro-cid-sp6fezam> Projects </a><a class="nav-link" href="/navfolio-site/vibe" data-astro-cid-sp6fezam> Vibe </a><a class="nav-link" href="/navfolio-site/about" data-astro-cid-sp6fezam> About </a> </nav> <nav class="mobile-menu-panel" id="mobile-nav-menu" aria-label="Mobile navigation" data-mobile-menu data-astro-cid-sp6fezam> <a class="mobile-menu-link" href="/navfolio-site/" data-mobile-menu-link data-astro-cid-sp6fezam> Home </a><a class="mobile-menu-link active" href="/navfolio-site/blog" data-mobile-menu-link data-astro-cid-sp6fezam> Blog </a><a class="mobile-menu-link" href="/navfolio-site/projects" data-mobile-menu-link data-astro-cid-sp6fezam> Projects </a><a class="mobile-menu-link" href="/navfolio-site/vibe" data-mobile-menu-link data-astro-cid-sp6fezam> Vibe </a><a class="mobile-menu-link" href="/navfolio-site/about" data-mobile-menu-link data-astro-cid-sp6fezam> About </a> </nav> <div class="nav-actions" aria-label="Page actions" data-astro-cid-sp6fezam> <a href="https://github.com/dodolalorc/astro-navfolio" target="_blank" rel="noreferrer" aria-label="Open GitHub repository" title="GitHub" data-astro-cid-sp6fezam> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="17" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-sp6fezam="true" class="lucide lucide-github">  <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path> <path d="M9 18c-4.51 2-5-2-7-2"></path>  </svg> </a> <button type="button" data-theme-toggle aria-label="Switch theme" data-astro-cid-sp6fezam> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="17" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-sp6fezam="true" class="lucide lucide-moon theme-icon-moon">  <path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"></path>  </svg> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="17" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-sp6fezam="true" class="lucide lucide-sun theme-icon-sun">  <circle cx="12" cy="12" r="4"></circle> <path d="M12 2v2"></path> <path d="M12 20v2"></path> <path d="m4.93 4.93 1.41 1.41"></path> <path d="m17.66 17.66 1.41 1.41"></path> <path d="M2 12h2"></path> <path d="M20 12h2"></path> <path d="m6.34 17.66-1.41 1.41"></path> <path d="m19.07 4.93-1.41 1.41"></path>  </svg> </button> <div class="site-search" data-site-search-root data-search-max-results="6" data-search-idle-label="Start typing to search." data-search-loading-label="Searching..." data-search-empty-label="No notes found." data-search-unavailable-label="Search index is not available yet. Run a production build first." data-pagefind-ignore data-astro-cid-prkij7br> <button class="site-search-trigger" type="button" aria-label="Search site" aria-expanded="false" aria-controls="site-search-dialog" title="Search (Ctrl K / Cmd K)" data-site-search-trigger data-astro-cid-prkij7br> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="17" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-prkij7br="true" class="lucide lucide-search">  <path d="m21 21-4.34-4.34"></path> <circle cx="11" cy="11" r="8"></circle>  </svg> </button> <div class="site-search-layer" data-site-search-backdrop data-astro-cid-prkij7br> <section class="site-search-dialog" id="site-search-dialog" role="dialog" aria-modal="true" aria-labelledby="site-search-title" data-site-search-dialog data-astro-cid-prkij7br> <header class="site-search-head" data-astro-cid-prkij7br> <div data-astro-cid-prkij7br> <p id="site-search-title" data-astro-cid-prkij7br>Search</p> <span data-astro-cid-prkij7br>Ctrl K / Cmd K</span> </div> <button class="site-search-close" type="button" aria-label="Close search" title="Close search" data-site-search-close data-astro-cid-prkij7br> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="17" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-prkij7br="true" class="lucide lucide-x">  <path d="M18 6 6 18"></path> <path d="m6 6 12 12"></path>  </svg> </button> </header> <label class="site-search-input-wrap" data-astro-cid-prkij7br> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="16" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" aria-hidden="true" data-astro-cid-prkij7br="true" class="lucide lucide-search">  <path d="m21 21-4.34-4.34"></path> <circle cx="11" cy="11" r="8"></circle>  </svg> <input type="search" placeholder="Search notes..." autocomplete="off" spellcheck="false" data-site-search-input data-astro-cid-prkij7br> </label> <p class="site-search-status" data-site-search-status data-astro-cid-prkij7br>Start typing to search.</p> <ol class="site-search-results" data-site-search-results data-astro-cid-prkij7br></ol> </section> </div> </div> <script type="module">const L=["a[href]","button:not([disabled])","input:not([disabled])","textarea:not([disabled])","select:not([disabled])",'[tabindex]:not([tabindex="-1"])'].join(","),h="/navfolio-site",w=`${h.replace(/\/$/,"")}/pagefind/pagefind.js`.replace(/^\/pagefind/,"/pagefind");let d=null,m=null;function q(e){if(/^https?:\/\//.test(e))return e;const t=h.replace(/\/$/,"");return!t||t==="/"||e.startsWith(`${t}/`)?e:e.startsWith("/")?`${t}${e}`:`${t}/${e}`}async function g(){return d||(d=import(w).then(async e=>(await e.options?.({baseUrl:h}),await e.init?.(),e)).catch(e=>{throw d=null,e})),d}function i(e,t){const a=e.querySelector("[data-site-search-status]");a&&(a.textContent=t)}function y(e,t){e.dataset.searchOpen=t?"true":"false",e.querySelector("[data-site-search-trigger]")?.setAttribute("aria-expanded",String(t))}function v(e){return Array.from(e.querySelectorAll(L)).filter(t=>t.offsetParent!==null)}function x(e,t){if(e.key!=="Tab")return;const a=v(t);if(a.length===0)return;const s=a[0],c=a[a.length-1];e.shiftKey&&document.activeElement===s?(e.preventDefault(),c.focus()):!e.shiftKey&&document.activeElement===c&&(e.preventDefault(),s.focus())}function f(e,t){const a=e.querySelector("[data-site-search-results]");if(a){a.replaceChildren();for(const s of t){const c=document.createElement("li"),o=document.createElement("a"),r=document.createElement("span"),l=document.createElement("span");o.href=q(s.url),r.className="site-search-result-title",r.textContent=s.title||s.url,l.className="site-search-result-excerpt",l.innerHTML=s.excerpt,o.append(r,l),c.append(o),a.append(c)}}}function k(e,t){let a;return(...s)=>{window.clearTimeout(a),a=window.setTimeout(()=>e(...s),t)}}function p(){for(const e of document.querySelectorAll("[data-site-search-root]")){if(e.dataset.siteSearchReady==="true")continue;e.dataset.siteSearchReady="true";const t=e.querySelector("[data-site-search-trigger]"),a=e.querySelector("[data-site-search-dialog]"),s=e.querySelector("[data-site-search-input]"),c=e.querySelectorAll("[data-site-search-close]"),o=Number(e.dataset.searchMaxResults||6);if(!t||!a||!s)continue;const r=()=>{y(e,!1),s.value="",f(e,[]),i(e,e.dataset.searchIdleLabel||"Start typing to search."),m?.focus?.()},l=()=>{m=document.activeElement instanceof HTMLElement?document.activeElement:null,y(e,!0),window.setTimeout(()=>s.focus(),30),g().catch(()=>{i(e,e.dataset.searchUnavailableLabel||"Search index is not available yet.")})},b=k(async()=>{const n=s.value.trim();if(!n){f(e,[]),i(e,e.dataset.searchIdleLabel||"Start typing to search.");return}i(e,e.dataset.searchLoadingLabel||"Searching...");try{const S=await(await g()).search(n),u=await Promise.all(S.results.slice(0,o).map(E=>E.data()));f(e,u),i(e,u.length>0?`${u.length} result${u.length===1?"":"s"}`:e.dataset.searchEmptyLabel||"No notes found.")}catch{f(e,[]),i(e,e.dataset.searchUnavailableLabel||"Search index is not available yet.")}},120);t.addEventListener("click",l),s.addEventListener("input",b);for(const n of c)n.addEventListener("click",r);e.addEventListener("click",n=>{n.target.matches("[data-site-search-backdrop]")&&r(),n.target.closest("[data-site-search-results] a")&&r()}),e.addEventListener("keydown",n=>{e.dataset.searchOpen==="true"&&(n.key==="Escape"&&r(),x(n,a))})}}document.addEventListener("keydown",e=>{if(!((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==="k"))return;const a=document.querySelector("[data-site-search-root]"),s=a?.querySelector("[data-site-search-trigger]");if(!(!a||!s)){if(e.preventDefault(),a.dataset.searchOpen==="true"){a.querySelector("[data-site-search-input]")?.focus();return}s.click()}});p();document.addEventListener("astro:page-load",p);p();</script> <button class="toc-action" type="button" aria-label="Open table of contents" aria-expanded="false" aria-controls="mobile-toc-menu" title="Table of contents" data-mobile-toc-trigger data-astro-cid-sp6fezam> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="17" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-sp6fezam="true" class="lucide lucide-list-tree">  <path d="M8 5h13"></path> <path d="M13 12h8"></path> <path d="M13 19h8"></path> <path d="M3 10a2 2 0 0 0 2 2h3"></path> <path d="M3 5v12a2 2 0 0 0 2 2h3"></path>  </svg> </button> </div> <nav class="mobile-toc-panel" id="mobile-toc-menu" aria-label="Article table of contents" data-nav-toc-menu data-toc-root data-astro-cid-sp6fezam> <p data-astro-cid-sp6fezam>Table of contents</p> <ol data-astro-cid-sp6fezam> <li data-astro-cid-sp6fezam> <a href="#背景" data-nav-toc-link data-toc-link data-toc-hash="#背景" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>1</span> 背景 </a> </li><li data-astro-cid-sp6fezam> <a href="#1283-e003-信道分配" data-nav-toc-link data-toc-link data-toc-hash="#1283-e003-信道分配" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>2</span> 1283: E003 信道分配 </a> </li><li data-astro-cid-sp6fezam> <a href="#引四色定理证明" data-nav-toc-link data-toc-link data-toc-hash="#引四色定理证明" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>3</span> 引四色定理证明 </a> </li><li data-astro-cid-sp6fezam> <a href="#回溯法back-tracking" data-nav-toc-link data-toc-link data-toc-hash="#回溯法back-tracking" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>4</span> 回溯法(back tracking) </a> </li><li data-astro-cid-sp6fezam> <a href="#回溯法介绍" data-nav-toc-link data-toc-link data-toc-hash="#回溯法介绍" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>5</span> 回溯法介绍 </a> </li><li data-astro-cid-sp6fezam> <a href="#例题实训" data-nav-toc-link data-toc-link data-toc-hash="#例题实训" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>6</span> 例题实训 </a> </li><li data-astro-cid-sp6fezam> <a href="#题目描述-1" data-nav-toc-link data-toc-link data-toc-hash="#题目描述-1" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>7</span> 题目描述 </a> </li><li data-astro-cid-sp6fezam> <a href="#输入格式" data-nav-toc-link data-toc-link data-toc-hash="#输入格式" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>8</span> 输入格式 </a> </li><li data-astro-cid-sp6fezam> <a href="#输出格式" data-nav-toc-link data-toc-link data-toc-hash="#输出格式" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>9</span> 输出格式 </a> </li><li data-astro-cid-sp6fezam> <a href="#样例-1" data-nav-toc-link data-toc-link data-toc-hash="#样例-1" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>10</span> 样例 #1 </a> </li><li data-astro-cid-sp6fezam> <a href="#样例输入-1" data-nav-toc-link data-toc-link data-toc-hash="#样例输入-1" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>11</span> 样例输入 #1 </a> </li><li data-astro-cid-sp6fezam> <a href="#样例输出-1" data-nav-toc-link data-toc-link data-toc-hash="#样例输出-1" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>12</span> 样例输出 #1 </a> </li><li data-astro-cid-sp6fezam> <a href="#提示" data-nav-toc-link data-toc-link data-toc-hash="#提示" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>13</span> 提示 </a> </li><li data-astro-cid-sp6fezam> <a href="#题目描述-2" data-nav-toc-link data-toc-link data-toc-hash="#题目描述-2" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>14</span> 题目描述 </a> </li><li data-astro-cid-sp6fezam> <a href="#输入格式-1" data-nav-toc-link data-toc-link data-toc-hash="#输入格式-1" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>15</span> 输入格式 </a> </li><li data-astro-cid-sp6fezam> <a href="#输出格式-1" data-nav-toc-link data-toc-link data-toc-hash="#输出格式-1" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>16</span> 输出格式 </a> </li><li data-astro-cid-sp6fezam> <a href="#样例-1-1" data-nav-toc-link data-toc-link data-toc-hash="#样例-1-1" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>17</span> 样例 #1 </a> </li><li data-astro-cid-sp6fezam> <a href="#样例输入-1-1" data-nav-toc-link data-toc-link data-toc-hash="#样例输入-1-1" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>18</span> 样例输入 #1 </a> </li><li data-astro-cid-sp6fezam> <a href="#样例输出-1-1" data-nav-toc-link data-toc-link data-toc-hash="#样例输出-1-1" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>19</span> 样例输出 #1 </a> </li><li data-astro-cid-sp6fezam> <a href="#提示-1" data-nav-toc-link data-toc-link data-toc-hash="#提示-1" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>20</span> 提示 </a> </li><li data-astro-cid-sp6fezam> <a href="#题目描述-3" data-nav-toc-link data-toc-link data-toc-hash="#题目描述-3" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>21</span> 题目描述 </a> </li><li data-astro-cid-sp6fezam> <a href="#示例-1" data-nav-toc-link data-toc-link data-toc-hash="#示例-1" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>22</span> 示例 1： </a> </li><li data-astro-cid-sp6fezam> <a href="#示例-2" data-nav-toc-link data-toc-link data-toc-hash="#示例-2" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>23</span> 示例 2： </a> </li><li data-astro-cid-sp6fezam> <a href="#提示-2" data-nav-toc-link data-toc-link data-toc-hash="#提示-2" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>24</span> 提示： </a> </li><li data-astro-cid-sp6fezam> <a href="#题目描述-4" data-nav-toc-link data-toc-link data-toc-hash="#题目描述-4" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>25</span> 题目描述 </a> </li><li data-astro-cid-sp6fezam> <a href="#示例-1-1" data-nav-toc-link data-toc-link data-toc-hash="#示例-1-1" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>26</span> 示例 1： </a> </li><li data-astro-cid-sp6fezam> <a href="#示例-2-1" data-nav-toc-link data-toc-link data-toc-hash="#示例-2-1" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>27</span> 示例 2: </a> </li><li data-astro-cid-sp6fezam> <a href="#提示-3" data-nav-toc-link data-toc-link data-toc-hash="#提示-3" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>28</span> 提示: </a> </li><li data-astro-cid-sp6fezam> <a href="#题目背景" data-nav-toc-link data-toc-link data-toc-hash="#题目背景" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>29</span> 题目背景 </a> </li><li data-astro-cid-sp6fezam> <a href="#题目描述-5" data-nav-toc-link data-toc-link data-toc-hash="#题目描述-5" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>30</span> 题目描述 </a> </li><li data-astro-cid-sp6fezam> <a href="#输入格式-2" data-nav-toc-link data-toc-link data-toc-hash="#输入格式-2" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>31</span> 输入格式 </a> </li><li data-astro-cid-sp6fezam> <a href="#输出格式-2" data-nav-toc-link data-toc-link data-toc-hash="#输出格式-2" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>32</span> 输出格式 </a> </li><li data-astro-cid-sp6fezam> <a href="#样例-1-2" data-nav-toc-link data-toc-link data-toc-hash="#样例-1-2" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>33</span> 样例 #1 </a> </li><li data-astro-cid-sp6fezam> <a href="#样例输入-1-2" data-nav-toc-link data-toc-link data-toc-hash="#样例输入-1-2" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>34</span> 样例输入 #1 </a> </li><li data-astro-cid-sp6fezam> <a href="#样例输出-1-2" data-nav-toc-link data-toc-link data-toc-hash="#样例输出-1-2" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>35</span> 样例输出 #1 </a> </li><li data-astro-cid-sp6fezam> <a href="#提示-4" data-nav-toc-link data-toc-link data-toc-hash="#提示-4" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>36</span> 提示 </a> </li><li data-astro-cid-sp6fezam> <a href="#题目背景-1" data-nav-toc-link data-toc-link data-toc-hash="#题目背景-1" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>37</span> 题目背景 </a> </li><li data-astro-cid-sp6fezam> <a href="#题目描述-6" data-nav-toc-link data-toc-link data-toc-hash="#题目描述-6" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>38</span> 题目描述 </a> </li><li data-astro-cid-sp6fezam> <a href="#输入格式-3" data-nav-toc-link data-toc-link data-toc-hash="#输入格式-3" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>39</span> 输入格式 </a> </li><li data-astro-cid-sp6fezam> <a href="#输出格式-3" data-nav-toc-link data-toc-link data-toc-hash="#输出格式-3" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>40</span> 输出格式 </a> </li><li data-astro-cid-sp6fezam> <a href="#样例-1-3" data-nav-toc-link data-toc-link data-toc-hash="#样例-1-3" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>41</span> 样例 #1 </a> </li><li data-astro-cid-sp6fezam> <a href="#样例输入-1-3" data-nav-toc-link data-toc-link data-toc-hash="#样例输入-1-3" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>42</span> 样例输入 #1 </a> </li><li data-astro-cid-sp6fezam> <a href="#样例输出-1-3" data-nav-toc-link data-toc-link data-toc-hash="#样例输出-1-3" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>43</span> 样例输出 #1 </a> </li><li data-astro-cid-sp6fezam> <a href="#提示-5" data-nav-toc-link data-toc-link data-toc-hash="#提示-5" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>44</span> 提示 </a> </li><li data-astro-cid-sp6fezam> <a href="#题目描述-7" data-nav-toc-link data-toc-link data-toc-hash="#题目描述-7" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>45</span> 题目描述 </a> </li><li data-astro-cid-sp6fezam> <a href="#输入格式-4" data-nav-toc-link data-toc-link data-toc-hash="#输入格式-4" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>46</span> 输入格式 </a> </li><li data-astro-cid-sp6fezam> <a href="#输出格式-4" data-nav-toc-link data-toc-link data-toc-hash="#输出格式-4" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>47</span> 输出格式 </a> </li><li data-astro-cid-sp6fezam> <a href="#样例-1-4" data-nav-toc-link data-toc-link data-toc-hash="#样例-1-4" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>48</span> 样例 #1 </a> </li><li data-astro-cid-sp6fezam> <a href="#样例输入-1-4" data-nav-toc-link data-toc-link data-toc-hash="#样例输入-1-4" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>49</span> 样例输入 #1 </a> </li><li data-astro-cid-sp6fezam> <a href="#样例输出-1-4" data-nav-toc-link data-toc-link data-toc-hash="#样例输出-1-4" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>50</span> 样例输出 #1 </a> </li><li data-astro-cid-sp6fezam> <a href="#提示-6" data-nav-toc-link data-toc-link data-toc-hash="#提示-6" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>51</span> 提示 </a> </li> </ol> </nav> </header> <script type="module">const r=()=>{for(const t of document.querySelectorAll(".blog-top-nav")){const o=t.querySelector("[data-mobile-menu-toggle]"),s=t.querySelector("[data-mobile-menu]"),i=t.querySelector("[data-mobile-toc-trigger]"),l=t.querySelector("[data-nav-toc-menu]");if(o&&s&&!t.dataset.mobileMenuReady){t.dataset.mobileMenuReady="true";const a=e=>{t.dataset.mobileMenuOpen=e?"true":"false",o.setAttribute("aria-expanded",String(e)),o.setAttribute("aria-label",e?"Close navigation menu":"Open navigation menu")},n=e=>{!i||!l||(t.dataset.mobileTocOpen=e?"true":"false",i.setAttribute("aria-expanded",String(e)),i.setAttribute("aria-label",e?"Close table of contents":"Open table of contents"))};o.addEventListener("click",()=>{const e=t.dataset.mobileMenuOpen!=="true";a(e),e&&n(!1)}),s.addEventListener("click",e=>{e.target.closest?.("[data-mobile-menu-link]")&&a(!1)}),i?.addEventListener("click",()=>{const e=t.dataset.mobileTocOpen!=="true";n(e),e&&a(!1)}),l?.addEventListener("click",e=>{e.target.closest?.("[data-nav-toc-link]")&&n(!1)}),document.addEventListener("click",e=>{t.contains(e.target)||(a(!1),n(!1))}),document.addEventListener("keydown",e=>{e.key==="Escape"&&(a(!1),n(!1))})}}};r();document.addEventListener("astro:page-load",r);</script> <div class="blog-background" aria-hidden="true" data-astro-cid-bl7sqnst></div> <main class="blog-layout" data-pagefind-body data-astro-cid-bl7sqnst> <div class="article-column" data-astro-cid-bl7sqnst> <article class="article-card" data-astro-cid-bl7sqnst> <header class="article-header" data-astro-cid-wynq62ua>  <h1 data-astro-cid-wynq62ua>一些回溯相关的刷题记录</h1> <div class="meta-line" aria-label="Article metadata" data-astro-cid-wynq62ua> <span class="meta-item" data-astro-cid-wynq62ua> <time datetime="2024-01-03T03:45:58.000Z"> Jan 3, 2024 </time> </span> <span class="meta-item" data-astro-cid-wynq62ua>4,121 words</span> <span class="meta-item" data-astro-cid-wynq62ua>11 min read</span> <script type="module">const showPageView = false;
+const serverURL = "";
+const selector = ".waline-pageview-count";
+
+  if (showPageView) {
+    const { pageviewCount } = await import('https://unpkg.com/@waline/client@v3/dist/pageview.js');
+
+    const updatePageViews = () => {
+      pageviewCount({
+        serverURL,
+        selector,
+        path: window.location.pathname,
+      });
+    };
+
+    updatePageViews();
+    document.addEventListener('astro:page-load', updatePageViews);
+  }
+</script>  </div>   </header> <section class="mobile-article-toc" aria-label="Article table of contents" data-astro-cid-bl7sqnst> <nav class="toc-card blog-card compact collapsible can-collapse" aria-label="Table of contents" data-toc-root data-mobile-toc data-expanded="false" data-astro-cid-ymbpksfa><h2 data-astro-cid-ymbpksfa>Table of contents</h2><ol id="mobile-article-toc-list" data-astro-cid-ymbpksfa><li data-astro-cid-ymbpksfa><a href="#背景" data-toc-link data-toc-hash="#背景" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>1</span>背景</a></li><li data-astro-cid-ymbpksfa><a href="#1283-e003-信道分配" data-toc-link data-toc-hash="#1283-e003-信道分配" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>2</span>1283: E003 信道分配</a></li><li data-astro-cid-ymbpksfa><a href="#引四色定理证明" data-toc-link data-toc-hash="#引四色定理证明" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>3</span>引四色定理证明</a></li><li data-astro-cid-ymbpksfa><a href="#回溯法back-tracking" data-toc-link data-toc-hash="#回溯法back-tracking" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>4</span>回溯法(back tracking)</a></li><li data-astro-cid-ymbpksfa><a href="#回溯法介绍" data-toc-link data-toc-hash="#回溯法介绍" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>5</span>回溯法介绍</a></li><li data-astro-cid-ymbpksfa><a href="#例题实训" data-toc-link data-toc-hash="#例题实训" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>6</span>例题实训</a></li><li data-astro-cid-ymbpksfa><a href="#题目描述-1" data-toc-link data-toc-hash="#题目描述-1" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>7</span>题目描述</a></li><li data-astro-cid-ymbpksfa><a href="#输入格式" data-toc-link data-toc-hash="#输入格式" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>8</span>输入格式</a></li><li data-astro-cid-ymbpksfa><a href="#输出格式" data-toc-link data-toc-hash="#输出格式" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>9</span>输出格式</a></li><li data-astro-cid-ymbpksfa><a href="#样例-1" data-toc-link data-toc-hash="#样例-1" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>10</span>样例 #1</a></li><li data-astro-cid-ymbpksfa><a href="#样例输入-1" data-toc-link data-toc-hash="#样例输入-1" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>11</span>样例输入 #1</a></li><li data-astro-cid-ymbpksfa><a href="#样例输出-1" data-toc-link data-toc-hash="#样例输出-1" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>12</span>样例输出 #1</a></li><li data-astro-cid-ymbpksfa><a href="#提示" data-toc-link data-toc-hash="#提示" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>13</span>提示</a></li><li data-astro-cid-ymbpksfa><a href="#题目描述-2" data-toc-link data-toc-hash="#题目描述-2" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>14</span>题目描述</a></li><li data-astro-cid-ymbpksfa><a href="#输入格式-1" data-toc-link data-toc-hash="#输入格式-1" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>15</span>输入格式</a></li><li data-astro-cid-ymbpksfa><a href="#输出格式-1" data-toc-link data-toc-hash="#输出格式-1" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>16</span>输出格式</a></li><li data-astro-cid-ymbpksfa><a href="#样例-1-1" data-toc-link data-toc-hash="#样例-1-1" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>17</span>样例 #1</a></li><li data-astro-cid-ymbpksfa><a href="#样例输入-1-1" data-toc-link data-toc-hash="#样例输入-1-1" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>18</span>样例输入 #1</a></li><li data-astro-cid-ymbpksfa><a href="#样例输出-1-1" data-toc-link data-toc-hash="#样例输出-1-1" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>19</span>样例输出 #1</a></li><li data-astro-cid-ymbpksfa><a href="#提示-1" data-toc-link data-toc-hash="#提示-1" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>20</span>提示</a></li><li data-astro-cid-ymbpksfa><a href="#题目描述-3" data-toc-link data-toc-hash="#题目描述-3" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>21</span>题目描述</a></li><li data-astro-cid-ymbpksfa><a href="#示例-1" data-toc-link data-toc-hash="#示例-1" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>22</span>示例 1：</a></li><li data-astro-cid-ymbpksfa><a href="#示例-2" data-toc-link data-toc-hash="#示例-2" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>23</span>示例 2：</a></li><li data-astro-cid-ymbpksfa><a href="#提示-2" data-toc-link data-toc-hash="#提示-2" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>24</span>提示：</a></li><li data-astro-cid-ymbpksfa><a href="#题目描述-4" data-toc-link data-toc-hash="#题目描述-4" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>25</span>题目描述</a></li><li data-astro-cid-ymbpksfa><a href="#示例-1-1" data-toc-link data-toc-hash="#示例-1-1" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>26</span>示例 1：</a></li><li data-astro-cid-ymbpksfa><a href="#示例-2-1" data-toc-link data-toc-hash="#示例-2-1" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>27</span>示例 2:</a></li><li data-astro-cid-ymbpksfa><a href="#提示-3" data-toc-link data-toc-hash="#提示-3" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>28</span>提示:</a></li><li data-astro-cid-ymbpksfa><a href="#题目背景" data-toc-link data-toc-hash="#题目背景" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>29</span>题目背景</a></li><li data-astro-cid-ymbpksfa><a href="#题目描述-5" data-toc-link data-toc-hash="#题目描述-5" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>30</span>题目描述</a></li><li data-astro-cid-ymbpksfa><a href="#输入格式-2" data-toc-link data-toc-hash="#输入格式-2" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>31</span>输入格式</a></li><li data-astro-cid-ymbpksfa><a href="#输出格式-2" data-toc-link data-toc-hash="#输出格式-2" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>32</span>输出格式</a></li><li data-astro-cid-ymbpksfa><a href="#样例-1-2" data-toc-link data-toc-hash="#样例-1-2" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>33</span>样例 #1</a></li><li data-astro-cid-ymbpksfa><a href="#样例输入-1-2" data-toc-link data-toc-hash="#样例输入-1-2" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>34</span>样例输入 #1</a></li><li data-astro-cid-ymbpksfa><a href="#样例输出-1-2" data-toc-link data-toc-hash="#样例输出-1-2" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>35</span>样例输出 #1</a></li><li data-astro-cid-ymbpksfa><a href="#提示-4" data-toc-link data-toc-hash="#提示-4" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>36</span>提示</a></li><li data-astro-cid-ymbpksfa><a href="#题目背景-1" data-toc-link data-toc-hash="#题目背景-1" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>37</span>题目背景</a></li><li data-astro-cid-ymbpksfa><a href="#题目描述-6" data-toc-link data-toc-hash="#题目描述-6" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>38</span>题目描述</a></li><li data-astro-cid-ymbpksfa><a href="#输入格式-3" data-toc-link data-toc-hash="#输入格式-3" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>39</span>输入格式</a></li><li data-astro-cid-ymbpksfa><a href="#输出格式-3" data-toc-link data-toc-hash="#输出格式-3" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>40</span>输出格式</a></li><li data-astro-cid-ymbpksfa><a href="#样例-1-3" data-toc-link data-toc-hash="#样例-1-3" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>41</span>样例 #1</a></li><li data-astro-cid-ymbpksfa><a href="#样例输入-1-3" data-toc-link data-toc-hash="#样例输入-1-3" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>42</span>样例输入 #1</a></li><li data-astro-cid-ymbpksfa><a href="#样例输出-1-3" data-toc-link data-toc-hash="#样例输出-1-3" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>43</span>样例输出 #1</a></li><li data-astro-cid-ymbpksfa><a href="#提示-5" data-toc-link data-toc-hash="#提示-5" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>44</span>提示</a></li><li data-astro-cid-ymbpksfa><a href="#题目描述-7" data-toc-link data-toc-hash="#题目描述-7" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>45</span>题目描述</a></li><li data-astro-cid-ymbpksfa><a href="#输入格式-4" data-toc-link data-toc-hash="#输入格式-4" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>46</span>输入格式</a></li><li data-astro-cid-ymbpksfa><a href="#输出格式-4" data-toc-link data-toc-hash="#输出格式-4" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>47</span>输出格式</a></li><li data-astro-cid-ymbpksfa><a href="#样例-1-4" data-toc-link data-toc-hash="#样例-1-4" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>48</span>样例 #1</a></li><li data-astro-cid-ymbpksfa><a href="#样例输入-1-4" data-toc-link data-toc-hash="#样例输入-1-4" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>49</span>样例输入 #1</a></li><li data-astro-cid-ymbpksfa><a href="#样例输出-1-4" data-toc-link data-toc-hash="#样例输出-1-4" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>50</span>样例输出 #1</a></li><li data-astro-cid-ymbpksfa><a href="#提示-6" data-toc-link data-toc-hash="#提示-6" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>51</span>提示</a></li></ol><button class="toc-expand" type="button" aria-label="Expand table of contents" aria-expanded="false" aria-controls="mobile-article-toc-list" data-toc-expand data-astro-cid-ymbpksfa><span data-expand-label data-astro-cid-ymbpksfa>Show all</span><i aria-hidden="true" data-astro-cid-ymbpksfa></i></button></nav><script type="module" src="/navfolio-site/_astro/TableOfContents.astro_astro_type_script_index_0_lang.B3wh3MgY.js"></script> </section> <section id="article-start" class="article-content" data-astro-cid-bl7sqnst>  <h2 id="背景">背景</h2>
+<p>今天复习算法课的题目时在琢磨这题：</p>
+<p>(2024年1月3日15:52:13更新：正好考到了，押题！)</p>
+<blockquote>
+<h3 id="1283-e003-信道分配">1283: E003 信道分配</h3>
+<h4 id="题目描述">题目描述</h4>
+<p>当无线电台在一个非常大的区域上传播信号时，为了每个接收器都能得到较强信号，使用转发器转发信号。然而，需要仔细地选择每个转发器使用的频道，以使附近的转发器不彼此干扰。如果邻近的转发器使用不同的频道，条件就得到满足。
+因为无线电波的频谱是宝贵的资源，转发器所需频道的数量应减到最少。编程任务：读取转发器网络的描述信息，并计算出所需频道的最小使用量。</p>
+<p>==输入==</p>
+<p>输入包含许多转发器网络图。每幅图的第一行是转发器数目（1~26）。转发器用连续的大写字母表示，从A开始。例如，10个转发器的名称分别是A，B，C，…，I和J。当转发器的个数是0时，表示输入结束。
+转发器数目之后，是其邻近关系的列表。每行的格式为
+A：BCDH
+表示转发器B、C、D和H与转发器A邻近。第一行描述与转发器A邻近的，第二行描述与B邻近的，直到描述完所有的转发器。如果某个转发器不与其他转发器相邻，它的形式为
+A：
+转发器依字母顺序列出。
+注意：相邻是对称的关系；如果A与B相邻，那么B与A也相邻。因为转发器位于水平面内，由相邻的转发器构成的网络图没有相交的线。</p>
+<p>==输出==</p>
+<p>对于每幅图（除了最后一个没有转发器），输出一行，是转发器不互相干扰所需的最少频道数。输出格式参考样例输出。注意：频道数为1的话，“channel”为单数。</p>
+<p>==样例输入==</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>2</span></span>
+<span class="line"><span>A:</span></span>
+<span class="line"><span>B:</span></span>
+<span class="line"><span>4</span></span>
+<span class="line"><span>A:BC</span></span>
+<span class="line"><span>B:ACD</span></span>
+<span class="line"><span>C:ABD</span></span>
+<span class="line"><span>D:BC</span></span>
+<span class="line"><span>0</span></span></code></pre>
+<p>==样例输出==</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>1 channel needed.</span></span>
+<span class="line"><span>3 channels needed.</span></span></code></pre>
+</blockquote>
+<p>找到的题解提到，这是一个可以在四个频道数内解决的问题，所以引起了ddl的好奇。这里记录一下学习这个四色定理。</p>
+<p>本题题意很简单，就是通过算法查找至少需要多少个频道才能保证相邻电台不会互相干扰（频率不同）</p>
+<h2 id="引四色定理证明">引四色定理证明</h2>
+<p>四色定理的证明至今也没有纯粹的数学证明，但是已有在计算机辅助下的证明。</p>
+<p>参考：<a href="https://www.ithome.com/0/709/172.htm">古典着色问题的新时代算法 - IT之家 (ithome.com)</a></p>
+<p>wiki百科：<a href="https://en.wikipedia.org/wiki/Four_color_theorem">Four_color_theorem</a></p>
+<p>和一篇[在计算机软件 Coq 的帮助下找到形式证明论文](<a href="https://www.ams.org/notices/200811/tx081101382p.pdf">tx081101382p.pdf (ams.org)</a>)</p>
+<h2 id="回溯法back-tracking">回溯法(back tracking)</h2>
+<h3 id="回溯法介绍">回溯法介绍</h3>
+<p>一种选优搜索法，或称“试探法”，按选优条件向前搜索，当搜索到某一步时，发现无法达到目标（即满足<strong>回溯条件</strong>），就<strong>退一步</strong>重新选择，这种走不通就退回来重走的技术称为回溯法。</p>
+<h3 id="例题实训">例题实训</h3>
+<h4 id="八皇后问题">八皇后问题</h4>
+<p>洛谷链接：[P1219 <a href="https://www.luogu.com.cn/problem/P1219">USACO1.5] 八皇后 Checker Challenge - 洛谷 | 计算机科学教育新生态 (luogu.com.cn)</a></p>
+<blockquote>
+<h1 id="usaco15-八皇后-checker-challenge">[USACO1.5] 八皇后 Checker Challenge</h1>
+<h2 id="题目描述-1">题目描述</h2>
+<p>一个如下的 $6 \times 6$ 的跳棋棋盘，有六个棋子被放置在棋盘上，使得每行、每列有且只有一个，每条对角线（包括两条主对角线的所有平行线）上至多有一个棋子。</p>
+<p><img src="https://cdn.luogu.com.cn/upload/image_hosting/3h71x0yf.png" alt=""></p>
+<p>上面的布局可以用序列 $2\ 4\ 6\ 1\ 3\ 5$ 来描述，第 $i$ 个数字表示在第 $i$ 行的相应位置有一个棋子，如下：</p>
+<p>行号 $1\ 2\ 3\ 4\ 5\ 6$</p>
+<p>列号 $2\ 4\ 6\ 1\ 3\ 5$</p>
+<p>这只是棋子放置的一个解。请编一个程序找出所有棋子放置的解。<br>
+并把它们以上面的序列方法输出，解按字典顺序排列。<br>
+请输出前 $3$ 个解。最后一行是解的总个数。</p>
+<h2 id="输入格式">输入格式</h2>
+<p>一行一个正整数 $n$，表示棋盘是 $n \times n$ 大小的。</p>
+<h2 id="输出格式">输出格式</h2>
+<p>前三行为前三个解，每个解的两个数字之间用一个空格隔开。第四行只有一个数字，表示解的总数。</p>
+<h2 id="样例-1">样例 #1</h2>
+<h3 id="样例输入-1">样例输入 #1</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>6</span></span></code></pre>
+<h3 id="样例输出-1">样例输出 #1</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>2 4 6 1 3 5</span></span>
+<span class="line"><span>3 6 2 5 1 4</span></span>
+<span class="line"><span>4 1 5 2 6 3</span></span>
+<span class="line"><span>4</span></span></code></pre>
+<h2 id="提示">提示</h2>
+<p>【数据范围】<br>
+对于 $100%$ 的数据，$6 \le n \le 13$。</p>
+<p>题目翻译来自NOCOW。</p>
+<p>USACO Training Section 1.5</p>
+</blockquote>
+<h4 id="回溯法数独">回溯法数独</h4>
+<p>洛谷链接：<a href="https://www.luogu.com.cn/problem/P1784">P1784 数独 - 洛谷 | 计算机科学教育新生态 (luogu.com.cn)</a></p>
+<blockquote>
+<h1 id="数独">数独</h1>
+<h2 id="题目描述-2">题目描述</h2>
+<p>数独是根据 $9 \times 9$ 盘面上的已知数字，推理出所有剩余空格的数字，并满足每一行、每一列、每一个粗线宫内的数字均含 $1 - 9$ ，不重复。每一道合格的数独谜题都有且仅有唯一答案，推理方法也以此为基础，任何无解或多解的题目都是不合格的。</p>
+<p>芬兰一位数学家号称设计出全球最难的“数独游戏”，并刊登在报纸上，让大家去挑战。</p>
+<p>这位数学家说，他相信只有“智慧最顶尖”的人才有可能破解这个“数独之谜”。</p>
+<p>据介绍，目前数独游戏的难度的等级有一到五级，一是入门等级，五则比较难。不过这位数学家说，他所设计的数独游戏难度等级是十一，可以说是所以数独游戏中，难度最高的等级。他还表示，他目前还没遇到解不出来的数独游戏，因此他认为“最具挑战性”的数独游戏并没有出现。</p>
+<h2 id="输入格式-1">输入格式</h2>
+<p>一个未填的数独。</p>
+<h2 id="输出格式-1">输出格式</h2>
+<p>填好的数独。</p>
+<h2 id="样例-1-1">样例 #1</h2>
+<h3 id="样例输入-1-1">样例输入 #1</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>8 0 0 0 0 0 0 0 0 </span></span>
+<span class="line"><span>0 0 3 6 0 0 0 0 0 </span></span>
+<span class="line"><span>0 7 0 0 9 0 2 0 0 </span></span>
+<span class="line"><span>0 5 0 0 0 7 0 0 0 </span></span>
+<span class="line"><span>0 0 0 0 4 5 7 0 0 </span></span>
+<span class="line"><span>0 0 0 1 0 0 0 3 0 </span></span>
+<span class="line"><span>0 0 1 0 0 0 0 6 8 </span></span>
+<span class="line"><span>0 0 8 5 0 0 0 1 0 </span></span>
+<span class="line"><span>0 9 0 0 0 0 4 0 0</span></span></code></pre>
+<h3 id="样例输出-1-1">样例输出 #1</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>8 1 2 7 5 3 6 4 9 </span></span>
+<span class="line"><span>9 4 3 6 8 2 1 7 5 </span></span>
+<span class="line"><span>6 7 5 4 9 1 2 8 3 </span></span>
+<span class="line"><span>1 5 4 2 3 7 8 9 6 </span></span>
+<span class="line"><span>3 6 9 8 4 5 7 2 1 </span></span>
+<span class="line"><span>2 8 7 1 6 9 5 3 4 </span></span>
+<span class="line"><span>5 2 1 9 7 4 3 6 8 </span></span>
+<span class="line"><span>4 3 8 5 2 6 9 1 7 </span></span>
+<span class="line"><span>7 9 6 3 1 8 4 5 2</span></span></code></pre>
+<h2 id="提示-1">提示</h2>
+<p>2022-04-17 @farteryhr 贡献了三组 hack 数据。加入了其中两组。第三组过强（来源：<a href="https://www.dcc.fc.up.pt/~acm/sudoku.pdf">https://www.dcc.fc.up.pt/~acm/sudoku.pdf</a>），放在下边供自测。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>9 0 0 8 0 0 0 0 0</span></span>
+<span class="line"><span>0 0 0 0 0 0 5 0 0 </span></span>
+<span class="line"><span>0 0 0 0 0 0 0 0 0 </span></span>
+<span class="line"><span>0 2 0 0 1 0 0 0 3</span></span>
+<span class="line"><span>0 1 0 0 0 0 0 6 0</span></span>
+<span class="line"><span>0 0 0 4 0 0 0 7 0</span></span>
+<span class="line"><span>7 0 8 6 0 0 0 0 0 </span></span>
+<span class="line"><span>0 0 0 0 3 0 1 0 0 </span></span>
+<span class="line"><span>4 0 0 0 0 0 2 0 0 </span></span></code></pre>
+<p>输出</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>9 7 2 8 5 3 6 1 4 </span></span>
+<span class="line"><span>1 4 6 2 7 9 5 3 8 </span></span>
+<span class="line"><span>5 8 3 1 4 6 7 2 9 </span></span>
+<span class="line"><span>6 2 4 7 1 8 9 5 3 </span></span>
+<span class="line"><span>8 1 7 3 9 5 4 6 2 </span></span>
+<span class="line"><span>3 5 9 4 6 2 8 7 1 </span></span>
+<span class="line"><span>7 9 8 6 2 1 3 4 5 </span></span>
+<span class="line"><span>2 6 5 9 3 4 1 8 7 </span></span>
+<span class="line"><span>4 3 1 5 8 7 2 9 6 </span></span></code></pre>
+</blockquote>
+<h4 id="子集">子集</h4>
+<p>力扣链接：<a href="https://leetcode.cn/problems/subsets/">78. 子集 - 力扣（LeetCode）</a></p>
+<blockquote>
+<h1 id="78-子集">[78. 子集]</h1>
+<h2 id="题目描述-3">题目描述</h2>
+<p>给你一个整数数组 <code>nums</code> ，数组中的元素 <strong>互不相同</strong> 。返回该数组所有可能的子集（幂集）。</p>
+<p>解集 <strong>不能</strong> 包含重复的子集。你可以按 <strong>任意顺序</strong> 返回解集。</p>
+<h2 id="示例-1">示例 1：</h2>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>输入：nums = [1,2,3]</span></span>
+<span class="line"><span>输出：[[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]</span></span></code></pre>
+<h2 id="示例-2">示例 2：</h2>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>输入：nums = [0]</span></span>
+<span class="line"><span>输出：[[],[0]]</span></span></code></pre>
+<h2 id="提示-2">提示：</h2>
+<ul>
+<li><code>1 &#x3C;= nums.length &#x3C;= 10</code></li>
+<li><code>-10 &#x3C;= nums[i] &#x3C;= 10</code></li>
+<li><code>nums</code> 中的所有元素 <strong>互不相同</strong></li>
+</ul>
+</blockquote>
+<h4 id="字母大小写全排列">字母大小写全排列</h4>
+<p>力扣链接：<a href="https://leetcode.cn/problems/letter-case-permutation/description/">784. 字母大小写全排列 - 力扣（LeetCode）</a></p>
+<blockquote>
+<h2 id="题目描述-4">题目描述</h2>
+<p>给定一个字符串 <code>s</code> ，通过将字符串 <code>s</code> 中的每个字母转变大小写，我们可以获得一个新的字符串。</p>
+<p>返回 <em>所有可能得到的字符串集合</em> 。以 <strong>任意顺序</strong> 返回输出。</p>
+<h2 id="示例-1-1">示例 1：</h2>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>输入：s = "a1b2"</span></span>
+<span class="line"><span>输出：["a1b2", "a1B2", "A1b2", "A1B2"]</span></span></code></pre>
+<h2 id="示例-2-1">示例 2:</h2>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>输入: s = "3z4"</span></span>
+<span class="line"><span>输出: ["3z4","3Z4"]</span></span></code></pre>
+<h2 id="提示-3">提示:</h2>
+<ul>
+<li><code>1 &#x3C;= s.length &#x3C;= 12</code></li>
+<li><code>s</code> 由小写英文字母、大写英文字母和数字组成</li>
+</ul>
+</blockquote>
+<h4 id="背包问题一">背包问题一</h4>
+<p>洛谷链接：[P4095 <a href="https://www.luogu.com.cn/problem/P4095">HEOI2013] Eden 的新背包问题 - 洛谷 | 计算机科学教育新生态 (luogu.com.cn)</a></p>
+<blockquote>
+<h1 id="heoi2013-eden-的新背包问题">[HEOI2013] Eden 的新背包问题</h1>
+<h2 id="题目背景">题目背景</h2>
+<p>“ 寄 没 有 地 址 的 信 ，这 样 的 情 绪 有 种 距 离 ，你 放 着 谁 的 歌 曲 ，是 怎 样 的 心 情 。 能 不 能 说 给 我 听 。”</p>
+<h2 id="题目描述-5">题目描述</h2>
+<p>失忆的 Eden 总想努力地回忆起过去，然而总是只能清晰地记得那种思念的感觉，却不能回忆起她的音容笑貌。</p>
+<p>记忆中，她总是喜欢给 Eden 出谜题：在 valentine’s day 的夜晚，两人在闹市中闲逛时，望着礼品店里精巧玲珑的各式玩偶，她突发奇想，问了 Eden 这样的一个问题：有 $n$ 个玩偶，每个玩偶有对应的价值、价钱，每个玩偶都可以被买有限次，在携带的价钱 $m$ 固定的情况下，如何选择买哪些玩偶以及每个玩偶买多少个，才能使得选择的玩偶总价钱不超过 $m$，且价值和最大。</p>
+<p>众所周知的，这是一个很经典的多重背包问题，Eden 很快解决了，不过她似乎因为自己的问题被飞快解决感到了一丝不高兴，于是她希望把问题加难：多次询问，每次询问都将给出新的总价钱，并且会去掉某个玩偶（即这个玩偶不能被选择），再问此时的多重背包的答案（即前一段所叙述的问题）。</p>
+<p>这下 Eden 犯难了，不过 Eden 不希望自己被难住，你能帮帮他么？</p>
+<h2 id="输入格式-2">输入格式</h2>
+<p>第一行有一个整数，代表玩偶的个数 $n$，玩偶从 $0$ 开始编号。</p>
+<p>第二行开始后面的 $n$ 行，每行三个整数，第 $(i + 2)$ 行的整数  $a_i, b_i, c_i$，分别表示买一个第 $i$ 个玩偶需要的价钱，获得的价值以及第 $i$ 个玩偶的限购次数。</p>
+<p>接下来的一行有一个整数 $q$，表示询问次数。</p>
+<p>接下来 $q$ 行，每行两个整数 $d_i, e_i$，表示每个询问去掉的是哪个玩偶（注意玩偶从 $0$ 开始编号）以及该询问对应的新的总价钱数。（去掉操作不保留，即不同询问互相独立）。</p>
+<h2 id="输出格式-2">输出格式</h2>
+<p>输出 $q$ 行，第 $i$ 行输出对于第 $i$ 个询问的答案。</p>
+<h2 id="样例-1-2">样例 #1</h2>
+<h3 id="样例输入-1-2">样例输入 #1</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>5 </span></span>
+<span class="line"><span>2 3 4 </span></span>
+<span class="line"><span>1 2 1 </span></span>
+<span class="line"><span>4 1 2 </span></span>
+<span class="line"><span>2 1 1 </span></span>
+<span class="line"><span>3 2 3 </span></span>
+<span class="line"><span>5 </span></span>
+<span class="line"><span>1 10 </span></span>
+<span class="line"><span>2 7 </span></span>
+<span class="line"><span>3 4 </span></span>
+<span class="line"><span>4 8 </span></span>
+<span class="line"><span>0 5</span></span></code></pre>
+<h3 id="样例输出-1-2">样例输出 #1</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>13 </span></span>
+<span class="line"><span>11 </span></span>
+<span class="line"><span>6 </span></span>
+<span class="line"><span>12 </span></span>
+<span class="line"><span>4</span></span></code></pre>
+<h2 id="提示-4">提示</h2>
+<h4 id="样例解释">样例解释</h4>
+<p>一共五种玩偶，分别的价钱价值和限购次数为 $(2,3,4)$， $(1,2,1)$， $(4,1,2)$， $(2,1,1)$， $(3,2,3)$。</p>
+<p>五个询问，以第一个询问为例。</p>
+<p>第一个询问表示的是去掉编号为 $1$ 的玩偶， 且拥有的钱数为 $10$ 时可以获得的最大价值，则此时剩余玩偶为 $(2,3,4$)，$(4,1,2)$， $(2,1,1)$，$(3,2,3)$，若把编号为 $0$ 的玩偶买 $4$ 个（即全买了），然后编号为 $3$ 的玩偶 买一个，则刚好把 $10$ 元全部花完，且总价值为 $13$。可以证明没有更优的方案了。</p>
+<p>注意买某种玩偶不一定要买光。</p>
+<hr>
+<h4 id="数据规模与约定">数据规模与约定</h4>
+<ul>
+<li>对于 $10%$ 的数据，保证 $n \leq 10$。</li>
+<li>另外存在 $20%$ 的数据，保证  $n \leq 100$，$c_i = 1$，$q \leq 100$。</li>
+<li>另外存在 $20%$ 的数据，保证 $n \leq 100$，$q \leq 100$。</li>
+<li>另外存在 $30%$ 的数据，保证 $c_i = 1$。</li>
+<li>对于 $100%$ 的数据，保证  $1 \leq n \leq 1000$，$1 \leq q \leq 3\times 10^5$， $1 \leq a_i,b_i,c_i \leq 100$，$0 \leq d_i &#x3C; n$，$0 \leq e_i \leq 1000$。</li>
+</ul>
+</blockquote>
+<h4 id="背包问题二">背包问题二</h4>
+<p>洛谷链接：<a href="https://www.luogu.com.cn/problem/P1757">P1757 通天之分组背包 - 洛谷 | 计算机科学教育新生态 (luogu.com.cn)</a></p>
+<blockquote>
+<h1 id="通天之分组背包">通天之分组背包</h1>
+<h2 id="题目背景-1">题目背景</h2>
+<p>直达通天路·小 A 历险记第二篇</p>
+<h2 id="题目描述-6">题目描述</h2>
+<p>自 $01$ 背包问世之后，小 A 对此深感兴趣。一天，小 A 去远游，却发现他的背包不同于 $01$ 背包，他的物品大致可分为 $k$ 组，每组中的物品相互冲突，现在，他想知道最大的利用价值是多少。</p>
+<h2 id="输入格式-3">输入格式</h2>
+<p>两个数 $m,n$，表示一共有 $n$ 件物品，总重量为 $m$。</p>
+<p>接下来 $n$ 行，每行 $3$ 个数 $a_i,b_i,c_i$，表示物品的重量，利用价值，所属组数。</p>
+<h2 id="输出格式-3">输出格式</h2>
+<p>一个数，最大的利用价值。</p>
+<h2 id="样例-1-3">样例 #1</h2>
+<h3 id="样例输入-1-3">样例输入 #1</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>45 3</span></span>
+<span class="line"><span>10 10 1</span></span>
+<span class="line"><span>10 5 1</span></span>
+<span class="line"><span>50 400 2</span></span></code></pre>
+<h3 id="样例输出-1-3">样例输出 #1</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>10</span></span></code></pre>
+<h2 id="提示-5">提示</h2>
+<p>$0 \leq m \leq 1000$，$1 \leq n \leq 1000$，$1\leq k\leq 100$，$a_i, b_i, c_i$ 在 <code>int</code> 范围内。</p>
+</blockquote>
+<h4 id="背包问题三">背包问题三</h4>
+<p>洛谷链接：[P1064 <a href="https://www.luogu.com.cn/problem/P1064">NOIP2006 提高组] 金明的预算方案 - 洛谷 | 计算机科学教育新生态 (luogu.com.cn)</a></p>
+<blockquote>
+<h1 id="noip2006-提高组-金明的预算方案">[NOIP2006 提高组] 金明的预算方案</h1>
+<h2 id="题目描述-7">题目描述</h2>
+<p>金明今天很开心，家里购置的新房就要领钥匙了，新房里有一间金明自己专用的很宽敞的房间。更让他高兴的是，妈妈昨天对他说：“你的房间需要购买哪些物品，怎么布置，你说了算，只要不超过 $n$ 元钱就行”。今天一早，金明就开始做预算了，他把想买的物品分为两类：主件与附件，附件是从属于某个主件的，下表就是一些主件与附件的例子：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="center">主件</th><th align="center">附件</th></tr></thead><tbody><tr><td align="center">电脑</td><td align="center">打印机，扫描仪</td></tr><tr><td align="center">书柜</td><td align="center">图书</td></tr><tr><td align="center">书桌</td><td align="center">台灯，文具</td></tr><tr><td align="center">工作椅</td><td align="center">无</td></tr></tbody></table>
+<p>如果要买归类为附件的物品，必须先买该附件所属的主件。每个主件可以有 $0$ 个、$1$ 个或 $2$ 个附件。每个附件对应一个主件，附件不再有从属于自己的附件。金明想买的东西很多，肯定会超过妈妈限定的 $n$ 元。于是，他把每件物品规定了一个重要度，分为 $5$ 等：用整数 $1 \sim 5$ 表示，第 $5$ 等最重要。他还从因特网上查到了每件物品的价格（都是 $10$ 元的整数倍）。他希望在不超过 $n$ 元的前提下，使每件物品的价格与重要度的乘积的总和最大。</p>
+<p>设第 $j$ 件物品的价格为 $v_j$，重要度为$w_j$，共选中了 $k$ 件物品，编号依次为 $j_1,j_2,\dots,j_k$，则所求的总和为：</p>
+<p>$v_{j_1} \times w_{j_1}+v_{j_2} \times w_{j_2}+ \dots +v_{j_k} \times w_{j_k}$。</p>
+<p>请你帮助金明设计一个满足要求的购物单。</p>
+<h2 id="输入格式-4">输入格式</h2>
+<p>第一行有两个整数，分别表示总钱数 $n$ 和希望购买的物品个数 $m$。</p>
+<p>第 $2$ 到第 $(m + 1)$ 行，每行三个整数，第 $(i + 1)$ 行的整数 $v_i$，$p_i$，$q_i$ 分别表示第 $i$ 件物品的价格、重要度以及它对应的的主件。如果 $q_i=0$，表示该物品本身是主件。</p>
+<h2 id="输出格式-4">输出格式</h2>
+<p>输出一行一个整数表示答案。</p>
+<h2 id="样例-1-4">样例 #1</h2>
+<h3 id="样例输入-1-4">样例输入 #1</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>1000 5</span></span>
+<span class="line"><span>800 2 0</span></span>
+<span class="line"><span>400 5 1</span></span>
+<span class="line"><span>300 5 1</span></span>
+<span class="line"><span>400 3 0</span></span>
+<span class="line"><span>500 2 0</span></span></code></pre>
+<h3 id="样例输出-1-4">样例输出 #1</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>2200</span></span></code></pre>
+<h2 id="提示-6">提示</h2>
+<h4 id="数据规模与约定-1">数据规模与约定</h4>
+<p>对于全部的测试点，保证 $1 \leq n \leq 3.2 \times 10^4$，$1 \leq m \leq 60$，$0 \leq v_i \leq 10^4$，$1 \leq p_i \leq 5$，$0 \leq q_i \leq m$，答案不超过 $2 \times 10^5$。</p>
+<p>NOIP 2006 提高组 第二题</p>
+</blockquote> <script type="module">let o,c="";const d=e=>!!e.closest(".article-content")&&!e.closest("[data-zoomable-image]")&&!e.closest("a[href]")&&(e.parentElement?.matches(".article-content > p, .article-content figure")??!1),r=e=>{if(!(e instanceof Element))return;const t=e.closest("[data-zoomable-image]")?.querySelector("[data-zoomable-image-target]");if(t instanceof HTMLImageElement&&!t.closest("a[href]"))return t;if(e instanceof HTMLImageElement&&d(e))return e},a=()=>{o&&(o.root.classList.remove("is-open"),o.root.setAttribute("aria-hidden","true"),document.body.style.overflow=c,o.image.removeAttribute("src"),o.image.alt="",o.image.removeAttribute("title"))},m=()=>{const e=document.createElement("div");e.className="zoomable-image-lightbox",e.setAttribute("aria-hidden","true"),e.innerHTML=`
+    <button class="zoomable-image-lightbox__close" type="button" aria-label="Close image preview">
+      <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22">
+        <path d="M18 6 6 18M6 6l12 12" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+      </svg>
+    </button>
+    <img class="zoomable-image-lightbox__image" alt="" />
+  `,document.body.append(e);const t=e.querySelector(".zoomable-image-lightbox__image"),i=e.querySelector(".zoomable-image-lightbox__close");if(!(t instanceof HTMLImageElement)||!(i instanceof HTMLButtonElement))throw new Error("Failed to initialize zoomable image lightbox.");return e.addEventListener("click",n=>{n.target===e&&a()}),i.addEventListener("click",a),{root:e,image:t,closeButton:i}},u=()=>(o??=m(),o),l=e=>{const{root:t,image:i,closeButton:n}=u();c=document.body.style.overflow,i.src=e.currentSrc||e.src,i.alt=e.alt||"",e.title?i.title=e.title:i.removeAttribute("title"),document.body.style.overflow="hidden",t.classList.add("is-open"),t.setAttribute("aria-hidden","false"),n.focus({preventScroll:!0})},s=()=>{window.__navfolioZoomableImagesReady||(window.__navfolioZoomableImagesReady=!0,document.addEventListener("click",e=>{const t=r(e.target);t&&l(t)}),document.addEventListener("keydown",e=>{if(e.key==="Escape"&&o?.root.classList.contains("is-open")){a();return}const t=r(e.target);!t||e.key!=="Enter"&&e.key!==" "||(e.preventDefault(),l(t))}))};document.readyState==="loading"?document.addEventListener("DOMContentLoaded",s,{once:!0}):s();</script>  </section> </article>  <section class="comment-section" aria-label="Comments" data-comment-path="/navfolio-site/blog/algorithm/topics/back-tracing/" data-astro-cid-wwpfc3k4><div class="comment-section-heading" data-astro-cid-wwpfc3k4><p data-astro-cid-wwpfc3k4>Comments</p><span data-astro-cid-wwpfc3k4>Quiet notes for this article.</span></div><div class="comment-provider" data-comment-provider="giscus"></div> <script type="module">const config = {"repo":"dodolalorc/astro-navfolio","repo_id":"R_kgDOSaQejw","category":"Announcements","category_id":"DIC_kwDOSaQej84C9di9","mapping":"pathname","strict":"0","reactions_enabled":"1","emit_metadata":"0","input_position":"top","theme":"preferred_color_scheme","lang":"zh-CN","loading":"lazy"};
+
+  const mountGiscus = () => {
+    const container = document.querySelector('[data-comment-provider="giscus"]');
+
+    if (!container) {
+      return;
+    }
+
+    const script = document.createElement('script');
+    script.src = 'https://giscus.app/client.js';
+    script.async = true;
+    script.crossOrigin = 'anonymous';
+    script.setAttribute('data-repo', config.repo);
+    script.setAttribute('data-repo-id', config.repo_id);
+    script.setAttribute('data-category', config.category);
+    script.setAttribute('data-category-id', config.category_id);
+    script.setAttribute('data-mapping', config.mapping);
+    script.setAttribute('data-strict', config.strict);
+    script.setAttribute('data-reactions-enabled', config.reactions_enabled);
+    script.setAttribute('data-emit-metadata', config.emit_metadata);
+    script.setAttribute('data-input-position', config.input_position);
+    script.setAttribute('data-theme', config.theme);
+    script.setAttribute('data-lang', config.lang);
+    script.setAttribute('data-loading', config.loading);
+
+    container.replaceChildren(script);
+  };
+
+  mountGiscus();
+  document.addEventListener('astro:page-load', mountGiscus);
+</script></section> </div> <aside class="right-sidebar" aria-label="Reading tools" data-astro-cid-bl7sqnst> <div class="right-sidebar-inner" data-astro-cid-bl7sqnst><nav class="toc-card blog-card" aria-label="Table of contents" data-toc-root data-astro-cid-ymbpksfa><h2 data-astro-cid-ymbpksfa>Table of contents</h2><ol data-astro-cid-ymbpksfa><li data-astro-cid-ymbpksfa><a href="#背景" data-toc-link data-toc-hash="#背景" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>1</span>背景</a></li><li data-astro-cid-ymbpksfa><a href="#1283-e003-信道分配" data-toc-link data-toc-hash="#1283-e003-信道分配" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>2</span>1283: E003 信道分配</a></li><li data-astro-cid-ymbpksfa><a href="#引四色定理证明" data-toc-link data-toc-hash="#引四色定理证明" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>3</span>引四色定理证明</a></li><li data-astro-cid-ymbpksfa><a href="#回溯法back-tracking" data-toc-link data-toc-hash="#回溯法back-tracking" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>4</span>回溯法(back tracking)</a></li><li data-astro-cid-ymbpksfa><a href="#回溯法介绍" data-toc-link data-toc-hash="#回溯法介绍" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>5</span>回溯法介绍</a></li><li data-astro-cid-ymbpksfa><a href="#例题实训" data-toc-link data-toc-hash="#例题实训" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>6</span>例题实训</a></li><li data-astro-cid-ymbpksfa><a href="#题目描述-1" data-toc-link data-toc-hash="#题目描述-1" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>7</span>题目描述</a></li><li data-astro-cid-ymbpksfa><a href="#输入格式" data-toc-link data-toc-hash="#输入格式" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>8</span>输入格式</a></li><li data-astro-cid-ymbpksfa><a href="#输出格式" data-toc-link data-toc-hash="#输出格式" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>9</span>输出格式</a></li><li data-astro-cid-ymbpksfa><a href="#样例-1" data-toc-link data-toc-hash="#样例-1" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>10</span>样例 #1</a></li><li data-astro-cid-ymbpksfa><a href="#样例输入-1" data-toc-link data-toc-hash="#样例输入-1" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>11</span>样例输入 #1</a></li><li data-astro-cid-ymbpksfa><a href="#样例输出-1" data-toc-link data-toc-hash="#样例输出-1" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>12</span>样例输出 #1</a></li><li data-astro-cid-ymbpksfa><a href="#提示" data-toc-link data-toc-hash="#提示" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>13</span>提示</a></li><li data-astro-cid-ymbpksfa><a href="#题目描述-2" data-toc-link data-toc-hash="#题目描述-2" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>14</span>题目描述</a></li><li data-astro-cid-ymbpksfa><a href="#输入格式-1" data-toc-link data-toc-hash="#输入格式-1" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>15</span>输入格式</a></li><li data-astro-cid-ymbpksfa><a href="#输出格式-1" data-toc-link data-toc-hash="#输出格式-1" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>16</span>输出格式</a></li><li data-astro-cid-ymbpksfa><a href="#样例-1-1" data-toc-link data-toc-hash="#样例-1-1" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>17</span>样例 #1</a></li><li data-astro-cid-ymbpksfa><a href="#样例输入-1-1" data-toc-link data-toc-hash="#样例输入-1-1" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>18</span>样例输入 #1</a></li><li data-astro-cid-ymbpksfa><a href="#样例输出-1-1" data-toc-link data-toc-hash="#样例输出-1-1" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>19</span>样例输出 #1</a></li><li data-astro-cid-ymbpksfa><a href="#提示-1" data-toc-link data-toc-hash="#提示-1" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>20</span>提示</a></li><li data-astro-cid-ymbpksfa><a href="#题目描述-3" data-toc-link data-toc-hash="#题目描述-3" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>21</span>题目描述</a></li><li data-astro-cid-ymbpksfa><a href="#示例-1" data-toc-link data-toc-hash="#示例-1" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>22</span>示例 1：</a></li><li data-astro-cid-ymbpksfa><a href="#示例-2" data-toc-link data-toc-hash="#示例-2" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>23</span>示例 2：</a></li><li data-astro-cid-ymbpksfa><a href="#提示-2" data-toc-link data-toc-hash="#提示-2" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>24</span>提示：</a></li><li data-astro-cid-ymbpksfa><a href="#题目描述-4" data-toc-link data-toc-hash="#题目描述-4" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>25</span>题目描述</a></li><li data-astro-cid-ymbpksfa><a href="#示例-1-1" data-toc-link data-toc-hash="#示例-1-1" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>26</span>示例 1：</a></li><li data-astro-cid-ymbpksfa><a href="#示例-2-1" data-toc-link data-toc-hash="#示例-2-1" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>27</span>示例 2:</a></li><li data-astro-cid-ymbpksfa><a href="#提示-3" data-toc-link data-toc-hash="#提示-3" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>28</span>提示:</a></li><li data-astro-cid-ymbpksfa><a href="#题目背景" data-toc-link data-toc-hash="#题目背景" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>29</span>题目背景</a></li><li data-astro-cid-ymbpksfa><a href="#题目描述-5" data-toc-link data-toc-hash="#题目描述-5" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>30</span>题目描述</a></li><li data-astro-cid-ymbpksfa><a href="#输入格式-2" data-toc-link data-toc-hash="#输入格式-2" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>31</span>输入格式</a></li><li data-astro-cid-ymbpksfa><a href="#输出格式-2" data-toc-link data-toc-hash="#输出格式-2" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>32</span>输出格式</a></li><li data-astro-cid-ymbpksfa><a href="#样例-1-2" data-toc-link data-toc-hash="#样例-1-2" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>33</span>样例 #1</a></li><li data-astro-cid-ymbpksfa><a href="#样例输入-1-2" data-toc-link data-toc-hash="#样例输入-1-2" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>34</span>样例输入 #1</a></li><li data-astro-cid-ymbpksfa><a href="#样例输出-1-2" data-toc-link data-toc-hash="#样例输出-1-2" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>35</span>样例输出 #1</a></li><li data-astro-cid-ymbpksfa><a href="#提示-4" data-toc-link data-toc-hash="#提示-4" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>36</span>提示</a></li><li data-astro-cid-ymbpksfa><a href="#题目背景-1" data-toc-link data-toc-hash="#题目背景-1" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>37</span>题目背景</a></li><li data-astro-cid-ymbpksfa><a href="#题目描述-6" data-toc-link data-toc-hash="#题目描述-6" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>38</span>题目描述</a></li><li data-astro-cid-ymbpksfa><a href="#输入格式-3" data-toc-link data-toc-hash="#输入格式-3" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>39</span>输入格式</a></li><li data-astro-cid-ymbpksfa><a href="#输出格式-3" data-toc-link data-toc-hash="#输出格式-3" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>40</span>输出格式</a></li><li data-astro-cid-ymbpksfa><a href="#样例-1-3" data-toc-link data-toc-hash="#样例-1-3" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>41</span>样例 #1</a></li><li data-astro-cid-ymbpksfa><a href="#样例输入-1-3" data-toc-link data-toc-hash="#样例输入-1-3" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>42</span>样例输入 #1</a></li><li data-astro-cid-ymbpksfa><a href="#样例输出-1-3" data-toc-link data-toc-hash="#样例输出-1-3" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>43</span>样例输出 #1</a></li><li data-astro-cid-ymbpksfa><a href="#提示-5" data-toc-link data-toc-hash="#提示-5" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>44</span>提示</a></li><li data-astro-cid-ymbpksfa><a href="#题目描述-7" data-toc-link data-toc-hash="#题目描述-7" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>45</span>题目描述</a></li><li data-astro-cid-ymbpksfa><a href="#输入格式-4" data-toc-link data-toc-hash="#输入格式-4" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>46</span>输入格式</a></li><li data-astro-cid-ymbpksfa><a href="#输出格式-4" data-toc-link data-toc-hash="#输出格式-4" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>47</span>输出格式</a></li><li data-astro-cid-ymbpksfa><a href="#样例-1-4" data-toc-link data-toc-hash="#样例-1-4" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>48</span>样例 #1</a></li><li data-astro-cid-ymbpksfa><a href="#样例输入-1-4" data-toc-link data-toc-hash="#样例输入-1-4" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>49</span>样例输入 #1</a></li><li data-astro-cid-ymbpksfa><a href="#样例输出-1-4" data-toc-link data-toc-hash="#样例输出-1-4" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>50</span>样例输出 #1</a></li><li data-astro-cid-ymbpksfa><a href="#提示-6" data-toc-link data-toc-hash="#提示-6" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>51</span>提示</a></li></ol></nav></div> </aside> </main></body></html>
