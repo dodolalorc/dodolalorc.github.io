@@ -1,0 +1,329 @@
+<!DOCTYPE html><html lang="en" data-palette="green-vivid" data-astro-cid-bl7sqnst> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.CAqDO0tx.js"></script><script>
+  (() => {
+    const storageKey = 'navfolio-theme';
+    const root = document.documentElement;
+    const themeMeta = () => document.querySelector('meta[name="theme-color"]');
+    const systemTheme = () =>
+      window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    const storedTheme = () => {
+      try {
+        return localStorage.getItem(storageKey);
+      } catch {
+        return null;
+      }
+    };
+    const setStoredTheme = (theme) => {
+      try {
+        localStorage.setItem(storageKey, theme);
+      } catch {}
+    };
+    const applyTheme = (theme, persist = true) => {
+      const nextTheme = theme === 'dark' ? 'dark' : 'light';
+      const toggleLabel = nextTheme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme';
+
+      root.dataset.theme = nextTheme;
+      root.style.colorScheme = nextTheme;
+      themeMeta()?.setAttribute('content', nextTheme === 'dark' ? '#171b18' : '#fdfdf9');
+      for (const button of document.querySelectorAll('[data-theme-toggle]')) {
+        button.setAttribute('aria-label', toggleLabel);
+        button.setAttribute('title', toggleLabel);
+      }
+      if (persist) setStoredTheme(nextTheme);
+    };
+    const syncThemeControls = () => {
+      applyTheme(root.dataset.theme || storedTheme() || systemTheme(), false);
+    };
+
+    applyTheme(storedTheme() || systemTheme(), false);
+
+    if (!window.__navfolioTheme) {
+      window.__navfolioTheme = {
+        toggle() {
+          applyTheme(root.dataset.theme === 'dark' ? 'light' : 'dark');
+        },
+      };
+    }
+
+    if (window.__navfolioThemeInitialized) {
+      syncThemeControls();
+      return;
+    }
+
+    window.__navfolioThemeInitialized = true;
+
+    document.addEventListener('click', (event) => {
+      const toggle = event.target.closest?.('[data-theme-toggle]');
+      if (toggle) window.__navfolioTheme.toggle();
+    });
+
+    document.addEventListener('DOMContentLoaded', syncThemeControls, { once: true });
+    document.addEventListener('astro:page-load', syncThemeControls);
+
+    window.matchMedia?.('(prefers-color-scheme: dark)').addEventListener('change', (event) => {
+      if (!storedTheme()) applyTheme(event.matches ? 'dark' : 'light', false);
+    });
+  })();
+</script><link rel="icon" href="/favicon.svg" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/manifest.json"><meta name="theme-color" content="#fdfdf9"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="dodola" href="https://dodolalorc.cn/rss.xml"><meta name="generator" content="Astro v6.3.5"><!-- Canonical URL --><link rel="canonical" href="https://dodolalorc.cn/blog/vibe-content-guide/"><!-- Primary Meta Tags --><title>Vibe 内容格式使用指南</title><meta name="title" content="Vibe 内容格式使用指南"><meta name="description" content="了解 navfolio 的 vibe 页面如何用 Markdown 管理生活碎片、开发札记、图片片段和轻量引用。"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://dodolalorc.cn/blog/vibe-content-guide/"><meta property="og:title" content="Vibe 内容格式使用指南"><meta property="og:description" content="了解 navfolio 的 vibe 页面如何用 Markdown 管理生活碎片、开发札记、图片片段和轻量引用。"><meta property="og:image" content="https://dodolalorc.cn/_astro/fail-loading-image.DEm-LhbX.png"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://dodolalorc.cn/blog/vibe-content-guide/"><meta property="twitter:title" content="Vibe 内容格式使用指南"><meta property="twitter:description" content="了解 navfolio 的 vibe 页面如何用 Markdown 管理生活碎片、开发札记、图片片段和轻量引用。"><meta property="twitter:image" content="https://dodolalorc.cn/_astro/fail-loading-image.DEm-LhbX.png"><link rel="stylesheet" href="/_astro/_..VeZrjLU-.css">
+<link rel="stylesheet" href="/_astro/BlogArticle.BLUUC9fD.css">
+<link rel="stylesheet" href="/_astro/BlogTopNav.CswDVlK0.css"><style>.long-image[data-astro-cid-bzh55gd2]{margin:28px 0 30px}.long-image__viewport[data-astro-cid-bzh55gd2]{position:relative;width:100%;max-height:var(--long-image-height);overflow-x:hidden;overflow-y:auto;border:1px solid var(--paper-line);border-radius:8px;background:var(--paper-surface-muted);box-shadow:inset 0 1px color-mix(in srgb,var(--paper-surface) 72%,transparent);cursor:ns-resize;overscroll-behavior-y:contain;scrollbar-color:color-mix(in srgb,var(--paper-ink-faint) 42%,transparent) transparent;scrollbar-width:thin;-webkit-overflow-scrolling:touch}.long-image__viewport[data-astro-cid-bzh55gd2]:before,.long-image__viewport[data-astro-cid-bzh55gd2]:after{position:sticky;z-index:1;display:block;height:24px;pointer-events:none;content:""}.long-image__viewport[data-astro-cid-bzh55gd2]:before{top:0;margin-bottom:-24px;background:linear-gradient(180deg,color-mix(in srgb,var(--paper-surface) 86%,transparent),transparent)}.long-image__viewport[data-astro-cid-bzh55gd2]:after{bottom:0;margin-top:-24px;background:linear-gradient(0deg,color-mix(in srgb,var(--paper-surface) 86%,transparent),transparent)}.long-image__viewport[data-astro-cid-bzh55gd2]:focus-visible{outline:2px solid color-mix(in srgb,var(--paper-accent) 36%,transparent);outline-offset:3px}.long-image__viewport[data-astro-cid-bzh55gd2]::-webkit-scrollbar{width:7px}.long-image__viewport[data-astro-cid-bzh55gd2]::-webkit-scrollbar-track{background:transparent}.long-image__viewport[data-astro-cid-bzh55gd2]::-webkit-scrollbar-thumb{border:2px solid transparent;border-radius:999px;background:color-mix(in srgb,var(--paper-ink-faint) 48%,transparent);background-clip:content-box}.long-image__viewport[data-astro-cid-bzh55gd2] img[data-astro-cid-bzh55gd2]{display:block;width:100%;height:auto;border-radius:0}.long-image[data-astro-cid-bzh55gd2] figcaption[data-astro-cid-bzh55gd2]{margin-top:9px;color:var(--paper-ink-faint);font-family:var(--font-meta);font-size:.78rem;line-height:1.5;text-align:center}@media(max-width:640px){.long-image[data-astro-cid-bzh55gd2]{margin:24px 0 26px}.long-image__viewport[data-astro-cid-bzh55gd2]{max-height:min(var(--long-image-height),62vh);cursor:auto;overscroll-behavior-y:auto}}
+</style></head> <body class="blog-detail-page" data-astro-cid-bl7sqnst> <header class="blog-top-nav" data-pagefind-ignore data-astro-cid-sp6fezam> <button class="mobile-menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav-menu" data-mobile-menu-toggle data-astro-cid-sp6fezam> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="18" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-sp6fezam="true" class="lucide lucide-menu">  <path d="M4 5h16"></path> <path d="M4 12h16"></path> <path d="M4 19h16"></path>  </svg> </button> <a class="brand" href="/" aria-label="Go to dodola home" data-astro-cid-sp6fezam> <span class="brand-mark" aria-hidden="true" data-astro-cid-sp6fezam></span> <span class="brand-title" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>dodola</span> <span class="brand-route" data-astro-cid-sp6fezam> · blog</span> </span> </a> <nav class="nav-links" aria-label="Article navigation" data-astro-cid-sp6fezam> <a class="nav-link" href="/" data-astro-cid-sp6fezam> Home </a><a class="nav-link active" href="/blog" data-astro-cid-sp6fezam> Blog </a><a class="nav-link" href="/projects" data-astro-cid-sp6fezam> Projects </a><a class="nav-link" href="/vibe" data-astro-cid-sp6fezam> Vibe </a><a class="nav-link" href="/about" data-astro-cid-sp6fezam> About </a> </nav> <nav class="mobile-menu-panel" id="mobile-nav-menu" aria-label="Mobile navigation" data-mobile-menu data-astro-cid-sp6fezam> <a class="mobile-menu-link" href="/" data-mobile-menu-link data-astro-cid-sp6fezam> Home </a><a class="mobile-menu-link active" href="/blog" data-mobile-menu-link data-astro-cid-sp6fezam> Blog </a><a class="mobile-menu-link" href="/projects" data-mobile-menu-link data-astro-cid-sp6fezam> Projects </a><a class="mobile-menu-link" href="/vibe" data-mobile-menu-link data-astro-cid-sp6fezam> Vibe </a><a class="mobile-menu-link" href="/about" data-mobile-menu-link data-astro-cid-sp6fezam> About </a> </nav> <div class="nav-actions" aria-label="Page actions" data-astro-cid-sp6fezam> <a href="https://github.com/dodolalorc/" target="_blank" rel="noreferrer" aria-label="Open GitHub repository" title="GitHub" data-astro-cid-sp6fezam> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="17" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-sp6fezam="true" class="lucide lucide-github">  <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path> <path d="M9 18c-4.51 2-5-2-7-2"></path>  </svg> </a> <button type="button" data-theme-toggle aria-label="Switch theme" data-astro-cid-sp6fezam> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="17" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-sp6fezam="true" class="lucide lucide-moon theme-icon-moon">  <path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"></path>  </svg> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="17" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-sp6fezam="true" class="lucide lucide-sun theme-icon-sun">  <circle cx="12" cy="12" r="4"></circle> <path d="M12 2v2"></path> <path d="M12 20v2"></path> <path d="m4.93 4.93 1.41 1.41"></path> <path d="m17.66 17.66 1.41 1.41"></path> <path d="M2 12h2"></path> <path d="M20 12h2"></path> <path d="m6.34 17.66-1.41 1.41"></path> <path d="m19.07 4.93-1.41 1.41"></path>  </svg> </button> <div class="site-search" data-site-search-root data-search-max-results="6" data-search-idle-label="Start typing to search." data-search-loading-label="Searching..." data-search-empty-label="No notes found." data-search-unavailable-label="Search index is not available yet. Run a production build first." data-pagefind-ignore data-astro-cid-prkij7br> <button class="site-search-trigger" type="button" aria-label="Search site" aria-expanded="false" aria-controls="site-search-dialog" title="Search (Ctrl K / Cmd K)" data-site-search-trigger data-astro-cid-prkij7br> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="17" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-prkij7br="true" class="lucide lucide-search">  <path d="m21 21-4.34-4.34"></path> <circle cx="11" cy="11" r="8"></circle>  </svg> </button> <div class="site-search-layer" data-site-search-backdrop data-astro-cid-prkij7br> <section class="site-search-dialog" id="site-search-dialog" role="dialog" aria-modal="true" aria-labelledby="site-search-title" data-site-search-dialog data-astro-cid-prkij7br> <header class="site-search-head" data-astro-cid-prkij7br> <div data-astro-cid-prkij7br> <p id="site-search-title" data-astro-cid-prkij7br>Search</p> <span data-astro-cid-prkij7br>Ctrl K / Cmd K</span> </div> <button class="site-search-close" type="button" aria-label="Close search" title="Close search" data-site-search-close data-astro-cid-prkij7br> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="17" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-prkij7br="true" class="lucide lucide-x">  <path d="M18 6 6 18"></path> <path d="m6 6 12 12"></path>  </svg> </button> </header> <label class="site-search-input-wrap" data-astro-cid-prkij7br> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="16" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" aria-hidden="true" data-astro-cid-prkij7br="true" class="lucide lucide-search">  <path d="m21 21-4.34-4.34"></path> <circle cx="11" cy="11" r="8"></circle>  </svg> <input type="search" placeholder="Search notes..." autocomplete="off" spellcheck="false" data-site-search-input data-astro-cid-prkij7br> </label> <p class="site-search-status" data-site-search-status data-astro-cid-prkij7br>Start typing to search.</p> <ol class="site-search-results" data-site-search-results data-astro-cid-prkij7br></ol> </section> </div> </div> <script type="module">const L=["a[href]","button:not([disabled])","input:not([disabled])","textarea:not([disabled])","select:not([disabled])",'[tabindex]:not([tabindex="-1"])'].join(","),h="/",w=`${h.replace(/\/$/,"")}/pagefind/pagefind.js`.replace(/^\/pagefind/,"/pagefind");let d=null,m=null;function q(e){if(/^https?:\/\//.test(e))return e;const t=h.replace(/\/$/,"");return!t||t==="/"||e.startsWith(`${t}/`)?e:e.startsWith("/")?`${t}${e}`:`${t}/${e}`}async function g(){return d||(d=import(w).then(async e=>(await e.options?.({baseUrl:h}),await e.init?.(),e)).catch(e=>{throw d=null,e})),d}function i(e,t){const a=e.querySelector("[data-site-search-status]");a&&(a.textContent=t)}function y(e,t){e.dataset.searchOpen=t?"true":"false",e.querySelector("[data-site-search-trigger]")?.setAttribute("aria-expanded",String(t))}function x(e){return Array.from(e.querySelectorAll(L)).filter(t=>t.offsetParent!==null)}function k(e,t){if(e.key!=="Tab")return;const a=x(t);if(a.length===0)return;const s=a[0],c=a[a.length-1];e.shiftKey&&document.activeElement===s?(e.preventDefault(),c.focus()):!e.shiftKey&&document.activeElement===c&&(e.preventDefault(),s.focus())}function f(e,t){const a=e.querySelector("[data-site-search-results]");if(a){a.replaceChildren();for(const s of t){const c=document.createElement("li"),o=document.createElement("a"),r=document.createElement("span"),l=document.createElement("span");o.href=q(s.url),r.className="site-search-result-title",r.textContent=s.title||s.url,l.className="site-search-result-excerpt",l.innerHTML=s.excerpt,o.append(r,l),c.append(o),a.append(c)}}}function v(e,t){let a;return(...s)=>{window.clearTimeout(a),a=window.setTimeout(()=>e(...s),t)}}function p(){for(const e of document.querySelectorAll("[data-site-search-root]")){if(e.dataset.siteSearchReady==="true")continue;e.dataset.siteSearchReady="true";const t=e.querySelector("[data-site-search-trigger]"),a=e.querySelector("[data-site-search-dialog]"),s=e.querySelector("[data-site-search-input]"),c=e.querySelectorAll("[data-site-search-close]"),o=Number(e.dataset.searchMaxResults||6);if(!t||!a||!s)continue;const r=()=>{y(e,!1),s.value="",f(e,[]),i(e,e.dataset.searchIdleLabel||"Start typing to search."),m?.focus?.()},l=()=>{m=document.activeElement instanceof HTMLElement?document.activeElement:null,y(e,!0),window.setTimeout(()=>s.focus(),30),g().catch(()=>{i(e,e.dataset.searchUnavailableLabel||"Search index is not available yet.")})},b=v(async()=>{const n=s.value.trim();if(!n){f(e,[]),i(e,e.dataset.searchIdleLabel||"Start typing to search.");return}i(e,e.dataset.searchLoadingLabel||"Searching...");try{const S=await(await g()).search(n),u=await Promise.all(S.results.slice(0,o).map(E=>E.data()));f(e,u),i(e,u.length>0?`${u.length} result${u.length===1?"":"s"}`:e.dataset.searchEmptyLabel||"No notes found.")}catch{f(e,[]),i(e,e.dataset.searchUnavailableLabel||"Search index is not available yet.")}},120);t.addEventListener("click",l),s.addEventListener("input",b);for(const n of c)n.addEventListener("click",r);e.addEventListener("click",n=>{n.target.matches("[data-site-search-backdrop]")&&r(),n.target.closest("[data-site-search-results] a")&&r()}),e.addEventListener("keydown",n=>{e.dataset.searchOpen==="true"&&(n.key==="Escape"&&r(),k(n,a))})}}document.addEventListener("keydown",e=>{if(!((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==="k"))return;const a=document.querySelector("[data-site-search-root]"),s=a?.querySelector("[data-site-search-trigger]");if(!(!a||!s)){if(e.preventDefault(),a.dataset.searchOpen==="true"){a.querySelector("[data-site-search-input]")?.focus();return}s.click()}});p();document.addEventListener("astro:page-load",p);p();</script> <button class="toc-action" type="button" aria-label="Open table of contents" aria-expanded="false" aria-controls="mobile-toc-menu" title="Table of contents" data-mobile-toc-trigger data-astro-cid-sp6fezam> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="17" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-sp6fezam="true" class="lucide lucide-list-tree">  <path d="M8 5h13"></path> <path d="M13 12h8"></path> <path d="M13 19h8"></path> <path d="M3 10a2 2 0 0 0 2 2h3"></path> <path d="M3 5v12a2 2 0 0 0 2 2h3"></path>  </svg> </button> </div> <nav class="mobile-toc-panel" id="mobile-toc-menu" aria-label="Article table of contents" data-nav-toc-menu data-toc-root data-astro-cid-sp6fezam> <p data-astro-cid-sp6fezam>Table of contents</p> <ol data-astro-cid-sp6fezam> <li data-astro-cid-sp6fezam> <a href="#页面配置" data-nav-toc-link data-toc-link data-toc-hash="#页面配置" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>1</span> 页面配置 </a> </li><li data-astro-cid-sp6fezam> <a href="#文件命名" data-nav-toc-link data-toc-link data-toc-hash="#文件命名" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>2</span> 文件命名 </a> </li><li data-astro-cid-sp6fezam> <a href="#最小格式" data-nav-toc-link data-toc-link data-toc-hash="#最小格式" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>3</span> 最小格式 </a> </li><li data-astro-cid-sp6fezam> <a href="#常用字段" data-nav-toc-link data-toc-link data-toc-hash="#常用字段" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>4</span> 常用字段 </a> </li><li data-astro-cid-sp6fezam> <a href="#内容类型" data-nav-toc-link data-toc-link data-toc-hash="#内容类型" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>5</span> 内容类型 </a> </li><li data-astro-cid-sp6fezam> <a href="#text" data-nav-toc-link data-toc-link data-toc-hash="#text" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>6</span> text </a> </li><li data-astro-cid-sp6fezam> <a href="#photo" data-nav-toc-link data-toc-link data-toc-hash="#photo" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>7</span> photo </a> </li><li data-astro-cid-sp6fezam> <a href="#quote" data-nav-toc-link data-toc-link data-toc-hash="#quote" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>8</span> quote </a> </li><li data-astro-cid-sp6fezam> <a href="#mixed" data-nav-toc-link data-toc-link data-toc-hash="#mixed" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>9</span> mixed </a> </li><li data-astro-cid-sp6fezam> <a href="#对齐和尺寸" data-nav-toc-link data-toc-link data-toc-hash="#对齐和尺寸" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>10</span> 对齐和尺寸 </a> </li><li data-astro-cid-sp6fezam> <a href="#草稿" data-nav-toc-link data-toc-link data-toc-hash="#草稿" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>11</span> 草稿 </a> </li><li data-astro-cid-sp6fezam> <a href="#推荐写法" data-nav-toc-link data-toc-link data-toc-hash="#推荐写法" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>12</span> 推荐写法 </a> </li> </ol> </nav> </header> <script type="module">const b=()=>{for(const t of document.querySelectorAll(".blog-top-nav")){const l=t.querySelector("[data-mobile-menu-toggle]"),c=t.querySelector("[data-mobile-menu]"),o=t.querySelector("[data-mobile-toc-trigger]"),u=t.querySelector("[data-nav-toc-menu]");if(!t.dataset.scrollHideReady){t.dataset.scrollHideReady="true";const a=24,s=96,e=8;let r=window.scrollY,d=0;const i=n=>{t.dataset.navHidden=n?"true":"false",t.toggleAttribute("inert",n),t.toggleAttribute("aria-hidden",n)},m=()=>window.scrollY<=a||t.dataset.mobileMenuOpen==="true"||t.dataset.mobileTocOpen==="true"||t.matches(":focus-within"),v=()=>{d=0;const n=window.scrollY,f=n-r;if(m()){i(!1),r=n;return}Math.abs(f)<e||(i(f>0&&n>s),r=n)};window.addEventListener("scroll",()=>{d||(d=window.requestAnimationFrame(v))},{passive:!0}),window.addEventListener("resize",()=>{window.scrollY<=a&&i(!1)}),i(!1)}if(l&&c&&!t.dataset.mobileMenuReady){t.dataset.mobileMenuReady="true";const a=e=>{t.dataset.mobileMenuOpen=e?"true":"false",l.setAttribute("aria-expanded",String(e)),l.setAttribute("aria-label",e?"Close navigation menu":"Open navigation menu")},s=e=>{!o||!u||(t.dataset.mobileTocOpen=e?"true":"false",o.setAttribute("aria-expanded",String(e)),o.setAttribute("aria-label",e?"Close table of contents":"Open table of contents"))};l.addEventListener("click",()=>{const e=t.dataset.mobileMenuOpen!=="true";a(e),t.dataset.navHidden="false",e&&s(!1)}),c.addEventListener("click",e=>{e.target.closest?.("[data-mobile-menu-link]")&&a(!1)}),o?.addEventListener("click",()=>{const e=t.dataset.mobileTocOpen!=="true";s(e),t.dataset.navHidden="false",e&&a(!1)}),u?.addEventListener("click",e=>{e.target.closest?.("[data-nav-toc-link]")&&s(!1)}),document.addEventListener("click",e=>{t.contains(e.target)||(a(!1),s(!1))}),document.addEventListener("keydown",e=>{e.key==="Escape"&&(a(!1),s(!1))})}}};b();document.addEventListener("astro:page-load",b);</script> <div class="blog-background" aria-hidden="true" data-astro-cid-bl7sqnst></div> <main class="blog-layout" data-pagefind-body data-astro-cid-bl7sqnst> <div class="article-column" data-astro-cid-bl7sqnst> <article class="article-card" data-astro-cid-bl7sqnst> <header class="article-header" data-astro-cid-wynq62ua>  <h1 data-astro-cid-wynq62ua>Vibe 内容格式使用指南</h1> <div class="meta-line" aria-label="Article metadata" data-astro-cid-wynq62ua> <span class="meta-item" data-astro-cid-wynq62ua> <time datetime="2026-05-20T08:40:00.000Z"> May 20, 2026 </time> </span> <span class="meta-item" data-astro-cid-wynq62ua>1,254 words</span> <span class="meta-item" data-astro-cid-wynq62ua>4 min read</span> <script type="module">const showPageView = false;
+const serverURL = "";
+const selector = ".waline-pageview-count";
+
+  if (showPageView) {
+    const { pageviewCount } = await import('https://unpkg.com/@waline/client@v3/dist/pageview.js');
+
+    const updatePageViews = () => {
+      pageviewCount({
+        serverURL,
+        selector,
+        path: window.location.pathname,
+      });
+    };
+
+    updatePageViews();
+    document.addEventListener('astro:page-load', updatePageViews);
+  }
+</script> <span class="meta-item tag-list" data-astro-cid-wynq62ua> <span class="tag" data-astro-cid-wynq62ua>#Astro</span><span class="tag" data-astro-cid-wynq62ua>#Vibe</span><span class="tag" data-astro-cid-wynq62ua>#Content</span> </span> </div>   </header> <section class="mobile-article-toc" aria-label="Article table of contents" data-astro-cid-bl7sqnst> <nav class="toc-card blog-card compact collapsible can-collapse" aria-label="Table of contents" data-toc-root data-mobile-toc data-expanded="false" data-astro-cid-ymbpksfa><h2 data-astro-cid-ymbpksfa>Table of contents</h2><ol id="mobile-article-toc-list" data-astro-cid-ymbpksfa><li data-astro-cid-ymbpksfa><a href="#页面配置" data-toc-link data-toc-hash="#页面配置" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>1</span>页面配置</a></li><li data-astro-cid-ymbpksfa><a href="#文件命名" data-toc-link data-toc-hash="#文件命名" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>2</span>文件命名</a></li><li data-astro-cid-ymbpksfa><a href="#最小格式" data-toc-link data-toc-hash="#最小格式" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>3</span>最小格式</a></li><li data-astro-cid-ymbpksfa><a href="#常用字段" data-toc-link data-toc-hash="#常用字段" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>4</span>常用字段</a></li><li data-astro-cid-ymbpksfa><a href="#内容类型" data-toc-link data-toc-hash="#内容类型" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>5</span>内容类型</a></li><li data-astro-cid-ymbpksfa><a href="#text" data-toc-link data-toc-hash="#text" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>6</span>text</a></li><li data-astro-cid-ymbpksfa><a href="#photo" data-toc-link data-toc-hash="#photo" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>7</span>photo</a></li><li data-astro-cid-ymbpksfa><a href="#quote" data-toc-link data-toc-hash="#quote" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>8</span>quote</a></li><li data-astro-cid-ymbpksfa><a href="#mixed" data-toc-link data-toc-hash="#mixed" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>9</span>mixed</a></li><li data-astro-cid-ymbpksfa><a href="#对齐和尺寸" data-toc-link data-toc-hash="#对齐和尺寸" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>10</span>对齐和尺寸</a></li><li data-astro-cid-ymbpksfa><a href="#草稿" data-toc-link data-toc-hash="#草稿" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>11</span>草稿</a></li><li data-astro-cid-ymbpksfa><a href="#推荐写法" data-toc-link data-toc-hash="#推荐写法" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>12</span>推荐写法</a></li></ol><button class="toc-expand" type="button" aria-label="Expand table of contents" aria-expanded="false" aria-controls="mobile-article-toc-list" data-toc-expand data-astro-cid-ymbpksfa><span data-expand-label data-astro-cid-ymbpksfa>Show all</span><i aria-hidden="true" data-astro-cid-ymbpksfa></i></button></nav><script type="module" src="/_astro/TableOfContents.astro_astro_type_script_index_0_lang.B3wh3MgY.js"></script> </section> <section id="article-start" class="article-content" data-astro-cid-bl7sqnst>  <p><code>vibe</code> 页面用于展示比正式 blog 更轻、更短、更即时的内容。它适合记录生活片段、开发中的小想法、页面调整后的感受、图片日记、灵感句子，或者暂时还不值得写成完整文章的记录。</p>
+<figure class="long-image" style="--long-image-height: 420px;" data-astro-cid-bzh55gd2> <div class="long-image__viewport" role="region" aria-label="vibe 页面长图布局预览" tabindex="0" data-astro-cid-bzh55gd2> <img src="/_astro/vibe-long-layout.BKzwOgGn.png" alt="vibe 页面长图布局预览" loading="lazy" decoding="async" data-astro-cid-bzh55gd2> </div> <figcaption data-astro-cid-bzh55gd2>vibe 页面长图布局预览</figcaption> </figure>
+<p>这些内容集中放在：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">src/content/vibe/</span></span></code></pre>
+<p>每一篇 vibe 都是一个独立的 Markdown 或 MDX 文件，由 Astro Content Collection 读取，并在 <code>src/pages/vibe.astro</code> 中渲染成一条时间流。</p>
+<h2 id="页面配置">页面配置</h2>
+<p><code>vibe</code> 页面有少量全局配置，放在：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">src/config/site.toml</span></span></code></pre>
+<p>当前支持的配置是：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="toml"><code><span class="line"><span style="color:#E1E4E8">[</span><span style="color:#B392F0">config</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">vibe</span><span style="color:#E1E4E8">]</span></span>
+<span class="line"><span style="color:#E1E4E8">showTrail = </span><span style="color:#79B8FF">true</span></span></code></pre>
+<p><code>showTrail</code> 用来控制页面是否展示时间流里的轨迹线和节点圆点。</p>
+<ul>
+<li><code>true</code>：默认值，桌面端展示轨迹线和 <code>vibe-dot</code></li>
+<li><code>false</code>：不渲染轨迹线、节点圆点，也不会加载绘制轨迹线的客户端脚本</li>
+</ul>
+<p>移动端会始终隐藏轨迹线和节点圆点。这样小屏幕阅读时不会被装饰线挤占空间，内容会更像一组轻量卡片自然向下排列。</p>
+<h2 id="文件命名">文件命名</h2>
+<p>推荐使用日期开头的文件名，方便排序和维护：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">2026-05-23-route-switching.md</span></span>
+<span class="line"><span style="color:#B392F0">2026-05-22-window-light.md</span></span>
+<span class="line"><span style="color:#B392F0">2026-05-20-rainy-night.md</span></span></code></pre>
+<p>文件名不直接决定显示日期，真正用于排序和展示的是 frontmatter 里的 <code>date</code> 字段。不过日期前缀可以让内容目录更容易扫描。</p>
+<h2 id="最小格式">最小格式</h2>
+<p>一篇最简单的 vibe 只需要 <code>date</code> 和正文：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="md"><code><span class="line"><span style="color:#79B8FF;font-weight:bold">---</span></span>
+<span class="line"><span style="color:#E1E4E8">date: 2026-05-20</span></span>
+<span class="line"><span style="color:#79B8FF;font-weight:bold">---</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">今天把一个小交互调顺了。页面没有变复杂，只是安静了一点。</span></span></code></pre>
+<p>如果没有显式设置 <code>type</code>，它会默认为 <code>text</code>。如果没有设置 <code>size</code>，它会默认为 <code>md</code>。</p>
+<h2 id="常用字段">常用字段</h2>
+<p><code>vibe</code> 集合的字段定义在 <code>src/content.config.ts</code> 中。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>字段</th><th>类型</th><th>说明</th></tr></thead><tbody><tr><td><code>title</code></td><td>string</td><td>可选标题，适合给某条片段一个短标签</td></tr><tr><td><code>date</code></td><td>date</td><td>必填，用于排序和显示</td></tr><tr><td><code>updatedDate</code></td><td>date</td><td>可选更新时间</td></tr><tr><td><code>draft</code></td><td>boolean</td><td>是否为草稿，草稿不会显示</td></tr><tr><td><code>type</code></td><td>enum</td><td>内容类型，可选 <code>text</code>、<code>photo</code>、<code>quote</code>、<code>code</code>、<code>mixed</code></td></tr><tr><td><code>mood</code></td><td>string</td><td>当前氛围，如 <code>quiet</code>、<code>rainy</code>、<code>after work</code></td></tr><tr><td><code>location</code></td><td>string</td><td>可选地点</td></tr><tr><td><code>images</code></td><td>image[]</td><td>图片数组，用于 photo 或 mixed 内容</td></tr><tr><td><code>tags</code></td><td>string[]</td><td>标签数组</td></tr><tr><td><code>align</code></td><td>enum</td><td>可选 <code>left</code>、<code>right</code>、<code>center</code></td></tr><tr><td><code>size</code></td><td>enum</td><td>可选 <code>sm</code>、<code>md</code>、<code>lg</code></td></tr></tbody></table>
+<h2 id="内容类型">内容类型</h2>
+<p><code>type</code> 会影响渲染时的视觉语气。它不是文章分类，而是这条片段的表现方式。</p>
+<h3 id="text">text</h3>
+<p>普通文字片段，适合大多数日常记录。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="md"><code><span class="line"><span style="color:#79B8FF;font-weight:bold">---</span></span>
+<span class="line"><span style="color:#E1E4E8">title: window light</span></span>
+<span class="line"><span style="color:#E1E4E8">date: 2026-05-22</span></span>
+<span class="line"><span style="color:#E1E4E8">type: text</span></span>
+<span class="line"><span style="color:#E1E4E8">mood: soft focus</span></span>
+<span class="line"><span style="color:#E1E4E8">tags: [daily, writing]</span></span>
+<span class="line"><span style="color:#E1E4E8">align: left</span></span>
+<span class="line"><span style="color:#E1E4E8">size: md</span></span>
+<span class="line"><span style="color:#79B8FF;font-weight:bold">---</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">窗边的光落在键盘上，像给今天留了一个很轻的批注。</span></span></code></pre>
+<h3 id="photo">photo</h3>
+<p>带图片的片段，适合生活照片、截图、手账插图等。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="md"><code><span class="line"><span style="color:#79B8FF;font-weight:bold">---</span></span>
+<span class="line"><span style="color:#E1E4E8">date: 2026-05-20</span></span>
+<span class="line"><span style="color:#E1E4E8">type: photo</span></span>
+<span class="line"><span style="color:#E1E4E8">mood: rainy</span></span>
+<span class="line"><span style="color:#E1E4E8">location: Tokyo</span></span>
+<span class="line"><span style="color:#E1E4E8">images:</span></span>
+<span class="line"><span style="color:#FFAB70">  -</span><span style="color:#E1E4E8"> ../../assets/figure/blog-sample-picture.png</span></span>
+<span class="line"><span style="color:#E1E4E8">tags: [</span><span style="color:#DBEDFF;text-decoration:underline">life</span><span style="color:#E1E4E8">]</span></span>
+<span class="line"><span style="color:#E1E4E8">align: right</span></span>
+<span class="line"><span style="color:#E1E4E8">size: lg</span></span>
+<span class="line"><span style="color:#79B8FF;font-weight:bold">---</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">东京下雨了，路灯下面有一点像游戏场景。</span></span></code></pre>
+<p>图片路径相对于当前 Markdown 文件。因为 vibe 文件在 <code>src/content/vibe/</code> 下，引用 <code>src/assets/figure/</code> 里的图片时通常需要写成：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#79B8FF">.</span><span style="color:#9ECBFF">./</span><span style="color:#79B8FF">.</span><span style="color:#9ECBFF">./assets/figure/example.png</span></span></code></pre>
+<h3 id="quote">quote</h3>
+<p>引用式片段，适合短句、摘录、某个想法的浓缩表达。当前页面会给 <code>quote</code> 类型更大的字号，所以如果希望字体和普通内容一致，请使用 <code>type: text</code>。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="md"><code><span class="line"><span style="color:#79B8FF;font-weight:bold">---</span></span>
+<span class="line"><span style="color:#E1E4E8">date: 2026-05-23</span></span>
+<span class="line"><span style="color:#E1E4E8">type: quote</span></span>
+<span class="line"><span style="color:#E1E4E8">mood: tiny motion</span></span>
+<span class="line"><span style="color:#E1E4E8">tags: [</span><span style="color:#DBEDFF;text-decoration:underline">idea</span><span style="color:#E1E4E8">]</span></span>
+<span class="line"><span style="color:#E1E4E8">align: center</span></span>
+<span class="line"><span style="color:#E1E4E8">size: sm</span></span>
+<span class="line"><span style="color:#79B8FF;font-weight:bold">---</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">Page transitions should feel like turning a quiet page.</span></span></code></pre>
+<h3 id="mixed">mixed</h3>
+<p>混合内容，适合既有标题、正文，也可能带图片、标签和更多 Markdown 内容的片段。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="md"><code><span class="line"><span style="color:#79B8FF;font-weight:bold">---</span></span>
+<span class="line"><span style="color:#E1E4E8">title: after work</span></span>
+<span class="line"><span style="color:#E1E4E8">date: 2026-05-21</span></span>
+<span class="line"><span style="color:#E1E4E8">type: mixed</span></span>
+<span class="line"><span style="color:#E1E4E8">mood: after work</span></span>
+<span class="line"><span style="color:#E1E4E8">tags: [blog, idea]</span></span>
+<span class="line"><span style="color:#E1E4E8">align: center</span></span>
+<span class="line"><span style="color:#E1E4E8">size: sm</span></span>
+<span class="line"><span style="color:#79B8FF;font-weight:bold">---</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">Not formal enough for a post. Still part of the story.</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">想把每一次小修小补都留下来，像页边的铅笔痕迹。</span></span></code></pre>
+<h2 id="对齐和尺寸">对齐和尺寸</h2>
+<p><code>align</code> 控制条目在时间流中的横向位置：</p>
+<ul>
+<li><code>left</code>：靠左显示</li>
+<li><code>right</code>：靠右显示</li>
+<li><code>center</code>：居中显示</li>
+</ul>
+<p>如果不设置 <code>align</code>，页面会根据顺序自动在左右之间交替。</p>
+<p><code>size</code> 控制条目的宽度语气：</p>
+<ul>
+<li><code>sm</code>：适合一句话、短引用、小想法</li>
+<li><code>md</code>：默认尺寸，适合普通段落</li>
+<li><code>lg</code>：适合图片或较长片段</li>
+</ul>
+<h2 id="草稿">草稿</h2>
+<p>如果一条 vibe 暂时不想展示，可以设置：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#85E89D">draft</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">true</span></span></code></pre>
+<p>页面读取内容时会过滤草稿：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> vibeEntries</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">await</span><span style="color:#B392F0"> getCollection</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">&#39;vibe&#39;</span><span style="color:#E1E4E8">)).</span><span style="color:#B392F0">filter</span><span style="color:#E1E4E8">((</span><span style="color:#FFAB70">item</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=&gt;</span><span style="color:#F97583"> !</span><span style="color:#E1E4E8">item.data.draft);</span></span></code></pre>
+<h2 id="推荐写法">推荐写法</h2>
+<p>把 <code>vibe</code> 当作轻量笔记，而不是另一个正式 blog 列表。</p>
+<p>适合放进 vibe 的内容：</p>
+<ul>
+<li>一次页面微调后的感受</li>
+<li>一个还没展开成文章的想法</li>
+<li>一张图片和一句说明</li>
+<li>某个开发过程里的小发现</li>
+<li>一段当天的情绪或观察</li>
+</ul>
+<p>不太适合放进 vibe 的内容：</p>
+<ul>
+<li>很长的技术教程</li>
+<li>需要完整结构的项目复盘</li>
+<li>多章节文章</li>
+<li>需要 SEO 摘要和 hero 图的正式内容</li>
+</ul>
+<p>如果一条内容开始变得很长，或者需要多个标题层级，那它更适合放进 <code>src/content/blog/</code>，写成一篇正式文章。</p> <script type="module">let t,g="",a=[],l=-1;const v=e=>!!e.closest(".article-content")&&!e.closest("[data-zoomable-image]")&&!e.closest("a[href]")&&(e.parentElement?.matches(".article-content > p, .article-content figure")??!1),d=e=>{if(!(e instanceof Element))return;const o=e.closest("[data-zoomable-image]")?.querySelector("[data-zoomable-image-target]");if(o instanceof HTMLImageElement&&!o.closest("a[href]"))return o;if(e instanceof HTMLImageElement&&v(e))return e},y=e=>{const o=e.closest("astro-carousel");if(!o)return{images:[e],index:0};const i=Array.from(o.querySelectorAll("[data-carousel-slide] img")).filter(r=>!r.closest("a[href]")).filter(r=>r.currentSrc||r.src),n=i.indexOf(e);return n===-1?{images:[e],index:0}:{images:i,index:n}},h=()=>{if(!t)return;const e=a.length>1;t.root.dataset.hasGallery=e?"true":"false",t.prevButton.hidden=!e,t.nextButton.hidden=!e},b=e=>{t&&(t.image.src=e.currentSrc||e.src,t.image.alt=e.alt||"",e.title?t.image.title=e.title:t.image.removeAttribute("title"))},s=e=>{!t||a.length<=1||(l=(l+e+a.length)%a.length,b(a[l]))},c=()=>{t&&(t.root.classList.remove("is-open"),t.root.setAttribute("aria-hidden","true"),document.body.style.overflow=g,t.image.removeAttribute("src"),t.image.alt="",t.image.removeAttribute("title"),a=[],l=-1,h())},p=()=>{const e=document.createElement("div");e.className="zoomable-image-lightbox",e.setAttribute("aria-hidden","true"),e.innerHTML=`
+    <button class="zoomable-image-lightbox__close" type="button" aria-label="Close image preview">
+      <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22">
+        <path d="M18 6 6 18M6 6l12 12" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+      </svg>
+    </button>
+    <button class="zoomable-image-lightbox__nav zoomable-image-lightbox__nav--prev" type="button" aria-label="Previous image" hidden>
+      <svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24">
+        <path d="m15 18-6-6 6-6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+      </svg>
+    </button>
+    <img class="zoomable-image-lightbox__image" alt="" />
+    <button class="zoomable-image-lightbox__nav zoomable-image-lightbox__nav--next" type="button" aria-label="Next image" hidden>
+      <svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24">
+        <path d="m9 18 6-6-6-6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+      </svg>
+    </button>
+  `,document.body.append(e);const o=e.querySelector(".zoomable-image-lightbox__image"),i=e.querySelector(".zoomable-image-lightbox__close"),n=e.querySelector(".zoomable-image-lightbox__nav--prev"),r=e.querySelector(".zoomable-image-lightbox__nav--next");if(!(o instanceof HTMLImageElement)||!(i instanceof HTMLButtonElement)||!(n instanceof HTMLButtonElement)||!(r instanceof HTMLButtonElement))throw new Error("Failed to initialize zoomable image lightbox.");return e.addEventListener("click",f=>{f.target===e&&c()}),i.addEventListener("click",c),n.addEventListener("click",()=>s(-1)),r.addEventListener("click",()=>s(1)),{root:e,image:o,closeButton:i,prevButton:n,nextButton:r}},w=()=>(t??=p(),t),m=e=>{const{root:o,closeButton:i}=w(),n=y(e);g=document.body.style.overflow,a=n.images,l=n.index,b(e),h(),document.body.style.overflow="hidden",o.classList.add("is-open"),o.setAttribute("aria-hidden","false"),i.focus({preventScroll:!0})},u=()=>{window.__navfolioZoomableImagesReady||(window.__navfolioZoomableImagesReady=!0,document.addEventListener("click",e=>{const o=d(e.target);o&&m(o)}),document.addEventListener("keydown",e=>{if(e.key==="Escape"&&t?.root.classList.contains("is-open")){c();return}if(t?.root.classList.contains("is-open")){if(e.key==="ArrowLeft"){e.preventDefault(),s(-1);return}if(e.key==="ArrowRight"){e.preventDefault(),s(1);return}}const o=d(e.target);!o||e.key!=="Enter"&&e.key!==" "||(e.preventDefault(),m(o))}))};document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u,{once:!0}):u();</script>  </section> </article> <aside class="related-posts blog-card article-after-related" data-astro-cid-xj4yj4fu> <h2 data-astro-cid-xj4yj4fu>More from navfolio</h2> <div class="related-list" data-astro-cid-xj4yj4fu> <a class="has-thumbnail" href="/blog/astro-remote-image-domain-guide/" data-astro-cid-xj4yj4fu> <img src="/_astro/fail-loading-image.DEm-LhbX_30FLe.webp" alt data-astro-cid-xj4yj4fu="true" loading="lazy" decoding="async" width="88" height="64"> <span data-astro-cid-xj4yj4fu> <strong data-astro-cid-xj4yj4fu>Astro 远程图片域名白名单配置</strong> <small data-astro-cid-xj4yj4fu> <time datetime="2026-05-21T00:00:00.000Z"> May 21, 2026 </time> </small> </span> </a><a class="has-thumbnail" href="/blog/site-search-module-guide/" data-astro-cid-xj4yj4fu> <img src="/_astro/search-hero.BhzaTXGb_1p79b6.webp" alt data-astro-cid-xj4yj4fu="true" loading="lazy" decoding="async" width="88" height="64"> <span data-astro-cid-xj4yj4fu> <strong data-astro-cid-xj4yj4fu>Navfolio 搜索模块使用说明</strong> <small data-astro-cid-xj4yj4fu> <time datetime="2026-05-21T00:00:00.000Z"> May 21, 2026 </time> </small> </span> </a><a class="has-thumbnail" href="/blog/theme-palettes/" data-astro-cid-xj4yj4fu> <img src="/_astro/theme-hero.6DVrK_nP_1MSIvL.webp" alt data-astro-cid-xj4yj4fu="true" loading="lazy" decoding="async" width="88" height="64"> <span data-astro-cid-xj4yj4fu> <strong data-astro-cid-xj4yj4fu>配置 Navfolio 的主题色盘</strong> <small data-astro-cid-xj4yj4fu> <time datetime="2026-05-20T16:07:19.299Z"> May 20, 2026 </time> </small> </span> </a> </div> </aside> <section class="comment-section" aria-label="Comments" data-comment-path="/blog/vibe-content-guide/" data-astro-cid-wwpfc3k4><div class="comment-section-heading" data-astro-cid-wwpfc3k4><p data-astro-cid-wwpfc3k4>Comments</p><span data-astro-cid-wwpfc3k4>Quiet notes for this article.</span></div><div class="comment-provider" data-comment-provider="giscus"></div> <script type="module">const config = {"repo":"dodolalorc/dodolalorc.github.io","repo_id":"R_kgDOLYjsRQ","category":"Announcements","category_id":"DIC_kwDOLYjsRc4Clp7p","mapping":"pathname","strict":"0","reactions_enabled":"1","emit_metadata":"0","input_position":"top","theme":"preferred_color_scheme","lang":"zh-CN","loading":"lazy"};
+
+  const mountGiscus = () => {
+    const container = document.querySelector('[data-comment-provider="giscus"]');
+
+    if (!container) {
+      return;
+    }
+
+    const script = document.createElement('script');
+    script.src = 'https://giscus.app/client.js';
+    script.async = true;
+    script.crossOrigin = 'anonymous';
+    script.setAttribute('data-repo', config.repo);
+    script.setAttribute('data-repo-id', config.repo_id);
+    script.setAttribute('data-category', config.category);
+    script.setAttribute('data-category-id', config.category_id);
+    script.setAttribute('data-mapping', config.mapping);
+    script.setAttribute('data-strict', config.strict);
+    script.setAttribute('data-reactions-enabled', config.reactions_enabled);
+    script.setAttribute('data-emit-metadata', config.emit_metadata);
+    script.setAttribute('data-input-position', config.input_position);
+    script.setAttribute('data-theme', config.theme);
+    script.setAttribute('data-lang', config.lang);
+    script.setAttribute('data-loading', config.loading);
+
+    container.replaceChildren(script);
+  };
+
+  mountGiscus();
+  document.addEventListener('astro:page-load', mountGiscus);
+</script></section> </div> <aside class="right-sidebar" aria-label="Reading tools" data-astro-cid-bl7sqnst> <div class="right-sidebar-inner" data-astro-cid-bl7sqnst><nav class="toc-card blog-card" aria-label="Table of contents" data-toc-root data-astro-cid-ymbpksfa><h2 data-astro-cid-ymbpksfa>Table of contents</h2><ol data-astro-cid-ymbpksfa><li data-astro-cid-ymbpksfa><a href="#页面配置" data-toc-link data-toc-hash="#页面配置" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>1</span>页面配置</a></li><li data-astro-cid-ymbpksfa><a href="#文件命名" data-toc-link data-toc-hash="#文件命名" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>2</span>文件命名</a></li><li data-astro-cid-ymbpksfa><a href="#最小格式" data-toc-link data-toc-hash="#最小格式" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>3</span>最小格式</a></li><li data-astro-cid-ymbpksfa><a href="#常用字段" data-toc-link data-toc-hash="#常用字段" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>4</span>常用字段</a></li><li data-astro-cid-ymbpksfa><a href="#内容类型" data-toc-link data-toc-hash="#内容类型" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>5</span>内容类型</a></li><li data-astro-cid-ymbpksfa><a href="#text" data-toc-link data-toc-hash="#text" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>6</span>text</a></li><li data-astro-cid-ymbpksfa><a href="#photo" data-toc-link data-toc-hash="#photo" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>7</span>photo</a></li><li data-astro-cid-ymbpksfa><a href="#quote" data-toc-link data-toc-hash="#quote" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>8</span>quote</a></li><li data-astro-cid-ymbpksfa><a href="#mixed" data-toc-link data-toc-hash="#mixed" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>9</span>mixed</a></li><li data-astro-cid-ymbpksfa><a href="#对齐和尺寸" data-toc-link data-toc-hash="#对齐和尺寸" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>10</span>对齐和尺寸</a></li><li data-astro-cid-ymbpksfa><a href="#草稿" data-toc-link data-toc-hash="#草稿" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>11</span>草稿</a></li><li data-astro-cid-ymbpksfa><a href="#推荐写法" data-toc-link data-toc-hash="#推荐写法" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>12</span>推荐写法</a></li></ol></nav></div> </aside> </main></body></html>
