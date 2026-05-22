@@ -1,0 +1,325 @@
+<!DOCTYPE html><html lang="en" data-palette="green-vivid" data-astro-cid-bl7sqnst> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.CAqDO0tx.js"></script><script>
+  (() => {
+    const storageKey = 'navfolio-theme';
+    const root = document.documentElement;
+    const themeMeta = () => document.querySelector('meta[name="theme-color"]');
+    const systemTheme = () =>
+      window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    const storedTheme = () => {
+      try {
+        return localStorage.getItem(storageKey);
+      } catch {
+        return null;
+      }
+    };
+    const setStoredTheme = (theme) => {
+      try {
+        localStorage.setItem(storageKey, theme);
+      } catch {}
+    };
+    const applyTheme = (theme, persist = true) => {
+      const nextTheme = theme === 'dark' ? 'dark' : 'light';
+      const toggleLabel = nextTheme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme';
+
+      root.dataset.theme = nextTheme;
+      root.style.colorScheme = nextTheme;
+      themeMeta()?.setAttribute('content', nextTheme === 'dark' ? '#171b18' : '#fdfdf9');
+      for (const button of document.querySelectorAll('[data-theme-toggle]')) {
+        button.setAttribute('aria-label', toggleLabel);
+        button.setAttribute('title', toggleLabel);
+      }
+      if (persist) setStoredTheme(nextTheme);
+    };
+    const syncThemeControls = () => {
+      applyTheme(root.dataset.theme || storedTheme() || systemTheme(), false);
+    };
+
+    applyTheme(storedTheme() || systemTheme(), false);
+
+    if (!window.__navfolioTheme) {
+      window.__navfolioTheme = {
+        toggle() {
+          applyTheme(root.dataset.theme === 'dark' ? 'light' : 'dark');
+        },
+      };
+    }
+
+    if (window.__navfolioThemeInitialized) {
+      syncThemeControls();
+      return;
+    }
+
+    window.__navfolioThemeInitialized = true;
+
+    document.addEventListener('click', (event) => {
+      const toggle = event.target.closest?.('[data-theme-toggle]');
+      if (toggle) window.__navfolioTheme.toggle();
+    });
+
+    document.addEventListener('DOMContentLoaded', syncThemeControls, { once: true });
+    document.addEventListener('astro:page-load', syncThemeControls);
+
+    window.matchMedia?.('(prefers-color-scheme: dark)').addEventListener('change', (event) => {
+      if (!storedTheme()) applyTheme(event.matches ? 'dark' : 'light', false);
+    });
+  })();
+</script><link rel="icon" href="/favicon.svg" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/manifest.json"><meta name="theme-color" content="#fdfdf9"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="dodola" href="https://dodolalorc.cn/rss.xml"><meta name="generator" content="Astro v6.3.5"><!-- Canonical URL --><link rel="canonical" href="https://dodolalorc.cn/blog/tech/frontend/js-garbage-collection/"><!-- Primary Meta Tags --><title>JavaScript 垃圾回收机制简述</title><meta name="title" content="JavaScript 垃圾回收机制简述"><meta name="description" content="JavaScript 垃圾回收笔记，介绍标记清除算法、优化概念以及避免内存泄漏的常见做法。"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://dodolalorc.cn/blog/tech/frontend/js-garbage-collection/"><meta property="og:title" content="JavaScript 垃圾回收机制简述"><meta property="og:description" content="JavaScript 垃圾回收笔记，介绍标记清除算法、优化概念以及避免内存泄漏的常见做法。"><meta property="og:image" content="https://dodolalorc.cn/_astro/fail-loading-image.DEm-LhbX.png"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://dodolalorc.cn/blog/tech/frontend/js-garbage-collection/"><meta property="twitter:title" content="JavaScript 垃圾回收机制简述"><meta property="twitter:description" content="JavaScript 垃圾回收笔记，介绍标记清除算法、优化概念以及避免内存泄漏的常见做法。"><meta property="twitter:image" content="https://dodolalorc.cn/_astro/fail-loading-image.DEm-LhbX.png"><link rel="stylesheet" href="/_astro/_..VeZrjLU-.css">
+<link rel="stylesheet" href="/_astro/BlogArticle.BLUUC9fD.css">
+<link rel="stylesheet" href="/_astro/BlogTopNav.CswDVlK0.css"></head> <body class="blog-detail-page" data-astro-cid-bl7sqnst> <header class="blog-top-nav" data-pagefind-ignore data-astro-cid-sp6fezam> <button class="mobile-menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav-menu" data-mobile-menu-toggle data-astro-cid-sp6fezam> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="18" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-sp6fezam="true" class="lucide lucide-menu">  <path d="M4 5h16"></path> <path d="M4 12h16"></path> <path d="M4 19h16"></path>  </svg> </button> <a class="brand" href="/" aria-label="Go to dodola home" data-astro-cid-sp6fezam> <span class="brand-mark" aria-hidden="true" data-astro-cid-sp6fezam></span> <span class="brand-title" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>dodola</span> <span class="brand-route" data-astro-cid-sp6fezam> · blog</span> </span> </a> <nav class="nav-links" aria-label="Article navigation" data-astro-cid-sp6fezam> <a class="nav-link" href="/" data-astro-cid-sp6fezam> Home </a><a class="nav-link active" href="/blog" data-astro-cid-sp6fezam> Blog </a><a class="nav-link" href="/projects" data-astro-cid-sp6fezam> Projects </a><a class="nav-link" href="/vibe" data-astro-cid-sp6fezam> Vibe </a><a class="nav-link" href="/about" data-astro-cid-sp6fezam> About </a> </nav> <nav class="mobile-menu-panel" id="mobile-nav-menu" aria-label="Mobile navigation" data-mobile-menu data-astro-cid-sp6fezam> <a class="mobile-menu-link" href="/" data-mobile-menu-link data-astro-cid-sp6fezam> Home </a><a class="mobile-menu-link active" href="/blog" data-mobile-menu-link data-astro-cid-sp6fezam> Blog </a><a class="mobile-menu-link" href="/projects" data-mobile-menu-link data-astro-cid-sp6fezam> Projects </a><a class="mobile-menu-link" href="/vibe" data-mobile-menu-link data-astro-cid-sp6fezam> Vibe </a><a class="mobile-menu-link" href="/about" data-mobile-menu-link data-astro-cid-sp6fezam> About </a> </nav> <div class="nav-actions" aria-label="Page actions" data-astro-cid-sp6fezam> <a href="https://github.com/dodolalorc/" target="_blank" rel="noreferrer" aria-label="Open GitHub repository" title="GitHub" data-astro-cid-sp6fezam> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="17" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-sp6fezam="true" class="lucide lucide-github">  <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path> <path d="M9 18c-4.51 2-5-2-7-2"></path>  </svg> </a> <button type="button" data-theme-toggle aria-label="Switch theme" data-astro-cid-sp6fezam> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="17" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-sp6fezam="true" class="lucide lucide-moon theme-icon-moon">  <path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"></path>  </svg> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="17" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-sp6fezam="true" class="lucide lucide-sun theme-icon-sun">  <circle cx="12" cy="12" r="4"></circle> <path d="M12 2v2"></path> <path d="M12 20v2"></path> <path d="m4.93 4.93 1.41 1.41"></path> <path d="m17.66 17.66 1.41 1.41"></path> <path d="M2 12h2"></path> <path d="M20 12h2"></path> <path d="m6.34 17.66-1.41 1.41"></path> <path d="m19.07 4.93-1.41 1.41"></path>  </svg> </button> <div class="site-search" data-site-search-root data-search-max-results="6" data-search-idle-label="Start typing to search." data-search-loading-label="Searching..." data-search-empty-label="No notes found." data-search-unavailable-label="Search index is not available yet. Run a production build first." data-pagefind-ignore data-astro-cid-prkij7br> <button class="site-search-trigger" type="button" aria-label="Search site" aria-expanded="false" aria-controls="site-search-dialog" title="Search (Ctrl K / Cmd K)" data-site-search-trigger data-astro-cid-prkij7br> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="17" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-prkij7br="true" class="lucide lucide-search">  <path d="m21 21-4.34-4.34"></path> <circle cx="11" cy="11" r="8"></circle>  </svg> </button> <div class="site-search-layer" data-site-search-backdrop data-astro-cid-prkij7br> <section class="site-search-dialog" id="site-search-dialog" role="dialog" aria-modal="true" aria-labelledby="site-search-title" data-site-search-dialog data-astro-cid-prkij7br> <header class="site-search-head" data-astro-cid-prkij7br> <div data-astro-cid-prkij7br> <p id="site-search-title" data-astro-cid-prkij7br>Search</p> <span data-astro-cid-prkij7br>Ctrl K / Cmd K</span> </div> <button class="site-search-close" type="button" aria-label="Close search" title="Close search" data-site-search-close data-astro-cid-prkij7br> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="17" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-prkij7br="true" class="lucide lucide-x">  <path d="M18 6 6 18"></path> <path d="m6 6 12 12"></path>  </svg> </button> </header> <label class="site-search-input-wrap" data-astro-cid-prkij7br> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="16" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" aria-hidden="true" data-astro-cid-prkij7br="true" class="lucide lucide-search">  <path d="m21 21-4.34-4.34"></path> <circle cx="11" cy="11" r="8"></circle>  </svg> <input type="search" placeholder="Search notes..." autocomplete="off" spellcheck="false" data-site-search-input data-astro-cid-prkij7br> </label> <p class="site-search-status" data-site-search-status data-astro-cid-prkij7br>Start typing to search.</p> <ol class="site-search-results" data-site-search-results data-astro-cid-prkij7br></ol> </section> </div> </div> <script type="module">const L=["a[href]","button:not([disabled])","input:not([disabled])","textarea:not([disabled])","select:not([disabled])",'[tabindex]:not([tabindex="-1"])'].join(","),h="/",w=`${h.replace(/\/$/,"")}/pagefind/pagefind.js`.replace(/^\/pagefind/,"/pagefind");let d=null,m=null;function q(e){if(/^https?:\/\//.test(e))return e;const t=h.replace(/\/$/,"");return!t||t==="/"||e.startsWith(`${t}/`)?e:e.startsWith("/")?`${t}${e}`:`${t}/${e}`}async function g(){return d||(d=import(w).then(async e=>(await e.options?.({baseUrl:h}),await e.init?.(),e)).catch(e=>{throw d=null,e})),d}function i(e,t){const a=e.querySelector("[data-site-search-status]");a&&(a.textContent=t)}function y(e,t){e.dataset.searchOpen=t?"true":"false",e.querySelector("[data-site-search-trigger]")?.setAttribute("aria-expanded",String(t))}function x(e){return Array.from(e.querySelectorAll(L)).filter(t=>t.offsetParent!==null)}function k(e,t){if(e.key!=="Tab")return;const a=x(t);if(a.length===0)return;const s=a[0],c=a[a.length-1];e.shiftKey&&document.activeElement===s?(e.preventDefault(),c.focus()):!e.shiftKey&&document.activeElement===c&&(e.preventDefault(),s.focus())}function f(e,t){const a=e.querySelector("[data-site-search-results]");if(a){a.replaceChildren();for(const s of t){const c=document.createElement("li"),o=document.createElement("a"),r=document.createElement("span"),l=document.createElement("span");o.href=q(s.url),r.className="site-search-result-title",r.textContent=s.title||s.url,l.className="site-search-result-excerpt",l.innerHTML=s.excerpt,o.append(r,l),c.append(o),a.append(c)}}}function v(e,t){let a;return(...s)=>{window.clearTimeout(a),a=window.setTimeout(()=>e(...s),t)}}function p(){for(const e of document.querySelectorAll("[data-site-search-root]")){if(e.dataset.siteSearchReady==="true")continue;e.dataset.siteSearchReady="true";const t=e.querySelector("[data-site-search-trigger]"),a=e.querySelector("[data-site-search-dialog]"),s=e.querySelector("[data-site-search-input]"),c=e.querySelectorAll("[data-site-search-close]"),o=Number(e.dataset.searchMaxResults||6);if(!t||!a||!s)continue;const r=()=>{y(e,!1),s.value="",f(e,[]),i(e,e.dataset.searchIdleLabel||"Start typing to search."),m?.focus?.()},l=()=>{m=document.activeElement instanceof HTMLElement?document.activeElement:null,y(e,!0),window.setTimeout(()=>s.focus(),30),g().catch(()=>{i(e,e.dataset.searchUnavailableLabel||"Search index is not available yet.")})},b=v(async()=>{const n=s.value.trim();if(!n){f(e,[]),i(e,e.dataset.searchIdleLabel||"Start typing to search.");return}i(e,e.dataset.searchLoadingLabel||"Searching...");try{const S=await(await g()).search(n),u=await Promise.all(S.results.slice(0,o).map(E=>E.data()));f(e,u),i(e,u.length>0?`${u.length} result${u.length===1?"":"s"}`:e.dataset.searchEmptyLabel||"No notes found.")}catch{f(e,[]),i(e,e.dataset.searchUnavailableLabel||"Search index is not available yet.")}},120);t.addEventListener("click",l),s.addEventListener("input",b);for(const n of c)n.addEventListener("click",r);e.addEventListener("click",n=>{n.target.matches("[data-site-search-backdrop]")&&r(),n.target.closest("[data-site-search-results] a")&&r()}),e.addEventListener("keydown",n=>{e.dataset.searchOpen==="true"&&(n.key==="Escape"&&r(),k(n,a))})}}document.addEventListener("keydown",e=>{if(!((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==="k"))return;const a=document.querySelector("[data-site-search-root]"),s=a?.querySelector("[data-site-search-trigger]");if(!(!a||!s)){if(e.preventDefault(),a.dataset.searchOpen==="true"){a.querySelector("[data-site-search-input]")?.focus();return}s.click()}});p();document.addEventListener("astro:page-load",p);p();</script> <button class="toc-action" type="button" aria-label="Open table of contents" aria-expanded="false" aria-controls="mobile-toc-menu" title="Table of contents" data-mobile-toc-trigger data-astro-cid-sp6fezam> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="17" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-sp6fezam="true" class="lucide lucide-list-tree">  <path d="M8 5h13"></path> <path d="M13 12h8"></path> <path d="M13 19h8"></path> <path d="M3 10a2 2 0 0 0 2 2h3"></path> <path d="M3 5v12a2 2 0 0 0 2 2h3"></path>  </svg> </button> </div> <nav class="mobile-toc-panel" id="mobile-toc-menu" aria-label="Article table of contents" data-nav-toc-menu data-toc-root data-astro-cid-sp6fezam> <p data-astro-cid-sp6fezam>Table of contents</p> <ol data-astro-cid-sp6fezam> <li data-astro-cid-sp6fezam> <a href="#关键算法标记-清除" data-nav-toc-link data-toc-link data-toc-hash="#关键算法标记-清除" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>1</span> 关键算法：标记-清除 </a> </li><li data-astro-cid-sp6fezam> <a href="#步骤" data-nav-toc-link data-toc-link data-toc-hash="#步骤" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>2</span> 步骤 </a> </li><li data-astro-cid-sp6fezam> <a href="#辅助概念与优化" data-nav-toc-link data-toc-link data-toc-hash="#辅助概念与优化" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>3</span> 辅助概念与优化 </a> </li><li data-astro-cid-sp6fezam> <a href="#如何帮助垃圾回收避免内存泄漏" data-nav-toc-link data-toc-link data-toc-hash="#如何帮助垃圾回收避免内存泄漏" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>4</span> 如何帮助垃圾回收（避免内存泄漏） </a> </li><li data-astro-cid-sp6fezam> <a href="#意外的全局变量" data-nav-toc-link data-toc-link data-toc-hash="#意外的全局变量" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>5</span> 意外的全局变量 </a> </li><li data-astro-cid-sp6fezam> <a href="#被遗忘的定时器或回调函数" data-nav-toc-link data-toc-link data-toc-hash="#被遗忘的定时器或回调函数" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>6</span> 被遗忘的定时器或回调函数 </a> </li><li data-astro-cid-sp6fezam> <a href="#脱离-dom-的引用" data-nav-toc-link data-toc-link data-toc-hash="#脱离-dom-的引用" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>7</span> 脱离 DOM 的引用 </a> </li><li data-astro-cid-sp6fezam> <a href="#闭包使用不当" data-nav-toc-link data-toc-link data-toc-hash="#闭包使用不当" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>8</span> 闭包使用不当 </a> </li> </ol> </nav> </header> <script type="module">const b=()=>{for(const t of document.querySelectorAll(".blog-top-nav")){const l=t.querySelector("[data-mobile-menu-toggle]"),c=t.querySelector("[data-mobile-menu]"),o=t.querySelector("[data-mobile-toc-trigger]"),u=t.querySelector("[data-nav-toc-menu]");if(!t.dataset.scrollHideReady){t.dataset.scrollHideReady="true";const a=24,s=96,e=8;let r=window.scrollY,d=0;const i=n=>{t.dataset.navHidden=n?"true":"false",t.toggleAttribute("inert",n),t.toggleAttribute("aria-hidden",n)},m=()=>window.scrollY<=a||t.dataset.mobileMenuOpen==="true"||t.dataset.mobileTocOpen==="true"||t.matches(":focus-within"),v=()=>{d=0;const n=window.scrollY,f=n-r;if(m()){i(!1),r=n;return}Math.abs(f)<e||(i(f>0&&n>s),r=n)};window.addEventListener("scroll",()=>{d||(d=window.requestAnimationFrame(v))},{passive:!0}),window.addEventListener("resize",()=>{window.scrollY<=a&&i(!1)}),i(!1)}if(l&&c&&!t.dataset.mobileMenuReady){t.dataset.mobileMenuReady="true";const a=e=>{t.dataset.mobileMenuOpen=e?"true":"false",l.setAttribute("aria-expanded",String(e)),l.setAttribute("aria-label",e?"Close navigation menu":"Open navigation menu")},s=e=>{!o||!u||(t.dataset.mobileTocOpen=e?"true":"false",o.setAttribute("aria-expanded",String(e)),o.setAttribute("aria-label",e?"Close table of contents":"Open table of contents"))};l.addEventListener("click",()=>{const e=t.dataset.mobileMenuOpen!=="true";a(e),t.dataset.navHidden="false",e&&s(!1)}),c.addEventListener("click",e=>{e.target.closest?.("[data-mobile-menu-link]")&&a(!1)}),o?.addEventListener("click",()=>{const e=t.dataset.mobileTocOpen!=="true";s(e),t.dataset.navHidden="false",e&&a(!1)}),u?.addEventListener("click",e=>{e.target.closest?.("[data-nav-toc-link]")&&s(!1)}),document.addEventListener("click",e=>{t.contains(e.target)||(a(!1),s(!1))}),document.addEventListener("keydown",e=>{e.key==="Escape"&&(a(!1),s(!1))})}}};b();document.addEventListener("astro:page-load",b);</script> <div class="blog-background" aria-hidden="true" data-astro-cid-bl7sqnst></div> <main class="blog-layout" data-pagefind-body data-astro-cid-bl7sqnst> <div class="article-column" data-astro-cid-bl7sqnst> <article class="article-card" data-astro-cid-bl7sqnst> <header class="article-header" data-astro-cid-wynq62ua>  <h1 data-astro-cid-wynq62ua>JavaScript 垃圾回收机制简述</h1> <div class="meta-line" aria-label="Article metadata" data-astro-cid-wynq62ua> <span class="meta-item" data-astro-cid-wynq62ua> <time datetime="2025-10-08T14:52:14.000Z"> Oct 8, 2025 </time> </span> <span class="meta-item" data-astro-cid-wynq62ua>2,076 words</span> <span class="meta-item" data-astro-cid-wynq62ua>5 min read</span> <script type="module">const showPageView = false;
+const serverURL = "";
+const selector = ".waline-pageview-count";
+
+  if (showPageView) {
+    const { pageviewCount } = await import('https://unpkg.com/@waline/client@v3/dist/pageview.js');
+
+    const updatePageViews = () => {
+      pageviewCount({
+        serverURL,
+        selector,
+        path: window.location.pathname,
+      });
+    };
+
+    updatePageViews();
+    document.addEventListener('astro:page-load', updatePageViews);
+  }
+</script>  </div>   </header> <section class="mobile-article-toc" aria-label="Article table of contents" data-astro-cid-bl7sqnst> <nav class="toc-card blog-card compact collapsible can-collapse" aria-label="Table of contents" data-toc-root data-mobile-toc data-expanded="false" data-astro-cid-ymbpksfa><h2 data-astro-cid-ymbpksfa>Table of contents</h2><ol id="mobile-article-toc-list" data-astro-cid-ymbpksfa><li data-astro-cid-ymbpksfa><a href="#关键算法标记-清除" data-toc-link data-toc-hash="#关键算法标记-清除" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>1</span>关键算法：标记-清除</a></li><li data-astro-cid-ymbpksfa><a href="#步骤" data-toc-link data-toc-hash="#步骤" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>2</span>步骤</a></li><li data-astro-cid-ymbpksfa><a href="#辅助概念与优化" data-toc-link data-toc-hash="#辅助概念与优化" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>3</span>辅助概念与优化</a></li><li data-astro-cid-ymbpksfa><a href="#如何帮助垃圾回收避免内存泄漏" data-toc-link data-toc-hash="#如何帮助垃圾回收避免内存泄漏" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>4</span>如何帮助垃圾回收（避免内存泄漏）</a></li><li data-astro-cid-ymbpksfa><a href="#意外的全局变量" data-toc-link data-toc-hash="#意外的全局变量" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>5</span>意外的全局变量</a></li><li data-astro-cid-ymbpksfa><a href="#被遗忘的定时器或回调函数" data-toc-link data-toc-hash="#被遗忘的定时器或回调函数" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>6</span>被遗忘的定时器或回调函数</a></li><li data-astro-cid-ymbpksfa><a href="#脱离-dom-的引用" data-toc-link data-toc-hash="#脱离-dom-的引用" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>7</span>脱离 DOM 的引用</a></li><li data-astro-cid-ymbpksfa><a href="#闭包使用不当" data-toc-link data-toc-hash="#闭包使用不当" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>8</span>闭包使用不当</a></li></ol><button class="toc-expand" type="button" aria-label="Expand table of contents" aria-expanded="false" aria-controls="mobile-article-toc-list" data-toc-expand data-astro-cid-ymbpksfa><span data-expand-label data-astro-cid-ymbpksfa>Show all</span><i aria-hidden="true" data-astro-cid-ymbpksfa></i></button></nav><script type="module" src="/_astro/TableOfContents.astro_astro_type_script_index_0_lang.B3wh3MgY.js"></script> </section> <section id="article-start" class="article-content" data-astro-cid-bl7sqnst>  <p>JavaScript 是一种<strong>具有自动垃圾回收</strong>的语言。这意味着开发者通常不需要手动管理内存，JavaScript 引擎（如 V8）会自动找出不再使用的变量并释放它们占用的内存。</p>
+<p>垃圾回收的核心思想是：<strong>确定哪些“对象”已经“不可达”，然后释放它们。</strong></p>
+<h2 id="关键算法标记-清除">关键算法：标记-清除</h2>
+<p>现代浏览器（尤其是 Chrome 的 V8 引擎）主要使用<strong>标记-清除</strong>算法，并辅以其他优化。</p>
+<h3 id="步骤">步骤</h3>
+<h4 id="步骤-1-标记">步骤 1: 标记</h4>
+<p>垃圾回收器会从一组称为  <strong>“根”</strong>  的对象开始。</p>
+<ul>
+<li><strong>根对象包括：</strong>
+<ul>
+<li>全局对象（在浏览器中是  <code>window</code>，在 Node.js 中是  <code>global</code>）</li>
+<li>当前函数调用链中的局部变量和参数（存储在调用栈上）</li>
+</ul>
+</li>
+</ul>
+<p>然后，垃圾回收器会从这些根对象出发，遍历所有能从根对象<strong>直接或间接访问到的对象</strong>，并将这些对象标记为  <strong>“可达的”</strong>。</p>
+<h4 id="步骤-2-清除">步骤 2: 清除</h4>
+<p>在标记阶段完成后，所有没有被标记为“可达”的对象，就被认为是  <strong>“不可达的”</strong> ，即应用程序不再需要它们了。垃圾回收器会将这些不可达对象所占用的内存回收。</p>
+<h4 id="一个简单的例子">一个简单的例子</h4>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#F97583">let</span><span style="color:#E1E4E8"> person </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">  name: </span><span style="color:#9ECBFF">'Alice'</span></span>
+<span class="line"><span style="color:#E1E4E8">};</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// 对象 { name: 'Alice' } 被变量 `person` 引用，因此是“可达的”。</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">person </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#6A737D">// 现在，`person` 不再引用那个对象。</span></span>
+<span class="line"><span style="color:#6A737D">// 对象 { name: 'Alice' } 变得“不可达”。</span></span>
+<span class="line"><span style="color:#6A737D">// 在下次垃圾回收运行时，这个对象的内存将被回收。</span></span></code></pre>
+<h3 id="辅助概念与优化">辅助概念与优化</h3>
+<h4 id="1-引用计数一种已被淘汰的原始算法">1. 引用计数（一种已被淘汰的原始算法）</h4>
+<p>虽然现代浏览器不再主要使用它，但了解它有助于理解。</p>
+<ul>
+<li><strong>原理：</strong>  跟踪每个对象被引用的次数。当一个对象的引用计数变为 0 时，就立即回收它。</li>
+<li><strong>致命缺陷：</strong> <strong>循环引用</strong>。</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">function</span><span style="color:#B392F0"> problem</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">  let</span><span style="color:#E1E4E8"> objA </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> {};</span></span>
+<span class="line"><span style="color:#F97583">  let</span><span style="color:#E1E4E8"> objB </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> {};</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">  objA.someProperty </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> objB; </span><span style="color:#6A737D">// objB 被 objA 引用 (计数=2)</span></span>
+<span class="line"><span style="color:#E1E4E8">  objB.anotherProperty </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> objA; </span><span style="color:#6A737D">// objA 被 objB 引用 (计数=2)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">  // 当函数执行完毕，objA 和 objB 离开了作用域，它们的引用各减1。</span></span>
+<span class="line"><span style="color:#6A737D">  // 但它们彼此之间仍然相互引用，所以计数不为0。</span></span>
+<span class="line"><span style="color:#6A737D">  // 在引用计数算法下，这两个对象永远不会被回收，导致内存泄漏。</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>在<strong>标记-清除</strong>算法中，由于函数执行后  <code>objA</code>  和  <code>objB</code>  都从根对象（调用栈）上无法到达，所以即使它们相互引用，仍然会被正确识别为垃圾并回收。</p>
+<h4 id="2-分代收集">2. 分代收集</h4>
+<p>这是现代垃圾回收器的一个核心优化策略。它将堆内存中的对象分为两个（或更多）“代”：</p>
+<ul>
+<li><strong>新生代：</strong>  存放生存时间短的对象（如函数内的局部变量）。
+<ul>
+<li>大多数对象在这里诞生并很快死亡。</li>
+<li>垃圾回收发生得非常频繁，速度也很快。这个过程称为  <strong>Scavenge</strong>（通常使用 Cheney 算法，将存活对象从一个区域复制到另一个区域）。</li>
+</ul>
+</li>
+<li><strong>老生代：</strong>  存放生存时间长的对象（如全局对象、从新生代晋升过来的对象）。
+<ul>
+<li>如果一个对象在新生代经历了几次垃圾回收后仍然存活，它就会被<strong>晋升</strong>到老生代。</li>
+<li>老生代的垃圾回收不那么频繁，但执行起来更耗时，通常使用<strong>标记-清除</strong>或<strong>标记-整理</strong>算法。</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-增量收集与闲时收集">3. 增量收集与闲时收集</h4>
+<p>为了不让垃圾回收过程（尤其是老生代的回收）导致页面卡顿或脚本执行暂停（“全停顿”），引擎采用了以下策略：</p>
+<ul>
+<li><strong>增量收集：</strong>  将完整的垃圾回收工作分解为多个小任务，穿插在 JavaScript 主线程的执行中。</li>
+<li><strong>闲时收集：</strong>  尽量在 CPU 空闲时运行垃圾回收任务。</li>
+</ul>
+<h2 id="如何帮助垃圾回收避免内存泄漏">如何帮助垃圾回收（避免内存泄漏）</h2>
+<p>尽管垃圾回收是自动的，但编写不当的代码仍然会导致内存泄漏。</p>
+<h3 id="意外的全局变量">意外的全局变量</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#F97583">function</span><span style="color:#B392F0"> foo</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">  bar </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "这是一个全局变量"</span><span style="color:#E1E4E8">; </span><span style="color:#6A737D">// 没有用 var/let/const 声明！</span></span>
+<span class="line"><span style="color:#79B8FF">  this</span><span style="color:#E1E4E8">.accidentalGlobal </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "oops"</span><span style="color:#E1E4E8">; </span><span style="color:#6A737D">// 在非严格模式下，this 指向 window</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"><span style="color:#B392F0">foo</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#6A737D">// 变量 `bar` 和 `accidentalGlobal` 会一直存在，直到页面关闭。</span></span></code></pre>
+<h4 id="对策杜绝未经声明的变量和不当的this引用">对策：杜绝未经声明的变量和不当的<code>this</code>引用</h4>
+<p><strong>具体措施：</strong></p>
+<ul>
+<li><strong>使用严格模式：</strong>  在脚本或函数开头添加  <code>"use strict";</code>。在严格模式下，给未声明的变量赋值会抛出错误，而不是创建全局变量。</li>
+<li><strong>始终使用变量声明关键字：</strong>  总是使用  <code>let</code>、<code>const</code>  或  <code>var</code>  来声明变量。</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#9ECBFF">"use strict"</span><span style="color:#E1E4E8">; </span><span style="color:#6A737D">// 开启严格模式</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">function</span><span style="color:#B392F0"> foo</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">  let</span><span style="color:#E1E4E8"> bar </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "这是一个局部变量"</span><span style="color:#E1E4E8">; </span><span style="color:#6A737D">// 使用 let 声明</span></span>
+<span class="line"><span style="color:#6A737D">  // 在严格模式下，这里的 this 是 undefined，赋值会报错</span></span>
+<span class="line"><span style="color:#6A737D">  // this.accidentalGlobal = "oops";</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"><span style="color:#B392F0">foo</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#6A737D">// 函数外部无法访问 bar，函数执行完毕即可被回收</span></span></code></pre>
+<h3 id="被遗忘的定时器或回调函数">被遗忘的定时器或回调函数</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#F97583">let</span><span style="color:#E1E4E8"> someData </span><span style="color:#F97583">=</span><span style="color:#B392F0"> getHugeData</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#B392F0">setInterval</span><span style="color:#E1E4E8">(() </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  let</span><span style="color:#E1E4E8"> node </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> document.</span><span style="color:#B392F0">getElementById</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'Node'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8"> (node) {</span></span>
+<span class="line"><span style="color:#6A737D">    // 这个闭包一直引用着 someData</span></span>
+<span class="line"><span style="color:#E1E4E8">    node.innerHTML </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> JSON</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">stringify</span><span style="color:#E1E4E8">(someData);</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}, </span><span style="color:#79B8FF">1000</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#6A737D">// 即使不再需要 `someData`，定时器不清除，它也无法被回收。</span></span></code></pre>
+<h4 id="对策清理被遗忘的定时器和回调函数">对策：清理被遗忘的定时器和回调函数</h4>
+<p><strong>核心原则：</strong>  在不需要时，主动清理所有会长期存在的引用。</p>
+<p><strong>具体措施：</strong></p>
+<ul>
+<li><strong>保存定时器 ID 并及时清除：</strong>  使用  <code>clearInterval</code>  或  <code>clearTimeout</code>  来清除不再需要的定时器。</li>
+<li><strong>在组件卸载等生命周期中清理：</strong>  在现代前端框架（如 React、Vue）中，在组件的卸载生命周期钩子中执行清理操作是至关重要的。</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#F97583">let</span><span style="color:#E1E4E8"> someData </span><span style="color:#F97583">=</span><span style="color:#B392F0"> getHugeData</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">let</span><span style="color:#E1E4E8"> timerId </span><span style="color:#F97583">=</span><span style="color:#B392F0"> setInterval</span><span style="color:#E1E4E8">(() </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  let</span><span style="color:#E1E4E8"> node </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> document.</span><span style="color:#B392F0">getElementById</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'Node'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8"> (node) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    node.innerHTML </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> JSON</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">stringify</span><span style="color:#E1E4E8">(someData);</span></span>
+<span class="line"><span style="color:#E1E4E8">  } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">    // 如果节点已经不存在，清除定时器</span></span>
+<span class="line"><span style="color:#B392F0">    clearInterval</span><span style="color:#E1E4E8">(timerId);</span></span>
+<span class="line"><span style="color:#E1E4E8">    someData </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">; </span><span style="color:#6A737D">// 显式断开对大数据的引用</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}, </span><span style="color:#79B8FF">1000</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// 当确定不再需要这个定时器时（例如，用户离开页面或关闭功能模块）</span></span>
+<span class="line"><span style="color:#6A737D">// clearInterval(timerId);</span></span></code></pre>
+<p>对于事件监听器也同样适用：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#F97583">function</span><span style="color:#B392F0"> handleClick</span><span style="color:#E1E4E8">() { </span><span style="color:#6A737D">/* ... */</span><span style="color:#E1E4E8"> }</span></span>
+<span class="line"><span style="color:#E1E4E8">element.</span><span style="color:#B392F0">addEventListener</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'click'</span><span style="color:#E1E4E8">, handleClick);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// 在不需要时，一定要移除</span></span>
+<span class="line"><span style="color:#6A737D">// element.removeEventListener('click', handleClick);</span></span></code></pre>
+<h3 id="脱离-dom-的引用">脱离 DOM 的引用</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#F97583">let</span><span style="color:#E1E4E8"> elements </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">  button: document.</span><span style="color:#B392F0">getElementById</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'myButton'</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">};</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// 后来从DOM树中移除了这个按钮</span></span>
+<span class="line"><span style="color:#E1E4E8">document.body.</span><span style="color:#B392F0">removeChild</span><span style="color:#E1E4E8">(document.</span><span style="color:#B392F0">getElementById</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'myButton'</span><span style="color:#E1E4E8">));</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// 只要 `elements.button` 这个引用还存在，这个按钮对应的DOM对象在内存中就无法被回收。</span></span></code></pre>
+<h4 id="对策管理脱离-dom-的引用">对策：管理脱离 DOM 的引用</h4>
+<p><strong>核心原则：</strong>  当 DOM 元素被移除后，应该同时释放所有对它的 JavaScript 引用。</p>
+<p><strong>具体措施：</strong></p>
+<ul>
+<li><strong>使用弱引用：</strong>  如果确实需要跟踪 DOM 元素但又不想阻止其被回收，可以使用  <code>WeakMap</code>  或  <code>WeakSet</code>。它们持有的是“弱引用”，不会阻止垃圾回收。</li>
+<li><strong>手动置空：</strong>  在移除 DOM 元素后，手动将存储其引用的变量设置为  <code>null</code>。</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#6A737D">// 使用 WeakMap 来存储与DOM元素相关的数据</span></span>
+<span class="line"><span style="color:#F97583">let</span><span style="color:#E1E4E8"> elementData </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> WeakMap</span><span style="color:#E1E4E8">(); </span><span style="color:#6A737D">// WeakMap 的键是弱引用的</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">let</span><span style="color:#E1E4E8"> button </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> document.</span><span style="color:#B392F0">getElementById</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'myButton'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">elementData.</span><span style="color:#B392F0">set</span><span style="color:#E1E4E8">(button, { clickCount: </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8"> });</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// 后来从DOM树中移除了这个按钮</span></span>
+<span class="line"><span style="color:#E1E4E8">document.body.</span><span style="color:#B392F0">removeChild</span><span style="color:#E1E4E8">(button);</span></span>
+<span class="line"><span style="color:#E1E4E8">button </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">; </span><span style="color:#6A737D">// 释放对按钮的强引用</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// 此时，button 对应的DOM对象没有强引用了，即使它在 WeakMap 中，也会被GC回收</span></span>
+<span class="line"><span style="color:#6A737D">// 之后，它对应的值 { clickCount: 0 } 也会因为键对象被回收而从 WeakMap 中自动移除</span></span></code></pre>
+<h3 id="闭包使用不当">闭包使用不当</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#F97583">function</span><span style="color:#B392F0"> outer</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">  let</span><span style="color:#E1E4E8"> bigData </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> Array</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">1000000</span><span style="color:#E1E4E8">).</span><span style="color:#B392F0">fill</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'*'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">  return</span><span style="color:#F97583"> function</span><span style="color:#B392F0"> inner</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#6A737D">    // 即使 outer 执行完毕，只要 inner 函数存在，bigData 就不会被回收</span></span>
+<span class="line"><span style="color:#E1E4E8">    console.</span><span style="color:#B392F0">log</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'hi'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">  };</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"><span style="color:#F97583">let</span><span style="color:#E1E4E8"> holdClosure </span><span style="color:#F97583">=</span><span style="color:#B392F0"> outer</span><span style="color:#E1E4E8">(); </span><span style="color:#6A737D">// bigData 被 inner 函数闭包引用</span></span>
+<span class="line"><span style="color:#6A737D">// 如果不再需要 holdClosure，记得将其设置为 null</span></span>
+<span class="line"><span style="color:#6A737D">// holdClosure = null;</span></span></code></pre>
+<h4 id="对策谨慎使用闭包">对策：谨慎使用闭包</h4>
+<p><strong>具体措施：</strong></p>
+<ul>
+<li><strong>避免在闭包中捕获不必要的大对象：</strong>  设计函数时，考虑是否需要将整个大对象保存在闭包中。有时可以只传递需要的属性。</li>
+<li><strong>主动释放：</strong>  如果闭包函数只在特定阶段有用，在使用完毕后，将其引用设置为  <code>null</code>。</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#F97583">function</span><span style="color:#B392F0"> outer</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">  let</span><span style="color:#E1E4E8"> bigData </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> Array</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">1000000</span><span style="color:#E1E4E8">).</span><span style="color:#B392F0">fill</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'*'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">  return</span><span style="color:#F97583"> function</span><span style="color:#B392F0"> inner</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">    console.</span><span style="color:#B392F0">log</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'hi'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#6A737D">    // 如果 inner 函数不需要访问 bigData，就不要在 outer 中定义 bigData</span></span>
+<span class="line"><span style="color:#6A737D">    // 如果确实需要，考虑只传递 bigData 的一部分必要数据</span></span>
+<span class="line"><span style="color:#E1E4E8">  };</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">let</span><span style="color:#E1E4E8"> holdClosure </span><span style="color:#F97583">=</span><span style="color:#B392F0"> outer</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// ... 使用 holdClosure ...</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// 当确定不再需要这个闭包功能时</span></span>
+<span class="line"><span style="color:#E1E4E8">holdClosure </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#6A737D">// 现在，inner 函数变得不可达，与之关联的闭包作用域（包含 bigData）也会一并被回收</span></span></code></pre> <script type="module">let t,g="",a=[],l=-1;const v=e=>!!e.closest(".article-content")&&!e.closest("[data-zoomable-image]")&&!e.closest("a[href]")&&(e.parentElement?.matches(".article-content > p, .article-content figure")??!1),d=e=>{if(!(e instanceof Element))return;const o=e.closest("[data-zoomable-image]")?.querySelector("[data-zoomable-image-target]");if(o instanceof HTMLImageElement&&!o.closest("a[href]"))return o;if(e instanceof HTMLImageElement&&v(e))return e},y=e=>{const o=e.closest("astro-carousel");if(!o)return{images:[e],index:0};const i=Array.from(o.querySelectorAll("[data-carousel-slide] img")).filter(r=>!r.closest("a[href]")).filter(r=>r.currentSrc||r.src),n=i.indexOf(e);return n===-1?{images:[e],index:0}:{images:i,index:n}},h=()=>{if(!t)return;const e=a.length>1;t.root.dataset.hasGallery=e?"true":"false",t.prevButton.hidden=!e,t.nextButton.hidden=!e},b=e=>{t&&(t.image.src=e.currentSrc||e.src,t.image.alt=e.alt||"",e.title?t.image.title=e.title:t.image.removeAttribute("title"))},s=e=>{!t||a.length<=1||(l=(l+e+a.length)%a.length,b(a[l]))},c=()=>{t&&(t.root.classList.remove("is-open"),t.root.setAttribute("aria-hidden","true"),document.body.style.overflow=g,t.image.removeAttribute("src"),t.image.alt="",t.image.removeAttribute("title"),a=[],l=-1,h())},p=()=>{const e=document.createElement("div");e.className="zoomable-image-lightbox",e.setAttribute("aria-hidden","true"),e.innerHTML=`
+    <button class="zoomable-image-lightbox__close" type="button" aria-label="Close image preview">
+      <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22">
+        <path d="M18 6 6 18M6 6l12 12" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+      </svg>
+    </button>
+    <button class="zoomable-image-lightbox__nav zoomable-image-lightbox__nav--prev" type="button" aria-label="Previous image" hidden>
+      <svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24">
+        <path d="m15 18-6-6 6-6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+      </svg>
+    </button>
+    <img class="zoomable-image-lightbox__image" alt="" />
+    <button class="zoomable-image-lightbox__nav zoomable-image-lightbox__nav--next" type="button" aria-label="Next image" hidden>
+      <svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24">
+        <path d="m9 18 6-6-6-6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+      </svg>
+    </button>
+  `,document.body.append(e);const o=e.querySelector(".zoomable-image-lightbox__image"),i=e.querySelector(".zoomable-image-lightbox__close"),n=e.querySelector(".zoomable-image-lightbox__nav--prev"),r=e.querySelector(".zoomable-image-lightbox__nav--next");if(!(o instanceof HTMLImageElement)||!(i instanceof HTMLButtonElement)||!(n instanceof HTMLButtonElement)||!(r instanceof HTMLButtonElement))throw new Error("Failed to initialize zoomable image lightbox.");return e.addEventListener("click",f=>{f.target===e&&c()}),i.addEventListener("click",c),n.addEventListener("click",()=>s(-1)),r.addEventListener("click",()=>s(1)),{root:e,image:o,closeButton:i,prevButton:n,nextButton:r}},w=()=>(t??=p(),t),m=e=>{const{root:o,closeButton:i}=w(),n=y(e);g=document.body.style.overflow,a=n.images,l=n.index,b(e),h(),document.body.style.overflow="hidden",o.classList.add("is-open"),o.setAttribute("aria-hidden","false"),i.focus({preventScroll:!0})},u=()=>{window.__navfolioZoomableImagesReady||(window.__navfolioZoomableImagesReady=!0,document.addEventListener("click",e=>{const o=d(e.target);o&&m(o)}),document.addEventListener("keydown",e=>{if(e.key==="Escape"&&t?.root.classList.contains("is-open")){c();return}if(t?.root.classList.contains("is-open")){if(e.key==="ArrowLeft"){e.preventDefault(),s(-1);return}if(e.key==="ArrowRight"){e.preventDefault(),s(1);return}}const o=d(e.target);!o||e.key!=="Enter"&&e.key!==" "||(e.preventDefault(),m(o))}))};document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u,{once:!0}):u();</script>  </section> </article>  <section class="comment-section" aria-label="Comments" data-comment-path="/blog/tech/frontend/js-garbage-collection/" data-astro-cid-wwpfc3k4><div class="comment-section-heading" data-astro-cid-wwpfc3k4><p data-astro-cid-wwpfc3k4>Comments</p><span data-astro-cid-wwpfc3k4>Quiet notes for this article.</span></div><div class="comment-provider" data-comment-provider="giscus"></div> <script type="module">const config = {"repo":"dodolalorc/dodolalorc.github.io","repo_id":"R_kgDOLYjsRQ","category":"Announcements","category_id":"DIC_kwDOLYjsRc4Clp7p","mapping":"pathname","strict":"0","reactions_enabled":"1","emit_metadata":"0","input_position":"top","theme":"preferred_color_scheme","lang":"zh-CN","loading":"lazy"};
+
+  const mountGiscus = () => {
+    const container = document.querySelector('[data-comment-provider="giscus"]');
+
+    if (!container) {
+      return;
+    }
+
+    const script = document.createElement('script');
+    script.src = 'https://giscus.app/client.js';
+    script.async = true;
+    script.crossOrigin = 'anonymous';
+    script.setAttribute('data-repo', config.repo);
+    script.setAttribute('data-repo-id', config.repo_id);
+    script.setAttribute('data-category', config.category);
+    script.setAttribute('data-category-id', config.category_id);
+    script.setAttribute('data-mapping', config.mapping);
+    script.setAttribute('data-strict', config.strict);
+    script.setAttribute('data-reactions-enabled', config.reactions_enabled);
+    script.setAttribute('data-emit-metadata', config.emit_metadata);
+    script.setAttribute('data-input-position', config.input_position);
+    script.setAttribute('data-theme', config.theme);
+    script.setAttribute('data-lang', config.lang);
+    script.setAttribute('data-loading', config.loading);
+
+    container.replaceChildren(script);
+  };
+
+  mountGiscus();
+  document.addEventListener('astro:page-load', mountGiscus);
+</script></section> </div> <aside class="right-sidebar" aria-label="Reading tools" data-astro-cid-bl7sqnst> <div class="right-sidebar-inner" data-astro-cid-bl7sqnst><nav class="toc-card blog-card" aria-label="Table of contents" data-toc-root data-astro-cid-ymbpksfa><h2 data-astro-cid-ymbpksfa>Table of contents</h2><ol data-astro-cid-ymbpksfa><li data-astro-cid-ymbpksfa><a href="#关键算法标记-清除" data-toc-link data-toc-hash="#关键算法标记-清除" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>1</span>关键算法：标记-清除</a></li><li data-astro-cid-ymbpksfa><a href="#步骤" data-toc-link data-toc-hash="#步骤" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>2</span>步骤</a></li><li data-astro-cid-ymbpksfa><a href="#辅助概念与优化" data-toc-link data-toc-hash="#辅助概念与优化" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>3</span>辅助概念与优化</a></li><li data-astro-cid-ymbpksfa><a href="#如何帮助垃圾回收避免内存泄漏" data-toc-link data-toc-hash="#如何帮助垃圾回收避免内存泄漏" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>4</span>如何帮助垃圾回收（避免内存泄漏）</a></li><li data-astro-cid-ymbpksfa><a href="#意外的全局变量" data-toc-link data-toc-hash="#意外的全局变量" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>5</span>意外的全局变量</a></li><li data-astro-cid-ymbpksfa><a href="#被遗忘的定时器或回调函数" data-toc-link data-toc-hash="#被遗忘的定时器或回调函数" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>6</span>被遗忘的定时器或回调函数</a></li><li data-astro-cid-ymbpksfa><a href="#脱离-dom-的引用" data-toc-link data-toc-hash="#脱离-dom-的引用" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>7</span>脱离 DOM 的引用</a></li><li data-astro-cid-ymbpksfa><a href="#闭包使用不当" data-toc-link data-toc-hash="#闭包使用不当" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>8</span>闭包使用不当</a></li></ol></nav></div> </aside> </main></body></html>

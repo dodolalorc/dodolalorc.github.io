@@ -1,0 +1,254 @@
+<!DOCTYPE html><html lang="en" data-palette="green-vivid" data-astro-cid-bl7sqnst> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.CAqDO0tx.js"></script><script>
+  (() => {
+    const storageKey = 'navfolio-theme';
+    const root = document.documentElement;
+    const themeMeta = () => document.querySelector('meta[name="theme-color"]');
+    const systemTheme = () =>
+      window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    const storedTheme = () => {
+      try {
+        return localStorage.getItem(storageKey);
+      } catch {
+        return null;
+      }
+    };
+    const setStoredTheme = (theme) => {
+      try {
+        localStorage.setItem(storageKey, theme);
+      } catch {}
+    };
+    const applyTheme = (theme, persist = true) => {
+      const nextTheme = theme === 'dark' ? 'dark' : 'light';
+      const toggleLabel = nextTheme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme';
+
+      root.dataset.theme = nextTheme;
+      root.style.colorScheme = nextTheme;
+      themeMeta()?.setAttribute('content', nextTheme === 'dark' ? '#171b18' : '#fdfdf9');
+      for (const button of document.querySelectorAll('[data-theme-toggle]')) {
+        button.setAttribute('aria-label', toggleLabel);
+        button.setAttribute('title', toggleLabel);
+      }
+      if (persist) setStoredTheme(nextTheme);
+    };
+    const syncThemeControls = () => {
+      applyTheme(root.dataset.theme || storedTheme() || systemTheme(), false);
+    };
+
+    applyTheme(storedTheme() || systemTheme(), false);
+
+    if (!window.__navfolioTheme) {
+      window.__navfolioTheme = {
+        toggle() {
+          applyTheme(root.dataset.theme === 'dark' ? 'light' : 'dark');
+        },
+      };
+    }
+
+    if (window.__navfolioThemeInitialized) {
+      syncThemeControls();
+      return;
+    }
+
+    window.__navfolioThemeInitialized = true;
+
+    document.addEventListener('click', (event) => {
+      const toggle = event.target.closest?.('[data-theme-toggle]');
+      if (toggle) window.__navfolioTheme.toggle();
+    });
+
+    document.addEventListener('DOMContentLoaded', syncThemeControls, { once: true });
+    document.addEventListener('astro:page-load', syncThemeControls);
+
+    window.matchMedia?.('(prefers-color-scheme: dark)').addEventListener('change', (event) => {
+      if (!storedTheme()) applyTheme(event.matches ? 'dark' : 'light', false);
+    });
+  })();
+</script><link rel="icon" href="/favicon.svg" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/manifest.json"><meta name="theme-color" content="#fdfdf9"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="dodola" href="https://dodolalorc.cn/rss.xml"><meta name="generator" content="Astro v6.3.5"><!-- Canonical URL --><link rel="canonical" href="https://dodolalorc.cn/blog/projects/toys-intro/block-chain/"><!-- Primary Meta Tags --><title>🦀Rust编程区块链项目 BlockChain in Rust</title><meta name="title" content="🦀Rust编程区块链项目 BlockChain in Rust"><meta name="description" content="Rust 区块链项目方案文档，整理产品目标、用户需求、技术选型、模块划分和使用手册。"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://dodolalorc.cn/blog/projects/toys-intro/block-chain/"><meta property="og:title" content="🦀Rust编程区块链项目 BlockChain in Rust"><meta property="og:description" content="Rust 区块链项目方案文档，整理产品目标、用户需求、技术选型、模块划分和使用手册。"><meta property="og:image" content="https://dodolalorc.cn/_astro/fail-loading-image.DEm-LhbX.png"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://dodolalorc.cn/blog/projects/toys-intro/block-chain/"><meta property="twitter:title" content="🦀Rust编程区块链项目 BlockChain in Rust"><meta property="twitter:description" content="Rust 区块链项目方案文档，整理产品目标、用户需求、技术选型、模块划分和使用手册。"><meta property="twitter:image" content="https://dodolalorc.cn/_astro/fail-loading-image.DEm-LhbX.png"><link rel="stylesheet" href="/_astro/_..VeZrjLU-.css">
+<link rel="stylesheet" href="/_astro/BlogArticle.BLUUC9fD.css">
+<link rel="stylesheet" href="/_astro/BlogTopNav.CswDVlK0.css"></head> <body class="blog-detail-page" data-astro-cid-bl7sqnst> <header class="blog-top-nav" data-pagefind-ignore data-astro-cid-sp6fezam> <button class="mobile-menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav-menu" data-mobile-menu-toggle data-astro-cid-sp6fezam> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="18" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-sp6fezam="true" class="lucide lucide-menu">  <path d="M4 5h16"></path> <path d="M4 12h16"></path> <path d="M4 19h16"></path>  </svg> </button> <a class="brand" href="/" aria-label="Go to dodola home" data-astro-cid-sp6fezam> <span class="brand-mark" aria-hidden="true" data-astro-cid-sp6fezam></span> <span class="brand-title" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>dodola</span> <span class="brand-route" data-astro-cid-sp6fezam> · blog</span> </span> </a> <nav class="nav-links" aria-label="Article navigation" data-astro-cid-sp6fezam> <a class="nav-link" href="/" data-astro-cid-sp6fezam> Home </a><a class="nav-link active" href="/blog" data-astro-cid-sp6fezam> Blog </a><a class="nav-link" href="/projects" data-astro-cid-sp6fezam> Projects </a><a class="nav-link" href="/vibe" data-astro-cid-sp6fezam> Vibe </a><a class="nav-link" href="/about" data-astro-cid-sp6fezam> About </a> </nav> <nav class="mobile-menu-panel" id="mobile-nav-menu" aria-label="Mobile navigation" data-mobile-menu data-astro-cid-sp6fezam> <a class="mobile-menu-link" href="/" data-mobile-menu-link data-astro-cid-sp6fezam> Home </a><a class="mobile-menu-link active" href="/blog" data-mobile-menu-link data-astro-cid-sp6fezam> Blog </a><a class="mobile-menu-link" href="/projects" data-mobile-menu-link data-astro-cid-sp6fezam> Projects </a><a class="mobile-menu-link" href="/vibe" data-mobile-menu-link data-astro-cid-sp6fezam> Vibe </a><a class="mobile-menu-link" href="/about" data-mobile-menu-link data-astro-cid-sp6fezam> About </a> </nav> <div class="nav-actions" aria-label="Page actions" data-astro-cid-sp6fezam> <a href="https://github.com/dodolalorc/" target="_blank" rel="noreferrer" aria-label="Open GitHub repository" title="GitHub" data-astro-cid-sp6fezam> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="17" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-sp6fezam="true" class="lucide lucide-github">  <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path> <path d="M9 18c-4.51 2-5-2-7-2"></path>  </svg> </a> <button type="button" data-theme-toggle aria-label="Switch theme" data-astro-cid-sp6fezam> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="17" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-sp6fezam="true" class="lucide lucide-moon theme-icon-moon">  <path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"></path>  </svg> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="17" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-sp6fezam="true" class="lucide lucide-sun theme-icon-sun">  <circle cx="12" cy="12" r="4"></circle> <path d="M12 2v2"></path> <path d="M12 20v2"></path> <path d="m4.93 4.93 1.41 1.41"></path> <path d="m17.66 17.66 1.41 1.41"></path> <path d="M2 12h2"></path> <path d="M20 12h2"></path> <path d="m6.34 17.66-1.41 1.41"></path> <path d="m19.07 4.93-1.41 1.41"></path>  </svg> </button> <div class="site-search" data-site-search-root data-search-max-results="6" data-search-idle-label="Start typing to search." data-search-loading-label="Searching..." data-search-empty-label="No notes found." data-search-unavailable-label="Search index is not available yet. Run a production build first." data-pagefind-ignore data-astro-cid-prkij7br> <button class="site-search-trigger" type="button" aria-label="Search site" aria-expanded="false" aria-controls="site-search-dialog" title="Search (Ctrl K / Cmd K)" data-site-search-trigger data-astro-cid-prkij7br> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="17" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-prkij7br="true" class="lucide lucide-search">  <path d="m21 21-4.34-4.34"></path> <circle cx="11" cy="11" r="8"></circle>  </svg> </button> <div class="site-search-layer" data-site-search-backdrop data-astro-cid-prkij7br> <section class="site-search-dialog" id="site-search-dialog" role="dialog" aria-modal="true" aria-labelledby="site-search-title" data-site-search-dialog data-astro-cid-prkij7br> <header class="site-search-head" data-astro-cid-prkij7br> <div data-astro-cid-prkij7br> <p id="site-search-title" data-astro-cid-prkij7br>Search</p> <span data-astro-cid-prkij7br>Ctrl K / Cmd K</span> </div> <button class="site-search-close" type="button" aria-label="Close search" title="Close search" data-site-search-close data-astro-cid-prkij7br> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="17" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-prkij7br="true" class="lucide lucide-x">  <path d="M18 6 6 18"></path> <path d="m6 6 12 12"></path>  </svg> </button> </header> <label class="site-search-input-wrap" data-astro-cid-prkij7br> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="16" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" aria-hidden="true" data-astro-cid-prkij7br="true" class="lucide lucide-search">  <path d="m21 21-4.34-4.34"></path> <circle cx="11" cy="11" r="8"></circle>  </svg> <input type="search" placeholder="Search notes..." autocomplete="off" spellcheck="false" data-site-search-input data-astro-cid-prkij7br> </label> <p class="site-search-status" data-site-search-status data-astro-cid-prkij7br>Start typing to search.</p> <ol class="site-search-results" data-site-search-results data-astro-cid-prkij7br></ol> </section> </div> </div> <script type="module">const L=["a[href]","button:not([disabled])","input:not([disabled])","textarea:not([disabled])","select:not([disabled])",'[tabindex]:not([tabindex="-1"])'].join(","),h="/",w=`${h.replace(/\/$/,"")}/pagefind/pagefind.js`.replace(/^\/pagefind/,"/pagefind");let d=null,m=null;function q(e){if(/^https?:\/\//.test(e))return e;const t=h.replace(/\/$/,"");return!t||t==="/"||e.startsWith(`${t}/`)?e:e.startsWith("/")?`${t}${e}`:`${t}/${e}`}async function g(){return d||(d=import(w).then(async e=>(await e.options?.({baseUrl:h}),await e.init?.(),e)).catch(e=>{throw d=null,e})),d}function i(e,t){const a=e.querySelector("[data-site-search-status]");a&&(a.textContent=t)}function y(e,t){e.dataset.searchOpen=t?"true":"false",e.querySelector("[data-site-search-trigger]")?.setAttribute("aria-expanded",String(t))}function x(e){return Array.from(e.querySelectorAll(L)).filter(t=>t.offsetParent!==null)}function k(e,t){if(e.key!=="Tab")return;const a=x(t);if(a.length===0)return;const s=a[0],c=a[a.length-1];e.shiftKey&&document.activeElement===s?(e.preventDefault(),c.focus()):!e.shiftKey&&document.activeElement===c&&(e.preventDefault(),s.focus())}function f(e,t){const a=e.querySelector("[data-site-search-results]");if(a){a.replaceChildren();for(const s of t){const c=document.createElement("li"),o=document.createElement("a"),r=document.createElement("span"),l=document.createElement("span");o.href=q(s.url),r.className="site-search-result-title",r.textContent=s.title||s.url,l.className="site-search-result-excerpt",l.innerHTML=s.excerpt,o.append(r,l),c.append(o),a.append(c)}}}function v(e,t){let a;return(...s)=>{window.clearTimeout(a),a=window.setTimeout(()=>e(...s),t)}}function p(){for(const e of document.querySelectorAll("[data-site-search-root]")){if(e.dataset.siteSearchReady==="true")continue;e.dataset.siteSearchReady="true";const t=e.querySelector("[data-site-search-trigger]"),a=e.querySelector("[data-site-search-dialog]"),s=e.querySelector("[data-site-search-input]"),c=e.querySelectorAll("[data-site-search-close]"),o=Number(e.dataset.searchMaxResults||6);if(!t||!a||!s)continue;const r=()=>{y(e,!1),s.value="",f(e,[]),i(e,e.dataset.searchIdleLabel||"Start typing to search."),m?.focus?.()},l=()=>{m=document.activeElement instanceof HTMLElement?document.activeElement:null,y(e,!0),window.setTimeout(()=>s.focus(),30),g().catch(()=>{i(e,e.dataset.searchUnavailableLabel||"Search index is not available yet.")})},b=v(async()=>{const n=s.value.trim();if(!n){f(e,[]),i(e,e.dataset.searchIdleLabel||"Start typing to search.");return}i(e,e.dataset.searchLoadingLabel||"Searching...");try{const S=await(await g()).search(n),u=await Promise.all(S.results.slice(0,o).map(E=>E.data()));f(e,u),i(e,u.length>0?`${u.length} result${u.length===1?"":"s"}`:e.dataset.searchEmptyLabel||"No notes found.")}catch{f(e,[]),i(e,e.dataset.searchUnavailableLabel||"Search index is not available yet.")}},120);t.addEventListener("click",l),s.addEventListener("input",b);for(const n of c)n.addEventListener("click",r);e.addEventListener("click",n=>{n.target.matches("[data-site-search-backdrop]")&&r(),n.target.closest("[data-site-search-results] a")&&r()}),e.addEventListener("keydown",n=>{e.dataset.searchOpen==="true"&&(n.key==="Escape"&&r(),k(n,a))})}}document.addEventListener("keydown",e=>{if(!((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==="k"))return;const a=document.querySelector("[data-site-search-root]"),s=a?.querySelector("[data-site-search-trigger]");if(!(!a||!s)){if(e.preventDefault(),a.dataset.searchOpen==="true"){a.querySelector("[data-site-search-input]")?.focus();return}s.click()}});p();document.addEventListener("astro:page-load",p);p();</script> <button class="toc-action" type="button" aria-label="Open table of contents" aria-expanded="false" aria-controls="mobile-toc-menu" title="Table of contents" data-mobile-toc-trigger data-astro-cid-sp6fezam> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="17" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-sp6fezam="true" class="lucide lucide-list-tree">  <path d="M8 5h13"></path> <path d="M13 12h8"></path> <path d="M13 19h8"></path> <path d="M3 10a2 2 0 0 0 2 2h3"></path> <path d="M3 5v12a2 2 0 0 0 2 2h3"></path>  </svg> </button> </div> <nav class="mobile-toc-panel" id="mobile-toc-menu" aria-label="Article table of contents" data-nav-toc-menu data-toc-root data-astro-cid-sp6fezam> <p data-astro-cid-sp6fezam>Table of contents</p> <ol data-astro-cid-sp6fezam> <li data-astro-cid-sp6fezam> <a href="#一产品方案" data-nav-toc-link data-toc-link data-toc-hash="#一产品方案" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>1</span> 一、产品方案 </a> </li><li data-astro-cid-sp6fezam> <a href="#项目目标" data-nav-toc-link data-toc-link data-toc-hash="#项目目标" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>2</span> 项目目标 </a> </li><li data-astro-cid-sp6fezam> <a href="#用户需求分析" data-nav-toc-link data-toc-link data-toc-hash="#用户需求分析" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>3</span> 用户需求分析 </a> </li><li data-astro-cid-sp6fezam> <a href="#主要功能" data-nav-toc-link data-toc-link data-toc-hash="#主要功能" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>4</span> 主要功能 </a> </li><li data-astro-cid-sp6fezam> <a href="#二技术方案" data-nav-toc-link data-toc-link data-toc-hash="#二技术方案" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>5</span> 二、技术方案 </a> </li><li data-astro-cid-sp6fezam> <a href="#技术选型" data-nav-toc-link data-toc-link data-toc-hash="#技术选型" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>6</span> 技术选型 </a> </li><li data-astro-cid-sp6fezam> <a href="#模块划分" data-nav-toc-link data-toc-link data-toc-hash="#模块划分" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>7</span> 模块划分 </a> </li><li data-astro-cid-sp6fezam> <a href="#系统结构" data-nav-toc-link data-toc-link data-toc-hash="#系统结构" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>8</span> 系统结构 </a> </li><li data-astro-cid-sp6fezam> <a href="#三使用手册" data-nav-toc-link data-toc-link data-toc-hash="#三使用手册" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>9</span> 三、使用手册 </a> </li><li data-astro-cid-sp6fezam> <a href="#实验截图" data-nav-toc-link data-toc-link data-toc-hash="#实验截图" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>10</span> 实验截图 </a> </li><li data-astro-cid-sp6fezam> <a href="#四项目要求" data-nav-toc-link data-toc-link data-toc-hash="#四项目要求" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>11</span> 四、项目要求 </a> </li> </ol> </nav> </header> <script type="module">const b=()=>{for(const t of document.querySelectorAll(".blog-top-nav")){const l=t.querySelector("[data-mobile-menu-toggle]"),c=t.querySelector("[data-mobile-menu]"),o=t.querySelector("[data-mobile-toc-trigger]"),u=t.querySelector("[data-nav-toc-menu]");if(!t.dataset.scrollHideReady){t.dataset.scrollHideReady="true";const a=24,s=96,e=8;let r=window.scrollY,d=0;const i=n=>{t.dataset.navHidden=n?"true":"false",t.toggleAttribute("inert",n),t.toggleAttribute("aria-hidden",n)},m=()=>window.scrollY<=a||t.dataset.mobileMenuOpen==="true"||t.dataset.mobileTocOpen==="true"||t.matches(":focus-within"),v=()=>{d=0;const n=window.scrollY,f=n-r;if(m()){i(!1),r=n;return}Math.abs(f)<e||(i(f>0&&n>s),r=n)};window.addEventListener("scroll",()=>{d||(d=window.requestAnimationFrame(v))},{passive:!0}),window.addEventListener("resize",()=>{window.scrollY<=a&&i(!1)}),i(!1)}if(l&&c&&!t.dataset.mobileMenuReady){t.dataset.mobileMenuReady="true";const a=e=>{t.dataset.mobileMenuOpen=e?"true":"false",l.setAttribute("aria-expanded",String(e)),l.setAttribute("aria-label",e?"Close navigation menu":"Open navigation menu")},s=e=>{!o||!u||(t.dataset.mobileTocOpen=e?"true":"false",o.setAttribute("aria-expanded",String(e)),o.setAttribute("aria-label",e?"Close table of contents":"Open table of contents"))};l.addEventListener("click",()=>{const e=t.dataset.mobileMenuOpen!=="true";a(e),t.dataset.navHidden="false",e&&s(!1)}),c.addEventListener("click",e=>{e.target.closest?.("[data-mobile-menu-link]")&&a(!1)}),o?.addEventListener("click",()=>{const e=t.dataset.mobileTocOpen!=="true";s(e),t.dataset.navHidden="false",e&&a(!1)}),u?.addEventListener("click",e=>{e.target.closest?.("[data-nav-toc-link]")&&s(!1)}),document.addEventListener("click",e=>{t.contains(e.target)||(a(!1),s(!1))}),document.addEventListener("keydown",e=>{e.key==="Escape"&&(a(!1),s(!1))})}}};b();document.addEventListener("astro:page-load",b);</script> <div class="blog-background" aria-hidden="true" data-astro-cid-bl7sqnst></div> <main class="blog-layout" data-pagefind-body data-astro-cid-bl7sqnst> <div class="article-column" data-astro-cid-bl7sqnst> <article class="article-card" data-astro-cid-bl7sqnst> <header class="article-header" data-astro-cid-wynq62ua>  <h1 data-astro-cid-wynq62ua>🦀Rust编程区块链项目 BlockChain in Rust</h1> <div class="meta-line" aria-label="Article metadata" data-astro-cid-wynq62ua> <span class="meta-item" data-astro-cid-wynq62ua> <time datetime="2025-03-03T07:20:51.000Z"> Mar 3, 2025 </time> </span> <span class="meta-item" data-astro-cid-wynq62ua>1,722 words</span> <span class="meta-item" data-astro-cid-wynq62ua>4 min read</span> <script type="module">const showPageView = false;
+const serverURL = "";
+const selector = ".waline-pageview-count";
+
+  if (showPageView) {
+    const { pageviewCount } = await import('https://unpkg.com/@waline/client@v3/dist/pageview.js');
+
+    const updatePageViews = () => {
+      pageviewCount({
+        serverURL,
+        selector,
+        path: window.location.pathname,
+      });
+    };
+
+    updatePageViews();
+    document.addEventListener('astro:page-load', updatePageViews);
+  }
+</script>  </div>   </header> <section class="mobile-article-toc" aria-label="Article table of contents" data-astro-cid-bl7sqnst> <nav class="toc-card blog-card compact collapsible can-collapse" aria-label="Table of contents" data-toc-root data-mobile-toc data-expanded="false" data-astro-cid-ymbpksfa><h2 data-astro-cid-ymbpksfa>Table of contents</h2><ol id="mobile-article-toc-list" data-astro-cid-ymbpksfa><li data-astro-cid-ymbpksfa><a href="#一产品方案" data-toc-link data-toc-hash="#一产品方案" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>1</span>一、产品方案</a></li><li data-astro-cid-ymbpksfa><a href="#项目目标" data-toc-link data-toc-hash="#项目目标" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>2</span>项目目标</a></li><li data-astro-cid-ymbpksfa><a href="#用户需求分析" data-toc-link data-toc-hash="#用户需求分析" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>3</span>用户需求分析</a></li><li data-astro-cid-ymbpksfa><a href="#主要功能" data-toc-link data-toc-hash="#主要功能" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>4</span>主要功能</a></li><li data-astro-cid-ymbpksfa><a href="#二技术方案" data-toc-link data-toc-hash="#二技术方案" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>5</span>二、技术方案</a></li><li data-astro-cid-ymbpksfa><a href="#技术选型" data-toc-link data-toc-hash="#技术选型" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>6</span>技术选型</a></li><li data-astro-cid-ymbpksfa><a href="#模块划分" data-toc-link data-toc-hash="#模块划分" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>7</span>模块划分</a></li><li data-astro-cid-ymbpksfa><a href="#系统结构" data-toc-link data-toc-hash="#系统结构" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>8</span>系统结构</a></li><li data-astro-cid-ymbpksfa><a href="#三使用手册" data-toc-link data-toc-hash="#三使用手册" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>9</span>三、使用手册</a></li><li data-astro-cid-ymbpksfa><a href="#实验截图" data-toc-link data-toc-hash="#实验截图" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>10</span>实验截图</a></li><li data-astro-cid-ymbpksfa><a href="#四项目要求" data-toc-link data-toc-hash="#四项目要求" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>11</span>四、项目要求</a></li></ol><button class="toc-expand" type="button" aria-label="Expand table of contents" aria-expanded="false" aria-controls="mobile-article-toc-list" data-toc-expand data-astro-cid-ymbpksfa><span data-expand-label data-astro-cid-ymbpksfa>Show all</span><i aria-hidden="true" data-astro-cid-ymbpksfa></i></button></nav><script type="module" src="/_astro/TableOfContents.astro_astro_type_script_index_0_lang.B3wh3MgY.js"></script> </section> <section id="article-start" class="article-content" data-astro-cid-bl7sqnst>  <blockquote>
+<p>[!info]- GitHub仓库地址
+GitHub 仓库地址：<a href="https://github.com/dodolalorc/BlockChain">BlockChain</a></p>
+</blockquote>
+<h2 id="一产品方案">一、产品方案</h2>
+<h3 id="项目目标">项目目标</h3>
+<p>实现一个轻量的简单高效的区块链系统项目，用于学习和研究。</p>
+<ul>
+<li>学习区块链的相关知识，实现一个由 Rust 实现的简单区块链系统。</li>
+<li>能够生成创世区块，支持区块的创建、验证和链式储存，实现工作量证明算法。</li>
+<li>利用本机端口构建服务系统，实现交易的广播、挖矿功能、简单的交易校验功能。</li>
+</ul>
+<h3 id="用户需求分析">用户需求分析</h3>
+<ul>
+<li>用户可以通过命令行启动本地服务，在<code>main.rs</code>中配置路由，参考下方的<a href="#%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C">使用手册</a>，进行创建交易、挖矿、查看信息等。</li>
+<li>通过时间戳、<code>lock_time</code>、签名校验等完成简单的对交易信息的核对。</li>
+<li>系统具有一定的可扩展性，用户可以通过调整 API 接口快速调试。</li>
+</ul>
+<h3 id="主要功能">主要功能</h3>
+<p>本产品主要由<code>src/</code>下的<code>.rs</code>文件实现主要功能。</p>
+<p>设计了区块链和区块的数据结构，并完成了简单的新建区块、新建区块链以及设置创世区块、添加交易到交易池、挖矿打包交易、交易广播、计算 Merkle 树根哈希等功能。</p>
+<p>设计了一条交易信息的各种数据结构，包括其交易输入、交易输出、锁定时间，还实现了签名交易和广播行为。</p>
+<h2 id="二技术方案">二、技术方案</h2>
+<h3 id="技术选型">技术选型</h3>
+<ul>
+<li>编程语言：Rust（高性能、内存安全、适合区块链开发）。</li>
+<li>数据序列化：使用  <code>serde</code>  和  <code>serde_json</code>  进行完成序列化。</li>
+<li>时间戳：使用<code>chrono</code>获取当前时间。</li>
+<li>哈希算法：通过<code>sha2</code>库的 SHA-256 计算哈希值。</li>
+<li>加密算法：使用 Rust 的加密库<code>ring</code>实现哈希、签名等功能。</li>
+<li>共识算法：实现 PoW（工作量证明）共识机制。</li>
+<li>网络通信：使用 Rust 的异步网络库<code>Tokio</code>实现 P2P 通信。</li>
+</ul>
+<h3 id="模块划分">模块划分</h3>
+<ul>
+<li>区块模块：区块的创建、验证和链式存储。</li>
+<li>交易模块：交易的创建、签名和验证。</li>
+<li>网络模块：节点发现、消息广播和数据同步。</li>
+<li>共识模块：实现共识算法。</li>
+<li>存储模块：数据持久化存储。</li>
+</ul>
+<p><code>main.rs</code>：定义了创建节点、消息广播等功能的网络模块。</p>
+<p><code>block_chain.rs</code>：定义了区块链和区块的数据结构，并完成了简单的新建区块、新建区块链以及设置创世区块、添加交易到交易池、挖矿打包交易、交易广播、计算 Merkle 树根哈希等功能。</p>
+<p><code>hash_function.rs</code>：主要定义了常用的哈希函数。</p>
+<p><code>serialization.rs</code>：定义了序列化和反序列化的方法。</p>
+<p><code>transaction.rs</code>：定义了一条交易信息的各种数据结构，包括其交易输入、交易输出、锁定时间，还实现了签名交易和广播行为。</p>
+<h3 id="系统结构">系统结构</h3>
+<h4 id="区块链结构">区块链结构</h4>
+<p>区块链的核心是由一系列按顺序链接的区块组成的链式结构。每个区块包含以下关键信息：</p>
+<ul>
+<li>时间戳（timestamp）：区块创建的时间。</li>
+<li>哈希值（merkle_root）：当前区块的唯一标识，通过加密算法生成。</li>
+<li>前一区块哈希（prev_block_hash）：指向前一个区块的哈希值，用于维护链的连续性。</li>
+</ul>
+<p>在实现中，区块链可以通过一个动态数组（ <code>Vec&#x3C;Block></code>）来存储所有区块，确保区块的顺序和完整性。</p>
+<h4 id="创世区块">创世区块</h4>
+<p>创世区块是区块链中的第一个区块，它的生成标志着区块链的初始化。创世区块的特点包括：</p>
+<ul>
+<li>前一区块哈希为空：由于没有前驱区块，其前一区块哈希值通常设置为空或特定标识（如 “0”）。</li>
+<li>哈希值计算：根据区块的内容（索引、时间戳、前一区块哈希和数据）生成唯一的哈希值，并存储到区块中。</li>
+</ul>
+<p>创世区块的生成是区块链启动的必要步骤，为后续区块的添加奠定基础。</p>
+<h4 id="挖矿算法">挖矿算法</h4>
+<p>挖矿是区块链中生成新区块的关键过程，其核心是通过计算找到一个满足特定条件的哈希值。具体实现如下：</p>
+<ol>
+<li>难度目标：设定一个哈希值的难度条件（例如，哈希值的前几位必须为 “0”）。</li>
+<li>随机数（Nonce）：通过不断尝试不同的随机数，结合区块的其他信息（索引、时间戳、前一区块哈希和数据），计算哈希值。</li>
+<li>哈希验证：检查生成的哈希值是否满足难度条件。如果满足，则挖矿成功；否则，继续尝试新的随机数。</li>
+</ol>
+<p>挖矿算法的实现确保了区块链的安全性和去中心化特性，同时也为新区块的生成提供了动力。</p>
+<p>以上设计使得区块链系统能够实现基础的区块的创建、链接和验证，同时通过挖矿算法保证网络的共识和安全。</p>
+<h2 id="三使用手册">三、使用手册</h2>
+<p>拉取本项目</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> clone</span><span style="color:#9ECBFF"> git@github.com:dodolalorc/BlockChain.git</span></span></code></pre>
+<p>启动项目，开启本地服务器</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">cargo</span><span style="color:#9ECBFF"> run</span></span></code></pre>
+<p>本地服务器接口使用：</p>
+<ul>
+<li>添加交易</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">curl</span><span style="color:#79B8FF"> -X</span><span style="color:#9ECBFF"> POST</span><span style="color:#9ECBFF"> http://127.0.0.1:3030/transaction</span><span style="color:#79B8FF"> -H</span><span style="color:#9ECBFF"> "Content-Type: application/json"</span><span style="color:#79B8FF"> -d</span><span style="color:#9ECBFF"> '{"value":100,"lock_time":0}'</span></span></code></pre>
+<ul>
+<li>查看交易池</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">curl</span><span style="color:#9ECBFF"> http://127.0.0.1:3030/pool</span></span></code></pre>
+<ul>
+<li>查看区块链区块部分</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">curl</span><span style="color:#9ECBFF"> http://127.0.0.1:3030/blocks</span></span></code></pre>
+<ul>
+<li>挖矿</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0"> curl</span><span style="color:#79B8FF"> -X</span><span style="color:#9ECBFF"> POST</span><span style="color:#9ECBFF"> http://127.0.0.1:3030/mine</span></span></code></pre>
+<h3 id="实验截图">实验截图</h3>
+<p>建立交易及交易池状态</p>
+<p><img src="https://img.dodolalorc.cn/i/2025/03/06/67c9967b9075f.png" alt=""></p>
+<p>挖矿</p>
+<p><img src="https://img.dodolalorc.cn/i/2025/03/06/67c99785d7f18.png" alt=""></p>
+<h2 id="四项目要求">四、项目要求</h2>
+<p>一：计划</p>
+<ol>
+<li>完成概念学习：区块链</li>
+<li>完成需求设计：产品方案、技术方案</li>
+<li>完成项目实现：Rust 实现，至少输出创世区块</li>
+</ol>
+<p>二：要求</p>
+<ol>
+<li>结合下面给的和自己搜索到的参考资料、书籍、视频等学习区块链基础知识</li>
+<li>结合个人兴趣和所学内容，自己确定一个区块链领域的项目目标（如，实现基本的挖矿）</li>
+<li>有了目标，自己学习怎么写产品方案、技术方案、可以多人组队研究</li>
+<li>基于产品方案和技术方案实现你的需求，要结合之前讲的数据结构和算法内容</li>
+</ol>
+<p><em>注意：至少是实现一个简单的区块链，运行并输出创世区块</em></p>
+<p>三：参考资料</p>
+<ol>
+<li>区块链教程 <a href="https://liaoxuefeng.com/books/blockchain/introduction/index.html">https://liaoxuefeng.com/books/blockchain/introduction/index.html</a></li>
+<li>区块链学习路线 <a href="https://zjubca.github.io/roadmap/">https://zjubca.github.io/roadmap/</a></li>
+<li>go 实现的 demo <a href="https://github.com/Jeiwan/blockchain_go">https://github.com/Jeiwan/blockchain_go</a></li>
+<li>B 站区块链项目实战 <a href="https://www.bilibili.com/video/BV145411t7qp/?vd_source=ca616b8d8161186b30bdd62e4e044e42">https://www.bilibili.com/video/BV145411t7qp/?vd_source=ca616b8d8161186b30bdd62e4e044e42</a></li>
+</ol>
+<p><img src="https://img.dodolalorc.cn/i/2025/03/03/67c5515c5fd95.png" alt=""></p> <script type="module">let t,g="",a=[],l=-1;const v=e=>!!e.closest(".article-content")&&!e.closest("[data-zoomable-image]")&&!e.closest("a[href]")&&(e.parentElement?.matches(".article-content > p, .article-content figure")??!1),d=e=>{if(!(e instanceof Element))return;const o=e.closest("[data-zoomable-image]")?.querySelector("[data-zoomable-image-target]");if(o instanceof HTMLImageElement&&!o.closest("a[href]"))return o;if(e instanceof HTMLImageElement&&v(e))return e},y=e=>{const o=e.closest("astro-carousel");if(!o)return{images:[e],index:0};const i=Array.from(o.querySelectorAll("[data-carousel-slide] img")).filter(r=>!r.closest("a[href]")).filter(r=>r.currentSrc||r.src),n=i.indexOf(e);return n===-1?{images:[e],index:0}:{images:i,index:n}},h=()=>{if(!t)return;const e=a.length>1;t.root.dataset.hasGallery=e?"true":"false",t.prevButton.hidden=!e,t.nextButton.hidden=!e},b=e=>{t&&(t.image.src=e.currentSrc||e.src,t.image.alt=e.alt||"",e.title?t.image.title=e.title:t.image.removeAttribute("title"))},s=e=>{!t||a.length<=1||(l=(l+e+a.length)%a.length,b(a[l]))},c=()=>{t&&(t.root.classList.remove("is-open"),t.root.setAttribute("aria-hidden","true"),document.body.style.overflow=g,t.image.removeAttribute("src"),t.image.alt="",t.image.removeAttribute("title"),a=[],l=-1,h())},p=()=>{const e=document.createElement("div");e.className="zoomable-image-lightbox",e.setAttribute("aria-hidden","true"),e.innerHTML=`
+    <button class="zoomable-image-lightbox__close" type="button" aria-label="Close image preview">
+      <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22">
+        <path d="M18 6 6 18M6 6l12 12" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+      </svg>
+    </button>
+    <button class="zoomable-image-lightbox__nav zoomable-image-lightbox__nav--prev" type="button" aria-label="Previous image" hidden>
+      <svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24">
+        <path d="m15 18-6-6 6-6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+      </svg>
+    </button>
+    <img class="zoomable-image-lightbox__image" alt="" />
+    <button class="zoomable-image-lightbox__nav zoomable-image-lightbox__nav--next" type="button" aria-label="Next image" hidden>
+      <svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24">
+        <path d="m9 18 6-6-6-6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+      </svg>
+    </button>
+  `,document.body.append(e);const o=e.querySelector(".zoomable-image-lightbox__image"),i=e.querySelector(".zoomable-image-lightbox__close"),n=e.querySelector(".zoomable-image-lightbox__nav--prev"),r=e.querySelector(".zoomable-image-lightbox__nav--next");if(!(o instanceof HTMLImageElement)||!(i instanceof HTMLButtonElement)||!(n instanceof HTMLButtonElement)||!(r instanceof HTMLButtonElement))throw new Error("Failed to initialize zoomable image lightbox.");return e.addEventListener("click",f=>{f.target===e&&c()}),i.addEventListener("click",c),n.addEventListener("click",()=>s(-1)),r.addEventListener("click",()=>s(1)),{root:e,image:o,closeButton:i,prevButton:n,nextButton:r}},w=()=>(t??=p(),t),m=e=>{const{root:o,closeButton:i}=w(),n=y(e);g=document.body.style.overflow,a=n.images,l=n.index,b(e),h(),document.body.style.overflow="hidden",o.classList.add("is-open"),o.setAttribute("aria-hidden","false"),i.focus({preventScroll:!0})},u=()=>{window.__navfolioZoomableImagesReady||(window.__navfolioZoomableImagesReady=!0,document.addEventListener("click",e=>{const o=d(e.target);o&&m(o)}),document.addEventListener("keydown",e=>{if(e.key==="Escape"&&t?.root.classList.contains("is-open")){c();return}if(t?.root.classList.contains("is-open")){if(e.key==="ArrowLeft"){e.preventDefault(),s(-1);return}if(e.key==="ArrowRight"){e.preventDefault(),s(1);return}}const o=d(e.target);!o||e.key!=="Enter"&&e.key!==" "||(e.preventDefault(),m(o))}))};document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u,{once:!0}):u();</script>  </section> </article>  <section class="comment-section" aria-label="Comments" data-comment-path="/blog/projects/toys-intro/block-chain/" data-astro-cid-wwpfc3k4><div class="comment-section-heading" data-astro-cid-wwpfc3k4><p data-astro-cid-wwpfc3k4>Comments</p><span data-astro-cid-wwpfc3k4>Quiet notes for this article.</span></div><div class="comment-provider" data-comment-provider="giscus"></div> <script type="module">const config = {"repo":"dodolalorc/dodolalorc.github.io","repo_id":"R_kgDOLYjsRQ","category":"Announcements","category_id":"DIC_kwDOLYjsRc4Clp7p","mapping":"pathname","strict":"0","reactions_enabled":"1","emit_metadata":"0","input_position":"top","theme":"preferred_color_scheme","lang":"zh-CN","loading":"lazy"};
+
+  const mountGiscus = () => {
+    const container = document.querySelector('[data-comment-provider="giscus"]');
+
+    if (!container) {
+      return;
+    }
+
+    const script = document.createElement('script');
+    script.src = 'https://giscus.app/client.js';
+    script.async = true;
+    script.crossOrigin = 'anonymous';
+    script.setAttribute('data-repo', config.repo);
+    script.setAttribute('data-repo-id', config.repo_id);
+    script.setAttribute('data-category', config.category);
+    script.setAttribute('data-category-id', config.category_id);
+    script.setAttribute('data-mapping', config.mapping);
+    script.setAttribute('data-strict', config.strict);
+    script.setAttribute('data-reactions-enabled', config.reactions_enabled);
+    script.setAttribute('data-emit-metadata', config.emit_metadata);
+    script.setAttribute('data-input-position', config.input_position);
+    script.setAttribute('data-theme', config.theme);
+    script.setAttribute('data-lang', config.lang);
+    script.setAttribute('data-loading', config.loading);
+
+    container.replaceChildren(script);
+  };
+
+  mountGiscus();
+  document.addEventListener('astro:page-load', mountGiscus);
+</script></section> </div> <aside class="right-sidebar" aria-label="Reading tools" data-astro-cid-bl7sqnst> <div class="right-sidebar-inner" data-astro-cid-bl7sqnst><nav class="toc-card blog-card" aria-label="Table of contents" data-toc-root data-astro-cid-ymbpksfa><h2 data-astro-cid-ymbpksfa>Table of contents</h2><ol data-astro-cid-ymbpksfa><li data-astro-cid-ymbpksfa><a href="#一产品方案" data-toc-link data-toc-hash="#一产品方案" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>1</span>一、产品方案</a></li><li data-astro-cid-ymbpksfa><a href="#项目目标" data-toc-link data-toc-hash="#项目目标" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>2</span>项目目标</a></li><li data-astro-cid-ymbpksfa><a href="#用户需求分析" data-toc-link data-toc-hash="#用户需求分析" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>3</span>用户需求分析</a></li><li data-astro-cid-ymbpksfa><a href="#主要功能" data-toc-link data-toc-hash="#主要功能" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>4</span>主要功能</a></li><li data-astro-cid-ymbpksfa><a href="#二技术方案" data-toc-link data-toc-hash="#二技术方案" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>5</span>二、技术方案</a></li><li data-astro-cid-ymbpksfa><a href="#技术选型" data-toc-link data-toc-hash="#技术选型" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>6</span>技术选型</a></li><li data-astro-cid-ymbpksfa><a href="#模块划分" data-toc-link data-toc-hash="#模块划分" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>7</span>模块划分</a></li><li data-astro-cid-ymbpksfa><a href="#系统结构" data-toc-link data-toc-hash="#系统结构" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>8</span>系统结构</a></li><li data-astro-cid-ymbpksfa><a href="#三使用手册" data-toc-link data-toc-hash="#三使用手册" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>9</span>三、使用手册</a></li><li data-astro-cid-ymbpksfa><a href="#实验截图" data-toc-link data-toc-hash="#实验截图" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>10</span>实验截图</a></li><li data-astro-cid-ymbpksfa><a href="#四项目要求" data-toc-link data-toc-hash="#四项目要求" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>11</span>四、项目要求</a></li></ol></nav></div> </aside> </main></body></html>

@@ -1,0 +1,815 @@
+<!DOCTYPE html><html lang="en" data-palette="green-vivid" data-astro-cid-bl7sqnst> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.CAqDO0tx.js"></script><script>
+  (() => {
+    const storageKey = 'navfolio-theme';
+    const root = document.documentElement;
+    const themeMeta = () => document.querySelector('meta[name="theme-color"]');
+    const systemTheme = () =>
+      window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    const storedTheme = () => {
+      try {
+        return localStorage.getItem(storageKey);
+      } catch {
+        return null;
+      }
+    };
+    const setStoredTheme = (theme) => {
+      try {
+        localStorage.setItem(storageKey, theme);
+      } catch {}
+    };
+    const applyTheme = (theme, persist = true) => {
+      const nextTheme = theme === 'dark' ? 'dark' : 'light';
+      const toggleLabel = nextTheme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme';
+
+      root.dataset.theme = nextTheme;
+      root.style.colorScheme = nextTheme;
+      themeMeta()?.setAttribute('content', nextTheme === 'dark' ? '#171b18' : '#fdfdf9');
+      for (const button of document.querySelectorAll('[data-theme-toggle]')) {
+        button.setAttribute('aria-label', toggleLabel);
+        button.setAttribute('title', toggleLabel);
+      }
+      if (persist) setStoredTheme(nextTheme);
+    };
+    const syncThemeControls = () => {
+      applyTheme(root.dataset.theme || storedTheme() || systemTheme(), false);
+    };
+
+    applyTheme(storedTheme() || systemTheme(), false);
+
+    if (!window.__navfolioTheme) {
+      window.__navfolioTheme = {
+        toggle() {
+          applyTheme(root.dataset.theme === 'dark' ? 'light' : 'dark');
+        },
+      };
+    }
+
+    if (window.__navfolioThemeInitialized) {
+      syncThemeControls();
+      return;
+    }
+
+    window.__navfolioThemeInitialized = true;
+
+    document.addEventListener('click', (event) => {
+      const toggle = event.target.closest?.('[data-theme-toggle]');
+      if (toggle) window.__navfolioTheme.toggle();
+    });
+
+    document.addEventListener('DOMContentLoaded', syncThemeControls, { once: true });
+    document.addEventListener('astro:page-load', syncThemeControls);
+
+    window.matchMedia?.('(prefers-color-scheme: dark)').addEventListener('change', (event) => {
+      if (!storedTheme()) applyTheme(event.matches ? 'dark' : 'light', false);
+    });
+  })();
+</script><link rel="icon" href="/favicon.svg" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/manifest.json"><meta name="theme-color" content="#fdfdf9"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="dodola" href="https://dodolalorc.cn/rss.xml"><meta name="generator" content="Astro v6.3.5"><!-- Canonical URL --><link rel="canonical" href="https://dodolalorc.cn/blog/tech/frontend/cart-page-sample/"><!-- Primary Meta Tags --><title>购物车页面制作教程（包含分页设计）</title><meta name="title" content="购物车页面制作教程（包含分页设计）"><meta name="description" content="购物车页面制作教程，围绕需求分析、整体布局、购物车列表和分页设计整理实现思路。"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://dodolalorc.cn/blog/tech/frontend/cart-page-sample/"><meta property="og:title" content="购物车页面制作教程（包含分页设计）"><meta property="og:description" content="购物车页面制作教程，围绕需求分析、整体布局、购物车列表和分页设计整理实现思路。"><meta property="og:image" content="https://dodolalorc.cn/_astro/fail-loading-image.DEm-LhbX.png"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://dodolalorc.cn/blog/tech/frontend/cart-page-sample/"><meta property="twitter:title" content="购物车页面制作教程（包含分页设计）"><meta property="twitter:description" content="购物车页面制作教程，围绕需求分析、整体布局、购物车列表和分页设计整理实现思路。"><meta property="twitter:image" content="https://dodolalorc.cn/_astro/fail-loading-image.DEm-LhbX.png"><link rel="stylesheet" href="/_astro/_..VeZrjLU-.css">
+<link rel="stylesheet" href="/_astro/BlogArticle.BLUUC9fD.css">
+<link rel="stylesheet" href="/_astro/BlogTopNav.CswDVlK0.css"></head> <body class="blog-detail-page" data-astro-cid-bl7sqnst> <header class="blog-top-nav" data-pagefind-ignore data-astro-cid-sp6fezam> <button class="mobile-menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav-menu" data-mobile-menu-toggle data-astro-cid-sp6fezam> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="18" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-sp6fezam="true" class="lucide lucide-menu">  <path d="M4 5h16"></path> <path d="M4 12h16"></path> <path d="M4 19h16"></path>  </svg> </button> <a class="brand" href="/" aria-label="Go to dodola home" data-astro-cid-sp6fezam> <span class="brand-mark" aria-hidden="true" data-astro-cid-sp6fezam></span> <span class="brand-title" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>dodola</span> <span class="brand-route" data-astro-cid-sp6fezam> · blog</span> </span> </a> <nav class="nav-links" aria-label="Article navigation" data-astro-cid-sp6fezam> <a class="nav-link" href="/" data-astro-cid-sp6fezam> Home </a><a class="nav-link active" href="/blog" data-astro-cid-sp6fezam> Blog </a><a class="nav-link" href="/projects" data-astro-cid-sp6fezam> Projects </a><a class="nav-link" href="/vibe" data-astro-cid-sp6fezam> Vibe </a><a class="nav-link" href="/about" data-astro-cid-sp6fezam> About </a> </nav> <nav class="mobile-menu-panel" id="mobile-nav-menu" aria-label="Mobile navigation" data-mobile-menu data-astro-cid-sp6fezam> <a class="mobile-menu-link" href="/" data-mobile-menu-link data-astro-cid-sp6fezam> Home </a><a class="mobile-menu-link active" href="/blog" data-mobile-menu-link data-astro-cid-sp6fezam> Blog </a><a class="mobile-menu-link" href="/projects" data-mobile-menu-link data-astro-cid-sp6fezam> Projects </a><a class="mobile-menu-link" href="/vibe" data-mobile-menu-link data-astro-cid-sp6fezam> Vibe </a><a class="mobile-menu-link" href="/about" data-mobile-menu-link data-astro-cid-sp6fezam> About </a> </nav> <div class="nav-actions" aria-label="Page actions" data-astro-cid-sp6fezam> <a href="https://github.com/dodolalorc/" target="_blank" rel="noreferrer" aria-label="Open GitHub repository" title="GitHub" data-astro-cid-sp6fezam> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="17" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-sp6fezam="true" class="lucide lucide-github">  <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path> <path d="M9 18c-4.51 2-5-2-7-2"></path>  </svg> </a> <button type="button" data-theme-toggle aria-label="Switch theme" data-astro-cid-sp6fezam> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="17" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-sp6fezam="true" class="lucide lucide-moon theme-icon-moon">  <path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"></path>  </svg> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="17" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-sp6fezam="true" class="lucide lucide-sun theme-icon-sun">  <circle cx="12" cy="12" r="4"></circle> <path d="M12 2v2"></path> <path d="M12 20v2"></path> <path d="m4.93 4.93 1.41 1.41"></path> <path d="m17.66 17.66 1.41 1.41"></path> <path d="M2 12h2"></path> <path d="M20 12h2"></path> <path d="m6.34 17.66-1.41 1.41"></path> <path d="m19.07 4.93-1.41 1.41"></path>  </svg> </button> <div class="site-search" data-site-search-root data-search-max-results="6" data-search-idle-label="Start typing to search." data-search-loading-label="Searching..." data-search-empty-label="No notes found." data-search-unavailable-label="Search index is not available yet. Run a production build first." data-pagefind-ignore data-astro-cid-prkij7br> <button class="site-search-trigger" type="button" aria-label="Search site" aria-expanded="false" aria-controls="site-search-dialog" title="Search (Ctrl K / Cmd K)" data-site-search-trigger data-astro-cid-prkij7br> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="17" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-prkij7br="true" class="lucide lucide-search">  <path d="m21 21-4.34-4.34"></path> <circle cx="11" cy="11" r="8"></circle>  </svg> </button> <div class="site-search-layer" data-site-search-backdrop data-astro-cid-prkij7br> <section class="site-search-dialog" id="site-search-dialog" role="dialog" aria-modal="true" aria-labelledby="site-search-title" data-site-search-dialog data-astro-cid-prkij7br> <header class="site-search-head" data-astro-cid-prkij7br> <div data-astro-cid-prkij7br> <p id="site-search-title" data-astro-cid-prkij7br>Search</p> <span data-astro-cid-prkij7br>Ctrl K / Cmd K</span> </div> <button class="site-search-close" type="button" aria-label="Close search" title="Close search" data-site-search-close data-astro-cid-prkij7br> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="17" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-prkij7br="true" class="lucide lucide-x">  <path d="M18 6 6 18"></path> <path d="m6 6 12 12"></path>  </svg> </button> </header> <label class="site-search-input-wrap" data-astro-cid-prkij7br> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="16" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" aria-hidden="true" data-astro-cid-prkij7br="true" class="lucide lucide-search">  <path d="m21 21-4.34-4.34"></path> <circle cx="11" cy="11" r="8"></circle>  </svg> <input type="search" placeholder="Search notes..." autocomplete="off" spellcheck="false" data-site-search-input data-astro-cid-prkij7br> </label> <p class="site-search-status" data-site-search-status data-astro-cid-prkij7br>Start typing to search.</p> <ol class="site-search-results" data-site-search-results data-astro-cid-prkij7br></ol> </section> </div> </div> <script type="module">const L=["a[href]","button:not([disabled])","input:not([disabled])","textarea:not([disabled])","select:not([disabled])",'[tabindex]:not([tabindex="-1"])'].join(","),h="/",w=`${h.replace(/\/$/,"")}/pagefind/pagefind.js`.replace(/^\/pagefind/,"/pagefind");let d=null,m=null;function q(e){if(/^https?:\/\//.test(e))return e;const t=h.replace(/\/$/,"");return!t||t==="/"||e.startsWith(`${t}/`)?e:e.startsWith("/")?`${t}${e}`:`${t}/${e}`}async function g(){return d||(d=import(w).then(async e=>(await e.options?.({baseUrl:h}),await e.init?.(),e)).catch(e=>{throw d=null,e})),d}function i(e,t){const a=e.querySelector("[data-site-search-status]");a&&(a.textContent=t)}function y(e,t){e.dataset.searchOpen=t?"true":"false",e.querySelector("[data-site-search-trigger]")?.setAttribute("aria-expanded",String(t))}function x(e){return Array.from(e.querySelectorAll(L)).filter(t=>t.offsetParent!==null)}function k(e,t){if(e.key!=="Tab")return;const a=x(t);if(a.length===0)return;const s=a[0],c=a[a.length-1];e.shiftKey&&document.activeElement===s?(e.preventDefault(),c.focus()):!e.shiftKey&&document.activeElement===c&&(e.preventDefault(),s.focus())}function f(e,t){const a=e.querySelector("[data-site-search-results]");if(a){a.replaceChildren();for(const s of t){const c=document.createElement("li"),o=document.createElement("a"),r=document.createElement("span"),l=document.createElement("span");o.href=q(s.url),r.className="site-search-result-title",r.textContent=s.title||s.url,l.className="site-search-result-excerpt",l.innerHTML=s.excerpt,o.append(r,l),c.append(o),a.append(c)}}}function v(e,t){let a;return(...s)=>{window.clearTimeout(a),a=window.setTimeout(()=>e(...s),t)}}function p(){for(const e of document.querySelectorAll("[data-site-search-root]")){if(e.dataset.siteSearchReady==="true")continue;e.dataset.siteSearchReady="true";const t=e.querySelector("[data-site-search-trigger]"),a=e.querySelector("[data-site-search-dialog]"),s=e.querySelector("[data-site-search-input]"),c=e.querySelectorAll("[data-site-search-close]"),o=Number(e.dataset.searchMaxResults||6);if(!t||!a||!s)continue;const r=()=>{y(e,!1),s.value="",f(e,[]),i(e,e.dataset.searchIdleLabel||"Start typing to search."),m?.focus?.()},l=()=>{m=document.activeElement instanceof HTMLElement?document.activeElement:null,y(e,!0),window.setTimeout(()=>s.focus(),30),g().catch(()=>{i(e,e.dataset.searchUnavailableLabel||"Search index is not available yet.")})},b=v(async()=>{const n=s.value.trim();if(!n){f(e,[]),i(e,e.dataset.searchIdleLabel||"Start typing to search.");return}i(e,e.dataset.searchLoadingLabel||"Searching...");try{const S=await(await g()).search(n),u=await Promise.all(S.results.slice(0,o).map(E=>E.data()));f(e,u),i(e,u.length>0?`${u.length} result${u.length===1?"":"s"}`:e.dataset.searchEmptyLabel||"No notes found.")}catch{f(e,[]),i(e,e.dataset.searchUnavailableLabel||"Search index is not available yet.")}},120);t.addEventListener("click",l),s.addEventListener("input",b);for(const n of c)n.addEventListener("click",r);e.addEventListener("click",n=>{n.target.matches("[data-site-search-backdrop]")&&r(),n.target.closest("[data-site-search-results] a")&&r()}),e.addEventListener("keydown",n=>{e.dataset.searchOpen==="true"&&(n.key==="Escape"&&r(),k(n,a))})}}document.addEventListener("keydown",e=>{if(!((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==="k"))return;const a=document.querySelector("[data-site-search-root]"),s=a?.querySelector("[data-site-search-trigger]");if(!(!a||!s)){if(e.preventDefault(),a.dataset.searchOpen==="true"){a.querySelector("[data-site-search-input]")?.focus();return}s.click()}});p();document.addEventListener("astro:page-load",p);p();</script> <button class="toc-action" type="button" aria-label="Open table of contents" aria-expanded="false" aria-controls="mobile-toc-menu" title="Table of contents" data-mobile-toc-trigger data-astro-cid-sp6fezam> <svg xmlns="http://www.w3.org/2000/svg" stroke-width="2" width="17" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" data-astro-cid-sp6fezam="true" class="lucide lucide-list-tree">  <path d="M8 5h13"></path> <path d="M13 12h8"></path> <path d="M13 19h8"></path> <path d="M3 10a2 2 0 0 0 2 2h3"></path> <path d="M3 5v12a2 2 0 0 0 2 2h3"></path>  </svg> </button> </div> <nav class="mobile-toc-panel" id="mobile-toc-menu" aria-label="Article table of contents" data-nav-toc-menu data-toc-root data-astro-cid-sp6fezam> <p data-astro-cid-sp6fezam>Table of contents</p> <ol data-astro-cid-sp6fezam> <li data-astro-cid-sp6fezam> <a href="#整体布局" data-nav-toc-link data-toc-link data-toc-hash="#整体布局" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>1</span> 整体布局 </a> </li><li data-astro-cid-sp6fezam> <a href="#购物车列表设计" data-nav-toc-link data-toc-link data-toc-hash="#购物车列表设计" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>2</span> 购物车列表设计 </a> </li><li data-astro-cid-sp6fezam> <a href="#js逻辑" data-nav-toc-link data-toc-link data-toc-hash="#js逻辑" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>3</span> JS逻辑 </a> </li><li data-astro-cid-sp6fezam> <a href="#数据获取与渲染" data-nav-toc-link data-toc-link data-toc-hash="#数据获取与渲染" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>4</span> 数据获取与渲染 </a> </li><li data-astro-cid-sp6fezam> <a href="#改变商品数量" data-nav-toc-link data-toc-link data-toc-hash="#改变商品数量" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>5</span> 改变商品数量 </a> </li><li data-astro-cid-sp6fezam> <a href="#删除商品" data-nav-toc-link data-toc-link data-toc-hash="#删除商品" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>6</span> 删除商品 </a> </li><li data-astro-cid-sp6fezam> <a href="#选中商品" data-nav-toc-link data-toc-link data-toc-hash="#选中商品" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>7</span> 选中商品 </a> </li><li data-astro-cid-sp6fezam> <a href="#更新总价" data-nav-toc-link data-toc-link data-toc-hash="#更新总价" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>8</span> 更新总价 </a> </li><li data-astro-cid-sp6fezam> <a href="#分页设计" data-nav-toc-link data-toc-link data-toc-hash="#分页设计" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>9</span> 分页设计 </a> </li><li data-astro-cid-sp6fezam> <a href="#结算" data-nav-toc-link data-toc-link data-toc-hash="#结算" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>10</span> 结算 </a> </li><li data-astro-cid-sp6fezam> <a href="#消息提示框" data-nav-toc-link data-toc-link data-toc-hash="#消息提示框" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>11</span> 消息提示框 </a> </li><li data-astro-cid-sp6fezam> <a href="#查找功能" data-nav-toc-link data-toc-link data-toc-hash="#查找功能" data-astro-cid-sp6fezam> <span data-astro-cid-sp6fezam>12</span> 查找功能 </a> </li> </ol> </nav> </header> <script type="module">const b=()=>{for(const t of document.querySelectorAll(".blog-top-nav")){const l=t.querySelector("[data-mobile-menu-toggle]"),c=t.querySelector("[data-mobile-menu]"),o=t.querySelector("[data-mobile-toc-trigger]"),u=t.querySelector("[data-nav-toc-menu]");if(!t.dataset.scrollHideReady){t.dataset.scrollHideReady="true";const a=24,s=96,e=8;let r=window.scrollY,d=0;const i=n=>{t.dataset.navHidden=n?"true":"false",t.toggleAttribute("inert",n),t.toggleAttribute("aria-hidden",n)},m=()=>window.scrollY<=a||t.dataset.mobileMenuOpen==="true"||t.dataset.mobileTocOpen==="true"||t.matches(":focus-within"),v=()=>{d=0;const n=window.scrollY,f=n-r;if(m()){i(!1),r=n;return}Math.abs(f)<e||(i(f>0&&n>s),r=n)};window.addEventListener("scroll",()=>{d||(d=window.requestAnimationFrame(v))},{passive:!0}),window.addEventListener("resize",()=>{window.scrollY<=a&&i(!1)}),i(!1)}if(l&&c&&!t.dataset.mobileMenuReady){t.dataset.mobileMenuReady="true";const a=e=>{t.dataset.mobileMenuOpen=e?"true":"false",l.setAttribute("aria-expanded",String(e)),l.setAttribute("aria-label",e?"Close navigation menu":"Open navigation menu")},s=e=>{!o||!u||(t.dataset.mobileTocOpen=e?"true":"false",o.setAttribute("aria-expanded",String(e)),o.setAttribute("aria-label",e?"Close table of contents":"Open table of contents"))};l.addEventListener("click",()=>{const e=t.dataset.mobileMenuOpen!=="true";a(e),t.dataset.navHidden="false",e&&s(!1)}),c.addEventListener("click",e=>{e.target.closest?.("[data-mobile-menu-link]")&&a(!1)}),o?.addEventListener("click",()=>{const e=t.dataset.mobileTocOpen!=="true";s(e),t.dataset.navHidden="false",e&&a(!1)}),u?.addEventListener("click",e=>{e.target.closest?.("[data-nav-toc-link]")&&s(!1)}),document.addEventListener("click",e=>{t.contains(e.target)||(a(!1),s(!1))}),document.addEventListener("keydown",e=>{e.key==="Escape"&&(a(!1),s(!1))})}}};b();document.addEventListener("astro:page-load",b);</script> <div class="blog-background" aria-hidden="true" data-astro-cid-bl7sqnst></div> <main class="blog-layout" data-pagefind-body data-astro-cid-bl7sqnst> <div class="article-column" data-astro-cid-bl7sqnst> <article class="article-card" data-astro-cid-bl7sqnst> <header class="article-header" data-astro-cid-wynq62ua>  <h1 data-astro-cid-wynq62ua>购物车页面制作教程（包含分页设计）</h1> <div class="meta-line" aria-label="Article metadata" data-astro-cid-wynq62ua> <span class="meta-item" data-astro-cid-wynq62ua> <time datetime="2024-07-06T11:16:27.000Z"> Jul 6, 2024 </time> </span> <span class="meta-item" data-astro-cid-wynq62ua>5,285 words</span> <span class="meta-item" data-astro-cid-wynq62ua>15 min read</span> <script type="module">const showPageView = false;
+const serverURL = "";
+const selector = ".waline-pageview-count";
+
+  if (showPageView) {
+    const { pageviewCount } = await import('https://unpkg.com/@waline/client@v3/dist/pageview.js');
+
+    const updatePageViews = () => {
+      pageviewCount({
+        serverURL,
+        selector,
+        path: window.location.pathname,
+      });
+    };
+
+    updatePageViews();
+    document.addEventListener('astro:page-load', updatePageViews);
+  }
+</script>  </div>   </header> <section class="mobile-article-toc" aria-label="Article table of contents" data-astro-cid-bl7sqnst> <nav class="toc-card blog-card compact collapsible can-collapse" aria-label="Table of contents" data-toc-root data-mobile-toc data-expanded="false" data-astro-cid-ymbpksfa><h2 data-astro-cid-ymbpksfa>Table of contents</h2><ol id="mobile-article-toc-list" data-astro-cid-ymbpksfa><li data-astro-cid-ymbpksfa><a href="#整体布局" data-toc-link data-toc-hash="#整体布局" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>1</span>整体布局</a></li><li data-astro-cid-ymbpksfa><a href="#购物车列表设计" data-toc-link data-toc-hash="#购物车列表设计" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>2</span>购物车列表设计</a></li><li data-astro-cid-ymbpksfa><a href="#js逻辑" data-toc-link data-toc-hash="#js逻辑" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>3</span>JS逻辑</a></li><li data-astro-cid-ymbpksfa><a href="#数据获取与渲染" data-toc-link data-toc-hash="#数据获取与渲染" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>4</span>数据获取与渲染</a></li><li data-astro-cid-ymbpksfa><a href="#改变商品数量" data-toc-link data-toc-hash="#改变商品数量" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>5</span>改变商品数量</a></li><li data-astro-cid-ymbpksfa><a href="#删除商品" data-toc-link data-toc-hash="#删除商品" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>6</span>删除商品</a></li><li data-astro-cid-ymbpksfa><a href="#选中商品" data-toc-link data-toc-hash="#选中商品" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>7</span>选中商品</a></li><li data-astro-cid-ymbpksfa><a href="#更新总价" data-toc-link data-toc-hash="#更新总价" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>8</span>更新总价</a></li><li data-astro-cid-ymbpksfa><a href="#分页设计" data-toc-link data-toc-hash="#分页设计" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>9</span>分页设计</a></li><li data-astro-cid-ymbpksfa><a href="#结算" data-toc-link data-toc-hash="#结算" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>10</span>结算</a></li><li data-astro-cid-ymbpksfa><a href="#消息提示框" data-toc-link data-toc-hash="#消息提示框" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>11</span>消息提示框</a></li><li data-astro-cid-ymbpksfa><a href="#查找功能" data-toc-link data-toc-hash="#查找功能" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>12</span>查找功能</a></li></ol><button class="toc-expand" type="button" aria-label="Expand table of contents" aria-expanded="false" aria-controls="mobile-article-toc-list" data-toc-expand data-astro-cid-ymbpksfa><span data-expand-label data-astro-cid-ymbpksfa>Show all</span><i aria-hidden="true" data-astro-cid-ymbpksfa></i></button></nav><script type="module" src="/_astro/TableOfContents.astro_astro_type_script_index_0_lang.B3wh3MgY.js"></script> </section> <section id="article-start" class="article-content" data-astro-cid-bl7sqnst>  <blockquote>
+<p>[!abstract]- 为什么有这篇低质量文章
+这篇文章用于2024年蓝旭暑期项目前的培训作业教学，目的是从零开始构建一个购物车页面，以此来熟悉原生前端三件套。o((>ω&#x3C; ))o</p>
+</blockquote>
+<h1 id="需求分析">需求分析</h1>
+<p><strong>功能要求</strong>：</p>
+<ul>
+<li>
+<p>全选、单选联动逻辑（包括依次选中所有物品时自动勾选全选按钮、勾选全选时勾选所
+有单选、取消全选后取消所有选中等）、结算小项总价以及整体总价。</p>
+</li>
+<li>
+<p>展示商品图片、名称、价格、数量等基础信息。</p>
+</li>
+<li>
+<p>体现分页展示购物车内商品内容。</p>
+</li>
+<li>
+<p>可以对购物车内商品进行增删改，即改变数量、结算商品、删除商品（结合分页显示数
+目合理调整）等。</p>
+</li>
+<li>
+<p>美观的页面效果。</p>
+</li>
+</ul>
+<p><strong>加分功能</strong></p>
+<ul>
+<li>
+<p>实现在购物车页面查找商品的功能。</p>
+</li>
+<li>
+<p>自己写一个弹出提示框，在删除商品、结算商品等行为后与用户进行确认交互。</p>
+</li>
+</ul>
+<h1 id="页面布局">页面布局</h1>
+<h2 id="整体布局">整体布局</h2>
+<p>整个购物车页面有三个主要功能：<code>列表</code>、<code>结算</code>、<code>分页</code>。</p>
+<p>购物车页面的布局主要分为两部分：<strong>购物车列表</strong>和<strong>结算栏</strong>。</p>
+<p>购物车列表是购物车页面的主体部分，用于展示用户购物车中的商品信息，我们将整个列表设计在整个页面的中部，在顶部设计一个<code>nav</code>用于展示购物车的标题，以及作为之后的路由跳转的位置，这个nav设计成吸顶。</p>
+<p>中间主体部分是购物车列表，用于展示用户购物车中的商品信息。</p>
+<p>底部我设计为结算栏，用于展示用户当前选中的总价，以及结算按钮。</p>
+<p>分页的位置我设计在购物车列表之上，并且把它设计成向下滑动时吸顶的设计，这样用户在浏览商品时可以随时翻页。</p>
+<p>于是整体的设计如下：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="html"><code><span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">body</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  &#x3C;</span><span style="color:#85E89D">div</span><span style="color:#B392F0"> class</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"shell"</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">nav</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      {/* 用来设计路由栏 */}</span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#85E89D">img</span><span style="color:#B392F0"> class</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"nav-item"</span><span style="color:#B392F0"> src</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"https://www.coca-cola.com/content/dam/onexp/cn/zh/logos/coke-header.png"</span><span style="color:#B392F0"> alt</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">""</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#85E89D">div</span><span style="color:#B392F0"> class</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"nav-item"</span><span style="color:#E1E4E8">>购物车&#x3C;/</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#85E89D">div</span><span style="color:#B392F0"> class</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"nav-item"</span><span style="color:#E1E4E8">>订单&#x3C;/</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#85E89D">div</span><span style="color:#B392F0"> class</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"nav-item"</span><span style="color:#E1E4E8">>我的&#x3C;/</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;/</span><span style="color:#85E89D">nav</span><span style="color:#E1E4E8">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">main</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#85E89D">div</span><span style="color:#B392F0"> class</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"title-div"</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">        &#x3C;</span><span style="color:#85E89D">div</span><span style="color:#B392F0"> class</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"title"</span><span style="color:#E1E4E8">>当前选中1样商品&#x3C;/</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">        &#x3C;</span><span style="color:#85E89D">div</span><span style="color:#B392F0"> class</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"pagination"</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">          &#x3C;</span><span style="color:#85E89D">div</span><span style="color:#B392F0"> class</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"page"</span><span style="color:#E1E4E8">>1&#x3C;/</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">          {/* 页码 */}</span></span>
+<span class="line"><span style="color:#E1E4E8">          &#x3C;</span><span style="color:#85E89D">div</span><span style="color:#B392F0"> class</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"page"</span><span style="color:#E1E4E8">>n&#x3C;/</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">        &#x3C;/</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;/</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#85E89D">div</span><span style="color:#B392F0"> class</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"container"</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">        &#x3C;</span><span style="color:#85E89D">div</span><span style="color:#B392F0"> class</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"cart-item"</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">          {/* 详细的购物车内商品信息 */}</span></span>
+<span class="line"><span style="color:#E1E4E8">        &#x3C;/</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">        &#x3C;</span><span style="color:#85E89D">div</span><span style="color:#B392F0"> class</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"cart-item"</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">          {/* 详细的购物车内商品信息 */}</span></span>
+<span class="line"><span style="color:#E1E4E8">        &#x3C;/</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">        {/* .... */}</span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;/</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;/</span><span style="color:#85E89D">main</span><span style="color:#E1E4E8">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">footer</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#85E89D">div</span><span style="color:#B392F0"> class</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"sum-foot"</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">        {/* 展示全选按钮和结算信息 */}</span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;/</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;/</span><span style="color:#85E89D">footer</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  &#x3C;/</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;/</span><span style="color:#85E89D">body</span><span style="color:#E1E4E8">></span></span></code></pre>
+<blockquote>
+<p>[!tip]- 关于吸顶和吸底的设计
+设计吸顶和吸底的时候，我们可以使用<code>position: sticky</code>属性，这个属性可以让元素在滚动到特定位置时固定在页面上，这样可以让用户在浏览页面时更加方便。</p>
+</blockquote>
+<h3 id="购物车列表设计">购物车列表设计</h3>
+<p>购物车列表的设计主要是展示购物车内的商品信息，我们需要展示商品的图片、名称、价格、数量等基础信息，我们把每个商品信息设计成一个卡片，之后我们可以通过js动态生成这些卡片。</p>
+<p>这是我设计的一个商品卡片的结构：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="html"><code><span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">div</span><span style="color:#B392F0"> class</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"cart-item"</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  &#x3C;</span><span style="color:#85E89D">input</span><span style="color:#B392F0"> type</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"radio"</span><span style="color:#E1E4E8">>  {/* 单选按钮 */}</span></span>
+<span class="line"><span style="color:#E1E4E8">  &#x3C;</span><span style="color:#85E89D">img</span><span style="color:#B392F0"> src</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">""</span><span style="color:#B392F0"> alt</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">""</span><span style="color:#E1E4E8">>   {/* 商品图片 */}</span></span>
+<span class="line"><span style="color:#E1E4E8">  &#x3C;</span><span style="color:#85E89D">div</span><span style="color:#B392F0"> class</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"item-info"</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">h2</span><span style="color:#E1E4E8">>{/* 商品名称 */}&#x3C;/</span><span style="color:#85E89D">h2</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">div</span><span style="color:#B392F0"> class</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"info"</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#85E89D">div</span><span style="color:#B392F0"> class</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"desp"</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">        {/* 商品描述 */}</span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;/</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#85E89D">div</span><span style="color:#B392F0"> class</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"detail"</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">        &#x3C;</span><span style="color:#85E89D">div</span><span style="color:#B392F0"> class</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"price"</span><span style="color:#E1E4E8">>{/* 价格 */}&#x3C;/</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">        &#x3C;</span><span style="color:#85E89D">div</span><span style="color:#B392F0"> class</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"quantity"</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">          {/* 数量 */}</span></span>
+<span class="line"><span style="color:#E1E4E8">        &#x3C;/</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;/</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;/</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  &#x3C;/</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  &#x3C;</span><span style="color:#85E89D">button</span><span style="color:#B392F0"> class</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"del-btn"</span><span style="color:#E1E4E8">>删除&#x3C;/</span><span style="color:#85E89D">button</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;/</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">></span></span></code></pre>
+<p>这是我的CSS样式：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="css"><code><span class="line"><span style="color:#B392F0">.cart-item</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">    height</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">fit-content</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">    width</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">80</span><span style="color:#F97583">%</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">    margin-bottom</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">1</span><span style="color:#F97583">rem</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">    padding</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">1</span><span style="color:#F97583">rem</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">    background-color</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">rgba</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">255</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">255</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">255</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">0.25</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#79B8FF">    backdrop-filter</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">blur</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">6</span><span style="color:#F97583">px</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#79B8FF">    -webkit-backdrop-filter</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">blur</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">6</span><span style="color:#F97583">px</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#79B8FF">    border</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">0.666667</span><span style="color:#F97583">px</span><span style="color:#79B8FF"> solid</span><span style="color:#79B8FF"> rgba</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">255</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">255</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">255</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">0.18</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#79B8FF">    box-shadow</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">rgba</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">142</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">142</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">142</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">0.19</span><span style="color:#E1E4E8">) </span><span style="color:#79B8FF">0</span><span style="color:#F97583">px</span><span style="color:#79B8FF"> 6</span><span style="color:#F97583">px</span><span style="color:#79B8FF"> 15</span><span style="color:#F97583">px</span><span style="color:#79B8FF"> 0</span><span style="color:#F97583">px</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">    -webkit-box-shadow</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">rgba</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">142</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">142</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">142</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">0.19</span><span style="color:#E1E4E8">) </span><span style="color:#79B8FF">0</span><span style="color:#F97583">px</span><span style="color:#79B8FF"> 6</span><span style="color:#F97583">px</span><span style="color:#79B8FF"> 15</span><span style="color:#F97583">px</span><span style="color:#79B8FF"> 0</span><span style="color:#F97583">px</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">    border-radius</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">12</span><span style="color:#F97583">px</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">    -webkit-border-radius</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">12</span><span style="color:#F97583">px</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF">    display</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">flex</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">    flex-direction</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">row</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">    justify-content</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">space-between</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">.cart-item</span><span style="color:#85E89D"> input</span><span style="color:#E1E4E8">[</span><span style="color:#B392F0">type</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">"radio"</span><span style="color:#E1E4E8">] {</span></span>
+<span class="line"><span style="color:#79B8FF">    margin-top</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">1</span><span style="color:#F97583">rem</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">    margin-right</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">1</span><span style="color:#F97583">rem</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">    cursor</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">pointer</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">    width</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">1.5</span><span style="color:#F97583">rem</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">.cart-item</span><span style="color:#85E89D"> img</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">    width</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">160</span><span style="color:#F97583">px</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">    height</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">160</span><span style="color:#F97583">px</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">    border-radius</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">12</span><span style="color:#F97583">px</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">    -webkit-border-radius</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">12</span><span style="color:#F97583">px</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">    box-shadow</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">rgba</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">142</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">142</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">142</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">0.19</span><span style="color:#E1E4E8">) </span><span style="color:#79B8FF">0</span><span style="color:#F97583">px</span><span style="color:#79B8FF"> 6</span><span style="color:#F97583">px</span><span style="color:#79B8FF"> 15</span><span style="color:#F97583">px</span><span style="color:#79B8FF"> 0</span><span style="color:#F97583">px</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">.cart-item</span><span style="color:#B392F0"> .item-info</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">    flex</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">    display</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">flex</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">    flex-direction</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">column</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">    justify-content</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">center</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#6A737D">    /* align-items: center; */</span></span>
+<span class="line"><span style="color:#79B8FF">    margin-left</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">1</span><span style="color:#F97583">rem</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">.cart-item</span><span style="color:#B392F0"> .info</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">    display</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">flex</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">    flex-direction</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">row</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">    justify-content</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">space-between</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    .</span><span style="color:#79B8FF">desp</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">        flex</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">3</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    .detail</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">        flex</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">        margin</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">0</span><span style="color:#79B8FF"> 1</span><span style="color:#F97583">rem</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">        background-color</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">#dddddd94</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">        border-radius</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">12</span><span style="color:#F97583">px</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">        backdrop-filter</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">blur</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">6</span><span style="color:#F97583">px</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#79B8FF">        -webkit-backdrop-filter</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">blur</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">6</span><span style="color:#F97583">px</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#79B8FF">        display</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">flex</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">        flex-direction</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">column</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">        justify-content</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">space-around</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">        padding</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">0.5</span><span style="color:#F97583">rem</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#79B8FF">price</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">            font-size</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">large</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">            font-weight</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">bold</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">            display</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">flex</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF">            span</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">                flex</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">                display</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">flex</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">                justify-content</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">space-around</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">                align-items</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">center</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">        .quantity</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">            font-size</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">medium</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">            font-weight</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">bold</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">            display</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">flex</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF">            span</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">                flex</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">                display</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">flex</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">                justify-content</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">space-around</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">                align-items</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">center</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">.cart-item</span><span style="color:#B392F0"> .del-btn</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">    background-color</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">#f8f9fa</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">    border</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">none</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">    color</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">red</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">    font-size</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">large</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">    font-weight</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">bold</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">    cursor</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">pointer</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">    margin-top</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">1</span><span style="color:#F97583">rem</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">.cart-item</span><span style="color:#B392F0"> .del-btn:hover</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">    color</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">#007bff</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h4 id="css解释">CSS解释</h4>
+<p>像上面这样直接甩出一堆代码，感觉会看起来有点懵，不过一条条的讲CSS会有点枯燥，这里稍微解释一下整体的设计想法。</p>
+<p>我比较习惯使用flex布局，所以整个卡片的设计都是基于flex布局的，首先整个卡片是一个<code>flex</code>容器，里面有四个部分：<code>单选按钮</code>、<code>商品图片</code>、<code>商品信息</code>、<code>删除按钮</code>。按照这个顺序，我将他们横向排列，分别占据不同的比例。</p>
+<blockquote>
+<p>[!tip]- 在flex布局中让内部元素水平垂直居中，并且间隔合适的技巧
+在flex布局中，我们可以通过<code>justify-content</code>和<code>align-items</code>来控制元素的水平和垂直居中，通过<code>margin</code>来控制元素之间的间隔。</p>
+<p>其中<code>justify-content</code>用于控制元素在主轴上的排列方式，<code>align-items</code>用于控制元素在交叉轴上的排列方式。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="css"><code><span class="line"><span style="color:#B392F0">.div</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">  display</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">flex</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">  justify-content</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">center</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">  align-items</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">center</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p><code>justify-content</code>除了<code>center</code>之外还有<code>flex-start</code>、<code>flex-end</code>、<code>space-between</code>、<code>space-around</code>等属性，<code>align-items</code>除了<code>center</code>之外还有<code>flex-start</code>、<code>flex-end</code>、<code>baseline</code>、<code>stretch</code>等属性，是很方便的布局方式，可以节省大量之前需要通过不断调整<code>margin</code>来实现的布局。具体区别可以在<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/justify-content">justify-content</a>和<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/align-items">align-items</a>在线演示。</p>
+</blockquote>
+<p>我固定了单选按钮、商品图片、删除按钮的大小，商品信息部分占据了剩下的空间。</p>
+<p>商品信息部分又分为两个部分：<code>商品描述</code>和<code>商品价格</code>，我将他们分别占据了不同的比例，使得整个卡片看起来比较美观。</p>
+<blockquote>
+<p>[!tip]- 在flex布局中让内部元素占据不同的比例
+上面的<code>justify-content</code>和<code>align-items</code>更倾向于把元素均匀排列，有时候我们也需要让元素分别占据不同的比例，这时候我们可以试试通过<code>flex</code>属性来控制元素。</p>
+<p>例如上面的代码中，我通过<code>flex: 3</code>和<code>flex: 1</code>来控制商品描述和商品价格分别占据了3:1的比例。这样的写法相比较于<code>width</code>属性更加灵活，可以根据不同的屏幕大小自动调整。就像下面这样：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="css"><code><span class="line"><span style="color:#B392F0">.cart-item</span><span style="color:#B392F0"> .info</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">    display</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">flex</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">    flex-direction</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">row</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">    justify-content</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">space-between</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    .</span><span style="color:#79B8FF">desp</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">        flex</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">3</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    .detail</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">        flex</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">        display</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">flex</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">        flex-direction</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">column</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">        justify-content</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">space-around</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#79B8FF">price</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">            span</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">                flex</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">        .quantity</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">            span</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">                flex</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span></code></pre>
+</blockquote>
+<h4 id="图标库">图标库</h4>
+<p>相信大家看完图片之后发现，我在价格和数量的部分的加号减号按钮，以及<code>￥</code>符号看起来不像原生的按钮和字符，这里我使用了<code>font-awesome</code>图标库，这是一个很好用的图标库，在美化页面的时候我们其实会尝试使用很多图标，我比较喜欢的两个图标库是<a href="https://fontawesome.com/">Font awesome</a>和<a href="https://www.iconfont.cn/">iconfont</a>，大家可以尝试使用，使用方法大家可以自行学习，这里我就不再赘述了。</p>
+<h4 id="在线工具推荐">在线工具推荐</h4>
+<p>有些同学可能不太擅长调整出好看的盒子，这里我推荐一个好用的前端工具在线网站：{{&#x3C;link “<a href="https://lingdaima.com/%22%3E%7D%7D">https://lingdaima.com/”>}}</a> ，可以帮助你快速调整出好看的CSS样式。</p>
+<p>当然了，在线工具只是起到一个辅助作用，调整CSS的时候还是需要自己多尝试，多调整，多看看效果。大家不要过分依赖哦(‾◡◝)</p>
+<p>这里是整体设计完Html结构和CSS之后的效果：</p>
+<p><img src="https://img.dodolalorc.cn/i/2024/07/07/66897122a1a47.png" alt="购物车整体页面"></p>
+<p>这个页面的效果是我自己设计的，大家可以根据自己的喜好进行调整，这里只是提供一个参考，相应的源码我也会公开放在我的gitee上，大家可以自行下载，仓库的地址在文末。</p>
+<h1 id="javascript逻辑">JavaScript逻辑</h1>
+<p>我比较习惯在设计完页面之后再写JavaScript逻辑，这样可以更好的理清思路，而且不需要总是再次调整Html和CSS。在设计完页面之后，我们通过让这个页面不再是一个静态的页面，而是一个可以动态交互的页面。</p>
+<blockquote>
+<p>[!tip]- 通过本地json来获得数据和渲染数据”
+由于这个只是用于前端学习的小项目，我们没有接口，不过在生成应用中，页面的数据是来自后端传递而来的（往往是一个json），所以在这个项目中，我们可以通过本地的json文件来模拟后端返回的数据，这样可以更好的模拟真实的购物车页面，同时也可以更好的理解前后端的交互。</p>
+<p>引入json文件的方法是通过<code>fetch</code>方法，这是一个异步方法，我们可以通过这个方法来获取json文件，然后通过<code>json()</code>方法来解析json文件。</p>
+<p>就像这样：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#B392F0">fetch</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'data.json'</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">  .</span><span style="color:#B392F0">then</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">response</span><span style="color:#F97583"> =></span><span style="color:#E1E4E8"> response.</span><span style="color:#B392F0">json</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#E1E4E8">  .</span><span style="color:#B392F0">then</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">data</span><span style="color:#F97583"> =></span><span style="color:#E1E4E8"> console.</span><span style="color:#B392F0">log</span><span style="color:#E1E4E8">(data));</span></span></code></pre>
+</blockquote>
+<h2 id="js逻辑">JS逻辑</h2>
+<p>为了方便管理数据，我将数据保存在一个全局变量中，这样可以更好的操作数据，下文的代码中，我会使用这些全局变量来操作数据。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">var</span><span style="color:#E1E4E8"> goods </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> []; </span><span style="color:#6A737D">// 当前页的商品列表</span></span>
+<span class="line"><span style="color:#F97583">var</span><span style="color:#E1E4E8"> totItems </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">; </span><span style="color:#6A737D">// 总商品数</span></span>
+<span class="line"><span style="color:#F97583">var</span><span style="color:#E1E4E8"> curPage </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">; </span><span style="color:#6A737D">// 当前页码</span></span>
+<span class="line"><span style="color:#F97583">var</span><span style="color:#E1E4E8"> totPages </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">; </span><span style="color:#6A737D">// 总页数</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">var</span><span style="color:#E1E4E8"> selectTotal </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">; </span><span style="color:#6A737D">// 选中商品总数</span></span>
+<span class="line"><span style="color:#F97583">var</span><span style="color:#E1E4E8"> curSelectGoods </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> [];  </span><span style="color:#6A737D">// 选中的商品列表</span></span>
+<span class="line"><span style="color:#F97583">var</span><span style="color:#E1E4E8"> selectAllStatus </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> false</span><span style="color:#E1E4E8">;  </span><span style="color:#6A737D">// 是否全选</span></span></code></pre>
+<h3 id="数据获取与渲染">数据获取与渲染</h3>
+<p>首先我们需要通过<code>fetch</code>方法来获取json文件，然后通过<code>json()</code>方法来解析json文件，这样我们就可以得到一个json对象，这个对象就是我们的商品信息。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"></span>
+<span class="line"><span style="color:#B392F0">fetch</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'data.json'</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">  .</span><span style="color:#B392F0">then</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">response</span><span style="color:#F97583"> =></span><span style="color:#E1E4E8"> response.</span><span style="color:#B392F0">json</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#E1E4E8">  .</span><span style="color:#B392F0">then</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">data</span><span style="color:#F97583"> =></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    console.</span><span style="color:#B392F0">log</span><span style="color:#E1E4E8">(data);</span></span>
+<span class="line"><span style="color:#B392F0">    render</span><span style="color:#E1E4E8">(data);</span></span>
+<span class="line"><span style="color:#E1E4E8">  });</span></span>
+<span class="line"></span></code></pre>
+<p>获取数据之后，我们设置全局变量来保存当前的数据状态，然后将数据渲染到页面上，就像这样：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">const</span><span style="color:#B392F0"> renderCartList</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> () </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> goodsContainer</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> document.</span><span style="color:#B392F0">querySelector</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'#container'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">  goodsContainer.innerHTML </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> ''</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8"> (goods.</span><span style="color:#79B8FF">length</span><span style="color:#F97583"> ===</span><span style="color:#79B8FF"> 0</span><span style="color:#F97583"> &#x26;&#x26;</span><span style="color:#E1E4E8"> totItems </span><span style="color:#F97583">!==</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#6A737D">    // 如果购物车本页没有商品（通过删除删空的情况或意外情况），应该重新请求数据，初始化购物车</span></span>
+<span class="line"><span style="color:#B392F0">    initGoods</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#F97583">  else</span><span style="color:#F97583"> if</span><span style="color:#E1E4E8"> (totItems </span><span style="color:#F97583">===</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">) { </span></span>
+<span class="line"><span style="color:#6A737D">    // 如果购物车没有商品，应该显示空购物车</span></span>
+<span class="line"><span style="color:#E1E4E8">    goodsContainer.innerHTML </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> '&#x3C;div class="empty-cart">购物车为空`(*>﹏&#x3C;*)′&#x3C;/div>'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#F97583">  for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">let</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">; i </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> goods.</span><span style="color:#79B8FF">length</span><span style="color:#E1E4E8">; i</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> good</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> goods[i];</span></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> cartItem</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> document.</span><span style="color:#B392F0">createElement</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'div'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    cartItem.classList.</span><span style="color:#B392F0">add</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'cart-item'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    cartItem.</span><span style="color:#B392F0">setAttribute</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'id'</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"item-"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> good[</span><span style="color:#9ECBFF">"id"</span><span style="color:#E1E4E8">]);</span></span>
+<span class="line"><span style="color:#E1E4E8">    cartItem.innerHTML </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> `&#x3C;input type="checkbox" onClick="selectGood(${</span><span style="color:#E1E4E8">good</span><span style="color:#9ECBFF">[</span><span style="color:#9ECBFF">"id"</span><span style="color:#9ECBFF">]</span><span style="color:#9ECBFF">})"></span></span>
+<span class="line"><span style="color:#9ECBFF">          &#x3C;img src="${</span><span style="color:#E1E4E8">good</span><span style="color:#9ECBFF">[</span><span style="color:#9ECBFF">"image"</span><span style="color:#9ECBFF">]</span><span style="color:#9ECBFF">}" alt=""></span></span>
+<span class="line"><span style="color:#9ECBFF">          &#x3C;div class="item-info"></span></span>
+<span class="line"><span style="color:#9ECBFF">            &#x3C;h2>商品名称：${</span><span style="color:#E1E4E8">good</span><span style="color:#9ECBFF">[</span><span style="color:#9ECBFF">"name"</span><span style="color:#9ECBFF">]</span><span style="color:#9ECBFF">}&#x3C;/h2></span></span>
+<span class="line"><span style="color:#9ECBFF">            &#x3C;div class="info"></span></span>
+<span class="line"><span style="color:#9ECBFF">              &#x3C;div class="desp"></span></span>
+<span class="line"><span style="color:#9ECBFF">                商品描述：&#x3C;span>${</span><span style="color:#E1E4E8">good</span><span style="color:#9ECBFF">[</span><span style="color:#9ECBFF">"description"</span><span style="color:#9ECBFF">]</span><span style="color:#9ECBFF">}&#x3C;/span></span></span>
+<span class="line"><span style="color:#9ECBFF">              &#x3C;/div></span></span>
+<span class="line"><span style="color:#9ECBFF">              &#x3C;div class="detail"></span></span>
+<span class="line"><span style="color:#9ECBFF">                &#x3C;div class="price">单价：&#x3C;span>&#x3C;i class="fa-solid fa-yen-sign">&#x3C;/i></span></span>
+<span class="line"><span style="color:#9ECBFF">                  &#x3C;span>${</span><span style="color:#E1E4E8">good</span><span style="color:#9ECBFF">[</span><span style="color:#9ECBFF">"price"</span><span style="color:#9ECBFF">].</span><span style="color:#B392F0">toFixed</span><span style="color:#9ECBFF">(</span><span style="color:#79B8FF">2</span><span style="color:#9ECBFF">)</span><span style="color:#9ECBFF">}&#x3C;/span></span></span>
+<span class="line"><span style="color:#9ECBFF">                &#x3C;/span>&#x3C;/div></span></span>
+<span class="line"><span style="color:#9ECBFF">                &#x3C;div class="price">小计：&#x3C;span>&#x3C;i class="fa-solid fa-yen-sign">&#x3C;/i></span></span>
+<span class="line"><span style="color:#9ECBFF">                  &#x3C;span class="tot-price">${</span><span style="color:#9ECBFF">(</span><span style="color:#E1E4E8">good</span><span style="color:#9ECBFF">[</span><span style="color:#9ECBFF">"price"</span><span style="color:#9ECBFF">] </span><span style="color:#F97583">*</span><span style="color:#E1E4E8"> good</span><span style="color:#9ECBFF">[</span><span style="color:#9ECBFF">"quantity"</span><span style="color:#9ECBFF">]).</span><span style="color:#B392F0">toFixed</span><span style="color:#9ECBFF">(</span><span style="color:#79B8FF">2</span><span style="color:#9ECBFF">)</span><span style="color:#9ECBFF">}&#x3C;/span></span></span>
+<span class="line"><span style="color:#9ECBFF">                &#x3C;/span>&#x3C;/div></span></span>
+<span class="line"><span style="color:#9ECBFF">                &#x3C;div class="quantity"></span></span>
+<span class="line"><span style="color:#9ECBFF">                  数量：</span></span>
+<span class="line"><span style="color:#9ECBFF">                  &#x3C;span class="count"></span></span>
+<span class="line"><span style="color:#9ECBFF">                    &#x3C;i class="fa-solid fa-circle-minus" onClick="changeQuantity(${</span><span style="color:#E1E4E8">good</span><span style="color:#9ECBFF">[</span><span style="color:#9ECBFF">"id"</span><span style="color:#9ECBFF">]</span><span style="color:#9ECBFF">}, -1)">&#x3C;/i></span></span>
+<span class="line"><span style="color:#9ECBFF">                    &#x3C;span>${</span><span style="color:#E1E4E8">good</span><span style="color:#9ECBFF">[</span><span style="color:#9ECBFF">"quantity"</span><span style="color:#9ECBFF">]</span><span style="color:#9ECBFF">}&#x3C;/span></span></span>
+<span class="line"><span style="color:#9ECBFF">                    &#x3C;i class="fa-solid fa-circle-plus" onClick="changeQuantity(${</span><span style="color:#E1E4E8">good</span><span style="color:#9ECBFF">[</span><span style="color:#9ECBFF">"id"</span><span style="color:#9ECBFF">]</span><span style="color:#9ECBFF">}, 1)">&#x3C;/i></span></span>
+<span class="line"><span style="color:#9ECBFF">                  &#x3C;/span></span></span>
+<span class="line"><span style="color:#9ECBFF">                &#x3C;/div></span></span>
+<span class="line"><span style="color:#9ECBFF">              &#x3C;/div></span></span>
+<span class="line"><span style="color:#9ECBFF">            &#x3C;/div></span></span>
+<span class="line"><span style="color:#9ECBFF">          &#x3C;/div></span></span>
+<span class="line"><span style="color:#9ECBFF">          &#x3C;button class="del-btn" onClick="delItem(${</span><span style="color:#E1E4E8">good</span><span style="color:#9ECBFF">[</span><span style="color:#9ECBFF">"id"</span><span style="color:#9ECBFF">]</span><span style="color:#9ECBFF">})">删除&#x3C;/button>`</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">    goodsContainer.</span><span style="color:#B392F0">appendChild</span><span style="color:#E1E4E8">(cartItem);</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>注意到，在上述代码中，我为每一个<code>cart-item</code>添加了一个唯一的<code>id</code>属性，这个属性是用于标识每一个商品的，这样我们在之后的操作中可以通过这个<code>id</code>属性来找到对应的商品。</p>
+<blockquote>
+<p>[!tip]- 关于唯一标识符
+在实际的项目中，我们往往需要为每一个商品添加一个唯一的标识符，这个标识符可以是商品的<code>id</code>，也可以是其他的唯一标识符，这样可以更好的操作商品，例如删除商品、修改商品数量等。</p>
+</blockquote>
+<blockquote>
+<p>[!attention]+ 过滤错误数据”
+在实际的项目中，我们往往会遇到一些错误的数据，例如商品数量为负数或者小数、商品价格为负数等，这些数据是不符合实际的，我们需要在获取数据之后对这些数据进行过滤，这样可以保证数据的正确性。</p>
+<p>如果数据量比较大，我们也会选择使用<code>filter</code>方法来过滤数据。</p>
+</blockquote>
+<blockquote>
+<p>[!bug]+ 图片加载失败时
+在实际的项目中，我们往往会遇到一些图片加载失败的情况，这时候我们可以通过<code>onerror</code>事件来监听图片加载失败的情况，然后通过一些方法来处理这种情况，例如显示一个默认图片、显示一个提示信息等。</p>
+</blockquote>
+<h3 id="改变商品数量">改变商品数量</h3>
+<p>修改商品数量是通过点击<code>+</code>和<code>-</code>按钮来实现的，我们可以通过<code>onClick</code>事件来监听这两个按钮的点击事件，然后通过<code>changeQuantity</code>函数来改变商品的数量。</p>
+<p>在修改商品数量的时候，我们需要注意一些边界条件，例如商品数量不能为负数，商品数量不能超过库存（本篇的demo没有考虑这个库存上限）等，考虑到加操作和减操作的逻辑是一样的，我们可以通过传入一个参数来判断是加还是减，以减少代码的重复。</p>
+<p>以下是我的<code>changeQuantity</code>函数：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">const</span><span style="color:#B392F0"> changeQuantity</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> (</span><span style="color:#FFAB70">id</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">cnt</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> item</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> document.</span><span style="color:#B392F0">querySelector</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'#item-'</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> id);</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> count</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> item.</span><span style="color:#B392F0">querySelector</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'.count span'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> price</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> item.</span><span style="color:#B392F0">querySelector</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'.tot-price'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> quantity</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> parseInt</span><span style="color:#E1E4E8">(count.innerHTML);</span></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8"> (quantity </span><span style="color:#F97583">+</span><span style="color:#E1E4E8"> cnt </span><span style="color:#F97583">&#x3C;=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#B392F0">    delItem</span><span style="color:#E1E4E8">(id);</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">  count.innerHTML </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> quantity </span><span style="color:#F97583">+</span><span style="color:#E1E4E8"> cnt;</span></span>
+<span class="line"><span style="color:#E1E4E8">  price.innerHTML </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> (</span><span style="color:#B392F0">parseFloat</span><span style="color:#E1E4E8">(price.innerHTML) </span><span style="color:#F97583">+</span><span style="color:#E1E4E8"> cnt </span><span style="color:#F97583">*</span><span style="color:#E1E4E8"> goods.</span><span style="color:#B392F0">find</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">good</span><span style="color:#F97583"> =></span><span style="color:#E1E4E8"> good[</span><span style="color:#9ECBFF">"id"</span><span style="color:#E1E4E8">] </span><span style="color:#F97583">===</span><span style="color:#E1E4E8"> id)[</span><span style="color:#9ECBFF">"price"</span><span style="color:#E1E4E8">]).</span><span style="color:#B392F0">toFixed</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">2</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#6A737D">  // 这里应该发送请求修改数据，这里只是模拟，直接修改</span></span>
+<span class="line"><span style="color:#E1E4E8">  goods </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> goods.</span><span style="color:#B392F0">map</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">good</span><span style="color:#F97583"> =></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (good[</span><span style="color:#9ECBFF">"id"</span><span style="color:#E1E4E8">] </span><span style="color:#F97583">===</span><span style="color:#E1E4E8"> id) {</span></span>
+<span class="line"><span style="color:#E1E4E8">      good[</span><span style="color:#9ECBFF">"quantity"</span><span style="color:#E1E4E8">] </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> quantity </span><span style="color:#F97583">+</span><span style="color:#E1E4E8"> cnt;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#E1E4E8"> good;</span></span>
+<span class="line"><span style="color:#E1E4E8">  });</span></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8"> (curSelectGoods.</span><span style="color:#B392F0">find</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">good</span><span style="color:#F97583"> =></span><span style="color:#E1E4E8"> good[</span><span style="color:#9ECBFF">"id"</span><span style="color:#E1E4E8">] </span><span style="color:#F97583">===</span><span style="color:#E1E4E8"> id)) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    selectTotal </span><span style="color:#F97583">+=</span><span style="color:#E1E4E8"> cnt;</span></span>
+<span class="line"><span style="color:#E1E4E8">    curSelectGoods </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> curSelectGoods.</span><span style="color:#B392F0">map</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">good</span><span style="color:#F97583"> =></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">      if</span><span style="color:#E1E4E8"> (good[</span><span style="color:#9ECBFF">"id"</span><span style="color:#E1E4E8">] </span><span style="color:#F97583">===</span><span style="color:#E1E4E8"> id) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        good[</span><span style="color:#9ECBFF">"price"</span><span style="color:#E1E4E8">] </span><span style="color:#F97583">=</span><span style="color:#B392F0"> parseFloat</span><span style="color:#E1E4E8">(price.innerHTML);</span></span>
+<span class="line"><span style="color:#E1E4E8">      }</span></span>
+<span class="line"><span style="color:#F97583">      return</span><span style="color:#E1E4E8"> good;</span></span>
+<span class="line"><span style="color:#E1E4E8">    });</span></span>
+<span class="line"><span style="color:#B392F0">    updateTotalCount</span><span style="color:#E1E4E8">(); </span><span style="color:#6A737D">// 更新总价</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h3 id="删除商品">删除商品</h3>
+<p>删除商品是通过点击删除按钮来实现的，我们可以通过<code>onClick</code>事件来监听删除按钮的点击事件，然后通过<code>delItem</code>函数来删除商品。</p>
+<p>在删除商品的时候，我们需要注意一些边界条件，例如删除商品后本页购物车为空，或者删除商品后购物车的商品数量减少等。</p>
+<p>以下是我的<code>delItem</code>函数：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">const</span><span style="color:#B392F0"> delItem</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> (</span><span style="color:#FFAB70">id</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> item</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> document.</span><span style="color:#B392F0">querySelector</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'#item-'</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> id);</span></span>
+<span class="line"><span style="color:#E1E4E8">  item.</span><span style="color:#B392F0">remove</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#6A737D">  // 这里应该发送请求删除数据，这里只是模拟，直接删除</span></span>
+<span class="line"><span style="color:#E1E4E8">  goods </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> goods.</span><span style="color:#B392F0">filter</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">good</span><span style="color:#F97583"> =></span><span style="color:#E1E4E8"> good[</span><span style="color:#9ECBFF">"id"</span><span style="color:#E1E4E8">] </span><span style="color:#F97583">!==</span><span style="color:#E1E4E8"> id);</span></span>
+<span class="line"><span style="color:#B392F0">  renderCartList</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8"> (curSelectGoods.</span><span style="color:#B392F0">find</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">good</span><span style="color:#F97583"> =></span><span style="color:#E1E4E8"> good[</span><span style="color:#9ECBFF">"id"</span><span style="color:#E1E4E8">] </span><span style="color:#F97583">===</span><span style="color:#E1E4E8"> id)) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    selectTotal </span><span style="color:#F97583">-=</span><span style="color:#B392F0"> parseInt</span><span style="color:#E1E4E8">(item.</span><span style="color:#B392F0">querySelector</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'.count span'</span><span style="color:#E1E4E8">).innerHTML);</span></span>
+<span class="line"><span style="color:#E1E4E8">    curSelectGoods </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> curSelectGoods.</span><span style="color:#B392F0">filter</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">good</span><span style="color:#F97583"> =></span><span style="color:#E1E4E8"> good[</span><span style="color:#9ECBFF">"id"</span><span style="color:#E1E4E8">] </span><span style="color:#F97583">!==</span><span style="color:#E1E4E8"> id);</span></span>
+<span class="line"><span style="color:#B392F0">    updateTotalCount</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h3 id="选中商品">选中商品</h3>
+<p>选中商品可以分为两种情况：全选和单选。全选的状态会影响到单选的状态，单选的状态也会影响到全选的状态，在考虑全选和单选的逻辑的时候，我们需要多角度考虑。</p>
+<p>在对单个商品进行选中的时候，我们可以通过<code>onClick</code>事件来监听单选按钮的点击事件，然后通过<code>selectGood</code>函数来选中商品，选中商品时，我们要考虑的有：选中商品的总价、选中商品的数量、全选按钮的状态等。</p>
+<p>以下是我的<code>selectGood</code>函数：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">const</span><span style="color:#B392F0"> selectGood</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> (</span><span style="color:#FFAB70">id</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> item</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> document.</span><span style="color:#B392F0">querySelector</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'#item-'</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> id);</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> checkbox</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> item.</span><span style="color:#B392F0">querySelector</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'input[type="checkbox"]'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> price</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> item.</span><span style="color:#B392F0">querySelector</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'.tot-price'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> quantity</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> item.</span><span style="color:#B392F0">querySelector</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'.count span'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8">(checkbox.checked) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    selectTotal </span><span style="color:#F97583">+=</span><span style="color:#B392F0"> parseInt</span><span style="color:#E1E4E8">(quantity.innerHTML);</span></span>
+<span class="line"><span style="color:#E1E4E8">    curSelectGoods.</span><span style="color:#B392F0">push</span><span style="color:#E1E4E8">({ id: id, price: </span><span style="color:#B392F0">parseFloat</span><span style="color:#E1E4E8">(price.innerHTML) });</span></span>
+<span class="line"><span style="color:#B392F0">    updateTotalCount</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">  } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    selectTotal </span><span style="color:#F97583">-=</span><span style="color:#B392F0"> parseInt</span><span style="color:#E1E4E8">(quantity.innerHTML);</span></span>
+<span class="line"><span style="color:#E1E4E8">    curSelectGoods </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> curSelectGoods.</span><span style="color:#B392F0">filter</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">good</span><span style="color:#F97583"> =></span><span style="color:#E1E4E8"> good[</span><span style="color:#9ECBFF">"id"</span><span style="color:#E1E4E8">] </span><span style="color:#F97583">!==</span><span style="color:#E1E4E8"> id);</span></span>
+<span class="line"><span style="color:#B392F0">    updateTotalCount</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8">(curSelectGoods.</span><span style="color:#79B8FF">length</span><span style="color:#F97583"> ===</span><span style="color:#E1E4E8"> goods.</span><span style="color:#79B8FF">length</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    selectAllStatus </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> true</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> selectAll</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> document.</span><span style="color:#B392F0">querySelector</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'#select-all'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> icon</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> selectAll.</span><span style="color:#B392F0">querySelector</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'i'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    icon.classList.</span><span style="color:#B392F0">remove</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'fa-regular'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    icon.classList.</span><span style="color:#B392F0">add</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'fa-solid'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#F97583">  else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    selectAllStatus </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> false</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> selectAll</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> document.</span><span style="color:#B392F0">querySelector</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'#select-all'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> icon</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> selectAll.</span><span style="color:#B392F0">querySelector</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'i'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    icon.classList.</span><span style="color:#B392F0">remove</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'fa-solid'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    icon.classList.</span><span style="color:#B392F0">add</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'fa-regular'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>在全选的时候，我们可以通过通过<code>selectAll</code>函数来全选商品，全选商品时，我们要考虑的有：选中商品的总价、选中商品的数量、单选按钮的状态等。</p>
+<p>以下是我的<code>selectAll</code>函数：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">const</span><span style="color:#B392F0"> setSelectAll</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> () </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> selectAll</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> document.</span><span style="color:#B392F0">querySelector</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'#select-all'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">  selectAll.</span><span style="color:#B392F0">addEventListener</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'click'</span><span style="color:#E1E4E8">, () </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> items</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> document.</span><span style="color:#B392F0">querySelectorAll</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'.cart-item'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#E1E4E8">selectAllStatus) {</span></span>
+<span class="line"><span style="color:#E1E4E8">      selectTotal </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">      curSelectGoods </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> [];</span></span>
+<span class="line"><span style="color:#F97583">      for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">let</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">; i </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> items.</span><span style="color:#79B8FF">length</span><span style="color:#E1E4E8">; i</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#79B8FF"> item</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> items[i];</span></span>
+<span class="line"><span style="color:#E1E4E8">        item.</span><span style="color:#B392F0">querySelector</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'input[type="checkbox"]'</span><span style="color:#E1E4E8">).checked </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> true</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">        selectTotal </span><span style="color:#F97583">+=</span><span style="color:#B392F0"> parseInt</span><span style="color:#E1E4E8">(item.</span><span style="color:#B392F0">querySelector</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'.count span'</span><span style="color:#E1E4E8">).innerHTML);</span></span>
+<span class="line"><span style="color:#E1E4E8">        curSelectGoods.</span><span style="color:#B392F0">push</span><span style="color:#E1E4E8">({ id: </span><span style="color:#B392F0">parseInt</span><span style="color:#E1E4E8">(item.</span><span style="color:#B392F0">getAttribute</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'id'</span><span style="color:#E1E4E8">).</span><span style="color:#B392F0">split</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'-'</span><span style="color:#E1E4E8">)[</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">]), price: </span><span style="color:#B392F0">parseFloat</span><span style="color:#E1E4E8">(item.</span><span style="color:#B392F0">querySelector</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'.tot-price'</span><span style="color:#E1E4E8">).innerHTML) });</span></span>
+<span class="line"><span style="color:#E1E4E8">      }</span></span>
+<span class="line"><span style="color:#F97583">      const</span><span style="color:#79B8FF"> icon</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> selectAll.</span><span style="color:#B392F0">querySelector</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'i'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">      icon.classList.</span><span style="color:#B392F0">remove</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'fa-regular'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">      icon.classList.</span><span style="color:#B392F0">add</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'fa-solid'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#F97583">    else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">      for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">let</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">; i </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> items.</span><span style="color:#79B8FF">length</span><span style="color:#E1E4E8">; i</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        items[i].</span><span style="color:#B392F0">querySelector</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'input[type="checkbox"]'</span><span style="color:#E1E4E8">).checked </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> false</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">      }</span></span>
+<span class="line"><span style="color:#E1E4E8">      selectTotal </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">      curSelectGoods </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> [];</span></span>
+<span class="line"><span style="color:#F97583">      const</span><span style="color:#79B8FF"> icon</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> selectAll.</span><span style="color:#B392F0">querySelector</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'i'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">      icon.classList.</span><span style="color:#B392F0">remove</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'fa-solid'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">      icon.classList.</span><span style="color:#B392F0">add</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'fa-regular'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#B392F0">    updateTotalCount</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    selectAllStatus </span><span style="color:#F97583">=</span><span style="color:#F97583"> !</span><span style="color:#E1E4E8">selectAllStatus;</span></span>
+<span class="line"><span style="color:#E1E4E8">  });</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h3 id="更新总价">更新总价</h3>
+<p>我们在结算的时候需要计算当前选中的商品的总价，这个总价依赖于选中的商品数量和价格，我们可以通过<code>updateTotalCount</code>函数来更新总价，并在需要的时候调用这个函数。</p>
+<p>以下是我的<code>updateTotalCount</code>函数：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">const</span><span style="color:#B392F0"> updateTotalCount</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> () </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> curSelectBox</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> document.</span><span style="color:#B392F0">querySelector</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'#cur-select'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8"> (selectTotal) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    curSelectBox.innerHTML </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> selectTotal;</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#F97583">  else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    curSelectBox.innerHTML </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> totPriceBox</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> document.</span><span style="color:#B392F0">querySelector</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'#sum'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8"> (curSelectGoods.</span><span style="color:#79B8FF">length</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    totPriceBox.innerHTML </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> curSelectGoods.</span><span style="color:#B392F0">reduce</span><span style="color:#E1E4E8">((</span><span style="color:#FFAB70">acc</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">cur</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> acc </span><span style="color:#F97583">+</span><span style="color:#E1E4E8"> cur[</span><span style="color:#9ECBFF">"price"</span><span style="color:#E1E4E8">], </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">).</span><span style="color:#B392F0">toFixed</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">2</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#F97583">  else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    totPriceBox.innerHTML </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h3 id="分页设计">分页设计</h3>
+<p>分页是通过点击页码来切换商品列表的，我们可以通过<code>onClick</code>事件来监听页码的点击事件，然后通过<code>changePage</code>函数来切换商品列表。</p>
+<p>标准的分页设计中，每次点击页码时，我们都会重新请求数据，然后重新渲染页面，这样可以保证数据的实时性，这里我只是模拟了这个过程，实际的项目中，我们会通过后端来获取数据。</p>
+<p>由于总页数是不确定的，所以我们依然是通过全局变量来保存当前的页码和总页数，并且在切换页码的时候，我们需要考虑一些边界条件，例如页码不能为负数，页码不能超过总页数等。</p>
+<p>以下是我的<code>initPagnation</code>和<code>changePagnation</code>函数：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">const</span><span style="color:#B392F0"> changePage</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> (</span><span style="color:#FFAB70">e</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">  changePagnation</span><span style="color:#E1E4E8">(e.target.innerHTML);</span></span>
+<span class="line"><span style="color:#6A737D">  // 按照正常的分页逻辑，这里应该重新请求数据，这里只是模拟，所以直接取数据</span></span>
+<span class="line"><span style="color:#B392F0">  changeCartList</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#B392F0"> initPagnation</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> () </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> pagination</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> document.</span><span style="color:#B392F0">querySelector</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'#pagination'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">  pagination.innerHTML </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> ''</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">  for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">let</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">; i </span><span style="color:#F97583">&#x3C;=</span><span style="color:#E1E4E8"> totPages </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">; i</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (i </span><span style="color:#F97583">===</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">      const</span><span style="color:#79B8FF"> prev</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> document.</span><span style="color:#B392F0">createElement</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'i'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">      prev.classList.</span><span style="color:#B392F0">add</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'fa-solid'</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">'fa-chevron-left'</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">'page-prev'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">      if</span><span style="color:#E1E4E8"> (curPage </span><span style="color:#F97583">===</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        prev.disabled </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> true</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">      }</span></span>
+<span class="line"><span style="color:#E1E4E8">      prev.</span><span style="color:#B392F0">addEventListener</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'click'</span><span style="color:#E1E4E8">, () </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (curPage </span><span style="color:#F97583">></span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#B392F0">          changePagnation</span><span style="color:#E1E4E8">(curPage </span><span style="color:#F97583">-</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">      });</span></span>
+<span class="line"><span style="color:#E1E4E8">      pagination.</span><span style="color:#B392F0">appendChild</span><span style="color:#E1E4E8">(prev);</span></span>
+<span class="line"><span style="color:#F97583">      continue</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#F97583">    else</span><span style="color:#F97583"> if</span><span style="color:#E1E4E8"> (i </span><span style="color:#F97583">===</span><span style="color:#E1E4E8"> totPages </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">      const</span><span style="color:#79B8FF"> next</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> document.</span><span style="color:#B392F0">createElement</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'i'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">      next.classList.</span><span style="color:#B392F0">add</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'fa-solid'</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">'fa-chevron-right'</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">'page-next'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">      if</span><span style="color:#E1E4E8"> (curPage </span><span style="color:#F97583">===</span><span style="color:#E1E4E8"> totPages) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        next.disabled </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> true</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">      }</span></span>
+<span class="line"><span style="color:#E1E4E8">      next.</span><span style="color:#B392F0">addEventListener</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'click'</span><span style="color:#E1E4E8">, () </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (curPage </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> totPages) {</span></span>
+<span class="line"><span style="color:#B392F0">          changePagnation</span><span style="color:#E1E4E8">(curPage </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">      });</span></span>
+<span class="line"><span style="color:#E1E4E8">      pagination.</span><span style="color:#B392F0">appendChild</span><span style="color:#E1E4E8">(next);</span></span>
+<span class="line"><span style="color:#F97583">      continue</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> page</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> document.</span><span style="color:#B392F0">createElement</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'div'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    page.innerHTML </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> i;</span></span>
+<span class="line"><span style="color:#E1E4E8">    page.classList.</span><span style="color:#B392F0">add</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'page'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (i </span><span style="color:#F97583">===</span><span style="color:#E1E4E8"> curPage) {</span></span>
+<span class="line"><span style="color:#E1E4E8">      page.classList.</span><span style="color:#B392F0">add</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'active-page'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">    page.</span><span style="color:#B392F0">addEventListener</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'click'</span><span style="color:#E1E4E8">, changePage);</span></span>
+<span class="line"><span style="color:#E1E4E8">    pagination.</span><span style="color:#B392F0">appendChild</span><span style="color:#E1E4E8">(page);</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#B392F0"> changePagnation</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> (</span><span style="color:#FFAB70">pageNo</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> page</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> document.</span><span style="color:#B392F0">querySelector</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'.active-page'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">  page.classList.</span><span style="color:#B392F0">remove</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'active-page'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> pageArr</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> document.</span><span style="color:#B392F0">querySelectorAll</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'.page'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">  curPage </span><span style="color:#F97583">=</span><span style="color:#B392F0"> parseInt</span><span style="color:#E1E4E8">(pageNo);</span></span>
+<span class="line"><span style="color:#E1E4E8">  pageArr[curPage </span><span style="color:#F97583">-</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">].classList.</span><span style="color:#B392F0">add</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'active-page'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#B392F0">  changeCartList</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>我这里的分页设计的比较简单，一共只根据json数据设计了5页，在实际项目中，分页的数目是不确定，而且有可能非常多，在设计分页功能的时候，最好的方法是增加一个<code>...</code>按钮，点击这个按钮可以展开更多的页码，以及增加一个<code>跳转</code>按钮，可以跳转到指定的页码，方便用户查找。</p>
+<h3 id="结算">结算</h3>
+<p>结算逻辑比较简单，依然是考虑为空等边界条件。</p>
+<p>以下是我的<code>setPay</code>函数：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">const</span><span style="color:#B392F0"> setPay</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> () </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> payBtn</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> document.</span><span style="color:#B392F0">querySelector</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'#pay'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">  payBtn.</span><span style="color:#B392F0">addEventListener</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'click'</span><span style="color:#E1E4E8">, () </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (curSelectGoods.</span><span style="color:#79B8FF">length</span><span style="color:#F97583"> ===</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#B392F0">      alert</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'请选择商品后结算'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">      return</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#6A737D">    // 这里应该发送请求支付，这里只是模拟，直接删除</span></span>
+<span class="line"><span style="color:#E1E4E8">    goods </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> goods.</span><span style="color:#B392F0">filter</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">good</span><span style="color:#F97583"> =></span><span style="color:#F97583"> !</span><span style="color:#E1E4E8">curSelectGoods.</span><span style="color:#B392F0">find</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">select</span><span style="color:#F97583"> =></span><span style="color:#E1E4E8"> select[</span><span style="color:#9ECBFF">"id"</span><span style="color:#E1E4E8">] </span><span style="color:#F97583">===</span><span style="color:#E1E4E8"> good[</span><span style="color:#9ECBFF">"id"</span><span style="color:#E1E4E8">]));</span></span>
+<span class="line"><span style="color:#E1E4E8">    curSelectGoods </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> [];</span></span>
+<span class="line"><span style="color:#E1E4E8">    selectTotal </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#B392F0">    updateTotalCount</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (goods.</span><span style="color:#79B8FF">length</span><span style="color:#F97583"> ===</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#B392F0">      initGoods</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#F97583">    else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">      renderCartList</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#B392F0">    alert</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'支付成功'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">  });</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h2 id="消息提示框">消息提示框</h2>
+<p>在删除商品、结算商品等行为后，我们可以通过一个弹出提示框来与用户进行确认交互，并且可以自定义消息弹出框的类型，这样可以提高用户体验。</p>
+<p>以下是我的<code>alert</code>函数：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">const</span><span style="color:#B392F0"> alert</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> (</span><span style="color:#FFAB70">msg</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">type</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> alertBox</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> document.</span><span style="color:#B392F0">createElement</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'div'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">  alertBox.classList.</span><span style="color:#B392F0">add</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'alert-box'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">  alertBox.innerHTML </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> msg;</span></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8"> (type </span><span style="color:#F97583">===</span><span style="color:#9ECBFF"> 'success'</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    alertBox.classList.</span><span style="color:#B392F0">add</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'alert-success'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#F97583">  else</span><span style="color:#F97583"> if</span><span style="color:#E1E4E8"> (type </span><span style="color:#F97583">===</span><span style="color:#9ECBFF"> 'error'</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    alertBox.classList.</span><span style="color:#B392F0">add</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'alert-error'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">  document.body.</span><span style="color:#B392F0">appendChild</span><span style="color:#E1E4E8">(alertBox);</span></span>
+<span class="line"><span style="color:#B392F0">  setTimeout</span><span style="color:#E1E4E8">(() </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    alertBox.style.display </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> 'none'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">  }, </span><span style="color:#79B8FF">2000</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">{</span><span style="color:#6A737D">/* 结合上面的支付函数就可以写成下面这样 */</span><span style="color:#E1E4E8">}</span></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#B392F0"> setPay</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> () </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> payBtn</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> document.</span><span style="color:#B392F0">querySelector</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'#pay'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">  payBtn.</span><span style="color:#B392F0">addEventListener</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'click'</span><span style="color:#E1E4E8">, () </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (curSelectGoods.</span><span style="color:#79B8FF">length</span><span style="color:#F97583"> ===</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#B392F0">      alert</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'请选择商品后结算'</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">'error'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">      return</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#6A737D">    // 这里应该发送请求支付，这里只是模拟，直接删除</span></span>
+<span class="line"><span style="color:#E1E4E8">    goods </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> goods.</span><span style="color:#B392F0">filter</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">good</span><span style="color:#F97583"> =></span><span style="color:#F97583"> !</span><span style="color:#E1E4E8">curSelectGoods.</span><span style="color:#B392F0">find</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">select</span><span style="color:#F97583"> =></span><span style="color:#E1E4E8"> select[</span><span style="color:#9ECBFF">"id"</span><span style="color:#E1E4E8">] </span><span style="color:#F97583">===</span><span style="color:#E1E4E8"> good[</span><span style="color:#9ECBFF">"id"</span><span style="color:#E1E4E8">]));</span></span>
+<span class="line"><span style="color:#E1E4E8">    curSelectGoods </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> [];</span></span>
+<span class="line"><span style="color:#E1E4E8">    selectTotal </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#B392F0">    updateTotalCount</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (goods.</span><span style="color:#79B8FF">length</span><span style="color:#F97583"> ===</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#B392F0">      initGoods</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#F97583">    else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">      renderCartList</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#B392F0">    alert</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'支付成功'</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">'success'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">  });</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h2 id="查找功能">查找功能</h2>
+<p>在本项目中，一页只有6个商品，感觉查找功能不是很必要，不过假如在一些项目中，一页有很多商品，比如不是基于分页获取数据，而是一次性获取所有数据或者是利用瀑布流加载数据，这时候查找功能就显得很重要了。</p>
+<p>查找功能的实现其实就是一个filter，我们设计一个简单的搜索功能：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">const</span><span style="color:#B392F0"> setSearch</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> () </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">  // 回车搜索</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> searchInput</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> document.</span><span style="color:#B392F0">querySelector</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'#search-input'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">  searchInput.</span><span style="color:#B392F0">addEventListener</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'keydown'</span><span style="color:#E1E4E8">, (</span><span style="color:#FFAB70">e</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (e.keyCode </span><span style="color:#F97583">===</span><span style="color:#79B8FF"> 13</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#B392F0">      search</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">  });</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#B392F0"> search</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> () </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> searchInput</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> document.</span><span style="color:#B392F0">querySelector</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'#search-input'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> keyword</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> searchInput.value;</span></span>
+<span class="line"><span style="color:#B392F0">  fetch</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'cart.json'</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">    .</span><span style="color:#B392F0">then</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">response</span><span style="color:#F97583"> =></span><span style="color:#E1E4E8"> response.</span><span style="color:#B392F0">json</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#E1E4E8">    .</span><span style="color:#B392F0">then</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">data</span><span style="color:#F97583"> =></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">      console.</span><span style="color:#B392F0">log</span><span style="color:#E1E4E8">(data);</span></span>
+<span class="line"><span style="color:#E1E4E8">      goods </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> data.pages[curPage </span><span style="color:#F97583">-</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">][</span><span style="color:#9ECBFF">"items"</span><span style="color:#E1E4E8">].</span><span style="color:#B392F0">filter</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">good</span><span style="color:#F97583"> =></span><span style="color:#E1E4E8"> good[</span><span style="color:#9ECBFF">"name"</span><span style="color:#E1E4E8">].</span><span style="color:#B392F0">includes</span><span style="color:#E1E4E8">(keyword));</span></span>
+<span class="line"><span style="color:#B392F0">      renderCartList</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">  );</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>搜索框的设计</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="html"><code><span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">div</span><span style="color:#B392F0"> class</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"search-bar"</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  &#x3C;</span><span style="color:#85E89D">input</span><span style="color:#B392F0"> type</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"text"</span><span style="color:#B392F0"> placeholder</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"Search"</span><span style="color:#B392F0"> id</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"search-input"</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;/</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">></span></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="css"><code><span class="line"><span style="color:#B392F0">.search-bar</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">    height</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">40</span><span style="color:#F97583">px</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">    display</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">flex</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">    width</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">100</span><span style="color:#F97583">%</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">    max-width</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">400</span><span style="color:#F97583">px</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">    padding-left</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">16</span><span style="color:#F97583">px</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF">    input</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">        width</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">100</span><span style="color:#F97583">%</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">        height</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">100</span><span style="color:#F97583">%</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">        border</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">none</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">        outline</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">none</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">        background-color</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">var</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">--search-bg</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#79B8FF">        border-radius</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">4</span><span style="color:#F97583">px</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">        font-family</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">var</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">--body-font</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#79B8FF">        font-size</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">15</span><span style="color:#F97583">px</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">        font-weight</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">500</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        &#x26;::placeholder {</span></span>
+<span class="line"><span style="color:#E1E4E8">            font-family: </span><span style="color:#79B8FF">var</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">--body-font</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#79B8FF">            color</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">var</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">--inactive-color</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#79B8FF">            font-size</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">15</span><span style="color:#F97583">px</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">            font-weight</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">500</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>这样我们就可以通过输入关键字来查找商品了。</p> <script type="module">let t,g="",a=[],l=-1;const v=e=>!!e.closest(".article-content")&&!e.closest("[data-zoomable-image]")&&!e.closest("a[href]")&&(e.parentElement?.matches(".article-content > p, .article-content figure")??!1),d=e=>{if(!(e instanceof Element))return;const o=e.closest("[data-zoomable-image]")?.querySelector("[data-zoomable-image-target]");if(o instanceof HTMLImageElement&&!o.closest("a[href]"))return o;if(e instanceof HTMLImageElement&&v(e))return e},y=e=>{const o=e.closest("astro-carousel");if(!o)return{images:[e],index:0};const i=Array.from(o.querySelectorAll("[data-carousel-slide] img")).filter(r=>!r.closest("a[href]")).filter(r=>r.currentSrc||r.src),n=i.indexOf(e);return n===-1?{images:[e],index:0}:{images:i,index:n}},h=()=>{if(!t)return;const e=a.length>1;t.root.dataset.hasGallery=e?"true":"false",t.prevButton.hidden=!e,t.nextButton.hidden=!e},b=e=>{t&&(t.image.src=e.currentSrc||e.src,t.image.alt=e.alt||"",e.title?t.image.title=e.title:t.image.removeAttribute("title"))},s=e=>{!t||a.length<=1||(l=(l+e+a.length)%a.length,b(a[l]))},c=()=>{t&&(t.root.classList.remove("is-open"),t.root.setAttribute("aria-hidden","true"),document.body.style.overflow=g,t.image.removeAttribute("src"),t.image.alt="",t.image.removeAttribute("title"),a=[],l=-1,h())},p=()=>{const e=document.createElement("div");e.className="zoomable-image-lightbox",e.setAttribute("aria-hidden","true"),e.innerHTML=`
+    <button class="zoomable-image-lightbox__close" type="button" aria-label="Close image preview">
+      <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22">
+        <path d="M18 6 6 18M6 6l12 12" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+      </svg>
+    </button>
+    <button class="zoomable-image-lightbox__nav zoomable-image-lightbox__nav--prev" type="button" aria-label="Previous image" hidden>
+      <svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24">
+        <path d="m15 18-6-6 6-6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+      </svg>
+    </button>
+    <img class="zoomable-image-lightbox__image" alt="" />
+    <button class="zoomable-image-lightbox__nav zoomable-image-lightbox__nav--next" type="button" aria-label="Next image" hidden>
+      <svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24">
+        <path d="m9 18 6-6-6-6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+      </svg>
+    </button>
+  `,document.body.append(e);const o=e.querySelector(".zoomable-image-lightbox__image"),i=e.querySelector(".zoomable-image-lightbox__close"),n=e.querySelector(".zoomable-image-lightbox__nav--prev"),r=e.querySelector(".zoomable-image-lightbox__nav--next");if(!(o instanceof HTMLImageElement)||!(i instanceof HTMLButtonElement)||!(n instanceof HTMLButtonElement)||!(r instanceof HTMLButtonElement))throw new Error("Failed to initialize zoomable image lightbox.");return e.addEventListener("click",f=>{f.target===e&&c()}),i.addEventListener("click",c),n.addEventListener("click",()=>s(-1)),r.addEventListener("click",()=>s(1)),{root:e,image:o,closeButton:i,prevButton:n,nextButton:r}},w=()=>(t??=p(),t),m=e=>{const{root:o,closeButton:i}=w(),n=y(e);g=document.body.style.overflow,a=n.images,l=n.index,b(e),h(),document.body.style.overflow="hidden",o.classList.add("is-open"),o.setAttribute("aria-hidden","false"),i.focus({preventScroll:!0})},u=()=>{window.__navfolioZoomableImagesReady||(window.__navfolioZoomableImagesReady=!0,document.addEventListener("click",e=>{const o=d(e.target);o&&m(o)}),document.addEventListener("keydown",e=>{if(e.key==="Escape"&&t?.root.classList.contains("is-open")){c();return}if(t?.root.classList.contains("is-open")){if(e.key==="ArrowLeft"){e.preventDefault(),s(-1);return}if(e.key==="ArrowRight"){e.preventDefault(),s(1);return}}const o=d(e.target);!o||e.key!=="Enter"&&e.key!==" "||(e.preventDefault(),m(o))}))};document.readyState==="loading"?document.addEventListener("DOMContentLoaded",u,{once:!0}):u();</script>  </section> </article>  <section class="comment-section" aria-label="Comments" data-comment-path="/blog/tech/frontend/cart-page-sample/" data-astro-cid-wwpfc3k4><div class="comment-section-heading" data-astro-cid-wwpfc3k4><p data-astro-cid-wwpfc3k4>Comments</p><span data-astro-cid-wwpfc3k4>Quiet notes for this article.</span></div><div class="comment-provider" data-comment-provider="giscus"></div> <script type="module">const config = {"repo":"dodolalorc/dodolalorc.github.io","repo_id":"R_kgDOLYjsRQ","category":"Announcements","category_id":"DIC_kwDOLYjsRc4Clp7p","mapping":"pathname","strict":"0","reactions_enabled":"1","emit_metadata":"0","input_position":"top","theme":"preferred_color_scheme","lang":"zh-CN","loading":"lazy"};
+
+  const mountGiscus = () => {
+    const container = document.querySelector('[data-comment-provider="giscus"]');
+
+    if (!container) {
+      return;
+    }
+
+    const script = document.createElement('script');
+    script.src = 'https://giscus.app/client.js';
+    script.async = true;
+    script.crossOrigin = 'anonymous';
+    script.setAttribute('data-repo', config.repo);
+    script.setAttribute('data-repo-id', config.repo_id);
+    script.setAttribute('data-category', config.category);
+    script.setAttribute('data-category-id', config.category_id);
+    script.setAttribute('data-mapping', config.mapping);
+    script.setAttribute('data-strict', config.strict);
+    script.setAttribute('data-reactions-enabled', config.reactions_enabled);
+    script.setAttribute('data-emit-metadata', config.emit_metadata);
+    script.setAttribute('data-input-position', config.input_position);
+    script.setAttribute('data-theme', config.theme);
+    script.setAttribute('data-lang', config.lang);
+    script.setAttribute('data-loading', config.loading);
+
+    container.replaceChildren(script);
+  };
+
+  mountGiscus();
+  document.addEventListener('astro:page-load', mountGiscus);
+</script></section> </div> <aside class="right-sidebar" aria-label="Reading tools" data-astro-cid-bl7sqnst> <div class="right-sidebar-inner" data-astro-cid-bl7sqnst><nav class="toc-card blog-card" aria-label="Table of contents" data-toc-root data-astro-cid-ymbpksfa><h2 data-astro-cid-ymbpksfa>Table of contents</h2><ol data-astro-cid-ymbpksfa><li data-astro-cid-ymbpksfa><a href="#整体布局" data-toc-link data-toc-hash="#整体布局" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>1</span>整体布局</a></li><li data-astro-cid-ymbpksfa><a href="#购物车列表设计" data-toc-link data-toc-hash="#购物车列表设计" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>2</span>购物车列表设计</a></li><li data-astro-cid-ymbpksfa><a href="#js逻辑" data-toc-link data-toc-hash="#js逻辑" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>3</span>JS逻辑</a></li><li data-astro-cid-ymbpksfa><a href="#数据获取与渲染" data-toc-link data-toc-hash="#数据获取与渲染" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>4</span>数据获取与渲染</a></li><li data-astro-cid-ymbpksfa><a href="#改变商品数量" data-toc-link data-toc-hash="#改变商品数量" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>5</span>改变商品数量</a></li><li data-astro-cid-ymbpksfa><a href="#删除商品" data-toc-link data-toc-hash="#删除商品" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>6</span>删除商品</a></li><li data-astro-cid-ymbpksfa><a href="#选中商品" data-toc-link data-toc-hash="#选中商品" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>7</span>选中商品</a></li><li data-astro-cid-ymbpksfa><a href="#更新总价" data-toc-link data-toc-hash="#更新总价" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>8</span>更新总价</a></li><li data-astro-cid-ymbpksfa><a href="#分页设计" data-toc-link data-toc-hash="#分页设计" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>9</span>分页设计</a></li><li data-astro-cid-ymbpksfa><a href="#结算" data-toc-link data-toc-hash="#结算" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>10</span>结算</a></li><li data-astro-cid-ymbpksfa><a href="#消息提示框" data-toc-link data-toc-hash="#消息提示框" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>11</span>消息提示框</a></li><li data-astro-cid-ymbpksfa><a href="#查找功能" data-toc-link data-toc-hash="#查找功能" data-astro-cid-ymbpksfa><span data-astro-cid-ymbpksfa>12</span>查找功能</a></li></ol></nav></div> </aside> </main></body></html>
