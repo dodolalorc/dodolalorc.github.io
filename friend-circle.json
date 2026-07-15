@@ -40,7 +40,11 @@
     "url": "https://dodolalorc.cn/blog/tech/tools/multi-identity-gitconfig/",
     "date": "Thu, 02 Jul 2026 06:17:01 GMT",
     "tags": [
-      "开发工具"
+      "开发工具",
+      "Git",
+      "开发工具",
+      "环境配置",
+      "开发环境配置"
     ],
     "author": "dodola",
     "authorUrl": "https://dodolalorc.cn/",
@@ -258,7 +262,13 @@
     "url": "https://dodolalorc.cn/blog/tech/tools/cn-font-perf/",
     "date": "Sun, 24 May 2026 18:28:58 GMT",
     "tags": [
-      "前端"
+      "前端",
+      "Web性能",
+      "性能优化",
+      "前端",
+      "字体子集化",
+      "CSS",
+      "前端性能优化"
     ],
     "author": "dodola",
     "authorUrl": "https://dodolalorc.cn/",
@@ -323,7 +333,12 @@
     "url": "https://dodolalorc.cn/blog/tech/tools/markdown-blog-workflow/",
     "date": "Thu, 14 May 2026 12:05:30 GMT",
     "tags": [
-      "开发工具"
+      "开发工具",
+      "开发工具",
+      "Obsidian",
+      "GitHub Actions",
+      "博客工作流",
+      "自动化发布工作流"
     ],
     "author": "dodola",
     "authorUrl": "https://dodolalorc.cn/",
@@ -334,7 +349,12 @@
     "url": "https://dodolalorc.cn/blog/tech/tools/ob-remote-save/",
     "date": "Tue, 12 May 2026 07:56:01 GMT",
     "tags": [
-      "开发工具"
+      "开发工具",
+      "开发工具",
+      "Obsidian",
+      "同步方案",
+      "Git",
+      "Obsidian 工作流"
     ],
     "author": "dodola",
     "authorUrl": "https://dodolalorc.cn/",
@@ -632,7 +652,11 @@
     "url": "https://dodolalorc.cn/blog/tech/frontend/dns-query/",
     "date": "Wed, 08 Oct 2025 18:24:48 GMT",
     "tags": [
-      "前端"
+      "前端",
+      "网络",
+      "DNS",
+      "浏览器原理",
+      "浏览器原理"
     ],
     "author": "dodola",
     "authorUrl": "https://dodolalorc.cn/",
@@ -643,7 +667,12 @@
     "url": "https://dodolalorc.cn/blog/tech/frontend/critical-rendering-path/",
     "date": "Wed, 08 Oct 2025 18:17:10 GMT",
     "tags": [
-      "前端"
+      "前端",
+      "前端",
+      "浏览器原理",
+      "Web性能",
+      "关键渲染路径",
+      "浏览器原理"
     ],
     "author": "dodola",
     "authorUrl": "https://dodolalorc.cn/",
@@ -654,7 +683,12 @@
     "url": "https://dodolalorc.cn/blog/tech/frontend/js-rollup/",
     "date": "Wed, 08 Oct 2025 17:36:48 GMT",
     "tags": [
-      "前端"
+      "前端",
+      "前端",
+      "JavaScript",
+      "构建工具",
+      "Rollup",
+      "前端工程化"
     ],
     "author": "dodola",
     "authorUrl": "https://dodolalorc.cn/",
@@ -665,7 +699,12 @@
     "url": "https://dodolalorc.cn/blog/tech/frontend/js-garbage-collection/",
     "date": "Wed, 08 Oct 2025 14:52:14 GMT",
     "tags": [
-      "前端"
+      "前端",
+      "前端",
+      "JavaScript",
+      "浏览器原理",
+      "垃圾回收",
+      "浏览器原理"
     ],
     "author": "dodola",
     "authorUrl": "https://dodolalorc.cn/",
@@ -676,7 +715,11 @@
     "url": "https://dodolalorc.cn/blog/tech/frontend/js-prototype-chain/",
     "date": "Wed, 08 Oct 2025 14:49:23 GMT",
     "tags": [
-      "前端"
+      "前端",
+      "前端",
+      "JavaScript",
+      "原型链",
+      "JavaScript 基础"
     ],
     "author": "dodola",
     "authorUrl": "https://dodolalorc.cn/",
@@ -696,7 +739,11 @@
     "url": "https://dodolalorc.cn/blog/tech/frontend/margin-fold/",
     "date": "Thu, 02 Oct 2025 20:31:02 GMT",
     "tags": [
-      "前端"
+      "前端",
+      "前端",
+      "CSS",
+      "盒模型",
+      "CSS 样式基础"
     ],
     "author": "dodola",
     "authorUrl": "https://dodolalorc.cn/",
@@ -707,7 +754,11 @@
     "url": "https://dodolalorc.cn/blog/tech/frontend/css-style-level/",
     "date": "Thu, 02 Oct 2025 18:34:28 GMT",
     "tags": [
-      "前端"
+      "前端",
+      "前端",
+      "CSS",
+      "选择器优先级",
+      "CSS 样式基础"
     ],
     "author": "dodola",
     "authorUrl": "https://dodolalorc.cn/",
@@ -727,7 +778,11 @@
     "url": "https://dodolalorc.cn/blog/tech/frontend/intersection-observer-api/",
     "date": "Wed, 17 Sep 2025 09:53:56 GMT",
     "tags": [
-      "前端"
+      "前端",
+      "前端",
+      "浏览器API",
+      "IntersectionObserver",
+      "浏览器 API"
     ],
     "author": "dodola",
     "authorUrl": "https://dodolalorc.cn/",
