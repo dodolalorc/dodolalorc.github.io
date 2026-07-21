@@ -105,6 +105,15 @@
   ],
   "posts": [
     {
+      "title": "把 Electron 的 Sparkle 更新器抽成库：bug 都住在边界上",
+      "url": "https://innei.in/posts/tinkering/electron-sparkle-updater-extraction",
+      "date": "Sat, 18 Jul 2026 13:59:08 GMT",
+      "tags": [],
+      "author": "Innei",
+      "authorUrl": "https://innei.in/",
+      "avatar": "https://avatars.githubusercontent.com/u/41265413?v=4"
+    },
+    {
       "title": "一些手办推荐",
       "url": "https://homulilly.com/post/figure-recommendations.html",
       "date": "2026-07-12T11:54:30.000Z",
@@ -147,7 +156,6 @@
       "tags": [
         "开发工具",
         "Git",
-        "开发工具",
         "环境配置",
         "开发环境配置"
       ],
@@ -327,33 +335,6 @@
       "avatar": "https://avatars.githubusercontent.com/u/41265413?v=4"
     },
     {
-      "title": "AtCoder",
-      "url": "https://www.elainafan.one/series/atcoder/",
-      "date": "Thu, 28 May 2026 00:00:00 +0000",
-      "tags": [],
-      "author": "Elainafan",
-      "authorUrl": "https://www.elainafan.one/",
-      "avatar": "https://www.elainafan.one/avatars/elainafan.jpg"
-    },
-    {
-      "title": "XCPC",
-      "url": "https://www.elainafan.one/series/xcpc/",
-      "date": "Thu, 28 May 2026 00:00:00 +0000",
-      "tags": [],
-      "author": "Elainafan",
-      "authorUrl": "https://www.elainafan.one/",
-      "avatar": "https://www.elainafan.one/avatars/elainafan.jpg"
-    },
-    {
-      "title": "Codeforces",
-      "url": "https://www.elainafan.one/series/codeforces/",
-      "date": "Tue, 26 May 2026 00:00:00 +0000",
-      "tags": [],
-      "author": "Elainafan",
-      "authorUrl": "https://www.elainafan.one/",
-      "avatar": "https://www.elainafan.one/avatars/elainafan.jpg"
-    },
-    {
       "title": "当生活被AI占满后，我开始思考孤独与爱情",
       "url": "https://innei.in/notes/214",
       "date": "Mon, 25 May 2026 19:28:35 GMT",
@@ -370,7 +351,6 @@
         "前端",
         "Web性能",
         "性能优化",
-        "前端",
         "字体子集化",
         "CSS",
         "前端性能优化"
@@ -383,15 +363,6 @@
       "title": "把 AI session 沉淀成两份资产",
       "url": "https://innei.in/posts/tech/skill-first-blog-second-my-session-to-asset-pipeline",
       "date": "Sun, 24 May 2026 16:00:09 GMT",
-      "tags": [],
-      "author": "Innei",
-      "authorUrl": "https://innei.in/",
-      "avatar": "https://avatars.githubusercontent.com/u/41265413?v=4"
-    },
-    {
-      "title": "LobeHub 的 Vite 路由模块预热实践",
-      "url": "https://innei.in/posts/tech/lobehub-vite-route-module-prewarm",
-      "date": "Sat, 23 May 2026 15:45:25 GMT",
       "tags": [],
       "author": "Innei",
       "authorUrl": "https://innei.in/",
@@ -421,7 +392,6 @@
       "date": "Thu, 14 May 2026 12:05:30 GMT",
       "tags": [
         "开发工具",
-        "开发工具",
         "Obsidian",
         "GitHub Actions",
         "博客工作流",
@@ -436,7 +406,6 @@
       "url": "https://dodolalorc.cn/blog/tech/tools/ob-remote-save/",
       "date": "Tue, 12 May 2026 07:56:01 GMT",
       "tags": [
-        "开发工具",
         "开发工具",
         "Obsidian",
         "同步方案",
@@ -457,15 +426,6 @@
       "author": "Echo",
       "authorUrl": "https://www.liveout.cn/",
       "avatar": "https://liveout.cn/usr/uploads/pic/icon1.jpg"
-    },
-    {
-      "title": "欧拉反演与莫比乌斯反演",
-      "url": "https://www.elainafan.one/p/%E6%AC%A7%E6%8B%89%E5%8F%8D%E6%BC%94%E4%B8%8E%E8%8E%AB%E6%AF%94%E4%B9%8C%E6%96%AF%E5%8F%8D%E6%BC%94/",
-      "date": "Thu, 07 May 2026 00:00:00 +0000",
-      "tags": [],
-      "author": "Elainafan",
-      "authorUrl": "https://www.elainafan.one/",
-      "avatar": "https://www.elainafan.one/avatars/elainafan.jpg"
     },
     {
       "title": "U-Boot、内核移植与根文件系统构建（BeagleBone Green Gateway&amp;AM335X）",
@@ -742,7 +702,6 @@
         "前端",
         "网络",
         "DNS",
-        "浏览器原理",
         "浏览器原理"
       ],
       "author": "dodola",
@@ -755,11 +714,9 @@
       "date": "Wed, 08 Oct 2025 18:17:10 GMT",
       "tags": [
         "前端",
-        "前端",
         "浏览器原理",
         "Web性能",
-        "关键渲染路径",
-        "浏览器原理"
+        "关键渲染路径"
       ],
       "author": "dodola",
       "authorUrl": "https://dodolalorc.cn/",
@@ -770,7 +727,6 @@
       "url": "https://dodolalorc.cn/blog/tech/frontend/js-rollup/",
       "date": "Wed, 08 Oct 2025 17:36:48 GMT",
       "tags": [
-        "前端",
         "前端",
         "JavaScript",
         "构建工具",
@@ -787,11 +743,9 @@
       "date": "Wed, 08 Oct 2025 14:52:14 GMT",
       "tags": [
         "前端",
-        "前端",
         "JavaScript",
         "浏览器原理",
-        "垃圾回收",
-        "浏览器原理"
+        "垃圾回收"
       ],
       "author": "dodola",
       "authorUrl": "https://dodolalorc.cn/",
@@ -802,7 +756,6 @@
       "url": "https://dodolalorc.cn/blog/tech/frontend/js-prototype-chain/",
       "date": "Wed, 08 Oct 2025 14:49:23 GMT",
       "tags": [
-        "前端",
         "前端",
         "JavaScript",
         "原型链",
@@ -827,7 +780,6 @@
       "date": "Thu, 02 Oct 2025 20:31:02 GMT",
       "tags": [
         "前端",
-        "前端",
         "CSS",
         "盒模型",
         "CSS 样式基础"
@@ -841,7 +793,6 @@
       "url": "https://dodolalorc.cn/blog/tech/frontend/css-style-level/",
       "date": "Thu, 02 Oct 2025 18:34:28 GMT",
       "tags": [
-        "前端",
         "前端",
         "CSS",
         "选择器优先级",
@@ -866,7 +817,6 @@
       "date": "Wed, 17 Sep 2025 09:53:56 GMT",
       "tags": [
         "前端",
-        "前端",
         "浏览器API",
         "IntersectionObserver",
         "浏览器 API"
@@ -888,6 +838,42 @@
       "title": "关于 | About",
       "url": "https://www.elainafan.one/about/",
       "date": "Sat, 13 Sep 2025 00:00:00 +0000",
+      "tags": [],
+      "author": "Elainafan",
+      "authorUrl": "https://www.elainafan.one/",
+      "avatar": "https://www.elainafan.one/avatars/elainafan.jpg"
+    },
+    {
+      "title": "链接 | Links",
+      "url": "https://www.elainafan.one/links/",
+      "date": "Sat, 13 Sep 2025 00:00:00 +0000",
+      "tags": [],
+      "author": "Elainafan",
+      "authorUrl": "https://www.elainafan.one/",
+      "avatar": "https://www.elainafan.one/avatars/elainafan.jpg"
+    },
+    {
+      "title": "友链 | Friends",
+      "url": "https://www.elainafan.one/friends/",
+      "date": "Sat, 13 Sep 2025 00:00:00 +0000",
+      "tags": [],
+      "author": "Elainafan",
+      "authorUrl": "https://www.elainafan.one/",
+      "avatar": "https://www.elainafan.one/avatars/elainafan.jpg"
+    },
+    {
+      "title": "从零开始的AI编程",
+      "url": "https://www.elainafan.one/p/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84ai%E7%BC%96%E7%A8%8B/",
+      "date": "Wed, 10 Sep 2025 00:00:00 +0000",
+      "tags": [],
+      "author": "Elainafan",
+      "authorUrl": "https://www.elainafan.one/",
+      "avatar": "https://www.elainafan.one/avatars/elainafan.jpg"
+    },
+    {
+      "title": "从零开始的音乐与数学",
+      "url": "https://www.elainafan.one/p/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84%E9%9F%B3%E4%B9%90%E4%B8%8E%E6%95%B0%E5%AD%A6/",
+      "date": "Mon, 08 Sep 2025 00:00:00 +0000",
       "tags": [],
       "author": "Elainafan",
       "authorUrl": "https://www.elainafan.one/",
