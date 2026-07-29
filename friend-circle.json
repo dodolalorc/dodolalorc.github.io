@@ -10,7 +10,7 @@
       "name": "思想犯",
       "url": "https://virgiling.github.io/",
       "avatar": "https://avatars.githubusercontent.com/u/71817082?v=4",
-      "rss": null
+      "rss": "https://virgiling.wiki/index.xml"
     },
     {
       "name": "Windlinxy",
@@ -475,7 +475,7 @@
     },
     {
       "title": "Model Counting in the Wild",
-      "url": "https://virgiling.wiki/02-research/12-papers/10.48550_arXiv-2408.07059",
+      "url": "https://virgiling.wiki/02-research/12-papers/10.48550_arxiv-2408.07059",
       "date": "Sun, 15 Mar 2026 00:00:00 GMT",
       "tags": [],
       "author": "忘れてください",
@@ -567,7 +567,7 @@
     },
     {
       "title": "Obsidian 配置 Copilot 插件",
-      "url": "https://virgiling.wiki/03-tools/Obsidian_Plus_AI",
+      "url": "https://virgiling.wiki/03-tools/obsidian_plus_ai",
       "date": "Tue, 30 Dec 2025 00:00:00 GMT",
       "tags": [],
       "author": "忘れてください",
@@ -612,7 +612,7 @@
     },
     {
       "title": "科研绘图工具",
-      "url": "https://virgiling.wiki/03-tools/Drawing-Figure-Research",
+      "url": "https://virgiling.wiki/03-tools/drawing-figure-research",
       "date": "Tue, 02 Dec 2025 00:00:00 GMT",
       "tags": [],
       "author": "忘れてください",
