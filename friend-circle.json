@@ -107,6 +107,12 @@
       "url": "https://blog.cosine.ren/",
       "avatar": "https://blog.cosine.ren/img/avatar.webp",
       "rss": "https://homulilly.com/atom.xml"
+    },
+    {
+      "name": "魈枫Hub",
+      "url": "https://xfhub.com/",
+      "avatar": "https://xfhub.com/avatar.png",
+      "rss": null
     }
   ],
   "posts": [
@@ -357,6 +363,15 @@
       "author": "Innei",
       "authorUrl": "https://innei.in/",
       "avatar": "https://avatars.githubusercontent.com/u/41265413?v=4"
+    },
+    {
+      "title": "Blog 评论系统",
+      "url": "https://xfhub.com/blog/comment",
+      "date": "Tue, 26 May 2026 08:00:00 GMT",
+      "tags": [],
+      "author": "魈枫Hub",
+      "authorUrl": "https://xfhub.com/",
+      "avatar": "https://xfhub.com/avatar.png"
     },
     {
       "title": "中文字体加载优化：在博客里混合使用字体子集和完整字体",
@@ -629,6 +644,15 @@
       "avatar": "https://avatars.githubusercontent.com/u/71817082?v=4"
     },
     {
+      "title": "从 2015-2025 资产回报看配置逻辑（全资产盘点）",
+      "url": "https://xfhub.com/blog/invest-zh",
+      "date": "Mon, 01 Dec 2025 23:00:00 GMT",
+      "tags": [],
+      "author": "魈枫Hub",
+      "authorUrl": "https://xfhub.com/",
+      "avatar": "https://xfhub.com/avatar.png"
+    },
+    {
       "title": "个人随笔",
       "url": "https://virgiling.wiki/06-story/",
       "date": "Sun, 30 Nov 2025 00:00:00 GMT",
@@ -690,6 +714,33 @@
       "author": "Elainafan",
       "authorUrl": "https://www.elainafan.one/",
       "avatar": "https://www.elainafan.one/avatars/elainafan.jpg"
+    },
+    {
+      "title": "Windows 与 Office 极简授权配置指南",
+      "url": "https://xfhub.com/blog/activate-win",
+      "date": "Mon, 20 Oct 2025 14:52:01 GMT",
+      "tags": [],
+      "author": "魈枫Hub",
+      "authorUrl": "https://xfhub.com/",
+      "avatar": "https://xfhub.com/avatar.png"
+    },
+    {
+      "title": "C盘扩容",
+      "url": "https://xfhub.com/blog/expand-c-drive",
+      "date": "Mon, 20 Oct 2025 08:00:00 GMT",
+      "tags": [],
+      "author": "魈枫Hub",
+      "authorUrl": "https://xfhub.com/",
+      "avatar": "https://xfhub.com/avatar.png"
+    },
+    {
+      "title": "C 盘安全无损清理教程",
+      "url": "https://xfhub.com/blog/clean-c-drive",
+      "date": "Wed, 15 Oct 2025 08:00:00 GMT",
+      "tags": [],
+      "author": "魈枫Hub",
+      "authorUrl": "https://xfhub.com/",
+      "avatar": "https://xfhub.com/avatar.png"
     },
     {
       "title": "更适合北大宝宝体质的 xv6 OS Lab 踩坑记 - Part2",
@@ -911,6 +962,15 @@
       "author": "Aroes",
       "authorUrl": "https://blog.cosine.ren/",
       "avatar": "https://blog.cosine.ren/img/avatar.webp"
+    },
+    {
+      "title": "使用 MDX",
+      "url": "https://xfhub.com/blog/using-mdx",
+      "date": "Sun, 01 Jun 2025 00:00:00 GMT",
+      "tags": [],
+      "author": "魈枫Hub",
+      "authorUrl": "https://xfhub.com/",
+      "avatar": "https://xfhub.com/avatar.png"
     },
     {
       "title": "记毕业",
@@ -1252,6 +1312,15 @@
       "author": "沨临",
       "authorUrl": "https://windlinxy.github.io/",
       "avatar": "https://avatars.githubusercontent.com/u/80376027?v=4"
+    },
+    {
+      "title": "Markdown 语法支持",
+      "url": "https://xfhub.com/blog/markdown-zh",
+      "date": "Wed, 26 Jul 2023 08:00:00 GMT",
+      "tags": [],
+      "author": "魈枫Hub",
+      "authorUrl": "https://xfhub.com/",
+      "avatar": "https://xfhub.com/avatar.png"
     },
     {
       "title": "读《redis设计与实现》",
