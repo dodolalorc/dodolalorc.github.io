@@ -111,6 +111,24 @@
   ],
   "posts": [
     {
+      "title": "在人间，各自流转",
+      "url": "https://innei.in/notes/218",
+      "date": "Tue, 04 Aug 2026 18:17:14 GMT",
+      "tags": [],
+      "author": "Innei",
+      "authorUrl": "https://innei.in/",
+      "avatar": "https://avatars.githubusercontent.com/u/41265413?v=4"
+    },
+    {
+      "title": "复刻 macOS 红绿灯悬停菜单",
+      "url": "https://innei.in/posts/tinkering/macos-zoom-button-hover-menu",
+      "date": "Mon, 03 Aug 2026 19:46:39 GMT",
+      "tags": [],
+      "author": "Innei",
+      "authorUrl": "https://innei.in/",
+      "avatar": "https://avatars.githubusercontent.com/u/41265413?v=4"
+    },
+    {
       "title": "AI 浪潮下的职业焦虑、产品实践与人生选择",
       "url": "https://innei.in/notes/217",
       "date": "Thu, 23 Jul 2026 17:17:08 GMT",
@@ -335,24 +353,6 @@
       "title": "第一次东京：迟到 26 年的旅行",
       "url": "https://innei.in/notes/215",
       "date": "Sat, 13 Jun 2026 15:33:26 GMT",
-      "tags": [],
-      "author": "Innei",
-      "authorUrl": "https://innei.in/",
-      "avatar": "https://avatars.githubusercontent.com/u/41265413?v=4"
-    },
-    {
-      "title": "把 Next.js 拆成壳：LobeHub 后端迁移 Hono 实录",
-      "url": "https://innei.in/posts/tech/nextjs-shell-hono-backend-migration",
-      "date": "Wed, 10 Jun 2026 11:27:40 GMT",
-      "tags": [],
-      "author": "Innei",
-      "authorUrl": "https://innei.in/",
-      "avatar": "https://avatars.githubusercontent.com/u/41265413?v=4"
-    },
-    {
-      "title": "当生活被AI占满后，我开始思考孤独与爱情",
-      "url": "https://innei.in/notes/214",
-      "date": "Mon, 25 May 2026 19:28:35 GMT",
       "tags": [],
       "author": "Innei",
       "authorUrl": "https://innei.in/",
