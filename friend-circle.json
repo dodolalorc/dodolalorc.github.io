@@ -115,13 +115,256 @@
       "rss": null
     },
     {
-      "name": "yanbo的博客",
+      "name": "烟波 Yanbo",
       "url": "https://yanbowa.ng/",
-      "avatar": null,
-      "rss": null
+      "avatar": "https://yanbowa.ng/logo.png",
+      "rss": "https://yanbowa.ng/rss.xml"
+    },
+    {
+      "name": "snowcat",
+      "url": "https://www.sadsnowcat.com/",
+      "avatar": "https://sadsnowcat.com/images/head.jpg",
+      "rss": "https://www.sadsnowcat.com/rss.xml"
     }
   ],
   "posts": [
+    {
+      "title": "Treehole Art",
+      "url": "https://arthals.ink/blog/treehole-art",
+      "date": "Tue, 15 Sep 2026 18:47:00 GMT",
+      "tags": [],
+      "author": "Arthals' ink",
+      "authorUrl": "https://arthals.ink/",
+      "avatar": "https://cdn.arthals.ink/Arthals.png"
+    },
+    {
+      "title": "IoT 学习笔记 0x06",
+      "url": "https://sadsnowcat.com/blog/iot/iot-0x06/",
+      "date": "Sun, 13 Sep 2026 01:20:00 GMT",
+      "tags": [
+        "IoT",
+        "IoT Learning"
+      ],
+      "author": "snowcat",
+      "authorUrl": "https://www.sadsnowcat.com/",
+      "avatar": "https://sadsnowcat.com/images/head.jpg"
+    },
+    {
+      "title": "IoT 学习笔记 0x05",
+      "url": "https://sadsnowcat.com/blog/iot/iot-0x05/",
+      "date": "Sun, 13 Sep 2026 01:13:26 GMT",
+      "tags": [
+        "IoT",
+        "IoT Learning"
+      ],
+      "author": "snowcat",
+      "authorUrl": "https://www.sadsnowcat.com/",
+      "avatar": "https://sadsnowcat.com/images/head.jpg"
+    },
+    {
+      "title": "一天原型，一周成品：开发 Lody iOS 实况",
+      "url": "https://innei.in/posts/tech/lody-ios-prototype-to-product",
+      "date": "Sat, 12 Sep 2026 19:11:45 GMT",
+      "tags": [],
+      "author": "Innei",
+      "authorUrl": "https://innei.in/",
+      "avatar": "https://avatars.githubusercontent.com/u/41265413?v=4"
+    },
+    {
+      "title": "困在北医的五年",
+      "url": "https://arthals.ink/blog/trapped-at-pkuhsc",
+      "date": "Fri, 11 Sep 2026 08:26:30 GMT",
+      "tags": [],
+      "author": "Arthals' ink",
+      "authorUrl": "https://arthals.ink/",
+      "avatar": "https://cdn.arthals.ink/Arthals.png"
+    },
+    {
+      "title": "ISCC Heap",
+      "url": "https://sadsnowcat.com/blog/heap/iscc-heap/",
+      "date": "Wed, 02 Sep 2026 09:39:16 GMT",
+      "tags": [
+        "PWN",
+        "Heap"
+      ],
+      "author": "snowcat",
+      "authorUrl": "https://www.sadsnowcat.com/",
+      "avatar": "https://sadsnowcat.com/images/head.jpg"
+    },
+    {
+      "title": "从纯 CSS 到 StyleX：AI 加持下的一万行 CSS 迁移实践",
+      "url": "https://innei.in/posts/tech/css-to-stylex-migration",
+      "date": "Sun, 30 Aug 2026 08:45:43 GMT",
+      "tags": [],
+      "author": "Innei",
+      "authorUrl": "https://innei.in/",
+      "avatar": "https://avatars.githubusercontent.com/u/41265413?v=4"
+    },
+    {
+      "title": "蓝旭2023春季学习",
+      "url": "https://blog.stevepaul101.net/tags/%E8%93%9D%E6%97%AD2023%E6%98%A5%E5%AD%A3%E5%AD%A6%E4%B9%A0",
+      "date": "Sat, 29 Aug 2026 15:43:18 GMT",
+      "tags": [],
+      "author": "Steve Paul",
+      "authorUrl": "https://gsteve-paul.github.io/",
+      "avatar": "https://avatars.githubusercontent.com/u/120476557?v=4"
+    },
+    {
+      "title": "蓝旭2023秋季学习",
+      "url": "https://blog.stevepaul101.net/tags/%E8%93%9D%E6%97%AD2023%E7%A7%8B%E5%AD%A3%E5%AD%A6%E4%B9%A0",
+      "date": "Sat, 29 Aug 2026 15:43:18 GMT",
+      "tags": [],
+      "author": "Steve Paul",
+      "authorUrl": "https://gsteve-paul.github.io/",
+      "avatar": "https://avatars.githubusercontent.com/u/120476557?v=4"
+    },
+    {
+      "title": "cpp",
+      "url": "https://blog.stevepaul101.net/tags/cpp",
+      "date": "Sat, 29 Aug 2026 15:43:18 GMT",
+      "tags": [],
+      "author": "Steve Paul",
+      "authorUrl": "https://gsteve-paul.github.io/",
+      "avatar": "https://avatars.githubusercontent.com/u/120476557?v=4"
+    },
+    {
+      "title": "并发",
+      "url": "https://blog.stevepaul101.net/tags/%E5%B9%B6%E5%8F%91",
+      "date": "Sat, 29 Aug 2026 15:43:18 GMT",
+      "tags": [],
+      "author": "Steve Paul",
+      "authorUrl": "https://gsteve-paul.github.io/",
+      "avatar": "https://avatars.githubusercontent.com/u/120476557?v=4"
+    },
+    {
+      "title": "raii",
+      "url": "https://blog.stevepaul101.net/tags/raii",
+      "date": "Sat, 29 Aug 2026 15:43:18 GMT",
+      "tags": [],
+      "author": "Steve Paul",
+      "authorUrl": "https://gsteve-paul.github.io/",
+      "avatar": "https://avatars.githubusercontent.com/u/120476557?v=4"
+    },
+    {
+      "title": "模拟器",
+      "url": "https://blog.stevepaul101.net/tags/%E6%A8%A1%E6%8B%9F%E5%99%A8",
+      "date": "Sat, 29 Aug 2026 15:43:18 GMT",
+      "tags": [],
+      "author": "Steve Paul",
+      "authorUrl": "https://gsteve-paul.github.io/",
+      "avatar": "https://avatars.githubusercontent.com/u/120476557?v=4"
+    },
+    {
+      "title": "调试器",
+      "url": "https://blog.stevepaul101.net/tags/%E8%B0%83%E8%AF%95%E5%99%A8",
+      "date": "Sat, 29 Aug 2026 15:43:18 GMT",
+      "tags": [],
+      "author": "Steve Paul",
+      "authorUrl": "https://gsteve-paul.github.io/",
+      "avatar": "https://avatars.githubusercontent.com/u/120476557?v=4"
+    },
+    {
+      "title": "risc-v",
+      "url": "https://blog.stevepaul101.net/tags/risc-v",
+      "date": "Sat, 29 Aug 2026 15:43:18 GMT",
+      "tags": [],
+      "author": "Steve Paul",
+      "authorUrl": "https://gsteve-paul.github.io/",
+      "avatar": "https://avatars.githubusercontent.com/u/120476557?v=4"
+    },
+    {
+      "title": "图灵机",
+      "url": "https://blog.stevepaul101.net/tags/%E5%9B%BE%E7%81%B5%E6%9C%BA",
+      "date": "Sat, 29 Aug 2026 15:43:18 GMT",
+      "tags": [],
+      "author": "Steve Paul",
+      "authorUrl": "https://gsteve-paul.github.io/",
+      "avatar": "https://avatars.githubusercontent.com/u/120476557?v=4"
+    },
+    {
+      "title": "冯·诺伊曼计算机系统",
+      "url": "https://blog.stevepaul101.net/tags/%E5%86%AF%C2%B7%E8%AF%BA%E4%BC%8A%E6%9B%BC%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F",
+      "date": "Sat, 29 Aug 2026 15:43:18 GMT",
+      "tags": [],
+      "author": "Steve Paul",
+      "authorUrl": "https://gsteve-paul.github.io/",
+      "avatar": "https://avatars.githubusercontent.com/u/120476557?v=4"
+    },
+    {
+      "title": "IoT 学习笔记 0x04",
+      "url": "https://sadsnowcat.com/blog/iot/iot-0x04/",
+      "date": "Sat, 29 Aug 2026 10:39:18 GMT",
+      "tags": [
+        "IoT",
+        "IoT Learning"
+      ],
+      "author": "snowcat",
+      "authorUrl": "https://www.sadsnowcat.com/",
+      "avatar": "https://sadsnowcat.com/images/head.jpg"
+    },
+    {
+      "title": "IoT 学习笔记 0x03",
+      "url": "https://sadsnowcat.com/blog/iot/iot-0x03/",
+      "date": "Sat, 29 Aug 2026 10:34:19 GMT",
+      "tags": [
+        "IoT",
+        "IoT Learning"
+      ],
+      "author": "snowcat",
+      "authorUrl": "https://www.sadsnowcat.com/",
+      "avatar": "https://sadsnowcat.com/images/head.jpg"
+    },
+    {
+      "title": "IoT 学习笔记 0x02",
+      "url": "https://sadsnowcat.com/blog/iot/iot-0x02/",
+      "date": "Fri, 28 Aug 2026 09:38:29 GMT",
+      "tags": [
+        "IoT",
+        "IoT Learning"
+      ],
+      "author": "snowcat",
+      "authorUrl": "https://www.sadsnowcat.com/",
+      "avatar": "https://sadsnowcat.com/images/head.jpg"
+    },
+    {
+      "title": "IoT 学习笔记 0x01",
+      "url": "https://sadsnowcat.com/blog/iot/iot-0x01/",
+      "date": "Thu, 27 Aug 2026 12:04:36 GMT",
+      "tags": [
+        "IoT",
+        "IoT Learning"
+      ],
+      "author": "snowcat",
+      "authorUrl": "https://www.sadsnowcat.com/",
+      "avatar": "https://sadsnowcat.com/images/head.jpg"
+    },
+    {
+      "title": "午夜备忘：关于爱、自由与未来",
+      "url": "https://innei.in/notes/219",
+      "date": "Mon, 24 Aug 2026 18:29:47 GMT",
+      "tags": [],
+      "author": "Innei",
+      "authorUrl": "https://innei.in/",
+      "avatar": "https://avatars.githubusercontent.com/u/41265413?v=4"
+    },
+    {
+      "title": "UIKitCore 逆向分析报告",
+      "url": "https://innei.in/posts/tinkering/uikitcore-reverse-engineering-report",
+      "date": "Sun, 23 Aug 2026 13:48:33 GMT",
+      "tags": [],
+      "author": "Innei",
+      "authorUrl": "https://innei.in/",
+      "avatar": "https://avatars.githubusercontent.com/u/41265413?v=4"
+    },
+    {
+      "title": "AI 时代我的开发工作流：从踩坑复盘到多项目并行验证",
+      "url": "https://innei.in/posts/tinkering/ai-era-dev-workflow-review-and-verify",
+      "date": "Sun, 16 Aug 2026 16:32:40 GMT",
+      "tags": [],
+      "author": "Innei",
+      "authorUrl": "https://innei.in/",
+      "avatar": "https://avatars.githubusercontent.com/u/41265413?v=4"
+    },
     {
       "title": "在人间，各自流转",
       "url": "https://innei.in/notes/218",
@@ -150,8 +393,20 @@
       "avatar": "https://avatars.githubusercontent.com/u/41265413?v=4"
     },
     {
-      "title": "把 Electron 的 Sparkle 更新器抽成库：bug 都住在边界上",
-      "url": "https://innei.in/posts/tinkering/electron-sparkle-updater-extraction",
+      "title": "从零开始的堆利用 0x00",
+      "url": "https://sadsnowcat.com/blog/heap/heap-0x00/",
+      "date": "Wed, 22 Jul 2026 03:41:08 GMT",
+      "tags": [
+        "PWN",
+        "Heap"
+      ],
+      "author": "snowcat",
+      "authorUrl": "https://www.sadsnowcat.com/",
+      "avatar": "https://sadsnowcat.com/images/head.jpg"
+    },
+    {
+      "title": "Electron Sparkle 更新器抽库：119 个测试之外的发布边界",
+      "url": "https://innei.in/posts/tinkering/electron-sparkle-updater-extraction-release-boundaries",
       "date": "Sat, 18 Jul 2026 13:59:08 GMT",
       "tags": [],
       "author": "Innei",
@@ -168,27 +423,9 @@
       "avatar": "https://blog.cosine.ren/img/avatar.webp"
     },
     {
-      "title": "在 CDN 边缘做灰度：分流在缓存前，资产在灰度外",
-      "url": "https://innei.in/posts/tech/canary-at-the-cdn-edge",
+      "title": "Cloudflare 边缘灰度：HTML 在缓存前分桶，Hash 资产退出切流",
+      "url": "https://innei.in/posts/tech/cloudflare-edge-canary-html-cache-asset-boundaries",
       "date": "Tue, 07 Jul 2026 19:47:49 GMT",
-      "tags": [],
-      "author": "Innei",
-      "authorUrl": "https://innei.in/",
-      "avatar": "https://avatars.githubusercontent.com/u/41265413?v=4"
-    },
-    {
-      "title": "别让 404 唤醒你的 Vercel 函数",
-      "url": "https://innei.in/posts/tech/dont-let-404-wake-your-vercel-function",
-      "date": "Mon, 06 Jul 2026 18:30:19 GMT",
-      "tags": [],
-      "author": "Innei",
-      "authorUrl": "https://innei.in/",
-      "avatar": "https://avatars.githubusercontent.com/u/41265413?v=4"
-    },
-    {
-      "title": "把 SSR 交给 Cloudflare：Landing 从 Next.js 迁到 React Router 的两日",
-      "url": "https://innei.in/posts/tech/landing-nextjs-rsc-to-react-router-v8-edge-cache",
-      "date": "Fri, 03 Jul 2026 18:04:22 GMT",
       "tags": [],
       "author": "Innei",
       "authorUrl": "https://innei.in/",
@@ -209,15 +446,6 @@
       "avatar": "https://avatars.githubusercontent.com/u/114007020?v=4"
     },
     {
-      "title": "在 AI 浪潮下，如何留在牌桌上",
-      "url": "https://innei.in/notes/216",
-      "date": "Sun, 28 Jun 2026 15:51:02 GMT",
-      "tags": [],
-      "author": "Innei",
-      "authorUrl": "https://innei.in/",
-      "avatar": "https://avatars.githubusercontent.com/u/41265413?v=4"
-    },
-    {
       "title": "Hexo Theme Flatpaper 加入朋友圈大家庭",
       "url": "https://homulilly.com/post/hexo-theme-flapaper-now-support-friend-circle-md.html",
       "date": "2026-06-24T17:04:04.000Z",
@@ -234,96 +462,6 @@
       "author": "Aroes",
       "authorUrl": "https://blog.cosine.ren/",
       "avatar": "https://blog.cosine.ren/img/avatar.webp"
-    },
-    {
-      "title": "蓝旭2023春季学习",
-      "url": "https://blog.stevepaul101.net/tags/%E8%93%9D%E6%97%AD2023%E6%98%A5%E5%AD%A3%E5%AD%A6%E4%B9%A0",
-      "date": "Mon, 22 Jun 2026 16:54:39 GMT",
-      "tags": [],
-      "author": "Steve Paul",
-      "authorUrl": "https://gsteve-paul.github.io/",
-      "avatar": "https://avatars.githubusercontent.com/u/120476557?v=4"
-    },
-    {
-      "title": "蓝旭2023秋季学习",
-      "url": "https://blog.stevepaul101.net/tags/%E8%93%9D%E6%97%AD2023%E7%A7%8B%E5%AD%A3%E5%AD%A6%E4%B9%A0",
-      "date": "Mon, 22 Jun 2026 16:54:39 GMT",
-      "tags": [],
-      "author": "Steve Paul",
-      "authorUrl": "https://gsteve-paul.github.io/",
-      "avatar": "https://avatars.githubusercontent.com/u/120476557?v=4"
-    },
-    {
-      "title": "cpp",
-      "url": "https://blog.stevepaul101.net/tags/cpp",
-      "date": "Mon, 22 Jun 2026 16:54:39 GMT",
-      "tags": [],
-      "author": "Steve Paul",
-      "authorUrl": "https://gsteve-paul.github.io/",
-      "avatar": "https://avatars.githubusercontent.com/u/120476557?v=4"
-    },
-    {
-      "title": "并发",
-      "url": "https://blog.stevepaul101.net/tags/%E5%B9%B6%E5%8F%91",
-      "date": "Mon, 22 Jun 2026 16:54:39 GMT",
-      "tags": [],
-      "author": "Steve Paul",
-      "authorUrl": "https://gsteve-paul.github.io/",
-      "avatar": "https://avatars.githubusercontent.com/u/120476557?v=4"
-    },
-    {
-      "title": "raii",
-      "url": "https://blog.stevepaul101.net/tags/raii",
-      "date": "Mon, 22 Jun 2026 16:54:39 GMT",
-      "tags": [],
-      "author": "Steve Paul",
-      "authorUrl": "https://gsteve-paul.github.io/",
-      "avatar": "https://avatars.githubusercontent.com/u/120476557?v=4"
-    },
-    {
-      "title": "模拟器",
-      "url": "https://blog.stevepaul101.net/tags/%E6%A8%A1%E6%8B%9F%E5%99%A8",
-      "date": "Mon, 22 Jun 2026 16:54:39 GMT",
-      "tags": [],
-      "author": "Steve Paul",
-      "authorUrl": "https://gsteve-paul.github.io/",
-      "avatar": "https://avatars.githubusercontent.com/u/120476557?v=4"
-    },
-    {
-      "title": "调试器",
-      "url": "https://blog.stevepaul101.net/tags/%E8%B0%83%E8%AF%95%E5%99%A8",
-      "date": "Mon, 22 Jun 2026 16:54:39 GMT",
-      "tags": [],
-      "author": "Steve Paul",
-      "authorUrl": "https://gsteve-paul.github.io/",
-      "avatar": "https://avatars.githubusercontent.com/u/120476557?v=4"
-    },
-    {
-      "title": "risc-v",
-      "url": "https://blog.stevepaul101.net/tags/risc-v",
-      "date": "Mon, 22 Jun 2026 16:54:39 GMT",
-      "tags": [],
-      "author": "Steve Paul",
-      "authorUrl": "https://gsteve-paul.github.io/",
-      "avatar": "https://avatars.githubusercontent.com/u/120476557?v=4"
-    },
-    {
-      "title": "图灵机",
-      "url": "https://blog.stevepaul101.net/tags/%E5%9B%BE%E7%81%B5%E6%9C%BA",
-      "date": "Mon, 22 Jun 2026 16:54:39 GMT",
-      "tags": [],
-      "author": "Steve Paul",
-      "authorUrl": "https://gsteve-paul.github.io/",
-      "avatar": "https://avatars.githubusercontent.com/u/120476557?v=4"
-    },
-    {
-      "title": "冯·诺伊曼计算机系统",
-      "url": "https://blog.stevepaul101.net/tags/%E5%86%AF%C2%B7%E8%AF%BA%E4%BC%8A%E6%9B%BC%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F",
-      "date": "Mon, 22 Jun 2026 16:54:39 GMT",
-      "tags": [],
-      "author": "Steve Paul",
-      "authorUrl": "https://gsteve-paul.github.io/",
-      "avatar": "https://avatars.githubusercontent.com/u/120476557?v=4"
     },
     {
       "title": "修复 Apple Developer 邮箱与 Apple 账户邮箱不一致的问题",
@@ -351,24 +489,6 @@
       "author": "Elainafan",
       "authorUrl": "https://www.elainafan.one/",
       "avatar": "https://www.elainafan.one/avatars/elainafan.jpg"
-    },
-    {
-      "title": "把 hydration 从 React UI 里解耦：一次 SPA 启动期边界纠正",
-      "url": "https://innei.in/posts/tech/decouple-hydration-from-react-ui",
-      "date": "Tue, 16 Jun 2026 19:16:41 GMT",
-      "tags": [],
-      "author": "Innei",
-      "authorUrl": "https://innei.in/",
-      "avatar": "https://avatars.githubusercontent.com/u/41265413?v=4"
-    },
-    {
-      "title": "第一次东京：迟到 26 年的旅行",
-      "url": "https://innei.in/notes/215",
-      "date": "Sat, 13 Jun 2026 15:33:26 GMT",
-      "tags": [],
-      "author": "Innei",
-      "authorUrl": "https://innei.in/",
-      "avatar": "https://avatars.githubusercontent.com/u/41265413?v=4"
     },
     {
       "title": "Blog 评论系统",
@@ -444,6 +564,18 @@
       "avatar": "https://avatars.githubusercontent.com/u/114007020?v=4"
     },
     {
+      "title": "BaseCTF2024",
+      "url": "https://sadsnowcat.com/blog/ctf/ctf-basectf2024/",
+      "date": "Sun, 10 May 2026 19:00:00 GMT",
+      "tags": [
+        "WP",
+        "PWN"
+      ],
+      "author": "snowcat",
+      "authorUrl": "https://www.sadsnowcat.com/",
+      "avatar": "https://sadsnowcat.com/images/head.jpg"
+    },
+    {
       "title": "Codex 自制宠物",
       "url": "https://liveout.cn/archives/40.html",
       "date": "Fri, 08 May 2026 13:06:00 +0800",
@@ -472,7 +604,19 @@
       "tags": [],
       "author": "烟波 Yanbo",
       "authorUrl": "https://yanbowa.ng/",
-      "avatar": null
+      "avatar": "https://yanbowa.ng/logo.png"
+    },
+    {
+      "title": "JNCTF 9th",
+      "url": "https://sadsnowcat.com/blog/ctf/ctf-jnctf9th/",
+      "date": "Sun, 19 Apr 2026 16:00:00 GMT",
+      "tags": [
+        "WP",
+        "PWN"
+      ],
+      "author": "snowcat",
+      "authorUrl": "https://www.sadsnowcat.com/",
+      "avatar": "https://sadsnowcat.com/images/head.jpg"
     },
     {
       "title": "Boosting MCSes Enumeration",
@@ -540,6 +684,18 @@
       "author": "Aroes",
       "authorUrl": "https://blog.cosine.ren/",
       "avatar": "https://blog.cosine.ren/img/avatar.webp"
+    },
+    {
+      "title": "MoeCTF2025PWN笔记",
+      "url": "https://sadsnowcat.com/blog/ctf/ctf-moectf2025/",
+      "date": "Mon, 26 Jan 2026 12:00:00 GMT",
+      "tags": [
+        "WP",
+        "PWN"
+      ],
+      "author": "snowcat",
+      "authorUrl": "https://www.sadsnowcat.com/",
+      "avatar": "https://sadsnowcat.com/images/head.jpg"
     },
     {
       "title": "更适合北大宝宝体质的 xv6 OS Lab 踩坑记 - Part8",
@@ -686,15 +842,6 @@
       "avatar": "https://cdn.arthals.ink/Arthals.png"
     },
     {
-      "title": "更适合北大宝宝体质的 xv6 OS Lab 踩坑记 - Part5",
-      "url": "https://arthals.ink/blog/xv6-os-lab-part5",
-      "date": "Sat, 22 Nov 2025 20:49:15 GMT",
-      "tags": [],
-      "author": "Arthals' ink",
-      "authorUrl": "https://arthals.ink/",
-      "avatar": "https://cdn.arthals.ink/Arthals.png"
-    },
-    {
       "title": "飞牛OS更新0.9.35后NVIDIA vGPU驱动失效问题与解决",
       "url": "https://wyy.ink/archives/123.html",
       "date": "Fri, 31 Oct 2025 17:39:00 +0800",
@@ -756,15 +903,6 @@
       "author": "魈枫Hub",
       "authorUrl": "https://xfhub.com/",
       "avatar": "https://xfhub.com/avatar.png"
-    },
-    {
-      "title": "更适合北大宝宝体质的 xv6 OS Lab 踩坑记 - Part2",
-      "url": "https://arthals.ink/blog/xv6-os-lab-part2",
-      "date": "Sat, 11 Oct 2025 03:56:13 GMT",
-      "tags": [],
-      "author": "Arthals' ink",
-      "authorUrl": "https://arthals.ink/",
-      "avatar": "https://cdn.arthals.ink/Arthals.png"
     },
     {
       "title": "DNS 查询简述",
@@ -838,15 +976,6 @@
       "avatar": "https://avatars.githubusercontent.com/u/114007020?v=4"
     },
     {
-      "title": "更适合北大宝宝体质的 xv6 OS Lab 踩坑记 - Part3",
-      "url": "https://arthals.ink/blog/xv6-os-lab-part3",
-      "date": "Sun, 05 Oct 2025 02:41:24 GMT",
-      "tags": [],
-      "author": "Arthals' ink",
-      "authorUrl": "https://arthals.ink/",
-      "avatar": "https://cdn.arthals.ink/Arthals.png"
-    },
-    {
       "title": "Margin 折叠",
       "url": "https://dodolalorc.cn/blog/tech/frontend/margin-fold/",
       "date": "Thu, 02 Oct 2025 20:31:02 GMT",
@@ -875,9 +1004,9 @@
       "avatar": "https://avatars.githubusercontent.com/u/114007020?v=4"
     },
     {
-      "title": "更适合北大宝宝体质的 xv6 OS Lab 踩坑记 - Part0",
-      "url": "https://arthals.ink/blog/xv6-os-lab-part0",
-      "date": "Thu, 02 Oct 2025 16:17:53 GMT",
+      "title": "更适合北大宝宝体质的 xv6 OS Lab 踩坑记 - Part1",
+      "url": "https://arthals.ink/blog/xv6-os-lab-part1",
+      "date": "Thu, 02 Oct 2025 16:20:53 GMT",
       "tags": [],
       "author": "Arthals' ink",
       "authorUrl": "https://arthals.ink/",
@@ -1003,7 +1132,7 @@
       "tags": [],
       "author": "烟波 Yanbo",
       "authorUrl": "https://yanbowa.ng/",
-      "avatar": null
+      "avatar": "https://yanbowa.ng/logo.png"
     },
     {
       "title": "朝闻道，夕死可矣",
@@ -1046,17 +1175,6 @@
       "avatar": "https://liveout.cn/usr/uploads/pic/icon1.jpg"
     },
     {
-      "title": "Windows下Python软件打包方式之—安装包",
-      "url": "https://pineseed.cn/installation_package_for_packaging_python_software_on_windows/",
-      "date": "Sat, 30 Nov 2024 11:57:15 +0000",
-      "tags": [
-        "Python"
-      ],
-      "author": "松種小窝",
-      "authorUrl": "https://pineseed.cn/",
-      "avatar": "https://pineseed.cn/wp-content/uploads/2024/08/picture.jpg"
-    },
-    {
       "title": "喂饭级，通过内网穿透自动拉取git仓库代码",
       "url": "https://huanxueblog.top/posts/309fd10a.html",
       "date": "2024-11-24T06:25:46.000Z",
@@ -1064,6 +1182,15 @@
       "author": "幻雪的博客",
       "authorUrl": "https://huanxueblog.top/",
       "avatar": "https://testingcf.jsdelivr.net/gh/huanxueshengmou/picture-host/huanxueblog_avatar.webp"
+    },
+    {
+      "title": "词法分析 II",
+      "url": "https://arthals.ink/blog/lexical-2",
+      "date": "Sun, 10 Nov 2024 14:02:00 GMT",
+      "tags": [],
+      "author": "Arthals' ink",
+      "authorUrl": "https://arthals.ink/",
+      "avatar": "https://cdn.arthals.ink/Arthals.png"
     },
     {
       "title": "全屋智能改造-01-安装配置Home Assistant",
@@ -1084,88 +1211,13 @@
       "avatar": "https://wyy.ink/img/%E5%A4%B4%E5%83%8F.jpg"
     },
     {
-      "title": "PKU VPN 3 - 用校内服务器实现 PKU 内网和 Clash/Surge 兼容使用",
-      "url": "https://arthals.ink/blog/pku-vpn-internal-server",
-      "date": "Fri, 20 Sep 2024 22:19:20 GMT",
-      "tags": [],
-      "author": "Arthals' ink",
-      "authorUrl": "https://arthals.ink/",
-      "avatar": "https://cdn.arthals.ink/Arthals.png"
-    },
-    {
-      "title": "从零开始配置 Mac",
-      "url": "https://arthals.ink/blog/initialize-mac",
-      "date": "Sat, 14 Sep 2024 20:03:24 GMT",
-      "tags": [],
-      "author": "Arthals' ink",
-      "authorUrl": "https://arthals.ink/",
-      "avatar": "https://cdn.arthals.ink/Arthals.png"
-    },
-    {
-      "title": "内网穿透、异地组网之N2N",
-      "url": "https://pineseed.cn/internal-network-penetration-and-remote-networking-in-n2n/",
-      "date": "Fri, 13 Sep 2024 09:59:31 +0000",
-      "tags": [
-        "杂项"
-      ],
-      "author": "松種小窝",
-      "authorUrl": "https://pineseed.cn/",
-      "avatar": "https://pineseed.cn/wp-content/uploads/2024/08/picture.jpg"
-    },
-    {
-      "title": "内网穿透、异地组网之SoftEther",
-      "url": "https://pineseed.cn/softether-for-internal-network-penetration-and-remote-networking/",
-      "date": "Fri, 13 Sep 2024 05:56:01 +0000",
-      "tags": [
-        "杂项"
-      ],
-      "author": "松種小窝",
-      "authorUrl": "https://pineseed.cn/",
-      "avatar": "https://pineseed.cn/wp-content/uploads/2024/08/picture.jpg"
-    },
-    {
-      "title": "Linux实现硬盘热扩容（热拔插）—以Ubuntu为例",
-      "url": "https://pineseed.cn/linux-achieves-hot-expansion-and-hot-plugging-of-hard-disks-taking-ubuntu-as-an-example/",
-      "date": "Mon, 09 Sep 2024 11:45:40 +0000",
-      "tags": [
-        "Linux",
-        "Ubuntu"
-      ],
-      "author": "松種小窝",
-      "authorUrl": "https://pineseed.cn/",
-      "avatar": "https://pineseed.cn/wp-content/uploads/2024/08/picture.jpg"
-    },
-    {
-      "title": "搭建lsky兰空图床",
-      "url": "https://pineseed.cn/build-an-lsky-orchid-sky-chart-bed/",
-      "date": "Mon, 09 Sep 2024 02:53:39 +0000",
-      "tags": [
-        "杂项"
-      ],
-      "author": "松種小窝",
-      "authorUrl": "https://pineseed.cn/",
-      "avatar": "https://pineseed.cn/wp-content/uploads/2024/08/picture.jpg"
-    },
-    {
-      "title": "Windows下MySQL5.7压缩包安装教程",
-      "url": "https://pineseed.cn/installation-tutorial-for-mysql5-7-compressed-files-on-windows/",
-      "date": "Thu, 05 Sep 2024 12:57:24 +0000",
-      "tags": [
-        "数据库",
-        "MySQL"
-      ],
-      "author": "松種小窝",
-      "authorUrl": "https://pineseed.cn/",
-      "avatar": "https://pineseed.cn/wp-content/uploads/2024/08/picture.jpg"
-    },
-    {
       "title": "加密之火 在东京悄然燃烧｜EDCON2024活动记录",
       "url": "https://yanbowa.ng/blog/edcon2024",
       "date": "Wed, 07 Aug 2024 00:00:00 GMT",
       "tags": [],
       "author": "烟波 Yanbo",
       "authorUrl": "https://yanbowa.ng/",
-      "avatar": null
+      "avatar": "https://yanbowa.ng/logo.png"
     },
     {
       "title": "关于创建mysql连接池的具体思路和实现",
@@ -1189,6 +1241,15 @@
       "title": "从零开始配置 Windows",
       "url": "https://arthals.ink/blog/initialize-windows",
       "date": "Mon, 12 Feb 2024 04:18:09 GMT",
+      "tags": [],
+      "author": "Arthals' ink",
+      "authorUrl": "https://arthals.ink/",
+      "avatar": "https://cdn.arthals.ink/Arthals.png"
+    },
+    {
+      "title": "使用 Surge + Docker 完整解锁 Raycast（含 AI 功能）",
+      "url": "https://arthals.ink/blog/unlocking-raycast-with-surge",
+      "date": "Tue, 30 Jan 2024 23:42:11 GMT",
       "tags": [],
       "author": "Arthals' ink",
       "authorUrl": "https://arthals.ink/",
@@ -1329,6 +1390,15 @@
       "avatar": "https://avatars.githubusercontent.com/u/80376027?v=4"
     },
     {
+      "title": "mx-space + Shiro：如纸一般纯净的新博客",
+      "url": "https://arthals.ink/blog/shiro",
+      "date": "Wed, 06 Sep 2023 10:52:22 GMT",
+      "tags": [],
+      "author": "Arthals' ink",
+      "authorUrl": "https://arthals.ink/",
+      "avatar": "https://cdn.arthals.ink/Arthals.png"
+    },
+    {
       "title": "PKU Art",
       "url": "https://arthals.ink/blog/pku-art",
       "date": "Sat, 02 Sep 2023 11:33:16 GMT",
@@ -1344,7 +1414,7 @@
       "tags": [],
       "author": "烟波 Yanbo",
       "authorUrl": "https://yanbowa.ng/",
-      "avatar": null
+      "avatar": "https://yanbowa.ng/logo.png"
     },
     {
       "title": "Git常用",
@@ -1380,7 +1450,7 @@
       "tags": [],
       "author": "烟波 Yanbo",
       "authorUrl": "https://yanbowa.ng/",
-      "avatar": null
+      "avatar": "https://yanbowa.ng/logo.png"
     },
     {
       "title": "ETH Beijing 活动记｜一个Web3小白的75小时",
@@ -1389,7 +1459,7 @@
       "tags": [],
       "author": "烟波 Yanbo",
       "authorUrl": "https://yanbowa.ng/",
-      "avatar": null
+      "avatar": "https://yanbowa.ng/logo.png"
     },
     {
       "title": "回文串相关-LeetCode刷题",
@@ -1461,7 +1531,7 @@
       "tags": [],
       "author": "烟波 Yanbo",
       "authorUrl": "https://yanbowa.ng/",
-      "avatar": null
+      "avatar": "https://yanbowa.ng/logo.png"
     },
     {
       "title": "Hello World.",
@@ -1470,7 +1540,7 @@
       "tags": [],
       "author": "烟波 Yanbo",
       "authorUrl": "https://yanbowa.ng/",
-      "avatar": null
+      "avatar": "https://yanbowa.ng/logo.png"
     },
     {
       "title": "java注解",
